@@ -1,7 +1,6 @@
 package com.devel.models;
 
 import com.devel.app.Principal;
-import com.devel.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -9,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Date;
+import com.devel.hibernate.Hibernate;
 
 @Entity(name = "TBL_RATE")
 public class Rate extends Hibernate {
