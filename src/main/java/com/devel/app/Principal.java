@@ -1,8 +1,12 @@
 package com.devel.app;
 
+import com.devel.hibernate.Hibernate;
+import com.devel.utilities.Utilities;
+
 public class Principal
 {
     public static void main( String[] args ){
-        System.out.println( "Hello World!" );
+        Hibernate.initialize();
+//        Utilities.cambiarWindows();
     }
 }

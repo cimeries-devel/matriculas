@@ -1,18 +1,19 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Entity
+@Entity(name = "TBL_PERSON")
 public class Person extends Hibernate {
-
     @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer ID;
-
     @Column
     private String ADDRESS;
     @Column
@@ -31,9 +32,23 @@ public class Person extends Hibernate {
     private boolean LIVETOGETHER;
     @Column
     private Date UPDATED;
+    @Column
+    private String CODE;
+    @OneToMany(mappedBy = "person")
+    private List<Document> documents = new ArrayList<>();
+    @OneToMany(mappedBy = "person")
+    private List<Relationship> relationships = new ArrayList<>();
+    @OneToMany()
+    private List<Phone> phones = new ArrayList<>();
+    @OneToMany()
+    private List<Secure> secures = new ArrayList<>();
 
     public Integer getID() {
         return ID;
+    }
+
+    public void setID(Integer ID) {
+        this.ID = ID;
     }
 
     public String getADDRESS() {
@@ -106,6 +121,46 @@ public class Person extends Hibernate {
 
     public void setUPDATED(Date UPDATED) {
         this.UPDATED = UPDATED;
+    }
+
+    public String getCODE() {
+        return CODE;
+    }
+
+    public void setCODE(String CODE) {
+        this.CODE = CODE;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
+    }
+
+    public List<Document> getDocuments() {
+        return documents;
+    }
+
+    public void setDocuments(List<Document> documents) {
+        this.documents = documents;
+    }
+
+    public List<Relationship> getRelationships() {
+        return relationships;
+    }
+
+    public void setRelationships(List<Relationship> relationships) {
+        this.relationships = relationships;
+    }
+
+    public List<Secure> getSecures() {
+        return secures;
+    }
+
+    public void setSecures(List<Secure> secures) {
+        this.secures = secures;
     }
 
     public void guardar() {
