@@ -8,13 +8,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class Secures extends Hibernate {
+public class Seguros extends Hibernate {
     private static Root<Seguro> root;
     private static CriteriaQuery<Seguro> criteria;
     private static Vector<Seguro> todos;
 
     public static Seguro get(Integer id) {
-        Seguro seguro = SESSION.find(Seguro.class, id, LockModeType.NONE);
+        Seguro seguro = session.find(Seguro.class, id, LockModeType.NONE);
         return seguro;
     }
 }

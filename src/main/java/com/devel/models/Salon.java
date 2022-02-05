@@ -19,7 +19,6 @@ public class Salon extends Hibernate {
     private Nivel nivel;
 
     @ManyToOne
-    @JoinColumn(name = "FK_grado")
     private Grado grado;
 
     public Integer getId() {

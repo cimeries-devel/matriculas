@@ -1,7 +1,7 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.models.Phone;
+import com.devel.models.Celular;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -9,12 +9,12 @@ import javax.persistence.criteria.Root;
 import java.util.Vector;
 
 public class Phones extends Hibernate {
-    private static Root<Phone> root;
-    private static CriteriaQuery<Phone> criteria;
-    private static Vector<Phone> todos;
+    private static Root<Celular> root;
+    private static CriteriaQuery<Celular> criteria;
+    private static Vector<Celular> todos;
 
-    public static Phone get(Integer id) {
-        Phone phone = SESSION.find(Phone.class, id, LockModeType.NONE);
-        return phone;
+    public static Celular get(Integer id) {
+        Celular celular = session.find(Celular.class, id, LockModeType.NONE);
+        return celular;
     }
 }

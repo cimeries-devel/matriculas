@@ -8,13 +8,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class Levels extends Hibernate {
+public class Niveles extends Hibernate {
     private static Root<Nivel> root;
     private static CriteriaQuery<Nivel> criteria;
     private static Vector<Nivel> todos;
 
     public static Nivel get(Integer id) {
-        Nivel nivel = SESSION.find(Nivel.class, id, LockModeType.NONE);
+        Nivel nivel = session.find(Nivel.class, id, LockModeType.NONE);
         return nivel;
     }
 }

@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity(name = "tbl_celular")
-public class Phone extends Hibernate {
+public class Celular extends Hibernate {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")

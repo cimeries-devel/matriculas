@@ -8,13 +8,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class Colleges extends Hibernate {
+public class Colegios extends Hibernate {
     private static Root<Colegio> root;
     private static CriteriaQuery<Colegio> criteria;
     private static Vector<Colegio> todos;
 
     public static Colegio get(Integer id) {
-        Colegio colegio = SESSION.find(Colegio.class, id, LockModeType.NONE);
+        Colegio colegio = session.find(Colegio.class, id, LockModeType.NONE);
         return colegio;
     }
 

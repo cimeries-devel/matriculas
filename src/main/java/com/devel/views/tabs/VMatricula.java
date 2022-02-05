@@ -1,54 +1,62 @@
 package com.devel.views.tabs;
 
-import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
-import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
+import com.devel.models.Relacion;
+import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
+import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
+import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
+import com.devel.views.dialogs.DNuevoEstudiante;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
+import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
-import java.util.Date;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 public class VMatricula extends JFrame{
     private JPanel panelPrincipal;
-    private JTable table1;
-    private JComboBox comboBox1;
-    private JTextField textField1;
-    private DatePicker datePicker1;
+    private JTable tablaFamiliares;
+    private JTable tablaMatriculas;
     private JTextField txtEdad;
+    private JButton button1;
     private JComboBox comboBox2;
-
+    private JTextField textField1;
+    private JButton buscarButton;
+    private JButton btnNuevoEstudiante;
+    private JScrollPane jScrollPane1;
+    private FamiliaresAbstractModel model;
     public VMatricula() {
-        setTitle("Matrícula");
-        datePicker1.addDateChangeListener(new DateChangeListener() {
+        iniciarComponentes();
+        btnNuevoEstudiante.addMouseListener(new MouseAdapter() {
             @Override
-            public void dateChanged(DateChangeEvent dateChangeEvent) {
-                Period edad = Period.between(datePicker1.getDate(), LocalDate.now());
-                txtEdad.setDisabledTextColor(new JTextField().getForeground());
-                txtEdad.setText(String.valueOf(edad.getYears()));
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarNuevoEstudiante();
             }
         });
     }
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
-
+    private void cargarNuevoEstudiante(){
+        setTitle("Matrícula");
+        DNuevoEstudiante dNuevoEstudiante=new DNuevoEstudiante();
+        dNuevoEstudiante.pack();
+        dNuevoEstudiante.setLocationRelativeTo(null);
+        dNuevoEstudiante.setVisible(true);
+        tablaFamiliares.updateUI();
+    }
+    private void iniciarComponentes(){
+        cargarTalbaFamiliares(new Vector<>());
+    }
+    private void cargarTalbaFamiliares(Vector<Relacion> relaciones){
+        model=new FamiliaresAbstractModel(relaciones);
+        tablaFamiliares.setModel(model);
+        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares());
+        TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
+        tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
+    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        datePicker1=new DatePicker();
-        datePicker1.getComponentDateTextField().setBorder(new JTextField().getBorder());
-        datePicker1.getComponentDateTextField().setEnabled(false);
-        datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
-        datePicker1.setSize(new JTextField().getSize());
-//        DateTimeFormatter a=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        datePicker1.getSettings().setFormatForDatesCommonEra("dd/MM/yyyy");
+
     }
 }

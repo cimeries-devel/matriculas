@@ -14,7 +14,7 @@ public class Ubigeos extends Hibernate {
     private static Vector<Ubigeo> todos;
 
     public static Ubigeo get(Integer id) {
-        Ubigeo ubigeo = SESSION.find(Ubigeo.class, id, LockModeType.NONE);
+        Ubigeo ubigeo = session.find(Ubigeo.class, id, LockModeType.NONE);
         return ubigeo;
     }
 }

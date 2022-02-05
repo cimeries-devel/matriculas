@@ -29,22 +29,13 @@ public class Persona extends Hibernate {
     @Column
     private String apellidos;
     @Column
-    private boolean vivenJuntos;
-    @Column
     private Date actualizacion;
     @Column
     private String codigo;
     @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
-    @ManyToOne
-    private Persona persona;
-    @Column
-    private String tipoRelacion;
-    @OneToMany(mappedBy = "persona")
-    private List<Persona> personas = new ArrayList<>();
     @OneToMany
-    private List<Phone> phones = new ArrayList<>();
-
+    private List<Celular> celulars = new ArrayList<>();
     @ManyToMany
     @JoinTable(
             name = "persona_secure",
@@ -53,12 +44,12 @@ public class Persona extends Hibernate {
     )
     private List<Seguro> seguros = new ArrayList<>();
 
-    public List<Phone> getPhones() {
-        return phones;
+    public List<Celular> getPhones() {
+        return celulars;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
+    public void setPhones(List<Celular> celulars) {
+        this.celulars = celulars;
     }
 
     public List<Documento> getDocuments() {
@@ -73,24 +64,25 @@ public class Persona extends Hibernate {
         return seguros;
     }
 
-    public Persona getPerson() {
-        return persona;
+
+    public List<Celular> getCelulars() {
+        return celulars;
     }
 
-    public void setPerson(Persona persona) {
-        this.persona = persona;
+    public void setCelulars(List<Celular> celulars) {
+        this.celulars = celulars;
+    }
+
+    public List<Seguro> getSeguros() {
+        return seguros;
+    }
+
+    public void setSeguros(List<Seguro> seguros) {
+        this.seguros = seguros;
     }
 
     public void setSecures(List<Seguro> seguros) {
         this.seguros = seguros;
-    }
-
-    public String getTipoRelacion() {
-        return tipoRelacion;
-    }
-
-    public void setTipoRelacion(String tipoRelacion) {
-        this.tipoRelacion = tipoRelacion;
     }
 
     public Integer getId() {
@@ -153,14 +145,6 @@ public class Persona extends Hibernate {
         this.apellidos = apellidos;
     }
 
-    public boolean isVivenJuntos() {
-        return vivenJuntos;
-    }
-
-    public void setVivenJuntos(boolean vivenJuntos) {
-        this.vivenJuntos = vivenJuntos;
-    }
-
     public Date getActualizacion() {
         return actualizacion;
     }
@@ -183,21 +167,5 @@ public class Persona extends Hibernate {
 
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
-    }
-
-    public Persona getPersona() {
-        return persona;
-    }
-
-    public void setPersona(Persona persona) {
-        this.persona = persona;
-    }
-
-    public List<Persona> getPersonas() {
-        return personas;
-    }
-
-    public void setPersonas(List<Persona> personas) {
-        this.personas = personas;
     }
 }

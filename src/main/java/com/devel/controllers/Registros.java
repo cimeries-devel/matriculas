@@ -8,13 +8,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class Registrations extends Hibernate {
+public class Registros extends Hibernate {
     private static Root<Registro> root;
     private static CriteriaQuery<Registro> criteria;
     private static Vector<Registro> todos;
 
     public static Registro get(Integer id) {
-        Registro registro = SESSION.find(Registro.class, id, LockModeType.NONE);
+        Registro registro = session.find(Registro.class, id, LockModeType.NONE);
         return registro;
     }
 }

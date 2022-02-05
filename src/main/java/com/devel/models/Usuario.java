@@ -32,7 +32,7 @@ public class Usuario extends Hibernate {
     private String usuario;
 
     @OneToMany
-    private List<Phone> phones = new ArrayList<>();
+    private List<Celular> celulars = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -102,11 +102,11 @@ public class Usuario extends Hibernate {
         this.usuario = usuario;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
+    public List<Celular> getPhones() {
+        return celulars;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
+    public void setPhones(List<Celular> celulars) {
+        this.celulars = celulars;
     }
 }

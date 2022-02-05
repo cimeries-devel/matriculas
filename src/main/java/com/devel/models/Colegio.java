@@ -38,7 +38,7 @@ public class Colegio extends Hibernate {
     private Ubigeo ubigeo;
 
     @OneToMany
-    private List<Phone> phones = new ArrayList<>();
+    private List<Celular> celulars = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -124,12 +124,12 @@ public class Colegio extends Hibernate {
         this.ubigeo = ubigeo;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
+    public List<Celular> getPhones() {
+        return celulars;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
+    public void setPhones(List<Celular> celulars) {
+        this.celulars = celulars;
     }
 
     @Override

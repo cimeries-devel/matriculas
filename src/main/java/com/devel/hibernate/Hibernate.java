@@ -10,20 +10,20 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import javax.persistence.criteria.CriteriaBuilder;
 
 public class Hibernate {
-    protected static Session SESSION;
-    protected static CriteriaBuilder BUILDER;
+    protected static Session session;
+    protected static CriteriaBuilder builder;
     private static void buildSessionFactory() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        SESSION = sessionFactory.openSession();
-        BUILDER = SESSION.getCriteriaBuilder();
+        session = sessionFactory.openSession();
+        builder = session.getCriteriaBuilder();
 
     }
     public static void initialize() {
         buildSessionFactory();
     }
     public static void close(){
-        SESSION.close();
+        session.close();
     }
 
     public void save(){
@@ -41,8 +41,8 @@ public class Hibernate {
         if (this instanceof Nivel) {
             id = ((Nivel)(this)).getId();
         }
-        if (this instanceof Phone) {
-            id = ((Phone)(this)).getId();
+        if (this instanceof Celular) {
+            id = ((Celular)(this)).getId();
         }
         if (this instanceof Tarifa) {
             id = ((Tarifa)(this)).getId();
@@ -65,13 +65,13 @@ public class Hibernate {
         if (this instanceof Salon) {
             id = ((Salon)(this)).getId();
         }
-        SESSION.beginTransaction();
+        session.beginTransaction();
         if (id != null) {
-            SESSION.update(this);
+            session.update(this);
         } else {
-            SESSION.save(this);
+            session.save(this);
         }
-        SESSION.getTransaction().commit();
+        session.getTransaction().commit();
 
     }
 }
