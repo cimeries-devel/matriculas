@@ -38,14 +38,4 @@ public class Phone extends Hibernate {
     public void setNUMBER(String NUMBER) {
         this.NUMBER = NUMBER;
     }
-
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
 }

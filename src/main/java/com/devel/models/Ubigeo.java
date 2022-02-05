@@ -89,13 +89,5 @@ public class Ubigeo extends Hibernate {
     public void setColleges(List<College> colleges) {
         this.colleges = colleges;
     }
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
+
 }

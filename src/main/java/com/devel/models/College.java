@@ -135,4 +135,8 @@ public class College extends Hibernate {
         this.phones = phones;
     }
 
+    @Override
+    public void save(){
+        super.save();
+    }
 }

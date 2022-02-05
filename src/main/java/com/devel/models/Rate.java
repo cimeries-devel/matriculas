@@ -61,13 +61,4 @@ public class Rate extends Hibernate {
         this.PRICE = PRICE;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
 }

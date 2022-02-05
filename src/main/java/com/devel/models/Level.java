@@ -69,13 +69,8 @@ public class Level extends Hibernate {
         this.classRooms = classRooms;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
+    @Override
+    public void save(){
+        super.save();
     }
 }

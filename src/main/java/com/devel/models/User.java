@@ -30,6 +30,7 @@ public class User extends Hibernate {
     private Date UPDATED;
     @Column
     private String USERNAME;
+
     @OneToMany
     private List<Phone> phones = new ArrayList<>();
 
@@ -99,15 +100,5 @@ public class User extends Hibernate {
 
     public void setUSERNAME(String USERNAME) {
         this.USERNAME = USERNAME;
-    }
-
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
     }
 }

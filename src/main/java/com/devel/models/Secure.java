@@ -17,8 +17,6 @@ public class Secure extends Hibernate {
     private String NAME;
     @Column
     private String CODE;
-    @OneToMany
-    private List<Person> persons= new ArrayList<>();
 
     public Integer getID() {
         return ID;
@@ -44,21 +42,5 @@ public class Secure extends Hibernate {
         this.CODE = CODE;
     }
 
-    public List<Person> getPersons() {
-        return persons;
-    }
 
-    public void setPersons(List<Person> persons) {
-        this.persons = persons;
-    }
-
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
 }

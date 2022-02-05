@@ -1,7 +1,9 @@
 package com.devel.app;
 
 import com.devel.Views.Dashboard;
+import com.devel.controllers.Persons;
 import com.devel.hibernate.Hibernate;
+import com.devel.models.Person;
 import com.devel.utilities.Utilities;
 
 public class Principal
@@ -9,8 +11,19 @@ public class Principal
     public static void main( String[] args ){
         Hibernate.initialize();
         Utilities.cambiarWindows();
-        Dashboard dashboard = new Dashboard();
-        dashboard.pack();
-        dashboard.setVisible(true);
+
+        Person person1=Persons.get(1);
+        person1.setFIRSTNAME("niño rata");
+        person1.save();
+
+//        Person person=new Person();
+//        person.setFIRSTNAME("padre");
+//        person.setPerson(person1);
+//        person.save();
+//
+//        Person person2=new Person();
+//        person2.setFIRSTNAME("madre");
+//        person2.setPerson(person1);
+//        person2.save();
     }
 }

@@ -38,13 +38,4 @@ public class Section extends Hibernate {
         this.classRooms = classRooms;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
 }

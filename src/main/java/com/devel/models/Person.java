@@ -36,12 +36,26 @@ public class Person extends Hibernate {
     private String CODE;
     @OneToMany(mappedBy = "person")
     private List<Document> documents = new ArrayList<>();
+    @ManyToOne
+    private Person person;
+    @Column
+    private String TYPERELATION;
     @OneToMany(mappedBy = "person")
-    private List<Relationship> relationships = new ArrayList<>();
-    @OneToMany()
+    private List<Person> persons = new ArrayList<>();
+    @OneToMany
     private List<Phone> phones = new ArrayList<>();
-    @OneToMany()
+
+    @ManyToMany
+    @JoinTable(
+            name = "person_secure",
+            joinColumns = {@JoinColumn(name = "fk_person")},
+            inverseJoinColumns = {@JoinColumn(name = "fk_secure")}
+    )
     private List<Secure> secures = new ArrayList<>();
+
+    public Person() {
+        CREATED = new Date();
+    }
 
     public Integer getID() {
         return ID;
@@ -147,29 +161,35 @@ public class Person extends Hibernate {
         this.documents = documents;
     }
 
-    public List<Relationship> getRelationships() {
-        return relationships;
-    }
-
-    public void setRelationships(List<Relationship> relationships) {
-        this.relationships = relationships;
-    }
-
     public List<Secure> getSecures() {
         return secures;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public void setSecures(List<Secure> secures) {
         this.secures = secures;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
+    public List<Person> getPersons() {
+        return persons;
+    }
+
+    public void setPersons(List<Person> persons) {
+        this.persons = persons;
+    }
+
+    public String getTYPERELATION() {
+        return TYPERELATION;
+    }
+
+    public void setTYPERELATION(String TYPERELATION) {
+        this.TYPERELATION = TYPERELATION;
     }
 }

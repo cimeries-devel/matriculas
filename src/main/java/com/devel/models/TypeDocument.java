@@ -41,13 +41,5 @@ public class TypeDocument extends Hibernate {
         this.DESCRIPTION = DESCRIPTION;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
+
 }

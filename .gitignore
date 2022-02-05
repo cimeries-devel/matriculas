@@ -24,4 +24,3 @@ hs_err_pid*
 target
 src/main/resources/hibernate.cfg.xml
 pom.xml
-out

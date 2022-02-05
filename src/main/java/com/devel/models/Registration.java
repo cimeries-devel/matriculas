@@ -73,14 +73,4 @@ public class Registration extends Hibernate {
         this.rate = rate;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
-    }
-
 }

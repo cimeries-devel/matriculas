@@ -48,13 +48,8 @@ public class Document extends Hibernate {
         this.typeDocument = typeDocument;
     }
 
-    public void guardar() {
-        SESSION.beginTransaction();
-        if (getID()==null) {
-            SESSION.save(this);
-        } else {
-            SESSION.update(this);
-        }
-        SESSION.getTransaction().commit();
+    @Override
+    public void save(){
+        super.save();
     }
 }
