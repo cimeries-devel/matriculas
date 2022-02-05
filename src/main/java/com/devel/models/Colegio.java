@@ -32,9 +32,11 @@ public class Colegio extends Hibernate {
     private String urbanizacion;
     @Column
     private String website;
+
     @ManyToOne
     @JoinColumn(name = "fk_ubigeo")
     private Ubigeo ubigeo;
+
     @OneToMany
     private List<Phone> phones = new ArrayList<>();
 

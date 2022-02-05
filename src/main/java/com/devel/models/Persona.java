@@ -34,7 +34,7 @@ public class Persona extends Hibernate {
     private Date actualizacion;
     @Column
     private String codigo;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
     @ManyToOne
     private Persona persona;

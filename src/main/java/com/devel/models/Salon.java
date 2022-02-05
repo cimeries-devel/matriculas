@@ -14,7 +14,7 @@ public class Salon extends Hibernate {
     @Column
     private String nombre;
     @ManyToOne()
-    private com.devel.models.seccion seccion;
+    private Seccion seccion;
     @ManyToOne()
     private Nivel nivel;
 
@@ -34,11 +34,11 @@ public class Salon extends Hibernate {
         this.nombre = nombre;
     }
 
-    public com.devel.models.seccion getSeccion() {
+    public Seccion getSeccion() {
         return seccion;
     }
 
-    public void setSeccion(com.devel.models.seccion seccion) {
+    public void setSeccion(Seccion seccion) {
         this.seccion = seccion;
     }
 

@@ -7,15 +7,15 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity(name = "tbl_Seccion")
-public class seccion extends Hibernate {
+@Entity(name = "tbl_seccion")
+public class Seccion extends Hibernate {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
     @Column
     private String seccion;
-    @OneToMany(mappedBy = "section")
+    @OneToMany(mappedBy = "seccion")
     private List<Salon> salons =new ArrayList<>();
 
     public Integer getId() {

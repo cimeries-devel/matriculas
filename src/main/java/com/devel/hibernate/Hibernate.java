@@ -50,8 +50,8 @@ public class Hibernate {
         if (this instanceof Registro) {
             id = ((Registro)(this)).getId();
         }
-        if (this instanceof seccion) {
-            id = ((seccion)(this)).getId();
+        if (this instanceof Seccion) {
+            id = ((Seccion)(this)).getId();
         }
         if (this instanceof Seguro) {
             id = ((Seguro)(this)).getId();
