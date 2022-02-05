@@ -18,4 +18,6 @@ public class Colleges extends Hibernate {
         College college = SESSION.find(College.class, id, LockModeType.NONE);
         return college;
     }
+
+
 }

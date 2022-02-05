@@ -192,4 +192,5 @@ public class Person extends Hibernate {
     public void setTYPERELATION(String TYPERELATION) {
         this.TYPERELATION = TYPERELATION;
     }
+
 }
