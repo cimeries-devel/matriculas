@@ -17,6 +17,7 @@ public class Hibernate {
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
         SESSION = sessionFactory.openSession();
         BUILDER = SESSION.getCriteriaBuilder();
+
     }
     public static void initialize() {
         buildSessionFactory();
@@ -27,42 +28,42 @@ public class Hibernate {
 
     public void save(){
         Integer id = null;
-        if (this instanceof Person) {
-            id = ((Person)(this)).getID();
+        if (this instanceof Persona) {
+            id = ((Persona)(this)).getId();
             System.out.println("ratatata");
         }
-        if (this instanceof User) {
-            id = ((User)(this)).getID();
+        if (this instanceof Usuario) {
+            id = ((Usuario)(this)).getId();
         }
-        if (this instanceof College) {
-            id = ((College)(this)).getID();
+        if (this instanceof Colegio) {
+            id = ((Colegio)(this)).getId();
         }
-        if (this instanceof Level) {
-            id = ((Level)(this)).getID();
+        if (this instanceof Nivel) {
+            id = ((Nivel)(this)).getId();
         }
         if (this instanceof Phone) {
-            id = ((Phone)(this)).getID();
+            id = ((Phone)(this)).getId();
         }
-        if (this instanceof Rate) {
-            id = ((Rate)(this)).getID();
+        if (this instanceof Tarifa) {
+            id = ((Tarifa)(this)).getId();
         }
-        if (this instanceof Registration) {
-            id = ((Registration)(this)).getID();
+        if (this instanceof Registro) {
+            id = ((Registro)(this)).getId();
         }
-        if (this instanceof Section) {
-            id = ((Section)(this)).getID();
+        if (this instanceof seccion) {
+            id = ((seccion)(this)).getId();
         }
-        if (this instanceof Secure) {
-            id = ((Secure)(this)).getID();
+        if (this instanceof Seguro) {
+            id = ((Seguro)(this)).getId();
         }
-        if (this instanceof TypeDocument) {
-            id = ((TypeDocument)(this)).getID();
+        if (this instanceof TipoDocumento) {
+            id = ((TipoDocumento)(this)).getId();
         }
         if (this instanceof Ubigeo) {
-            id = ((Ubigeo)(this)).getID();
+            id = ((Ubigeo)(this)).getId();
         }
-        if (this instanceof ClassRoom) {
-            id = ((ClassRoom)(this)).getID();
+        if (this instanceof Salon) {
+            id = ((Salon)(this)).getId();
         }
         SESSION.beginTransaction();
         if (id != null) {

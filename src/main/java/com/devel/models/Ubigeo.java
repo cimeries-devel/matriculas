@@ -8,86 +8,85 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Entity(name = "TBL_UBIGEO")
+@Entity(name = "tbl_ubigeo")
 public class Ubigeo extends Hibernate {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
-    private Integer ID;
+    private Integer id;
     @Column
-    private String CODE;
+    private String codigo;
     @Column
-    private Date CREATED;
+    private Date creacion;
     @Column
-    private String DEPARTMENT;
+    private String departamento;
     @Column
-    private String DISTRICT;
+    private String distrito;
     @Column
-    private String PROVINCE;
+    private String provincia;
     @Column
-    private Date UPDATED;
+    private Date actualizacion;
 
     @OneToMany(mappedBy = "ubigeo")
-    private List<College> colleges=new ArrayList<>();
+    private List<Colegio> colegios =new ArrayList<>();
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public String getCODE() {
-        return CODE;
+    public String getCodigo() {
+        return codigo;
     }
 
-    public void setCODE(String CODE) {
-        this.CODE = CODE;
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
-    public Date getCREATED() {
-        return CREATED;
+    public Date getCreacion() {
+        return creacion;
     }
 
-    public void setCREATED(Date CREATED) {
-        this.CREATED = CREATED;
+    public void setCreacion(Date creacion) {
+        this.creacion = creacion;
     }
 
-    public String getDEPARTMENT() {
-        return DEPARTMENT;
+    public String getDepartamento() {
+        return departamento;
     }
 
-    public void setDEPARTMENT(String DEPARTMENT) {
-        this.DEPARTMENT = DEPARTMENT;
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
     }
 
-    public String getDISTRICT() {
-        return DISTRICT;
+    public String getDistrito() {
+        return distrito;
     }
 
-    public void setDISTRICT(String DISTRICT) {
-        this.DISTRICT = DISTRICT;
+    public void setDistrito(String distrito) {
+        this.distrito = distrito;
     }
 
-    public String getPROVINCE() {
-        return PROVINCE;
+    public String getProvincia() {
+        return provincia;
     }
 
-    public void setPROVINCE(String PROVINCE) {
-        this.PROVINCE = PROVINCE;
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
     }
 
-    public Date getUPDATED() {
-        return UPDATED;
+    public Date getActualizacion() {
+        return actualizacion;
     }
 
-    public void setUPDATED(Date UPDATED) {
-        this.UPDATED = UPDATED;
+    public void setActualizacion(Date actualizacion) {
+        this.actualizacion = actualizacion;
     }
 
-    public List<College> getColleges() {
-        return colleges;
+    public List<Colegio> getColegios() {
+        return colegios;
     }
 
-    public void setColleges(List<College> colleges) {
-        this.colleges = colleges;
+    public void setColegios(List<Colegio> colegios) {
+        this.colegios = colegios;
     }
-
 }

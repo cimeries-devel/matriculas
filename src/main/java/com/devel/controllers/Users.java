@@ -1,8 +1,7 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.models.ClassRoom;
-import com.devel.models.User;
+import com.devel.models.Usuario;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,13 +9,13 @@ import javax.persistence.criteria.Root;
 import java.util.Vector;
 
 public class Users extends Hibernate {
-    private static Root<User> root;
-    private static CriteriaQuery<User> criteria;
-    private static Vector<User> todos;
+    private static Root<Usuario> root;
+    private static CriteriaQuery<Usuario> criteria;
+    private static Vector<Usuario> todos;
 
-    public static User get(Integer id) {
-        User user = SESSION.find(User.class, id, LockModeType.NONE);
-        return user;
+    public static Usuario get(Integer id) {
+        Usuario usuario = SESSION.find(Usuario.class, id, LockModeType.NONE);
+        return usuario;
     }
 
 }

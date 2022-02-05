@@ -64,7 +64,7 @@ public class Cross extends JPanel {
     private ImageIcon getImage(String icono) {
         Image IMG=null;
         try {
-            IMG = new ImageIcon(ForResources.class.getResource("/Icons/x32/"+icono)).getImage();
+            IMG = new ImageIcon(ForResources.class.getResource(String.format("Icons/x32/"+icono))).getImage();
             IMG = IMG.getScaledInstance(size,size, Image.SCALE_SMOOTH);
         } catch(Exception e) {
             e.printStackTrace();

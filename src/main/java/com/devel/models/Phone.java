@@ -8,34 +8,34 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity(name = "TBL_PHONE")
+@Entity(name = "tbl_celular")
 public class Phone extends Hibernate {
     @Id
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
-    private Integer ID;
+    private Integer id;
     @Column
-    private String DESCRIPTION;
+    private String descipcion;
     @Column
-    private String NUMBER;
+    private String numero;
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
-    public String getDESCRIPTION() {
-        return DESCRIPTION;
+    public String getDescipcion() {
+        return descipcion;
     }
 
-    public void setDESCRIPTION(String DESCRIPTION) {
-        this.DESCRIPTION = DESCRIPTION;
+    public void setDescipcion(String descipcion) {
+        this.descipcion = descipcion;
     }
 
-    public String getNUMBER() {
-        return NUMBER;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNUMBER(String NUMBER) {
-        this.NUMBER = NUMBER;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 }

@@ -12,10 +12,8 @@ public class DnDTabbedPane extends JTabbedPane {
     public static final long serialVersionUID = 1L;
     private static final int LINEWIDTH = 3;
     private static final String NAME = "TabTransferData";
-    private final DataFlavor FLAVOR = new DataFlavor(
-            DataFlavor.javaJVMLocalObjectMimeType, NAME);
+    private final DataFlavor FLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType, NAME);
     private static GhostGlassPane s_glassPane = new GhostGlassPane();
-
     private boolean m_isDrawRect = false;
     private final Rectangle2D m_lineRect = new Rectangle2D.Double();
 
@@ -31,7 +29,6 @@ public class DnDTabbedPane extends JTabbedPane {
 
     public DnDTabbedPane() {
         super();
-
         final DragSourceListener dsl = new DragSourceListener() {
             public void dragEnter(DragSourceDragEvent e) {
                 e.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);

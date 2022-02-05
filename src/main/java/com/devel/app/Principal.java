@@ -1,8 +1,6 @@
 package com.devel.app;
 
-import com.devel.controllers.Persons;
 import com.devel.hibernate.Hibernate;
-import com.devel.models.Person;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
 

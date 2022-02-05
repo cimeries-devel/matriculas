@@ -1,7 +1,6 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.models.ClassRoom;
 import com.devel.models.Ubigeo;
 
 import javax.persistence.LockModeType;

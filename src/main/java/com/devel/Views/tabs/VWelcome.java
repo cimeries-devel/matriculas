@@ -9,10 +9,11 @@ public class VWelcome extends JFrame{
     public VWelcome() {
         setTitle("Inicio");
     }
-    public JPanel getPanelBienvenida() {
+    public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
+        panelPrincipal=new FondoPanel("Images/fondo.jpg");
     }
 }

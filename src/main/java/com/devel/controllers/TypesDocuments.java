@@ -1,8 +1,7 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.models.ClassRoom;
-import com.devel.models.TypeDocument;
+import com.devel.models.TipoDocumento;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -10,12 +9,12 @@ import javax.persistence.criteria.Root;
 import java.util.Vector;
 
 public class TypesDocuments extends Hibernate {
-    private static Root<TypeDocument> root;
-    private static CriteriaQuery<TypeDocument> criteria;
-    private static Vector<TypeDocument> todos;
+    private static Root<TipoDocumento> root;
+    private static CriteriaQuery<TipoDocumento> criteria;
+    private static Vector<TipoDocumento> todos;
 
-    public static TypeDocument get(Integer id) {
-        TypeDocument typeDocument = SESSION.find(TypeDocument.class, id, LockModeType.NONE);
-        return typeDocument;
+    public static TipoDocumento get(Integer id) {
+        TipoDocumento tipoDocumento = SESSION.find(TipoDocumento.class, id, LockModeType.NONE);
+        return tipoDocumento;
     }
 }
