@@ -4,12 +4,15 @@ import com.devel.ForResources;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.beans.JavaBean;
 import java.util.Vector;
 
 public class Utilities {
     private static TrayIcon mainTrayIcon;
+    private static DefaultTableCellRenderer trigth = new DefaultTableCellRenderer();
     private static Image trayIconImage = Toolkit.getDefaultToolkit().createImage(ForResources.class.getResource("Icons/x32/fedora.png"));
     private static SystemTray mainTray;
     private static boolean primera=true;
@@ -71,5 +74,28 @@ public class Utilities {
     }
     public static boolean isWindows(String OS) {
         return (OS.indexOf("Win") >= 0);
+    }
+
+    public static void alinearCentro(TableColumn columna){
+        trigth.setHorizontalAlignment(SwingConstants.CENTER);
+        columna.setCellRenderer(trigth);
+    }
+    public static void definirTamaño(TableColumn column, Integer maxWidth,Integer minWidth){
+        column.setMaxWidth(maxWidth);
+        column.setMinWidth(minWidth);
+    }
+
+    public static void headerNegrita(JTable table){
+        ((DefaultTableCellRenderer) (table.getTableHeader()).getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
+        DefaultTableCellRenderer header = new DefaultTableCellRenderer();
+        header.setFont(header.getFont().deriveFont(Font.BOLD));
+        header.setForeground(Color.white);
+        header.setBackground(new Color(0xFF0000));
+        header.setHorizontalAlignment(JLabel.CENTER);
+        for(int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setHeaderRenderer(header);
+        }
+        table.getTableHeader().setReorderingAllowed(false);
+
     }
 }

@@ -51,7 +51,7 @@ public class VMatricula extends JFrame{
     private void cargarTalbaFamiliares(Vector<Relacion> relaciones){
         model=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(model);
-        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares());
+        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones));
         TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
     }

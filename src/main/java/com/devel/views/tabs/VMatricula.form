@@ -69,7 +69,7 @@
         <border type="none"/>
         <children/>
       </grid>
-      <grid id="65eaf" layout-manager="GridLayoutManager" row-count="3" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="65eaf" layout-manager="GridLayoutManager" row-count="3" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
         <margin top="0" left="5" bottom="0" right="5"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -89,7 +89,7 @@
           <component id="aa523" class="javax.swing.JTextField" binding="textField1" default-binding="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
+                <preferred-size width="200" height="-1"/>
               </grid>
             </constraints>
             <properties/>
@@ -205,7 +205,7 @@
           <component id="d5806" class="javax.swing.JTextField" default-binding="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
+                <preferred-size width="200" height="-1"/>
               </grid>
             </constraints>
             <properties/>

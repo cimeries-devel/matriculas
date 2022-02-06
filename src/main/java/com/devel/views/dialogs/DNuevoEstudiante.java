@@ -2,6 +2,7 @@ package com.devel.views.dialogs;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
+import com.devel.utilities.Utilities;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -58,6 +59,7 @@ public class DNuevoEstudiante extends JDialog{
                 super.mouseClicked(e);
                 cargarAgregarFamiliar();
                 tablaFamiliares.updateUI();
+                Utilities.headerNegrita(tablaFamiliares);
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -72,14 +74,12 @@ public class DNuevoEstudiante extends JDialog{
         dañadirCelular.pack();
         dañadirCelular.setLocationRelativeTo(null);
         dañadirCelular.setVisible(true);
-        tablaCelulares.updateUI();
     }
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(relaciones,familiares,persona,documentos);
         dAñadirFamiliar.pack();
         dAñadirFamiliar.setLocationRelativeTo(null);
         dAñadirFamiliar.setVisible(true);
-        tablaCelulares.updateUI();
     }
     private void iniciarComponentes(){
         setTitle("Nuevo estudiante");
@@ -88,6 +88,8 @@ public class DNuevoEstudiante extends JDialog{
         setModal(true);
         cargarComboBox();
         cargarTalbaFamiliares(relaciones);
+        Utilities.headerNegrita(tablaCelulares);
+        Utilities.headerNegrita(tablaFamiliares);
     }
     private void cargarComboBox(){
         cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoDocumentos));
@@ -96,9 +98,10 @@ public class DNuevoEstudiante extends JDialog{
     private void cargarTalbaFamiliares(Vector<Relacion> relaciones){
         model=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(model);
-        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares());
+        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones));
         TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
+        Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),80,80);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

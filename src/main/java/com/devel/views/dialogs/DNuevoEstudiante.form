@@ -39,7 +39,9 @@
                 <children>
                   <component id="a5db4" class="javax.swing.JTable" binding="tablaFamiliares">
                     <constraints/>
-                    <properties/>
+                    <properties>
+                      <rowHeight value="25"/>
+                    </properties>
                   </component>
                 </children>
               </scrollpane>
