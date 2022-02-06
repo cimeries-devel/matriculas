@@ -74,8 +74,4 @@ public class Nivel extends Hibernate {
     }
 
 
-    @Override
-    public void save(){
-        super.save();
-    }
 }

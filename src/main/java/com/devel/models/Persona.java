@@ -34,6 +34,9 @@ public class Persona extends Hibernate {
     private String codigo;
     @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
+    @OneToMany(mappedBy = "persona")
+    private List<Relacion> familiares = new ArrayList<>();
+
     @OneToMany
     private List<Celular> celulars = new ArrayList<>();
     @ManyToMany
@@ -167,5 +170,13 @@ public class Persona extends Hibernate {
 
     public void setDocumentos(List<Documento> documentos) {
         this.documentos = documentos;
+    }
+
+    public List<Relacion> getFamiliares() {
+        return familiares;
+    }
+
+    public void setFamiliares(List<Relacion> familiares) {
+        this.familiares = familiares;
     }
 }

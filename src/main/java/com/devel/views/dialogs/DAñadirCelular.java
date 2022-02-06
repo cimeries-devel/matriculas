@@ -37,6 +37,7 @@ public class DAñadirCelular extends JDialog{
     private void iniciarComponentes(){
         setTitle("Añadir número de celular");
         setContentPane(panelPrincipal);
+        setResizable(false);
         setModal(true);
     }
 }

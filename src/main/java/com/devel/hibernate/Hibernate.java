@@ -26,7 +26,7 @@ public class Hibernate {
         session.close();
     }
 
-    public void save(){
+    public void guardar(){
         Integer id = null;
         if (this instanceof Persona) {
             id = ((Persona)(this)).getId();

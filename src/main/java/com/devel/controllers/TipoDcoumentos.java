@@ -17,4 +17,15 @@ public class TipoDcoumentos extends Hibernate {
         TipoDocumento tipoDocumento = session.find(TipoDocumento.class, id, LockModeType.NONE);
         return tipoDocumento;
     }
+    public static Vector<TipoDocumento> getTodos(){
+        criteria = builder.createQuery(TipoDocumento.class);
+        criteria.select(criteria.from(TipoDocumento.class));
+        todos = new Vector<>(session.createQuery(criteria).getResultList());
+        if(todos.isEmpty()){
+            TipoDocumento tipoDocumento=new TipoDocumento();
+            tipoDocumento.setCodigo("--");
+            todos.add(tipoDocumento);
+        }
+        return todos;
+    }
 }

@@ -48,8 +48,4 @@ public class Documento extends Hibernate {
         this.tipoDocumento = tipoDocumento;
     }
 
-    @Override
-    public void save(){
-        super.save();
-    }
 }

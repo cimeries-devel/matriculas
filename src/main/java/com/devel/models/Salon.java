@@ -57,8 +57,4 @@ public class Salon extends Hibernate {
         this.grado = grado;
     }
 
-    @Override
-    public void save(){
-        super.save();
-    }
 }

@@ -1,6 +1,8 @@
 package com.devel.views;
 
+import com.devel.controllers.TipoDcoumentos;
 import com.devel.custom.DnDTabbedPane;
+import com.devel.models.TipoDocumento;
 import com.devel.views.menus.MenuGestiones;
 import com.devel.views.menus.MenuInicio;
 import com.devel.views.menus.MenuReportes;
@@ -10,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class VPrincipal extends JFrame{
     private JPanel contentPane;
@@ -27,6 +30,7 @@ public class VPrincipal extends JFrame{
     private MenuInicio inicioOpciones=new MenuInicio(tabContenido);
     private MenuReportes menuReportes=new MenuReportes(tabContenido);
     private MenuGestiones menuGestiones=new MenuGestiones(tabContenido);
+    public static Vector<TipoDocumento> tipoDocumentos=new Vector<>(TipoDcoumentos.getTodos());
     public VPrincipal(){
         setContentPane(contentPane);
         setTitle("Gestión matrículas");

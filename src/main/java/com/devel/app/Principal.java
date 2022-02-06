@@ -1,6 +1,7 @@
 package com.devel.app;
 
 import com.devel.hibernate.Hibernate;
+import com.devel.models.TipoDocumento;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
 

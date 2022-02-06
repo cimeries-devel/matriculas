@@ -7,6 +7,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.swing.*;
+import java.awt.*;
 
 @Entity(name = "tbl_tipoDocumento")
 public class TipoDocumento extends Hibernate {
@@ -25,10 +27,6 @@ public class TipoDocumento extends Hibernate {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getCodigo() {
         return codigo;
     }
@@ -43,5 +41,15 @@ public class TipoDocumento extends Hibernate {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof TipoDocumento) {
+                value = ((TipoDocumento) value).getCodigo();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
     }
 }

@@ -1,30 +1,40 @@
 package com.devel.views.dialogs;
-
-import com.devel.models.Persona;
+import com.devel.models.*;
+import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
+import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
+import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
+import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
 import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.Vector;
 
 public class DNuevoEstudiante extends JDialog{
     private JTextField textField1;
-    private JComboBox comboBox1;
+    private JComboBox cbbTipoDocumento;
     private DatePicker datePicker1;
     private JTextField txtEdad;
     private JPanel panelPrincipal;
-    private JTable table2;
     private JButton añadirFamiliarButton;
     private JButton añdirCelularButton;
     private JTable tablaCelulares;
+    private JTable tablaFamiliares;
     private JButton guardarButton;
     private JButton hechoButton;
+    private JScrollPane jScrollPane;
     private Persona persona=new Persona();
+    private FamiliaresAbstractModel model;
+    private Vector<Persona> familiares=new Vector<>();
+    private Vector<Relacion> relaciones=new Vector<>();
+    private Vector<Documento> documentos=new Vector<>();
     public DNuevoEstudiante(){
         iniciarComponentes();
         datePicker1.addDateChangeListener(new DateChangeListener() {
@@ -47,6 +57,7 @@ public class DNuevoEstudiante extends JDialog{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarAgregarFamiliar();
+                tablaFamiliares.updateUI();
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -64,7 +75,7 @@ public class DNuevoEstudiante extends JDialog{
         tablaCelulares.updateUI();
     }
     private void cargarAgregarFamiliar(){
-        DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
+        DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(relaciones,familiares,persona,documentos);
         dAñadirFamiliar.pack();
         dAñadirFamiliar.setLocationRelativeTo(null);
         dAñadirFamiliar.setVisible(true);
@@ -73,8 +84,21 @@ public class DNuevoEstudiante extends JDialog{
     private void iniciarComponentes(){
         setTitle("Nuevo estudiante");
         setContentPane(panelPrincipal);
+        setResizable(false);
         setModal(true);
-//        setSize(new Dimension(400,250));
+        cargarComboBox();
+        cargarTalbaFamiliares(relaciones);
+    }
+    private void cargarComboBox(){
+        cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoDocumentos));
+        cbbTipoDocumento.setRenderer(new TipoDocumento.ListCellRenderer());
+    }
+    private void cargarTalbaFamiliares(Vector<Relacion> relaciones){
+        model=new FamiliaresAbstractModel(relaciones);
+        tablaFamiliares.setModel(model);
+        tablaFamiliares.getColumnModel().getColumn(model.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares());
+        TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
+        tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
