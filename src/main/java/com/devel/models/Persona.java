@@ -25,6 +25,8 @@ public class Persona extends Hibernate {
     @Column
     private String email;
     @Column
+    private boolean genero;
+    @Column
     private String nombres;
     @Column
     private String apellidos;
@@ -178,5 +180,13 @@ public class Persona extends Hibernate {
 
     public void setFamiliares(List<Relacion> familiares) {
         this.familiares = familiares;
+    }
+
+    public boolean isGenero() {
+        return genero;
+    }
+
+    public void setGenero(boolean genero) {
+        this.genero = genero;
     }
 }

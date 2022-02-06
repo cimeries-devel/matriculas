@@ -17,11 +17,11 @@ public class VMatricula extends JFrame{
     private JTable tablaFamiliares;
     private JTable tablaMatriculas;
     private JTextField txtEdad;
-    private JButton button1;
     private JComboBox comboBox2;
     private JTextField textField1;
     private JButton buscarButton;
     private JButton btnNuevoEstudiante;
+    private JButton registrarMatriculaButton;
     private JScrollPane jScrollPane1;
     private FamiliaresAbstractModel model;
     public VMatricula() {
@@ -38,7 +38,6 @@ public class VMatricula extends JFrame{
         return panelPrincipal;
     }
     private void cargarNuevoEstudiante(){
-        setTitle("Matrícula");
         DNuevoEstudiante dNuevoEstudiante=new DNuevoEstudiante();
         dNuevoEstudiante.pack();
         dNuevoEstudiante.setLocationRelativeTo(null);
@@ -46,6 +45,7 @@ public class VMatricula extends JFrame{
         tablaFamiliares.updateUI();
     }
     private void iniciarComponentes(){
+        setTitle("Matrícula");
         cargarTalbaFamiliares(new Vector<>());
     }
     private void cargarTalbaFamiliares(Vector<Relacion> relaciones){
