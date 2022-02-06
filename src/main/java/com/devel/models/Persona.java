@@ -37,8 +37,9 @@ public class Persona extends Hibernate {
     @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
     @OneToMany(mappedBy = "persona")
-    private List<Relacion> familiares = new ArrayList<>();
-
+    private List<Relacion> relaciones = new ArrayList<>();
+    @OneToMany(mappedBy = "estudiante")
+    private List<Registro> registros = new ArrayList<>();
     @OneToMany
     private List<Celular> celulars = new ArrayList<>();
     @ManyToMany
@@ -55,14 +56,6 @@ public class Persona extends Hibernate {
 
     public void setPhones(List<Celular> celulars) {
         this.celulars = celulars;
-    }
-
-    public List<Documento> getDocuments() {
-        return documentos;
-    }
-
-    public void setDocuments(List<Documento> documentos) {
-        this.documentos = documentos;
     }
 
     public List<Seguro> getSecures() {
@@ -174,12 +167,12 @@ public class Persona extends Hibernate {
         this.documentos = documentos;
     }
 
-    public List<Relacion> getFamiliares() {
-        return familiares;
+    public List<Relacion> getRelaciones() {
+        return relaciones;
     }
 
-    public void setFamiliares(List<Relacion> familiares) {
-        this.familiares = familiares;
+    public void setRelaciones(List<Relacion> familiares) {
+        this.relaciones = familiares;
     }
 
     public boolean isGenero() {
@@ -188,5 +181,30 @@ public class Persona extends Hibernate {
 
     public void setGenero(boolean genero) {
         this.genero = genero;
+    }
+
+    public List<Registro> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(List<Registro> registros) {
+        this.registros = registros;
+    }
+
+    public Persona getApoderado(){
+        for(Relacion relacion:getRelaciones()){
+            if(relacion.isApoderado()){
+                return relacion.getPersona1();
+            }
+        }
+        return null;
+    }
+    public String getRelacionDeApoderado(){
+        for(Relacion relacion:getRelaciones()){
+            if(relacion.isApoderado()){
+                return relacion.getTipoRelacion();
+            }
+        }
+        return null;
     }
 }

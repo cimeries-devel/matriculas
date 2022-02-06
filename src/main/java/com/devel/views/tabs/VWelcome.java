@@ -14,6 +14,6 @@ public class VWelcome extends JFrame{
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        panelPrincipal=new FondoPanel("Images/fondo.jpg");
+        panelPrincipal=new FondoPanel("Images/fondo2.jpg");
     }
 }

@@ -14,8 +14,28 @@ public class Grado extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
     @Column
-    private Integer grado;
+    private String grado;
     @OneToMany(mappedBy = "grado")
     private List<Salon> salon =new ArrayList<>();
 
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getGrado() {
+        return grado;
+    }
+
+    public void setGrado(String grado) {
+        this.grado = grado;
+    }
+
+    public List<Salon> getSalon() {
+        return salon;
+    }
+
+    public void setSalon(List<Salon> salon) {
+        this.salon = salon;
+    }
 }

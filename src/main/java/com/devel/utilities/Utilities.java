@@ -1,6 +1,7 @@
 package com.devel.utilities;
 
 import com.devel.ForResources;
+import com.devel.models.Registro;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -96,6 +97,14 @@ public class Utilities {
             table.getColumnModel().getColumn(i).setHeaderRenderer(header);
         }
         table.getTableHeader().setReorderingAllowed(false);
-
+    }
+    public static Vector invertirVector(Vector vector){
+        Object ventaAUX;
+        for(int i=0;i<vector.size()/2;i++){
+            ventaAUX=vector.get(i);
+            vector.set(i, vector.get(vector.size() - i-1));
+            vector.set((vector.size()-i-1), ventaAUX);
+        }
+        return vector;
     }
 }

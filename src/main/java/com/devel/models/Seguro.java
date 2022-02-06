@@ -4,6 +4,8 @@ import com.devel.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 
 @Entity(name = "tbl_seguro")
 public class Seguro extends Hibernate {
@@ -38,5 +40,15 @@ public class Seguro extends Hibernate {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Seguro) {
+                value = ((Seguro) value).getCodigo();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
     }
 }

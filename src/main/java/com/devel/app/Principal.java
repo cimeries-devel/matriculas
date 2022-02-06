@@ -1,7 +1,7 @@
 package com.devel.app;
 
+import com.devel.controllers.Registros;
 import com.devel.hibernate.Hibernate;
-import com.devel.models.TipoDocumento;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
 
@@ -10,6 +10,8 @@ public class Principal
     public static void main( String[] args ){
         Hibernate.initialize();
         Utilities.cambiarWindows();
+
+
 //        Person person1=Persons.get(1);
 //        person1.setFIRSTNAME("niño rata");
 //        person1.save();
@@ -23,6 +25,7 @@ public class Principal
 //        person2.setFIRSTNAME("madre");
 //        person2.setPerson(person1);
 //        person2.save();
+
         VPrincipal vPrincipal=new VPrincipal();
         vPrincipal.pack();
         vPrincipal.setVisible(true);

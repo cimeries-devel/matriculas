@@ -1,5 +1,7 @@
 package com.devel.views.dialogs;
 
+import com.devel.controllers.Documentos;
+import com.devel.controllers.Personas;
 import com.devel.models.*;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
@@ -8,6 +10,7 @@ import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Date;
@@ -34,18 +37,12 @@ public class DAñadirFamiliar extends JDialog{
     private JTextField txtEmail;
     private JTextField txtRelacion;
     private JTextField txtDni;
+    private JComboBox cbbGenero;
     private Persona persona;
     private Vector<String> errores=new Vector<>();
-    private Vector<Relacion> relaciones;
-    private Vector<Persona> familiares;
-    private Vector<Documento> documentos;
-    private Vector<Celular> celulares;
-    public DAñadirFamiliar(Vector<Relacion> relaciones,Vector<Persona> familiares,Persona persona,Vector<Documento> documentos){
-        this.relaciones=relaciones;
+
+    public DAñadirFamiliar(Persona persona){
         this.persona=persona;
-        this.familiares=familiares;
-        this.documentos=documentos;
-        this.celulares=celulares;
         iniciarComponentes();
         datePicker1.addDateChangeListener(new DateChangeListener() {
             @Override
@@ -66,11 +63,7 @@ public class DAñadirFamiliar extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(!añadirFamiliar()){
-                    Utilities.leerErrores(errores);
-                }else{
-                    limpiarControles();
-                }
+                registrarFamiliar();
             }
         });
     }
@@ -80,12 +73,16 @@ public class DAñadirFamiliar extends JDialog{
         setModal(true);
         cargarComboBox();
     }
-    private boolean añadirFamiliar(){
+    private void registrarFamiliar(){
         errores.clear();
-        return añadirFamiliar(crearPersona());
+        if(añadirFamiliar(crearPersona())){
+            limpiarControles();
+            Utilities.sendNotification("Éxito", "Familiar registrado", TrayIcon.MessageType.INFO);
+        }else{
+            Utilities.sendNotification("Error", "Ocurrió un error", TrayIcon.MessageType.ERROR);
+        }
     }
     private Persona crearPersona(){
-        Persona familiar=new Persona();
         if(txtDni.getText().length()<8){
             errores.add("Documento");
             return null;
@@ -106,6 +103,14 @@ public class DAñadirFamiliar extends JDialog{
             errores.add("relacion");
             return null;
         }
+        Persona familiar;
+        Documento doc= Documentos.getByDni(txtDni.getText());
+        if(doc!=null){
+            familiar= doc.getPerson();
+        }else{
+            doc=new Documento();
+            familiar=new Persona();
+        }
         familiar.setNombres(txtNombres.getText().trim());
         familiar.setApellidos(txtApellidos.getText().trim());
         familiar.setCumpleaños(Date.valueOf(datePicker1.getDate()));
@@ -113,18 +118,19 @@ public class DAñadirFamiliar extends JDialog{
         familiar.setActualizacion(new java.util.Date());
         familiar.setDireccion(txtDireccion.getText().trim());
         familiar.setEdad(Integer.parseInt(txtEdad.getText()));
-        familiar.setEmail(txtEmail.getText().trim());Documento documento=new Documento();
-        documento.setPerson(familiar);
-        documento.setTypeDocument((TipoDocumento) cbbTipoDocumento.getSelectedItem());
-        documento.setNumero(txtDni.getText().trim());
+        familiar.setEmail(txtEmail.getText().trim());
+        familiar.setGenero(cbbGenero.getSelectedIndex() == 0);
+        doc.setPerson(familiar);
+        doc.setTypeDocument((TipoDocumento) cbbTipoDocumento.getSelectedItem());
+        doc.setNumero(txtDni.getText().trim());
+        familiar.guardar();
+        doc.guardar();
         if(txtCelular.getText().length()>=9){
             Celular celular=new Celular();
             celular.setNumero(txtCelular.getText().trim());
             celular.setDescipcion(txtDescripcionCelular.getText().length()==0?"personal":txtDescripcionCelular.getText());
             familiar.getCelulars().add(celular);
         }
-        familiares.add(familiar);
-        documentos.add(documento);
         return familiar;
     }
     private boolean añadirFamiliar(Persona familiar){
@@ -134,12 +140,12 @@ public class DAñadirFamiliar extends JDialog{
             relacion.setPersona1(familiar);
             relacion.setTipoRelacion(txtRelacion.getText().trim());
             relacion.setVivenJuntos(ckVivenJuntos.isSelected());
-            if(relaciones.isEmpty()){
+            if(persona.getRelaciones().isEmpty()){
                 relacion.setApoderado(true);
             }else{
                 relacion.setApoderado(false);
             }
-            relaciones.add(relacion);
+            persona.getRelaciones().add(relacion);
             return true;
         }
         return false;
@@ -164,5 +170,8 @@ public class DAñadirFamiliar extends JDialog{
     private void createUIComponents() {
         // TODO: place custom component creation code here
         datePicker1=new DatePicker();
+        datePicker1.getComponentDateTextField().setBorder(new JTextField().getBorder());
+        datePicker1.getComponentDateTextField().setEnabled(false);
+        datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
     }
 }

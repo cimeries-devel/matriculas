@@ -13,6 +13,7 @@ public class MenuReportes {
     }
 
     public JPanel traerReportesOpciones() {
+        String button="<html></html>";
         return panelPrincipal;
     }
 }

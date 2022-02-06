@@ -1,8 +1,13 @@
 package com.devel.views;
 
+import com.devel.controllers.Registros;
+import com.devel.controllers.Seguros;
 import com.devel.controllers.TipoDcoumentos;
 import com.devel.custom.DnDTabbedPane;
+import com.devel.models.Registro;
+import com.devel.models.Seguro;
 import com.devel.models.TipoDocumento;
+import com.devel.views.Config.ConfigSistema;
 import com.devel.views.menus.MenuGestiones;
 import com.devel.views.menus.MenuInicio;
 import com.devel.views.menus.MenuReportes;
@@ -12,6 +17,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Vector;
 
 public class VPrincipal extends JFrame{
@@ -31,6 +38,9 @@ public class VPrincipal extends JFrame{
     private MenuReportes menuReportes=new MenuReportes(tabContenido);
     private MenuGestiones menuGestiones=new MenuGestiones(tabContenido);
     public static Vector<TipoDocumento> tipoDocumentos=new Vector<>(TipoDcoumentos.getTodos());
+    public static Vector<Registro> alumnosMatriculados=new Vector<>(Registros.getMatriculados());
+    public static Vector<Seguro> seguros=new Vector<>(Seguros.todos());
+    public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
     public VPrincipal(){
         setContentPane(contentPane);
         setTitle("Gestión matrículas");
@@ -66,8 +76,18 @@ public class VPrincipal extends JFrame{
             }
         });
 
+        btnConfiguraciones.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarConfiguraciones();
+            }
+        });
     }
-
+    private void cargarConfiguraciones(){
+        ConfigSistema configSistema=new ConfigSistema();
+        configSistema.setVisible(true);
+    }
     private void createUIComponents(){
         tabContenido=new DnDTabbedPane();
     }
