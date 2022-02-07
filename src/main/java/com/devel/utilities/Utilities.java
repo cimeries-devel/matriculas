@@ -2,6 +2,7 @@ package com.devel.utilities;
 
 import com.devel.ForResources;
 import com.devel.models.Registro;
+import com.devel.utilities.TablecellRendered.TablesCellRendered;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -81,9 +82,8 @@ public class Utilities {
         trigth.setHorizontalAlignment(SwingConstants.CENTER);
         columna.setCellRenderer(trigth);
     }
-    public static void definirTamaño(TableColumn column, Integer maxWidth,Integer minWidth){
-        column.setMaxWidth(maxWidth);
-        column.setMinWidth(minWidth);
+    public static void definirTamaño(TableColumn column, Integer maxWidth){
+        column.setPreferredWidth(maxWidth);
     }
 
     public static void headerNegrita(JTable table){
@@ -106,5 +106,11 @@ public class Utilities {
             vector.set((vector.size()-i-1), ventaAUX);
         }
         return vector;
+    }
+    public static void cellsRendered(JTable table){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered();
+        for (int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
+        }
     }
 }

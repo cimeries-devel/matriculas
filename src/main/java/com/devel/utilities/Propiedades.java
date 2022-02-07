@@ -9,10 +9,10 @@ import java.util.Properties;
 public class Propiedades {
     private Properties properties;
     private FileInputStream inputStream;
-    private File carpeta = new File(System.getProperty("user.home") + "/.Mistica");
+    private File carpeta = new File(System.getProperty("user.home") + "/.Devel");
     private File archivo;
 
-    public Propiedades() {
+    public Propiedades(){
         try {
             inicializar();
         } catch (IOException e) {
@@ -38,7 +38,6 @@ public class Propiedades {
             setActualizado(true);
             setContraseña("");
             setEstadoImprecion("preguntar");
-            setEstadoVentaCliente("preguntar");
             guardar();
         }else{
             inputStream = new FileInputStream(archivo.getAbsolutePath());
@@ -64,7 +63,6 @@ public class Propiedades {
     public String getUsuario() {
         return properties.getProperty("usuario");
     }
-
     public void setActualizado(boolean estado) {
         properties.put("Actualizado", String.valueOf(estado));
     }
@@ -94,11 +92,5 @@ public class Propiedades {
     }
     public String getTokenApiperu() {
         return properties.getProperty("TokenApiPeru");
-    }
-    public String getEstadoVentaCliente(){
-        return properties.getProperty("estadoVentaCliente");
-    }
-    public void setEstadoVentaCliente(String estadoVentaCliente){
-        properties.put("estadoVentaCliente",estadoVentaCliente);
     }
 }

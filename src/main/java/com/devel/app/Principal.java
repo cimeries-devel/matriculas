@@ -3,6 +3,7 @@ package com.devel.app;
 import com.devel.controllers.Registros;
 import com.devel.hibernate.Hibernate;
 import com.devel.utilities.Utilities;
+import com.devel.views.VLogin;
 import com.devel.views.VPrincipal;
 
 public class Principal
@@ -29,5 +30,7 @@ public class Principal
         VPrincipal vPrincipal=new VPrincipal();
         vPrincipal.pack();
         vPrincipal.setVisible(true);
+//        VLogin vLogin=new VLogin();
+//        vLogin.setVisible(true);
     }
 }

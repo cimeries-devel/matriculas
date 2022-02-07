@@ -1,9 +1,11 @@
 package com.devel.views;
 
+import com.devel.controllers.Niveles;
 import com.devel.controllers.Registros;
 import com.devel.controllers.Seguros;
 import com.devel.controllers.TipoDcoumentos;
 import com.devel.custom.DnDTabbedPane;
+import com.devel.models.Nivel;
 import com.devel.models.Registro;
 import com.devel.models.Seguro;
 import com.devel.models.TipoDocumento;
@@ -33,12 +35,14 @@ public class VPrincipal extends JFrame{
     private JButton reportesButton;
     private JButton gestionarButton;
     private JSplitPane splitPane;
+    private JButton cerrarSesiónButton;
     private VWelcome welcome;
     private MenuInicio inicioOpciones=new MenuInicio(tabContenido);
     private MenuReportes menuReportes=new MenuReportes(tabContenido);
     private MenuGestiones menuGestiones=new MenuGestiones(tabContenido);
-    public static Vector<TipoDocumento> tipoDocumentos=new Vector<>(TipoDcoumentos.getTodos());
-    public static Vector<Registro> alumnosMatriculados=new Vector<>(Registros.getMatriculados());
+    public static Vector<TipoDocumento> tipoDocumentos=TipoDcoumentos.getTodos();
+    public static Vector<Registro> alumnosMatriculados=Registros.getMatriculados();
+    public static Vector<Nivel> niveles= Niveles.getTodos();
     public static Vector<Seguro> seguros=new Vector<>(Seguros.todos());
     public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
     public VPrincipal(){

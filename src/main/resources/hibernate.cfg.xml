@@ -27,5 +27,6 @@
         <mapping class="com.devel.models.Seguro"/>
         <mapping class="com.devel.models.Grado"/>
         <mapping class="com.devel.models.Relacion"/>
+        <mapping class="com.devel.models.DataAPIDNI"/>
     </session-factory>
 </hibernate-configuration>

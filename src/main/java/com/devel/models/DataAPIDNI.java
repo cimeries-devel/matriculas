@@ -170,7 +170,7 @@ public class DataAPIDNI extends Hibernate {
         return dataAPIDNI;
     }
 
-    public static DataAPIDNI getDatosDni(String id) throws URISyntaxException, IOException, InterruptedException {
+    public static DataAPIDNI getDatosDni(String id){
         DataAPIDNI dataAPIDNI=getFromDataBase(id);
         if(dataAPIDNI==null){
             dataAPIDNI=getFromApi(id);

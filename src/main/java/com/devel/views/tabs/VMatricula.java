@@ -38,6 +38,7 @@ public class VMatricula extends JFrame{
     private JTextField txtNombres;
     private JCheckBox matriculadoCheckBox;
     private JTextField textField1;
+    private JTextField txtCodigo;
     private JScrollPane jScrollPane1;
     private FamiliaresAbstractModel familiaresAbstractModel;
     private Persona persona;
@@ -50,12 +51,6 @@ public class VMatricula extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarNuevoEstudiante();
-            }
-        });
-        buscarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
             }
         });
         buscarButton.addMouseListener(new MouseAdapter() {
@@ -78,10 +73,8 @@ public class VMatricula extends JFrame{
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
         dAñadirFamiliar.pack();
-        dAñadirFamiliar.setLocationRelativeTo(null);
         dAñadirFamiliar.setVisible(true);
         cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-        tablaFamiliares.updateUI();
     }
     private void buscarAlumno(){
         if(txtDni.getText().length()>=8){
@@ -90,6 +83,8 @@ public class VMatricula extends JFrame{
                 if(dni.getPerson().getCodigo()!=null){
                     persona=dni.getPerson();
                     txtNombres.setText(persona.getNombres()+" "+persona.getApellidos());
+                    txtCodigo.setText(persona.getCodigo());
+                    cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
                     verificarMatricula();
                     nuevoFamiliarButton.addMouseListener(new MouseAdapter() {
                         @Override
@@ -133,15 +128,22 @@ public class VMatricula extends JFrame{
     private void cargarMatriculas(){
         matriculadosAbstractModel=new AlumnosMatriculadosAbstractModel(VPrincipal.alumnosMatriculados);
         tablaMatriculas.setModel(matriculadosAbstractModel);
+        Utilities.cellsRendered(tablaMatriculas);
         Utilities.headerNegrita(tablaMatriculas);
     }
     private void cargarTablaFamiliares(Vector<Relacion> relaciones){
         familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(familiaresAbstractModel);
         tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones));
-        TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
+        TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.headerNegrita(tablaFamiliares);
+        definirColumnas();
+    }
+    private void definirColumnas(){
+        Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
+        Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
+        Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

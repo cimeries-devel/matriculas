@@ -18,6 +18,7 @@ public class Documentos extends Hibernate {
         Documento documento = session.find(Documento.class, id, LockModeType.NONE);
         return documento;
     }
+
     public static Documento getByDni(String dni) {
         criteria = builder.createQuery(Documento.class);
         root = criteria.from(Documento.class);

@@ -17,7 +17,7 @@ public class JButtonEditorCelulares extends AbstractCellEditor implements TableC
 
     public JButtonEditorCelulares(Vector<Celular> celulares) {
         this.celulares=celulares;
-        button = new JButtonAction("x16/default.png");
+        button = new JButtonAction("x16/editar.png");
         iniciarComponentes();
     }
     private void iniciarComponentes() {
