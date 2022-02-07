@@ -82,8 +82,9 @@ public class Utilities {
         trigth.setHorizontalAlignment(SwingConstants.CENTER);
         columna.setCellRenderer(trigth);
     }
-    public static void definirTamaño(TableColumn column, Integer maxWidth){
-        column.setPreferredWidth(maxWidth);
+    public static void definirTamaño(TableColumn column, Integer Width){
+        column.setMinWidth(Width);
+        column.setMaxWidth(Width);
     }
 
     public static void headerNegrita(JTable table){

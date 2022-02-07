@@ -42,10 +42,13 @@ public class DAñadirSeguro extends JDialog{
             seguro.guardar();
             VPrincipal.seguros.add(seguro);
             Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
+            txtDescripcion.setText(null);
+            txtCodigo.setText(null);
         }else{
             Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
         }
     }
+
     private void iniciarComponentes(){
         setTitle("Registrar Seguro");
         setContentPane(panelPrincipal);

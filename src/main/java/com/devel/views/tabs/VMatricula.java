@@ -1,16 +1,16 @@
 package com.devel.views.tabs;
 
 import com.devel.controllers.Documentos;
-import com.devel.models.Documento;
-import com.devel.models.Persona;
-import com.devel.models.Registro;
-import com.devel.models.Relacion;
+import com.devel.models.*;
+import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilities;
 import com.devel.utilities.modelosTablas.AlumnosMatriculadosAbstractModel;
+import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.views.VPrincipal;
+import com.devel.views.dialogs.DAñadirCelular;
 import com.devel.views.dialogs.DAñadirFamiliar;
 import com.devel.views.dialogs.DNuevoEstudiante;
 
@@ -39,11 +39,15 @@ public class VMatricula extends JFrame{
     private JCheckBox matriculadoCheckBox;
     private JTextField textField1;
     private JTextField txtCodigo;
+    private JTable tablaCelulares;
+    private JButton añdirCelularButton;
     private JScrollPane jScrollPane1;
     private FamiliaresAbstractModel familiaresAbstractModel;
     private Persona persona;
     private DateFormat año=new SimpleDateFormat("yyyy");
     private AlumnosMatriculadosAbstractModel matriculadosAbstractModel;
+    private CelularesAbstractModel modelCelulares;
+
     public VMatricula() {
         iniciarComponentes();
         btnNuevoEstudiante.addMouseListener(new MouseAdapter() {
@@ -72,9 +76,9 @@ public class VMatricula extends JFrame{
     }
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
-        dAñadirFamiliar.pack();
         dAñadirFamiliar.setVisible(true);
         cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
+        definirColumnas();
     }
     private void buscarAlumno(){
         if(txtDni.getText().length()>=8){
@@ -85,12 +89,21 @@ public class VMatricula extends JFrame{
                     txtNombres.setText(persona.getNombres()+" "+persona.getApellidos());
                     txtCodigo.setText(persona.getCodigo());
                     cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
+                    cargarTablaCelulares(new Vector<>(persona.getCelulars()));
+                    definirColumnas();
                     verificarMatricula();
                     nuevoFamiliarButton.addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             super.mouseClicked(e);
                             cargarAgregarFamiliar();
+                        }
+                    });
+                    añdirCelularButton.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            super.mouseClicked(e);
+                            cargarAgregarCelular();
                         }
                     });
                 }else{
@@ -117,12 +130,13 @@ public class VMatricula extends JFrame{
         }else{
             matriculadoCheckBox.setSelected(false);
         }
-
     }
     private void iniciarComponentes(){
         persona=new Persona();
         setTitle("Matrícula");
         cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
+        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
+        definirColumnas();
         cargarMatriculas();
     }
     private void cargarMatriculas(){
@@ -138,15 +152,30 @@ public class VMatricula extends JFrame{
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.headerNegrita(tablaFamiliares);
+    }
+    private void cargarTablaCelulares(Vector<Celular> celulares){
+        modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulars()));
+        tablaCelulares.setModel(modelCelulares);
+        tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(celulares));
+        TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
+        tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
+        Utilities.headerNegrita(tablaCelulares);
+    }
+    private void cargarAgregarCelular(){
+        DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
+        dañadirCelular.setVisible(true);
+        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
         definirColumnas();
     }
     private void definirColumnas(){
         Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
         Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
+        Utilities.definirTamaño(tablaCelulares.getColumn(""),30);
+        Utilities.alinearCentro(tablaCelulares.getColumn("Número"));
+//        Utilities.alinearCentro(tablaCelulares.getColumn(""));
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-
     }
 }

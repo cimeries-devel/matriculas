@@ -72,7 +72,9 @@
           <grid id="be621" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
             <margin top="5" left="5" bottom="5" right="5"/>
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="300"/>
+              </grid>
             </constraints>
             <properties/>
             <border type="none" title="Familiares"/>
@@ -106,7 +108,7 @@
               </component>
             </children>
           </grid>
-          <grid id="ae15a" layout-manager="GridLayoutManager" row-count="4" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+          <grid id="ae15a" layout-manager="GridLayoutManager" row-count="5" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
             <margin top="5" left="5" bottom="5" right="5"/>
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -310,6 +312,43 @@
                   <visible value="true"/>
                 </properties>
               </component>
+              <grid id="2259" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="0">
+                <margin top="0" left="0" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="6" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                    <preferred-size width="250" height="-1"/>
+                  </grid>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <scrollpane id="c8cb3">
+                    <constraints>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="40" height="45"/>
+                    </properties>
+                    <border type="none" title=""/>
+                    <children>
+                      <component id="a8813" class="javax.swing.JTable" binding="tablaCelulares">
+                        <constraints/>
+                        <properties>
+                          <rowHeight value="25"/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                  <component id="87840" class="javax.swing.JButton" binding="añdirCelularButton" default-binding="true">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="Añadir celular"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
             </children>
           </grid>
         </children>

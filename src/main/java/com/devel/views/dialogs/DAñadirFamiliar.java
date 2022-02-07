@@ -84,6 +84,7 @@ public class DAñadirFamiliar extends JDialog{
     private void iniciarComponentes(){
         setTitle("Añadir nuevo familiar");
         setContentPane(panelPrincipal);
+        pack();
         setModal(true);
         cargarComboBox();
         setLocationRelativeTo(null);
@@ -164,7 +165,9 @@ public class DAñadirFamiliar extends JDialog{
             }else{
                 relacion.setApoderado(false);
             }
-//            relacion.guardar();
+            if(persona.getId()!=null){
+                relacion.guardar();
+            }
             persona.getRelaciones().add(relacion);
             return true;
         }
