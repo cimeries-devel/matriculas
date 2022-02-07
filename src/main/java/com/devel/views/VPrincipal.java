@@ -1,14 +1,8 @@
 package com.devel.views;
 
-import com.devel.controllers.Niveles;
-import com.devel.controllers.Registros;
-import com.devel.controllers.Seguros;
-import com.devel.controllers.TipoDcoumentos;
+import com.devel.controllers.*;
 import com.devel.custom.DnDTabbedPane;
-import com.devel.models.Nivel;
-import com.devel.models.Registro;
-import com.devel.models.Seguro;
-import com.devel.models.TipoDocumento;
+import com.devel.models.*;
 import com.devel.views.Config.ConfigSistema;
 import com.devel.views.menus.MenuGestiones;
 import com.devel.views.menus.MenuInicio;
@@ -43,7 +37,9 @@ public class VPrincipal extends JFrame{
     public static Vector<TipoDocumento> tipoDocumentos=TipoDcoumentos.getTodos();
     public static Vector<Registro> alumnosMatriculados=Registros.getMatriculados();
     public static Vector<Nivel> niveles= Niveles.getTodos();
-    public static Vector<Seguro> seguros=new Vector<>(Seguros.todos());
+    public static Vector<Grado> grados= Grados.getTodos();
+    public static Vector<Tarifa> tarifas= Tarifas.getTodas();
+    public static Vector<Seguro> seguros= Seguros.todos();
     public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
     public VPrincipal(){
         setContentPane(contentPane);

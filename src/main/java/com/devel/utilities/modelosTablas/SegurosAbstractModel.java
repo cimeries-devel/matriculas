@@ -1,22 +1,18 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Nivel;
-import com.devel.models.Relacion;
+import com.devel.models.Celular;
+import com.devel.models.Seguro;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-public class NivelesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Hora inicio","Hora fin",""};
-    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class};
-    private Vector<Nivel> vector;
-    private DateFormat formatoHora=new SimpleDateFormat("hh:mm a");
-
-    public NivelesAbstractModel(Vector<Nivel> vector){
+public class SegurosAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Nombre","Código","Editar"};
+    public Class[] m_colTypes = {String.class,String.class, JButton.class};
+    private Vector<Seguro> vector;
+    public SegurosAbstractModel(Vector<Seguro> vector){
         this.vector=vector;
     }
     @Override
@@ -45,22 +41,21 @@ public class NivelesAbstractModel extends AbstractTableModel {
         }
         return false;
     }
+
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Nivel nivel=vector.get(rowIndex);
+        Seguro seguro=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return nivel.getDescripcion();
+                return seguro.getNombre();
             case 1:
-                return formatoHora.format(nivel.getHoraInicio());
-            case 2:
-                return formatoHora.format(nivel.getHoraFin());
+                return seguro.getCodigo();
             default:
                 return new JButtonAction("x16/editar.png");
         }
     }
-    public Nivel traer(int row){
-        Nivel ta = vector.get(row);
+    public Seguro traer(int row){
+        Seguro ta = vector.get(row);
         return ta;
     }
 }

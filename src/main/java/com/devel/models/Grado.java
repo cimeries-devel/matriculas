@@ -4,6 +4,8 @@ import com.devel.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,6 @@ public class Grado extends Hibernate {
     private String grado;
     @OneToMany(mappedBy = "grado")
     private List<Salon> salon =new ArrayList<>();
-
 
     public Integer getId() {
         return id;
@@ -37,5 +38,15 @@ public class Grado extends Hibernate {
 
     public void setSalon(List<Salon> salon) {
         this.salon = salon;
+    }
+
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Grado) {
+                value = ((Grado) value).getGrado();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
     }
 }

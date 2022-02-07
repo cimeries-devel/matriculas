@@ -4,6 +4,8 @@ import com.devel.hibernate.Hibernate;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -73,5 +75,14 @@ public class Nivel extends Hibernate {
         this.salons = salons;
     }
 
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Nivel) {
+                value = ((Nivel) value).getDescripcion();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
+    }
 
 }

@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Date;
 import com.devel.hibernate.Hibernate;
 
@@ -16,7 +18,7 @@ public class Tarifa extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
     @Column
-    private boolean precioDefecto;
+    private boolean defecto;
     @Column
     private String descripcion;
     @Column
@@ -28,12 +30,12 @@ public class Tarifa extends Hibernate {
         return id;
     }
 
-    public boolean isPrecioDefecto() {
-        return precioDefecto;
+    public boolean isDefecto() {
+        return defecto;
     }
 
-    public void setPrecioDefecto(boolean precioDefecto) {
-        this.precioDefecto = precioDefecto;
+    public void setDefecto(boolean defecto) {
+        this.defecto = defecto;
     }
 
     public String getDescripcion() {
@@ -58,5 +60,15 @@ public class Tarifa extends Hibernate {
 
     public void setPrecio(Double precio) {
         this.precio = precio;
+    }
+
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Tarifa) {
+                value = ((Tarifa) value).getDescripcion();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
     }
 }

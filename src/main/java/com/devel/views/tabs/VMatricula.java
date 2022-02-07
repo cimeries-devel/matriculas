@@ -1,6 +1,7 @@
 package com.devel.views.tabs;
 
 import com.devel.controllers.Documentos;
+import com.devel.controllers.Niveles;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
@@ -29,7 +30,7 @@ public class VMatricula extends JFrame{
     private JTable tablaFamiliares;
     private JTable tablaMatriculas;
     private JTextField txtEdad;
-    private JComboBox comboBox2;
+    private JComboBox cbbNiveles;
     private JTextField txtDni;
     private JButton buscarButton;
     private JButton btnNuevoEstudiante;
@@ -41,6 +42,8 @@ public class VMatricula extends JFrame{
     private JTextField txtCodigo;
     private JTable tablaCelulares;
     private JButton añdirCelularButton;
+    private JComboBox cbbGrados;
+    private JComboBox cbbTarifas;
     private JScrollPane jScrollPane1;
     private FamiliaresAbstractModel familiaresAbstractModel;
     private Persona persona;
@@ -138,6 +141,15 @@ public class VMatricula extends JFrame{
         cargarTablaCelulares(new Vector<>(persona.getCelulars()));
         definirColumnas();
         cargarMatriculas();
+        cargarComboBox();
+    }
+    private void cargarComboBox(){
+        cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));
+        cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
+        cbbGrados.setModel(new DefaultComboBoxModel(VPrincipal.grados));
+        cbbGrados.setRenderer(new Grado.ListCellRenderer());
+        cbbTarifas.setModel(new DefaultComboBoxModel(VPrincipal.tarifas));
+        cbbTarifas.setRenderer(new Tarifa.ListCellRenderer());
     }
     private void cargarMatriculas(){
         matriculadosAbstractModel=new AlumnosMatriculadosAbstractModel(VPrincipal.alumnosMatriculados);

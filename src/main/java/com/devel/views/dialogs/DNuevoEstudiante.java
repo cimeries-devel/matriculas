@@ -90,7 +90,7 @@ public class DNuevoEstudiante extends JDialog{
         nuevoButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DAñadirSeguro añadirSeguro=new DAñadirSeguro();
+                DAñadirSeguro añadirSeguro=new DAñadirSeguro(null);
                 añadirSeguro.setVisible(true);
                 cbbSeguro.setSelectedIndex(cbbSeguro.getItemCount()-1);
             }

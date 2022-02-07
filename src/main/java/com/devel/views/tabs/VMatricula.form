@@ -161,7 +161,7 @@
                   <text value="Nivel:"/>
                 </properties>
               </component>
-              <component id="6a1ac" class="javax.swing.JComboBox" binding="comboBox2" default-binding="true">
+              <component id="6a1ac" class="javax.swing.JComboBox" binding="cbbNiveles">
                 <constraints>
                   <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -208,7 +208,7 @@
                   <text value="Grado:"/>
                 </properties>
               </component>
-              <component id="e18b4" class="javax.swing.JComboBox" default-binding="true">
+              <component id="e18b4" class="javax.swing.JComboBox" binding="cbbGrados">
                 <constraints>
                   <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -272,7 +272,7 @@
                   <text value="Escala pago:"/>
                 </properties>
               </component>
-              <component id="c9e48" class="javax.swing.JComboBox" default-binding="true">
+              <component id="c9e48" class="javax.swing.JComboBox" binding="cbbTarifas">
                 <constraints>
                   <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>

@@ -3,6 +3,7 @@ package com.devel.views.dialogs;
 import com.devel.models.Seguro;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
+import com.sun.istack.Nullable;
 import jdk.jshell.execution.Util;
 
 import javax.swing.*;
@@ -16,14 +17,36 @@ public class DAñadirSeguro extends JDialog{
     private JButton añadirButton;
     private JButton hechoButton;
     private JTextField txtDescripcion;
-
-    public DAñadirSeguro() {
+    private Seguro seguro;
+    public DAñadirSeguro(@Nullable Seguro seguro1) {
+        if(seguro1==null){
+            setTitle("Registrar Seguro");
+            seguro=new Seguro();
+        }else{
+            seguro=seguro1;
+            setTitle("Editar seguro");
+            cargarSeguro();
+            añadirButton.setText("Guardar");
+        }
         iniciarComponentes();
         añadirButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                registrarSeguro();
+                if(registrarSeguro()){
+                    if(seguro1==null){
+                        VPrincipal.seguros.add(seguro);
+                        seguro=null;
+                        seguro=new Seguro();
+                        Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
+                        txtDescripcion.setText(null);
+                        txtCodigo.setText(null);
+                    }else {
+                        Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                    }
+                }else{
+                    Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+                }
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -34,23 +57,21 @@ public class DAñadirSeguro extends JDialog{
             }
         });
     }
-    private void registrarSeguro(){
+    private boolean registrarSeguro(){
         if(txtCodigo.getText().length()>0&&txtDescripcion.getText().length()>0){
-            Seguro seguro=new Seguro();
             seguro.setNombre(txtDescripcion.getText().trim());
-            seguro.setCodigo(txtDescripcion.getText().trim());
+            seguro.setCodigo(txtCodigo.getText().trim());
             seguro.guardar();
-            VPrincipal.seguros.add(seguro);
-            Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
-            txtDescripcion.setText(null);
-            txtCodigo.setText(null);
+            return true;
         }else{
-            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+            return false;
         }
     }
-
+    private void cargarSeguro(){
+        txtDescripcion.setText(seguro.getNombre());
+        txtCodigo.setText(seguro.getCodigo());
+    }
     private void iniciarComponentes(){
-        setTitle("Registrar Seguro");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
