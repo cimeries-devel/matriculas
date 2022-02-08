@@ -9,8 +9,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class GradoAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Id","Grado","Editar"};
-    public Class[] m_colTypes = {Integer.class,String.class, JButton.class};
+    private String[] columnNames = {"Id","Nivel","Grado","Editar"};
+    public Class[] m_colTypes = {Integer.class,String.class,String.class, JButton.class};
     private Vector<Grado> vector;
     public GradoAbstractModel(Vector<Grado> vector){
         this.vector=vector;
@@ -49,6 +49,8 @@ public class GradoAbstractModel extends AbstractTableModel {
             case 0:
                 return grado.getId();
             case 1:
+                return grado.getNivel().getDescripcion();
+            case 2:
                 return grado.getGrado();
             default:
                 return new JButtonAction("x16/editar.png");

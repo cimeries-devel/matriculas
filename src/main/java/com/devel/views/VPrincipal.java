@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 public class VPrincipal extends JFrame{
@@ -43,15 +45,7 @@ public class VPrincipal extends JFrame{
     public static Vector<Seccion> secciones= Secciones.todos();
     public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
     public VPrincipal(){
-        setContentPane(contentPane);
-        setTitle("Gestión matrículas");
-        setSize(new Dimension(700, 500));
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(3);
-        inicioOpciones.cargarBienvenida();
-        splitPane.setRightComponent(null);
-        splitPane.setRightComponent(inicioOpciones.traerInicioOpciones());
-        contentPane.updateUI();
+        iniciarComponentes();
         inicioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +78,19 @@ public class VPrincipal extends JFrame{
                 cargarConfiguraciones();
             }
         });
+
+    }
+
+    private void iniciarComponentes(){
+        setContentPane(contentPane);
+        setTitle("Gestión matrículas");
+        setDefaultCloseOperation(3);
+        inicioOpciones.cargarBienvenida();
+        splitPane.setRightComponent(null);
+        splitPane.setRightComponent(inicioOpciones.traerInicioOpciones());
+        contentPane.updateUI();
+        pack();
+        setLocationRelativeTo(null);
     }
     private void cargarConfiguraciones(){
         ConfigSistema configSistema=new ConfigSistema();

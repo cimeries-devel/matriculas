@@ -98,6 +98,7 @@ public class DNuevoEstudiante extends JDialog{
     }
     private boolean registrarEstudiante(){
         if(txtDni.getText().length()>=8&&txtApellidos.getText().length()>5&&txtNombres.getText().length()>5&&!txtEdad.getText().isEmpty()&&!txtCodigo.getText().isEmpty()&&((Seguro)cbbSeguro.getSelectedItem()).getId()!=null){
+            if(cbbTipoDocumento.getItemCount()>0){
             if(!persona.getRelaciones().isEmpty()){
                 Documento documento=Documentos.getByDni(txtDni.getText().trim());
                 if(documento!=null){
@@ -113,10 +114,14 @@ public class DNuevoEstudiante extends JDialog{
                 persona.setEmail(txtEmail.getText().trim());
                 persona.setDireccion(txtDireccion.getText().trim());
                 persona.setCodigo(txtCodigo.getText().trim());
+                persona.guardar();
                 guardarPersona();
                 return true;
             }else{
                 Utilities.sendNotification("Error","Debe registrar un Apoderado", TrayIcon.MessageType.ERROR);
+                return false;
+            }}else{
+                Utilities.sendNotification("Error","Debe registrar un tipo de documento", TrayIcon.MessageType.ERROR);
                 return false;
             }
         }else{
@@ -126,7 +131,6 @@ public class DNuevoEstudiante extends JDialog{
     }
 
     private void guardarPersona(){
-        persona.guardar();
         for(Relacion relacion:persona.getRelaciones()){
             relacion.guardar();
         }
@@ -203,7 +207,7 @@ public class DNuevoEstudiante extends JDialog{
         Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
         Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
-        Utilities.definirTamaño(tablaCelulares.getColumn(""),30);
+        Utilities.definirTamaño(tablaCelulares.getColumn("Editar"),40);
         Utilities.alinearCentro(tablaCelulares.getColumn("Número"));
         Utilities.definirTamaño(tablaCelulares.getColumn("Número"),60);
 //        Utilities.alinearCentro(tablaCelulares.getColumn(""));
@@ -215,6 +219,7 @@ public class DNuevoEstudiante extends JDialog{
         datePicker1.getComponentDateTextField().setEnabled(false);
         datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
         datePicker1.getComponentDateTextField().setPreferredSize(new Dimension(150,new JTextField().getHeight()));
+        datePicker1.getComponentDateTextField().setHorizontalAlignment(JTextField.CENTER);
 //        datePicker1.setPreferredSize(new Dimension(200,new JTextField().getHeight()));
 //        DateTimeFormatter a=DateTimeFormatter.ofPattern("dd/MM/yyyy");
 //        datePicker1.getSettings().setFormatForDatesCommonEra("dd/MM/yyyy");

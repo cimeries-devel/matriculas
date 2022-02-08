@@ -64,7 +64,7 @@ public class DGestionTarifa extends JDialog{
         tablaTarifas.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.definirTamaño(tablaTarifas.getColumn("Tarifa"),80);
         Utilities.definirTamaño(tablaTarifas.getColumn("Activa"),40);
-        Utilities.definirTamaño(tablaTarifas.getColumn(""),40);
+        Utilities.definirTamaño(tablaTarifas.getColumn("Editar"),40);
         Utilities.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
         Utilities.alinearCentro(tablaTarifas.getColumn("Fecha creación"));
         Utilities.alinearCentro(tablaTarifas.getColumn("Tarifa"));

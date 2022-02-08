@@ -2,6 +2,7 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Grado;
 import com.devel.models.Nivel;
+import com.devel.models.TipoDocumento;
 import com.devel.utilities.Utilities;
 import com.devel.views.VPrincipal;
 import com.sun.istack.Nullable;
@@ -16,18 +17,21 @@ public class DCrearGrado extends JDialog {
     private JButton añadirButton;
     private JPanel panelPrincipal;
     private JButton btnHecho;
+    private JComboBox cbbNiveles;
     private Grado grado;
+    private String error;
     public DCrearGrado(@Nullable Grado grado1) {
+        iniciarComponentes();
         if(grado1==null){
             grado=new Grado();
             setTitle("Crear grado");
         }else{
             grado=grado1;
             txtGrado.setText(grado1.getGrado());
+            cbbNiveles.setSelectedItem(grado1.getNivel());
             setTitle("Editar grado");
             añadirButton.setText("Guardar");
         }
-        iniciarComponentes();
         añadirButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -43,7 +47,15 @@ public class DCrearGrado extends JDialog {
                         Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
                     }
                 }else{
-                    Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+                    switch (error){
+                        case "nivel":
+                            Utilities.sendNotification("Error","Primero debe registrar un nivel", TrayIcon.MessageType.ERROR);
+                            break;
+                        case "grado":
+                            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+                            break;
+                    }
+
                 }
             }
         });
@@ -60,15 +72,26 @@ public class DCrearGrado extends JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarCombox();
     }
-
+    private void cargarCombox(){
+        cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));
+        cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
+    }
     private boolean guardarGrado(){
         if(txtGrado.getText().length()>0){
-            grado.setGrado(txtGrado.getText().trim());
-            grado.guardar();
-            return true;
+            if(cbbNiveles.getItemCount()!=0){
+                grado.setNivel((Nivel) cbbNiveles.getSelectedItem());
+                grado.setGrado(txtGrado.getText().trim());
+                grado.guardar();
+                ((Nivel) cbbNiveles.getSelectedItem()).getGrados().add(grado);
+                return true;
+            }else{
+                error="nivel";
+            }
         }else{
-            return false;
+            error="grado";
         }
+        return false;
     }
 }

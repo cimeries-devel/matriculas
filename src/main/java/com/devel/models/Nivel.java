@@ -26,13 +26,11 @@ public class Nivel extends Hibernate {
     private Date horaInicio;
     @OneToMany(mappedBy = "nivel")
     private List<Salon> salons =new ArrayList<>();
+    @OneToMany(mappedBy = "nivel")
+    private List<Grado> grados=new ArrayList<>();
 
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Date getCreacion() {
@@ -73,6 +71,14 @@ public class Nivel extends Hibernate {
 
     public void setSalons(List<Salon> salons) {
         this.salons = salons;
+    }
+
+    public List<Grado> getGrados() {
+        return grados;
+    }
+
+    public void setGrados(List<Grado> grados) {
+        this.grados = grados;
     }
 
     public static class ListCellRenderer extends DefaultListCellRenderer {

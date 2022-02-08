@@ -73,7 +73,21 @@ public class VMatricula extends JFrame{
         cbbTarifas.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+                if(cbbTarifas.getItemCount()>0){
+                    if(cbbTarifas.getSelectedItem()!=null){
+                        txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+                    }
+                }
+            }
+        });
+        cbbNiveles.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if(cbbNiveles.getItemCount()>0){
+                    if(cbbNiveles.getSelectedItem()!=null){
+                        cargarGradosPorNivel();
+                    }
+                }
             }
         });
     }
@@ -143,6 +157,10 @@ public class VMatricula extends JFrame{
             matriculadoCheckBox.setSelected(false);
         }
     }
+    private void cargarGradosPorNivel(){
+        cbbGrados.setModel(new DefaultComboBoxModel(new Vector(((Nivel)cbbNiveles.getSelectedItem()).getGrados())));
+        cbbGrados.setRenderer(new Grado.ListCellRenderer());
+    }
     private void iniciarComponentes(){
         persona=new Persona();
         setTitle("Matrícula");
@@ -192,7 +210,7 @@ public class VMatricula extends JFrame{
         Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
         Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
-        Utilities.definirTamaño(tablaCelulares.getColumn(""),30);
+        Utilities.definirTamaño(tablaCelulares.getColumn("Editar"),40);
         Utilities.alinearCentro(tablaCelulares.getColumn("Número"));
 //        Utilities.alinearCentro(tablaCelulares.getColumn(""));
     }

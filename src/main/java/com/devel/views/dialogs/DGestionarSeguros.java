@@ -40,6 +40,7 @@ public class DGestionarSeguros extends JDialog{
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
+        setResizable(false);
         setModal(true);
         cargarTabla();
     }
@@ -56,7 +57,7 @@ public class DGestionarSeguros extends JDialog{
         TableCellRenderer renderer1 = tablaSeguros.getDefaultRenderer(JButton.class);
         tablaSeguros.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.alinearCentro(tablaSeguros.getColumn("Código"));
-        Utilities.definirTamaño(tablaSeguros.getColumn("Editar"),60);
+        Utilities.definirTamaño(tablaSeguros.getColumn("Editar"),40);
         Utilities.headerNegrita(tablaSeguros);
     }
 }

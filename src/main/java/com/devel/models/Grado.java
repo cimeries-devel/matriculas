@@ -19,6 +19,9 @@ public class Grado extends Hibernate {
     private String grado;
     @OneToMany(mappedBy = "grado")
     private List<Salon> salon =new ArrayList<>();
+    @ManyToOne
+    @JoinColumn(name = "fk_nivel")
+    private Nivel nivel;
 
     public Integer getId() {
         return id;
@@ -38,6 +41,14 @@ public class Grado extends Hibernate {
 
     public void setSalon(List<Salon> salon) {
         this.salon = salon;
+    }
+
+    public Nivel getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Nivel nivel) {
+        this.nivel = nivel;
     }
 
     public static class ListCellRenderer extends DefaultListCellRenderer {

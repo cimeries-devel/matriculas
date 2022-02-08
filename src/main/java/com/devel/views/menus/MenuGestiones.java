@@ -15,6 +15,7 @@ public class MenuGestiones {
     private JButton btnSeguros;
     private JButton btnSecciones;
     private JButton btnEscalasDePago;
+    private JButton btnTiposdeDocumentos;
     private DnDTabbedPane tabContenido;
     public MenuGestiones(DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
@@ -54,6 +55,13 @@ public class MenuGestiones {
                 cargarGestionTarifas();
             }
         });
+        btnTiposdeDocumentos.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarGestionTipoDocumentos();
+            }
+        });
     }
     public JPanel traerInicioOpciones() {
         return panelPrincipal;
@@ -77,6 +85,10 @@ public class MenuGestiones {
     }
     private void cargarGestionarGrados(){
         DGestionarGrados dGestionarGrados=new DGestionarGrados();
+        dGestionarGrados.setVisible(true);
+    }
+    private void cargarGestionTipoDocumentos(){
+        DGestionTipoDocumento dGestionarGrados=new DGestionTipoDocumento();
         dGestionarGrados.setVisible(true);
     }
 

@@ -12,25 +12,7 @@ public class Principal
         Hibernate.initialize();
         Utilities.cambiarWindows();
 
-
-//        Person person1=Persons.get(1);
-//        person1.setFIRSTNAME("niño rata");
-//        person1.save();
-
-//        Person person=new Person();
-//        person.setFIRSTNAME("padre");
-//        person.setPerson(person1);
-//        person.save();
-//
-//        Person person2=new Person();
-//        person2.setFIRSTNAME("madre");
-//        person2.setPerson(person1);
-//        person2.save();
-
         VPrincipal vPrincipal=new VPrincipal();
-        vPrincipal.pack();
         vPrincipal.setVisible(true);
-//        VLogin vLogin=new VLogin();
-//        vLogin.setVisible(true);
     }
 }

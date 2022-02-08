@@ -41,6 +41,7 @@ public class DGestionNiveles extends JDialog{
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
+        setResizable(false);
         setModal(true);
         cargarTabla();
     }private void cargarCrearNivel(){
@@ -55,7 +56,7 @@ public class DGestionNiveles extends JDialog{
         tablaNiveles.getColumnModel().getColumn(nivelesAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroNiveles(tablaNiveles));
         TableCellRenderer renderer1 = tablaNiveles.getDefaultRenderer(JButton.class);
         tablaNiveles.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaNiveles.getColumn(""),35);
+        Utilities.definirTamaño(tablaNiveles.getColumn("Editar"),40);
         Utilities.alinearCentro(tablaNiveles.getColumn("Descripción"));
         Utilities.alinearCentro(tablaNiveles.getColumn("Hora inicio"));
         Utilities.alinearCentro(tablaNiveles.getColumn("Hora fin"));

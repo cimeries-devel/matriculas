@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class NivelesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Hora inicio","Hora fin",""};
+    private String[] columnNames = {"Descripción","Hora inicio","Hora fin","Editar"};
     public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class};
     private Vector<Nivel> vector;
     private DateFormat formatoHora=new SimpleDateFormat("hh:mm a");
