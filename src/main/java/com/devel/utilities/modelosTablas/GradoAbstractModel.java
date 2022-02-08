@@ -55,7 +55,6 @@ public class GradoAbstractModel extends AbstractTableModel {
         }
     }
     public Grado traer(int row){
-        Grado ta = vector.get(row);
-        return ta;
+        return vector.get(row);
     }
 }

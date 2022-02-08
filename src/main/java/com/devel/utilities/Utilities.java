@@ -92,7 +92,7 @@ public class Utilities {
         DefaultTableCellRenderer header = new DefaultTableCellRenderer();
         header.setFont(header.getFont().deriveFont(Font.BOLD));
         header.setForeground(Color.white);
-        header.setBackground(new Color(0xFF0000));
+        header.setBackground(new Color(0xFF3A3434, true));
         header.setHorizontalAlignment(JLabel.CENTER);
         for(int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setHeaderRenderer(header);

@@ -55,7 +55,6 @@ public class SegurosAbstractModel extends AbstractTableModel {
         }
     }
     public Seguro traer(int row){
-        Seguro ta = vector.get(row);
-        return ta;
+        return vector.get(row);
     }
 }

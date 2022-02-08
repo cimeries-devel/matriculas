@@ -1,22 +1,24 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Celular;
-import com.devel.models.Registro;
+import com.devel.models.Seguro;
+import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-public class AlumnosMatriculadosAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Código","Alumno","Apoderado","Nivel","Grado","Sección","Fecha Matrícula"};
-    public Class[] m_colTypes = {String.class,String.class, String.class,String.class,String.class,String.class,String.class};
-    private Vector<Registro> vector;
+public class TarifasAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Fecha creación","Descripción","Tarifa","Activa",""};
+    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
+    private Vector<Tarifa> vector;
     private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    private NumberFormat sol = NumberFormat.getCurrencyInstance();
 
-    public AlumnosMatriculadosAbstractModel(Vector<Registro> vector){
+    public TarifasAbstractModel(Vector<Tarifa> vector){
         this.vector=vector;
     }
     @Override
@@ -48,26 +50,21 @@ public class AlumnosMatriculadosAbstractModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Registro registro=vector.get(rowIndex);
+        Tarifa tarifa=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return registro.getEstudiante().getCodigo();
+                return formatoFecha.format(tarifa.getCreacion());
             case 1:
-                return registro.getEstudiante().getNombres()+" "+registro.getEstudiante().getNombres();
+                return tarifa.getDescripcion();
             case 2:
-                return registro.getEstudiante().getApoderado().getNombres()+" "+registro.getEstudiante().getApoderado().getApellidos()+" - "+registro.getEstudiante().getRelacionDeApoderado();
+                return sol.format(tarifa.getPrecio());
             case 3:
-                return registro.getSalon().getNivel().getDescripcion();
-            case 4:
-                return registro.getSalon().getGrado().getGrado();
-            case 5:
-                return registro.getSalon().getSeccion().getSeccion();
+                return tarifa.isDefecto()?new JButtonAction("x16/default.png"):new JButtonAction("x16/Nodefault.png");
             default:
-                return formatoFecha.format(registro.getActualizacion());
+                return new JButtonAction("x16/editar.png");
         }
     }
-
-    public Registro traer(int row){
+    public Tarifa traer(int row){
         return vector.get(row);
     }
 }

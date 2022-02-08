@@ -1,9 +1,7 @@
 package com.devel.views.menus;
 
 import com.devel.custom.DnDTabbedPane;
-import com.devel.views.dialogs.DGestionNiveles;
-import com.devel.views.dialogs.DGestionarGrados;
-import com.devel.views.dialogs.DGestionarSeguros;
+import com.devel.views.dialogs.*;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -15,6 +13,8 @@ public class MenuGestiones {
     private JButton nivelesButton;
     private JButton btnGrados;
     private JButton btnSeguros;
+    private JButton btnSecciones;
+    private JButton btnEscalasDePago;
     private DnDTabbedPane tabContenido;
     public MenuGestiones(DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
@@ -40,6 +40,20 @@ public class MenuGestiones {
                 cargarGestionSeguros();
             }
         });
+        btnSecciones.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarGestionarSecciones();
+            }
+        });
+        btnEscalasDePago.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cargarGestionTarifas();
+            }
+        });
     }
     public JPanel traerInicioOpciones() {
         return panelPrincipal;
@@ -48,6 +62,14 @@ public class MenuGestiones {
     private void cargarGestionNiveles(){
         DGestionNiveles dGestionNiveles=new DGestionNiveles();
         dGestionNiveles.setVisible(true);
+    }
+    private void cargarGestionTarifas(){
+        DGestionTarifa dGestionNiveles=new DGestionTarifa();
+        dGestionNiveles.setVisible(true);
+    }
+    private void cargarGestionarSecciones(){
+        DGestionSecciones dGestionSecciones=new DGestionSecciones();
+        dGestionSecciones.setVisible(true);
     }
     private void cargarGestionSeguros(){
         DGestionarSeguros dGestionNiveles=new DGestionarSeguros();

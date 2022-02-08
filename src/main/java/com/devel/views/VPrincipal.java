@@ -29,7 +29,7 @@ public class VPrincipal extends JFrame{
     private JButton reportesButton;
     private JButton gestionarButton;
     private JSplitPane splitPane;
-    private JButton cerrarSesiónButton;
+    private JButton button1;
     private VWelcome welcome;
     private MenuInicio inicioOpciones=new MenuInicio(tabContenido);
     private MenuReportes menuReportes=new MenuReportes(tabContenido);
@@ -40,6 +40,7 @@ public class VPrincipal extends JFrame{
     public static Vector<Grado> grados= Grados.getTodos();
     public static Vector<Tarifa> tarifas= Tarifas.getTodas();
     public static Vector<Seguro> seguros= Seguros.todos();
+    public static Vector<Seccion> secciones= Secciones.todos();
     public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
     public VPrincipal(){
         setContentPane(contentPane);

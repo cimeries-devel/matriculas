@@ -33,20 +33,7 @@ public class DAñadirSeguro extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(registrarSeguro()){
-                    if(seguro1==null){
-                        VPrincipal.seguros.add(seguro);
-                        seguro=null;
-                        seguro=new Seguro();
-                        Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
-                        txtDescripcion.setText(null);
-                        txtCodigo.setText(null);
-                    }else {
-                        Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                    }
-                }else{
-                    Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
-                }
+                registrar(seguro1);
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -65,6 +52,22 @@ public class DAñadirSeguro extends JDialog{
             return true;
         }else{
             return false;
+        }
+    }
+    private void registrar(Seguro seguro1){
+        if(registrarSeguro()){
+            if(seguro1==null){
+                VPrincipal.seguros.add(seguro);
+                seguro=null;
+                seguro=new Seguro();
+                Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
+                txtDescripcion.setText(null);
+                txtCodigo.setText(null);
+            }else {
+                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            }
+        }else{
+            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
         }
     }
     private void cargarSeguro(){

@@ -1,7 +1,7 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Nivel;
-import com.devel.models.Relacion;
+import com.devel.models.Seccion;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
@@ -10,13 +10,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-public class NivelesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Hora inicio","Hora fin",""};
-    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class};
-    private Vector<Nivel> vector;
-    private DateFormat formatoHora=new SimpleDateFormat("hh:mm a");
+public class SeccionAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Id","Sección","Editar"};
+    public Class[] m_colTypes = {String.class,String.class, JButton.class};
+    private Vector<Seccion> vector;
 
-    public NivelesAbstractModel(Vector<Nivel> vector){
+    public SeccionAbstractModel(Vector<Seccion> vector){
         this.vector=vector;
     }
     @Override
@@ -47,19 +46,17 @@ public class NivelesAbstractModel extends AbstractTableModel {
     }
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Nivel nivel=vector.get(rowIndex);
+        Seccion seccion=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return nivel.getDescripcion();
+                return seccion.getId();
             case 1:
-                return formatoHora.format(nivel.getHoraInicio());
-            case 2:
-                return formatoHora.format(nivel.getHoraFin());
+                return seccion.getSeccion();
             default:
                 return new JButtonAction("x16/editar.png");
         }
     }
-    public Nivel traer(int row){
+    public Seccion traer(int row){
         return vector.get(row);
     }
 }

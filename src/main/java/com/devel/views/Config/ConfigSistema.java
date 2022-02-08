@@ -3,10 +3,12 @@ package com.devel.views.Config;
 import com.devel.custom.FondoPanel;
 
 import javax.swing.*;
+import javax.swing.plaf.BorderUIResource;
+import java.awt.*;
 
 public class ConfigSistema extends JDialog {
-    private JButton button1;
-    private JButton button2;
+    private JButton btnRetroceder;
+    private JButton btnAvanzar;
     private JPanel panelContenido;
     private JTabbedPane TabConfiguraciones;
     private JLabel labelLogo;
@@ -25,14 +27,24 @@ public class ConfigSistema extends JDialog {
     private JPanel panelCelulares;
 
     public ConfigSistema(){
+        iniciarComponentes();
+    }
+    private void iniciarComponentes(){
         setTitle("Configuraciones");
         setContentPane(panelPrincipal);
         setModal(true);
         setResizable(false);
         pack();
         setLocationRelativeTo(null);
+        cargarCursores();
     }
 
+    private void cargarCursores(){
+        labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnRetroceder.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnAvanzar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+
+    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         panelPrincipal=new FondoPanel("Images/fondo2.jpg");

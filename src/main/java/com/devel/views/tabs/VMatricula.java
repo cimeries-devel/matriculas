@@ -1,7 +1,6 @@
 package com.devel.views.tabs;
 
 import com.devel.controllers.Documentos;
-import com.devel.controllers.Niveles;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
@@ -20,7 +19,10 @@ import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -38,7 +40,7 @@ public class VMatricula extends JFrame{
     private JButton nuevoFamiliarButton;
     private JTextField txtNombres;
     private JCheckBox matriculadoCheckBox;
-    private JTextField textField1;
+    private JTextField txtMonto;
     private JTextField txtCodigo;
     private JTable tablaCelulares;
     private JButton añdirCelularButton;
@@ -50,6 +52,7 @@ public class VMatricula extends JFrame{
     private DateFormat año=new SimpleDateFormat("yyyy");
     private AlumnosMatriculadosAbstractModel matriculadosAbstractModel;
     private CelularesAbstractModel modelCelulares;
+    private NumberFormat sol = NumberFormat.getCurrencyInstance();
 
     public VMatricula() {
         iniciarComponentes();
@@ -65,6 +68,12 @@ public class VMatricula extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 buscarAlumno();
+            }
+        });
+        cbbTarifas.addPropertyChangeListener(new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
             }
         });
     }

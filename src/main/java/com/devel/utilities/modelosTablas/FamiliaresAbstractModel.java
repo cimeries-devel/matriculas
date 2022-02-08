@@ -63,8 +63,7 @@ public class FamiliaresAbstractModel extends AbstractTableModel {
         }
     }
     public Relacion traer(int row){
-        Relacion ta = vector.get(row);
-        return ta;
+        return vector.get(row);
     }
 }
 

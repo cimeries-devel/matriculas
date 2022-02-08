@@ -23,11 +23,6 @@ public class Seguros extends Hibernate {
         criteria.select(criteria.from(Seguro.class));
         todos= new Vector<>(session.createQuery(criteria).getResultList());
         System.out.println(todos.size());
-        if(todos.isEmpty()){
-            Seguro seguro=new Seguro();
-            seguro.setNombre("--");
-            todos.add(seguro);
-        }
         return todos;
     }
     public static Vector<Seguro> todosconTodos(){

@@ -55,7 +55,6 @@ public class CelularesAbstractModel extends AbstractTableModel {
         }
     }
     public Celular traer(int row){
-        Celular ta = vector.get(row);
-        return ta;
+        return vector.get(row);
     }
 }

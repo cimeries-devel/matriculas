@@ -3,9 +3,13 @@
   <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="359" height="281"/>
+      <xy x="20" y="20" width="400" height="400"/>
     </constraints>
-    <properties/>
+    <properties>
+      <maximumSize width="400" height="400"/>
+      <minimumSize width="400" height="400"/>
+      <preferredSize width="400" height="400"/>
+    </properties>
     <border type="none"/>
     <children>
       <scrollpane id="d50eb">

@@ -2,6 +2,7 @@ package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
 import com.devel.models.Seccion;
+import com.devel.models.Seguro;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,5 +17,12 @@ public class Secciones extends Hibernate {
     public static Seccion get(Integer id) {
         Seccion seccion = session.find(Seccion.class, id, LockModeType.NONE);
         return seccion;
+    }
+    public static Vector<Seccion> todos(){
+        criteria = builder.createQuery(Seccion.class);
+        criteria.select(criteria.from(Seccion.class));
+        todos= new Vector<>(session.createQuery(criteria).getResultList());
+        System.out.println(todos.size());
+        return todos;
     }
 }
