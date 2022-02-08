@@ -1,10 +1,16 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import com.devel.utilities.Utilities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -96,7 +102,8 @@ public class Persona extends Hibernate {
     }
 
     public int getEdad() {
-        return edad;
+        Period edad = Period.between(LocalDate.parse(Utilities.formatoParaAños.format(getCumpleaños())), LocalDate.now());
+        return edad.getYears();
     }
 
     public void setEdad(int edad) {
@@ -186,7 +193,15 @@ public class Persona extends Hibernate {
     public List<Registro> getRegistros() {
         return registros;
     }
-
+    public Registro ultimaMatricula(){
+        Registro ultimoRegistro=getRegistros().get(0);
+        for (Registro registro:getRegistros()){
+            if (ultimoRegistro.getCreacion().before(registro.getCreacion())){
+                ultimoRegistro=registro;
+            }
+        }
+        return ultimoRegistro;
+    }
     public void setRegistros(List<Registro> registros) {
         this.registros = registros;
     }

@@ -1,7 +1,7 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Celular;
-import com.devel.models.Registro;
+import com.devel.models.Persona;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
@@ -10,13 +10,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
-public class AlumnosMatriculadosAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Código","Alumno","Apoderado","Nivel","Grado","Sección","Fecha Matrícula"};
-    public Class[] m_colTypes = {String.class,String.class, String.class,String.class,String.class,String.class,String.class};
-    private Vector<Registro> vector;
-    private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-    public AlumnosMatriculadosAbstractModel(Vector<Registro> vector){
+public class AlumnosAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Código","Nombres y apellidos","Edad","Nivel","Grado","Sección","Última matrícula","Familiares","Nro. celular"};
+    public Class[] m_colTypes = {String.class,String.class,Integer.class,String.class,String.class,String.class,String.class,JButton.class,JButton.class};
+    private DateFormat año=new SimpleDateFormat("yyyy");
+    private Vector<Persona> vector;
+    public AlumnosAbstractModel(Vector<Persona> vector){
         this.vector=vector;
     }
     @Override
@@ -45,29 +44,31 @@ public class AlumnosMatriculadosAbstractModel extends AbstractTableModel {
         }
         return false;
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Registro registro=vector.get(rowIndex);
+        Persona persona=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return registro.getEstudiante().getCodigo();
+                return persona.getCodigo();
             case 1:
-                return registro.getEstudiante().getNombres()+" "+registro.getEstudiante().getNombres();
+                return persona.getNombres()+" "+persona.getApellidos();
             case 2:
-                return registro.getEstudiante().getApoderado().getNombres()+" "+registro.getEstudiante().getApoderado().getApellidos()+" - "+registro.getEstudiante().getRelacionDeApoderado();
+                return persona.getEdad();
             case 3:
-                return registro.getSalon().getNivel().getDescripcion();
+                return persona.ultimaMatricula().getSalon().getNivel();
             case 4:
-                return registro.getSalon().getGrado().getGrado();
+                return persona.ultimaMatricula().getSalon().getGrado();
             case 5:
-                return registro.getSalon().getSeccion().getSeccion();
+                return año.format(persona.ultimaMatricula().getSalon().getSeccion());
+            case 6:
+                return persona.ultimaMatricula().getCreacion();
+            case 7:
+                return new JButtonAction("x16/editar.png");
             default:
-                return formatoFecha.format(registro.getActualizacion());
+                return new JButtonAction("x16/editar.png");
         }
     }
-
-    public Registro traer(int row){
+    public Persona traer(int row){
         return vector.get(row);
     }
 }

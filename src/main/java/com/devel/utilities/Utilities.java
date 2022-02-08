@@ -10,6 +10,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.beans.JavaBean;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class Utilities {
@@ -18,7 +20,7 @@ public class Utilities {
     private static Image trayIconImage = Toolkit.getDefaultToolkit().createImage(ForResources.class.getResource("Icons/x32/fedora.png"));
     private static SystemTray mainTray;
     private static boolean primera=true;
-
+    public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
     public static void cambiarWindows(){
         try{
             for (UIManager.LookAndFeelInfo info :  javax.swing.UIManager.getInstalledLookAndFeels()) {

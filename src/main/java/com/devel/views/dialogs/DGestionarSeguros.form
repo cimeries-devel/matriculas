@@ -16,7 +16,9 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <focusTraversalPolicyProvider value="false"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="ece97" class="javax.swing.JTable" binding="tablaSeguros">

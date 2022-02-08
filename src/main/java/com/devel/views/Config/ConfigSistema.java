@@ -3,8 +3,9 @@ package com.devel.views.Config;
 import com.devel.custom.FondoPanel;
 
 import javax.swing.*;
-import javax.swing.plaf.BorderUIResource;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ConfigSistema extends JDialog {
     private JButton btnRetroceder;
@@ -25,9 +26,18 @@ public class ConfigSistema extends JDialog {
     private JPanel panelImpreciones;
     private JPanel panelToken;
     private JPanel panelCelulares;
+    private JButton guardarButton;
+    private JButton btnHecho;
 
     public ConfigSistema(){
         iniciarComponentes();
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                dispose();
+            }
+        });
     }
     private void iniciarComponentes(){
         setTitle("Configuraciones");

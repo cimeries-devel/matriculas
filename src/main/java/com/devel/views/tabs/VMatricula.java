@@ -6,7 +6,7 @@ import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilities;
-import com.devel.utilities.modelosTablas.AlumnosMatriculadosAbstractModel;
+import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
 import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.views.VPrincipal;
@@ -50,7 +50,7 @@ public class VMatricula extends JFrame{
     private FamiliaresAbstractModel familiaresAbstractModel;
     private Persona persona;
     private DateFormat año=new SimpleDateFormat("yyyy");
-    private AlumnosMatriculadosAbstractModel matriculadosAbstractModel;
+    private MatriculasAbstractModel matriculadosAbstractModel;
     private CelularesAbstractModel modelCelulares;
     private NumberFormat sol = NumberFormat.getCurrencyInstance();
 
@@ -179,7 +179,7 @@ public class VMatricula extends JFrame{
         cbbTarifas.setRenderer(new Tarifa.ListCellRenderer());
     }
     private void cargarMatriculas(){
-        matriculadosAbstractModel=new AlumnosMatriculadosAbstractModel(VPrincipal.alumnosMatriculados);
+        matriculadosAbstractModel=new MatriculasAbstractModel(VPrincipal.alumnosMatriculados);
         tablaMatriculas.setModel(matriculadosAbstractModel);
         Utilities.cellsRendered(tablaMatriculas);
         Utilities.headerNegrita(tablaMatriculas);

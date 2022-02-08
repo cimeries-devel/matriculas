@@ -36,27 +36,7 @@ public class DCrearGrado extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(guardarGrado()){
-                    if(grado1==null){
-                        VPrincipal.grados.add(grado);
-                        txtGrado.setText(null);
-                        grado=null;
-                        grado=new Grado();
-                        Utilities.sendNotification("Éxito","Grado creado", TrayIcon.MessageType.INFO);
-                    }else{
-                        Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                    }
-                }else{
-                    switch (error){
-                        case "nivel":
-                            Utilities.sendNotification("Error","Primero debe registrar un nivel", TrayIcon.MessageType.ERROR);
-                            break;
-                        case "grado":
-                            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
-                            break;
-                    }
-
-                }
+                registrar(grado1);
             }
         });
         btnHecho.addMouseListener(new MouseAdapter() {
@@ -73,6 +53,28 @@ public class DCrearGrado extends JDialog {
         setResizable(false);
         setModal(true);
         cargarCombox();
+    }
+    private void registrar(Grado grado1){
+        if(guardarGrado()){
+            if(grado1==null){
+                VPrincipal.grados.add(grado);
+                txtGrado.setText(null);
+                grado=null;
+                grado=new Grado();
+                Utilities.sendNotification("Éxito","Grado creado", TrayIcon.MessageType.INFO);
+            }else{
+                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            }
+        }else{
+            switch (error){
+                case "nivel":
+                    Utilities.sendNotification("Error","Primero debe registrar un nivel", TrayIcon.MessageType.ERROR);
+                    break;
+                case "grado":
+                    Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+                    break;
+            }
+        }
     }
     private void cargarCombox(){
         cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));

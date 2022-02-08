@@ -22,6 +22,8 @@
           <component id="5cc66" class="javax.swing.JTable" binding="tablaGrados">
             <constraints/>
             <properties>
+              <autoCreateColumnsFromModel value="true"/>
+              <autoCreateRowSorter value="false"/>
               <rowHeight value="25"/>
             </properties>
           </component>
