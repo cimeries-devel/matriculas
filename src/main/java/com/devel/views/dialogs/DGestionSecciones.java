@@ -37,7 +37,7 @@ public class DGestionSecciones extends JDialog{
         });
     }
     private void iniciarComponentes(){
-        setTitle("Gestión Seccion");
+        setTitle("Gestión Secciones");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
