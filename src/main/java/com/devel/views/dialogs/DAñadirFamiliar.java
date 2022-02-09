@@ -52,9 +52,9 @@ public class DAñadirFamiliar extends JDialog{
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
                 if(datePicker1.getDate()!=null){
-                    Period edad = Period.between(datePicker1.getDate(), LocalDate.now());
+                    int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
                     txtEdad.setDisabledTextColor(new JTextField().getForeground());
-                    txtEdad.setText(String.valueOf(edad.getYears()));
+                    txtEdad.setText(String.valueOf(edad));
                 }
             }
         });

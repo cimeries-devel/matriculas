@@ -14,5 +14,7 @@ public class Principal
 
         VPrincipal vPrincipal=new VPrincipal();
         vPrincipal.setVisible(true);
+//        VLogin vLogin=new VLogin();
+//        vLogin.setVisible(true);
     }
 }

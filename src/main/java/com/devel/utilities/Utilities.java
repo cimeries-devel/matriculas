@@ -12,6 +12,8 @@ import java.awt.*;
 import java.beans.JavaBean;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Vector;
 
 public class Utilities {
@@ -115,5 +117,26 @@ public class Utilities {
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }
+    }
+    public static Integer calcularaños(Date fecha){
+        Calendar hoy=Calendar.getInstance();
+        Calendar nacimiento=Calendar.getInstance();
+        nacimiento.setTime(fecha);
+        int años= hoy.get(Calendar.YEAR)-nacimiento.get(Calendar.YEAR);
+        int meses= hoy.get(Calendar.MONTH)-nacimiento.get(Calendar.MONTH);
+        int dias= hoy.get(Calendar.DAY_OF_MONTH)-nacimiento.get(Calendar.DAY_OF_MONTH);
+        JOptionPane.showMessageDialog(null,""+años);
+        switch (meses){
+            case 0:
+                if(dias<0){
+                    años-=1;
+                }
+                break;
+            default:
+                if(meses<0){
+                    años-=1;
+                }
+        }
+        return años<0?0:años;
     }
 }

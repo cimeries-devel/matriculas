@@ -103,7 +103,7 @@ public class Persona extends Hibernate {
     }
 
     public int getEdad() {
-        return calcularaños(getCumpleaños());
+        return Utilities.calcularaños(getCumpleaños());
     }
 
     public void setEdad(int edad) {
@@ -223,25 +223,5 @@ public class Persona extends Hibernate {
         return null;
     }
 
-    public static Integer calcularaños(Date fecha){
-        Calendar hoy=Calendar.getInstance();
-        Calendar nacimiento=Calendar.getInstance();
-        nacimiento.setTime(fecha);
-        int años= hoy.get(Calendar.YEAR)-nacimiento.get(Calendar.YEAR);
-        int meses= hoy.get(Calendar.MONTH)-nacimiento.get(Calendar.MONTH);
-        int dias= hoy.get(Calendar.DAY_OF_MONTH)-nacimiento.get(Calendar.DAY_OF_MONTH);
-        JOptionPane.showMessageDialog(null,""+años);
-        switch (meses){
-            case 0:
-                if(dias<0){
-                    años-=1;
-                }
-                break;
-            default:
-                if(meses<0){
-                    años-=1;
-                }
-        }
-        return años<0?0:años;
-    }
+
 }
