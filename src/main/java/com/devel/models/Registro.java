@@ -12,7 +12,8 @@ public class Registro extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
-    @Column
+
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creacion;
     @Column
     private Date actualizacion;

@@ -52,9 +52,9 @@ public class DNuevoEstudiante extends JDialog{
         datePicker1.addDateChangeListener(new DateChangeListener() {
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
-                Period edad = Period.between(datePicker1.getDate(), LocalDate.now());
+                int edad=Persona.calcularaños(Date.valueOf(datePicker1.getDate()));
                 txtEdad.setDisabledTextColor(new JTextField().getForeground());
-                txtEdad.setText(String.valueOf(edad.getYears()));
+                txtEdad.setText(String.valueOf(edad));
             }
         });
         añdirCelularButton.addMouseListener(new MouseAdapter() {
