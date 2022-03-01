@@ -2,6 +2,7 @@ package com.devel.views;
 
 import com.devel.custom.FondoPanel;
 import com.devel.utilities.PlaceHolder;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +19,7 @@ public class VLogin extends JFrame{
     private JButton ingresarButton;
     private JTextField txtUsuario;
     private JCheckBox recordarUsuarioCheckBox;
-    private JCheckBox checkBox1;
-    private JPanel ratata;
+    private JCheckBox checkBox1=new JCheckBox();
     public static PlaceHolder placeholder;
     public VLogin(){
         iniciarComponentes();
@@ -38,10 +38,11 @@ public class VLogin extends JFrame{
         setContentPane(panelLogin);
         setTitle("Login");
         placeholder= new PlaceHolder("Usuario", txtUsuario);
-        placeholder= new PlaceHolder(" Contraseña", psfContraseña);
+        placeholder= new PlaceHolder("Contraseña", psfContraseña);
         pack();
         setLocationRelativeTo(null);
         cargarCursores();
+        psfContraseña.add(checkBox1,1);
     }
     private void cargarCursores(){
         psfContraseña.setEchoChar('•');
@@ -52,8 +53,6 @@ public class VLogin extends JFrame{
         // TODO: place custom component creation code here
         panelLogin=new FondoPanel("Images/fondo2.jpg");
         psfContraseña=new JPasswordField();
-        psfContraseña.setBorder(BorderFactory.createEmptyBorder());
-        ratata=new JPanel();
-        ratata.setBorder(new JTextField().getBorder());
+        psfContraseña.setSize(new JTextField().getSize());
     }
 }

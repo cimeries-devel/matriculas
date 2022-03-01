@@ -47,7 +47,8 @@
                       <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Email:"/>
                     </properties>
                   </component>
@@ -71,7 +72,8 @@
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Dirección:"/>
                     </properties>
                   </component>
@@ -83,6 +85,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="b425e" class="javax.swing.JLabel">
@@ -90,7 +93,8 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Nombre Colegio:"/>
                     </properties>
                   </component>
@@ -102,6 +106,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="61dd6" class="javax.swing.JTextField" default-binding="true">
@@ -112,6 +117,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="27b02" class="javax.swing.JLabel">
@@ -119,7 +125,8 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Ruc:"/>
                     </properties>
                   </component>
@@ -131,6 +138,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="ac06" class="javax.swing.JLabel">
@@ -138,7 +146,8 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Token Api Perú:"/>
                     </properties>
                   </component>
@@ -150,6 +159,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="7e446" class="javax.swing.JLabel">
@@ -157,7 +167,8 @@
                       <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Sitio Web:"/>
                     </properties>
                   </component>
@@ -169,6 +180,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <component id="b1168" class="javax.swing.JLabel">
@@ -176,7 +188,8 @@
                       <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14"/>
+                      <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Teléfono:"/>
                     </properties>
                   </component>
@@ -188,6 +201,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
+                      <opaque value="false"/>
                     </properties>
                   </component>
                   <grid id="3c332" binding="panelToken" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -273,6 +287,7 @@
                     </constraints>
                     <properties>
                       <font size="14" style="1"/>
+                      <foreground color="-16777216"/>
                       <text value="Matrícula :"/>
                     </properties>
                   </component>

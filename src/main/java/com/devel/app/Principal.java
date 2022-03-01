@@ -12,9 +12,9 @@ public class Principal
         Hibernate.initialize();
         Utilities.cambiarWindows();
 
-        VPrincipal vPrincipal=new VPrincipal();
-        vPrincipal.setVisible(true);
-//        VLogin vLogin=new VLogin();
-//        vLogin.setVisible(true);
+//        VPrincipal vPrincipal=new VPrincipal();
+//        vPrincipal.setVisible(true);
+        VLogin vLogin=new VLogin();
+        vLogin.setVisible(true);
     }
 }
