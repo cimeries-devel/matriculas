@@ -4,10 +4,7 @@ import com.devel.ForResources;
 import com.devel.models.Registro;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
 import com.github.weisj.darklaf.LafManager;
-import com.github.weisj.darklaf.theme.DarculaTheme;
-import com.github.weisj.darklaf.theme.IntelliJTheme;
-import com.github.weisj.darklaf.theme.SolarizedDarkTheme;
-import com.github.weisj.darklaf.theme.SolarizedLightTheme;
+import com.github.weisj.darklaf.theme.*;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -28,23 +25,19 @@ public class Utilities {
     private static SystemTray mainTray;
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
-    public static void cambiarWindows(){
-        LafManager.install(new DarculaTheme());
 
-//        try{
-//            for (UIManager.LookAndFeelInfo info :  javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if (info.getName().equals("Windows")) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//            UIDefaults defaults = UIManager.getLookAndFeelDefaults();
-//            defaults.put("Button.focus", new ColorUIResource(new Color(0, 0, 0, 0)));
-//        }
-//        catch (Exception e) {
-//            e.printStackTrace();
-//        }
+    public static void cambiarThemaIntellij(){
+        LafManager.install(new IntelliJTheme());
+    }
 
+    public static void tema(String tema){
+        if(tema.equals("oscuro")){
+            LafManager.setTheme(new DarculaTheme());
+            LafManager.install();
+        }else{
+            LafManager.setTheme(new IntelliJTheme());
+            LafManager.install();
+        }
     }
     public static Boolean espacioEnblanco(JTextField textField){
         if(textField.getText().trim().length()>0){

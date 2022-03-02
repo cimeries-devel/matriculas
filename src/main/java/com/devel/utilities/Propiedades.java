@@ -38,6 +38,7 @@ public class Propiedades {
             setActualizado(true);
             setContraseña("");
             setEstadoImprecion("preguntar");
+            setTema("claro");
             guardar();
         }else{
             inputStream = new FileInputStream(archivo.getAbsolutePath());
@@ -92,5 +93,11 @@ public class Propiedades {
     }
     public String getTokenApiperu() {
         return properties.getProperty("TokenApiPeru");
+    }
+    public void setTema(String tema){
+        properties.put("tema", tema);
+    }
+    public String getTema() {
+        return properties.getProperty("tema");
     }
 }

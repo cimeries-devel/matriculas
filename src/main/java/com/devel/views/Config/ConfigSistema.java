@@ -1,6 +1,8 @@
 package com.devel.views.Config;
 
 import com.devel.custom.FondoPanel;
+import com.devel.utilities.Propiedades;
+import com.devel.utilities.Utilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,14 +30,24 @@ public class ConfigSistema extends JDialog {
     private JPanel panelCelulares;
     private JButton guardarButton;
     private JButton btnHecho;
-
-    public ConfigSistema(){
+    private JRadioButton temaOscuro;
+    private JRadioButton temaClaro;
+    private JButton btnAplicarCambios;
+    private Propiedades propiedades;
+    public ConfigSistema(Propiedades propiedades){
+        this.propiedades=propiedades;
         iniciarComponentes();
         btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 dispose();
+            }
+        });
+        btnAplicarCambios.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                guardarDatosAplicacion();
             }
         });
     }
@@ -47,13 +59,31 @@ public class ConfigSistema extends JDialog {
         pack();
         setLocationRelativeTo(null);
         cargarCursores();
+        cargarTema();
     }
-
+    private void guardarDatosAplicacion(){
+        if(temaOscuro.isSelected()){
+            propiedades.setTema("oscuro");
+            Utilities.sendNotification("EZ","oscuro", TrayIcon.MessageType.INFO);
+//            Utilities.tema("oscuro");
+        }else{
+            propiedades.setTema("claro");
+            Utilities.sendNotification("EZ","claro", TrayIcon.MessageType.INFO);
+//            Utilities.tema("claro");
+        }
+    }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnRetroceder.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnAvanzar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
+    }
+    private void cargarTema(){
+        if(propiedades.getTema().equals("oscuro")){
+            temaOscuro.setSelected(true);
+        }else{
+            temaClaro.setSelected(true);
+        }
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

@@ -10,7 +10,7 @@ public class Principal
 {
     public static void main( String[] args ){
         Hibernate.initialize();
-        Utilities.cambiarWindows();
+        Utilities.cambiarThemaIntellij();
 
 //        VPrincipal vPrincipal=new VPrincipal();
 //        vPrincipal.setVisible(true);

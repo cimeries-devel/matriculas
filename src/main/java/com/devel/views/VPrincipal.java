@@ -3,6 +3,7 @@ package com.devel.views;
 import com.devel.controllers.*;
 import com.devel.custom.DnDTabbedPane;
 import com.devel.models.*;
+import com.devel.utilities.Propiedades;
 import com.devel.views.Config.ConfigSistema;
 import com.devel.views.menus.MenuGestiones;
 import com.devel.views.menus.MenuInicio;
@@ -79,6 +80,14 @@ public class VPrincipal extends JFrame{
             }
         });
 
+        button1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                dispose();
+                VLogin vLogin=new VLogin();
+                vLogin.setVisible(true);
+            }
+        });
     }
 
     private void iniciarComponentes(){
@@ -93,7 +102,7 @@ public class VPrincipal extends JFrame{
         setLocationRelativeTo(null);
     }
     private void cargarConfiguraciones(){
-        ConfigSistema configSistema=new ConfigSistema();
+        ConfigSistema configSistema=new ConfigSistema(new Propiedades());
         configSistema.setVisible(true);
     }
     private void createUIComponents(){

@@ -1,13 +1,18 @@
 package com.devel.views;
 
+import com.devel.ForResources;
 import com.devel.custom.FondoPanel;
 import com.devel.utilities.PlaceHolder;
+import com.devel.utilities.Propiedades;
+import com.devel.utilities.Utilities;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
+import org.jdesktop.swingx.JXLoginPane;
+import org.jdesktop.swingx.JXSearchField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -21,6 +26,7 @@ public class VLogin extends JFrame{
     private JCheckBox recordarUsuarioCheckBox;
     private JCheckBox checkBox1=new JCheckBox();
     public static PlaceHolder placeholder;
+    private Propiedades propiedades;
     public VLogin(){
         iniciarComponentes();
         checkBox1.addActionListener(new ActionListener() {
@@ -33,8 +39,35 @@ public class VLogin extends JFrame{
                 }
             }
         });
+        psfContraseña.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (psfContraseña.getText().length() > 14) {
+                    e.consume();
+                }
+            }
+        });
+        psfContraseña.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                if(psfContraseña.getText().length()>0){
+                    checkBox1.setVisible(true);
+                }else{
+                    checkBox1.setVisible(false);
+                }
+            }
+        });
+        ingresarButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                VPrincipal vPrincipal=new VPrincipal();
+                vPrincipal.setVisible(true);
+                dispose();
+            }
+        });
     }
     private void iniciarComponentes(){
+        setDefaultCloseOperation(3);
         setContentPane(panelLogin);
         setTitle("Login");
         placeholder= new PlaceHolder("Usuario", txtUsuario);
@@ -43,16 +76,25 @@ public class VLogin extends JFrame{
         setLocationRelativeTo(null);
         cargarCursores();
         psfContraseña.add(checkBox1,1);
+        checkBox1.setBorder(BorderFactory.createEmptyBorder(5, 142, 0, 5));
+        checkBox1.setVisible(false);
+        cargarPropiedades();
+    }
+    private void cargarPropiedades(){
+        propiedades=new Propiedades();
+        Utilities.tema(propiedades.getTema());
     }
     private void cargarCursores(){
         psfContraseña.setEchoChar('•');
+        checkBox1.setOpaque(false);
+        checkBox1.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/ocultarContraseña.png")));
+        checkBox1.setSelectedIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/mostrarContraseña.png")));
         checkBox1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ingresarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        checkBox1.setFocusable(false);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         panelLogin=new FondoPanel("Images/fondo2.jpg");
-        psfContraseña=new JPasswordField();
-        psfContraseña.setSize(new JTextField().getSize());
     }
 }

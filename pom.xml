@@ -74,6 +74,11 @@
       <artifactId>darklaf</artifactId>
       <version>1.3.3.4</version>
     </dependency>
+    <dependency>
+      <groupId>org.swinglabs.swingx</groupId>
+      <artifactId>swingx-all</artifactId>
+      <version>1.6.5-1</version>
+    </dependency>
   </dependencies>
 
   <build>
