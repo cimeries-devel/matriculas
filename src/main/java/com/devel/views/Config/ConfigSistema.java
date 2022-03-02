@@ -3,6 +3,7 @@ package com.devel.views.Config;
 import com.devel.custom.FondoPanel;
 import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilities;
+import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,9 +33,11 @@ public class ConfigSistema extends JDialog {
     private JButton btnHecho;
     private JRadioButton temaOscuro;
     private JRadioButton temaClaro;
-    private JButton btnAplicarCambios;
+    private JPanel panelAplicacion;
     private Propiedades propiedades;
-    public ConfigSistema(Propiedades propiedades){
+    private VPrincipal vPrincipal;
+    public ConfigSistema(VPrincipal vPrincipal,Propiedades propiedades){
+        this.vPrincipal=vPrincipal;
         this.propiedades=propiedades;
         iniciarComponentes();
         btnHecho.addMouseListener(new MouseAdapter() {
@@ -44,12 +47,23 @@ public class ConfigSistema extends JDialog {
                 dispose();
             }
         });
-        btnAplicarCambios.addMouseListener(new MouseAdapter() {
+        guardarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                guardarDatosAplicacion();
+                super.mouseClicked(e);
+                guardarCambios();
             }
         });
+    }
+    private void guardarCambios(){
+        if(temaOscuro.isSelected()){
+            propiedades.setTema("oscuro");
+        }else{
+            propiedades.setTema("claro");
+        }
+        propiedades.guardar();
+        Utilities.sendNotification("Éxito","Cambios guardados, algunos cambios se aplciarán despues del reinicio", TrayIcon.MessageType.INFO);
+        dispose();
     }
     private void iniciarComponentes(){
         setTitle("Configuraciones");
@@ -60,17 +74,6 @@ public class ConfigSistema extends JDialog {
         setLocationRelativeTo(null);
         cargarCursores();
         cargarTema();
-    }
-    private void guardarDatosAplicacion(){
-        if(temaOscuro.isSelected()){
-            propiedades.setTema("oscuro");
-            Utilities.sendNotification("EZ","oscuro", TrayIcon.MessageType.INFO);
-//            Utilities.tema("oscuro");
-        }else{
-            propiedades.setTema("claro");
-            Utilities.sendNotification("EZ","claro", TrayIcon.MessageType.INFO);
-//            Utilities.tema("claro");
-        }
     }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -91,5 +94,6 @@ public class ConfigSistema extends JDialog {
         panelDatos =new FondoPanel("Images/fondo2.jpg");
         panelImpreciones=new FondoPanel("Images/fondo2.jpg");
         panelContenido=new FondoPanel("Images/fondo2.jpg");
+        panelAplicacion=new FondoPanel("Images/fondo2.jpg");
     }
 }

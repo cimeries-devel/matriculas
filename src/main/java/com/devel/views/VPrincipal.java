@@ -21,7 +21,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Vector;
 
 public class VPrincipal extends JFrame{
-    private JPanel contentPane;
+    public JPanel contentPane;
     private DnDTabbedPane tabContenido;
     private JMenu btnInicio;
     private JMenu btnAyuda;
@@ -102,7 +102,7 @@ public class VPrincipal extends JFrame{
         setLocationRelativeTo(null);
     }
     private void cargarConfiguraciones(){
-        ConfigSistema configSistema=new ConfigSistema(new Propiedades());
+        ConfigSistema configSistema=new ConfigSistema(this,new Propiedades());
         configSistema.setVisible(true);
     }
     private void createUIComponents(){

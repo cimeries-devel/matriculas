@@ -32,11 +32,9 @@ public class Utilities {
 
     public static void tema(String tema){
         if(tema.equals("oscuro")){
-            LafManager.setTheme(new DarculaTheme());
-            LafManager.install();
+            LafManager.install(new DarculaTheme());
         }else{
-            LafManager.setTheme(new IntelliJTheme());
-            LafManager.install();
+            LafManager.install(new IntelliJTheme());
         }
     }
     public static Boolean espacioEnblanco(JTextField textField){

@@ -26,7 +26,7 @@ public class VLogin extends JFrame{
     private JCheckBox recordarUsuarioCheckBox;
     private JCheckBox checkBox1=new JCheckBox();
     public static PlaceHolder placeholder;
-    private Propiedades propiedades;
+    public Propiedades propiedades;
     public VLogin(){
         iniciarComponentes();
         checkBox1.addActionListener(new ActionListener() {
@@ -67,6 +67,7 @@ public class VLogin extends JFrame{
         });
     }
     private void iniciarComponentes(){
+        propiedades=new Propiedades();
         setDefaultCloseOperation(3);
         setContentPane(panelLogin);
         setTitle("Login");
@@ -78,11 +79,6 @@ public class VLogin extends JFrame{
         psfContraseña.add(checkBox1,1);
         checkBox1.setBorder(BorderFactory.createEmptyBorder(5, 142, 0, 5));
         checkBox1.setVisible(false);
-        cargarPropiedades();
-    }
-    private void cargarPropiedades(){
-        propiedades=new Propiedades();
-        Utilities.tema(propiedades.getTema());
     }
     private void cargarCursores(){
         psfContraseña.setEchoChar('•');

@@ -306,7 +306,9 @@
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <opaque value="false"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="9819e" class="javax.swing.JRadioButton" binding="ImpresionNoPreguntarRadioButton">
@@ -353,12 +355,14 @@
                   </grid>
                 </children>
               </grid>
-              <grid id="c9ab4" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="5">
+              <grid id="c9ab4" binding="panelAplicacion" custom-create="true" layout-manager="GridLayoutManager" row-count="2" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="5">
                 <margin top="5" left="5" bottom="5" right="5"/>
                 <constraints>
                   <tabbedpane title="Aplicación"/>
                 </constraints>
-                <properties/>
+                <properties>
+                  <opaque value="true"/>
+                </properties>
                 <border type="none"/>
                 <children>
                   <component id="39ee6" class="javax.swing.JLabel">
@@ -386,7 +390,9 @@
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <opaque value="false"/>
+                    </properties>
                     <border type="none"/>
                     <children>
                       <component id="1fe39" class="javax.swing.JRadioButton" binding="temaClaro">
@@ -418,20 +424,6 @@
                       </component>
                     </children>
                   </grid>
-                  <component id="1b96a" class="javax.swing.JButton" binding="btnAplicarCambios">
-                    <constraints>
-                      <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <opaque value="false"/>
-                      <text value="Aplicar cambios"/>
-                    </properties>
-                  </component>
-                  <hspacer id="89f5e">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </hspacer>
                 </children>
               </grid>
             </children>
