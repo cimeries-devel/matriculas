@@ -28,24 +28,16 @@ public class DNuevoEstudiante extends JDialog{
     private DatePicker datePicker1;
     private JTextField txtEdad;
     private JPanel panelPrincipal;
-    private JButton añadirFamiliarButton;
-    private JButton añdirCelularButton;
-    private JTable tablaCelulares;
-    private JTable tablaFamiliares;
     private JButton registrarEstudianteButton;
     private JButton hechoButton;
     private JTextField txtDni;
     private JTextField txtApellidos;
-    private JTextField txtDireccion;
     private JTextField txtEmail;
     private JTextField txtCodigo;
     private JComboBox cbbGenero;
     private JComboBox cbbSeguro;
     private JButton nuevoButton;
-    private JScrollPane jScrollPane;
     private Persona persona=new Persona();
-    private FamiliaresAbstractModel modelFamiliares;
-    private CelularesAbstractModel modelCelulares;
 
     public DNuevoEstudiante(){
         iniciarComponentes();
@@ -55,20 +47,6 @@ public class DNuevoEstudiante extends JDialog{
                 int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
                 txtEdad.setDisabledTextColor(new JTextField().getForeground());
                 txtEdad.setText(String.valueOf(edad));
-            }
-        });
-        añdirCelularButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarAgregarCelular();
-            }
-        });
-        añadirFamiliarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarAgregarFamiliar();
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -112,7 +90,6 @@ public class DNuevoEstudiante extends JDialog{
                 persona.setCreacion(new java.util.Date());
                 persona.setActualizacion(new java.util.Date());
                 persona.setEmail(txtEmail.getText().trim());
-                persona.setDireccion(txtDireccion.getText().trim());
                 persona.setCodigo(txtCodigo.getText().trim());
                 persona.guardar();
                 guardarPersona();
@@ -151,31 +128,14 @@ public class DNuevoEstudiante extends JDialog{
         txtNombres.setText(null);
         txtApellidos.setText(null);
         txtEdad.setText(null);
-        txtDireccion.setText(null);
         txtEmail.setText(null);
-    }
-    private void cargarAgregarCelular(){
-        DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
-        dañadirCelular.setVisible(true);
-        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
-        definirColumnas();
-    }
-    private void cargarAgregarFamiliar(){
-        DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
-        dAñadirFamiliar.pack();
-        dAñadirFamiliar.setLocationRelativeTo(null);
-        dAñadirFamiliar.setVisible(true);
-        cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
     }
     private void iniciarComponentes(){
         setTitle("Nuevo estudiante");
         setContentPane(panelPrincipal);
-        setResizable(false);
+        pack();
         setModal(true);
         cargarComboBox();
-        cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
-        definirColumnas();
     }
     private void cargarComboBox(){
         cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoDocumentos));
@@ -184,32 +144,6 @@ public class DNuevoEstudiante extends JDialog{
         cbbSeguro.setRenderer(new Seguro.ListCellRenderer());
     }
 
-    private void cargarTablaFamiliares(Vector<Relacion> relaciones){
-        modelFamiliares=new FamiliaresAbstractModel(relaciones);
-        tablaFamiliares.setModel(modelFamiliares);
-        tablaFamiliares.getColumnModel().getColumn(modelFamiliares.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones));
-        TableCellRenderer renderer1 = tablaFamiliares.getDefaultRenderer(JButton.class);
-        tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),75);
-        Utilities.definirTamaño(tablaFamiliares.getColumn("Relación"),70);
-        Utilities.definirTamaño(tablaFamiliares.getColumn("Viven juntos"),80);
-        tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
-        Utilities.headerNegrita(tablaFamiliares);
-        Utilities.cellsRendered(tablaFamiliares);
-    }
-    private void cargarTablaCelulares(Vector<Celular> celulares){
-        modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulars()));
-        tablaCelulares.setModel(modelCelulares);
-        tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(celulares));
-        TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
-        tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.headerNegrita(tablaCelulares);
-        Utilities.cellsRendered(tablaCelulares);
-    }
-    private void definirColumnas(){
-        Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
-        Utilities.definirTamaño(tablaCelulares.getColumn("Número"),90);
-    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         datePicker1=new DatePicker();
