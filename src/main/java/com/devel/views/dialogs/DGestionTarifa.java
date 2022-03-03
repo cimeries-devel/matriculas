@@ -68,6 +68,7 @@ public class DGestionTarifa extends JDialog{
         Utilities.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
         Utilities.alinearCentro(tablaTarifas.getColumn("Fecha creación"));
         Utilities.alinearCentro(tablaTarifas.getColumn("Tarifa"));
+        Utilities.alinearIzquierda(tablaTarifas.getColumn("Descripción"));
         Utilities.headerNegrita(tablaTarifas);
     }
 }

@@ -53,6 +53,7 @@ public class DGestionTipoDocumento extends JDialog{
         Utilities.definirTamaño(tablaTipoDocumentos.getColumn("Editar"),40);
         Utilities.definirTamaño(tablaTipoDocumentos.getColumn("Código"),80);
         Utilities.alinearCentro(tablaTipoDocumentos.getColumn("Código"));
+        Utilities.alinearIzquierda(tablaTipoDocumentos.getColumn("Documento"));
         Utilities.headerNegrita(tablaTipoDocumentos);
     }
     private void cargarNuevoTipoDeDocumento(){

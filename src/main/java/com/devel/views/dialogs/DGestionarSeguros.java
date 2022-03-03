@@ -57,6 +57,7 @@ public class DGestionarSeguros extends JDialog{
         TableCellRenderer renderer1 = tablaSeguros.getDefaultRenderer(JButton.class);
         tablaSeguros.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.alinearCentro(tablaSeguros.getColumn("Código"));
+        Utilities.alinearIzquierda(tablaSeguros.getColumn("Nombre"));
         Utilities.definirTamaño(tablaSeguros.getColumn("Editar"),40);
         Utilities.headerNegrita(tablaSeguros);
     }

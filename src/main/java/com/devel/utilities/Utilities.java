@@ -20,7 +20,8 @@ import java.util.Vector;
 
 public class Utilities {
     private static TrayIcon mainTrayIcon;
-    private static DefaultTableCellRenderer trigth = new DefaultTableCellRenderer();
+    private static DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
+    private static DefaultTableCellRenderer izquierda = new DefaultTableCellRenderer();
     private static Image trayIconImage = Toolkit.getDefaultToolkit().createImage(ForResources.class.getResource("Icons/x32/fedora.png"));
     private static SystemTray mainTray;
     private static boolean primera=true;
@@ -82,8 +83,12 @@ public class Utilities {
     }
 
     public static void alinearCentro(TableColumn columna){
-        trigth.setHorizontalAlignment(SwingConstants.CENTER);
-        columna.setCellRenderer(trigth);
+        centro.setHorizontalAlignment(SwingConstants.CENTER);
+        columna.setCellRenderer(centro);
+    }
+    public static void alinearIzquierda(TableColumn columna){
+        izquierda.setHorizontalAlignment(SwingConstants.LEFT);
+        columna.setCellRenderer(izquierda);
     }
     public static void definirTamaño(TableColumn column, Integer Width){
         column.setMinWidth(Width);
