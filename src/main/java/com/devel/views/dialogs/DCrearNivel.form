@@ -70,6 +70,7 @@
         </constraints>
         <properties>
           <foreground color="-1"/>
+          <opaque value="true"/>
         </properties>
       </component>
       <component id="ff931" class="com.github.lgooddatepicker.components.TimePicker" binding="horaFin" custom-create="true">

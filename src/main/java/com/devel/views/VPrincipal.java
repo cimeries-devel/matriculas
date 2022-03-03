@@ -88,6 +88,7 @@ public class VPrincipal extends JFrame{
                 vLogin.setVisible(true);
             }
         });
+
     }
 
     private void iniciarComponentes(){
