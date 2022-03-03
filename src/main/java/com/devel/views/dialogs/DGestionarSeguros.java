@@ -49,6 +49,7 @@ public class DGestionarSeguros extends JDialog{
         dAñadirSeguro.setVisible(true);
         tablaSeguros.updateUI();
         Utilities.headerNegrita(tablaSeguros);
+        Utilities.cellsRendered(tablaSeguros);
     }
     private void cargarTabla(){
         segurosAbstractModel=new SegurosAbstractModel(VPrincipal.seguros);
@@ -56,9 +57,8 @@ public class DGestionarSeguros extends JDialog{
         tablaSeguros.getColumnModel().getColumn(segurosAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSeguros(tablaSeguros));
         TableCellRenderer renderer1 = tablaSeguros.getDefaultRenderer(JButton.class);
         tablaSeguros.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.alinearCentro(tablaSeguros.getColumn("Código"));
-        Utilities.alinearIzquierda(tablaSeguros.getColumn("Nombre"));
-        Utilities.definirTamaño(tablaSeguros.getColumn("Editar"),40);
+        Utilities.definirTamaño(tablaSeguros.getColumn(""),30);
         Utilities.headerNegrita(tablaSeguros);
+        Utilities.cellsRendered(tablaSeguros);
     }
 }

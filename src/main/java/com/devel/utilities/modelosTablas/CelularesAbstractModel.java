@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class CelularesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Número","Editar"};
+    private String[] columnNames = {"Descripción","Número",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
     private Vector<Celular> vector;
     public CelularesAbstractModel(Vector<Celular> vector){

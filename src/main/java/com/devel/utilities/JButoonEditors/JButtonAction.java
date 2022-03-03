@@ -3,6 +3,7 @@ package com.devel.utilities.JButoonEditors;
 import com.devel.ForResources;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JButtonAction extends JButton {
 
@@ -17,6 +18,7 @@ public class JButtonAction extends JButton {
         initialize();
     }
     private void initialize() {
+        setBackground(new Color(0x0000000, true));
         setBorderPainted(false);
         setFocusable(false);
     }

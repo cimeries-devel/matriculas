@@ -51,6 +51,7 @@ public class DGestionSecciones extends JDialog{
         dAñadirSecciones.setVisible(true);
         tablaSecciones.updateUI();
         Utilities.headerNegrita(tablaSecciones);
+        Utilities.cellsRendered(tablaSecciones);
     }
     private void cargarTabla(){
         seccionAbstractModel=new SeccionAbstractModel(VPrincipal.secciones);
@@ -58,10 +59,8 @@ public class DGestionSecciones extends JDialog{
         tablaSecciones.getColumnModel().getColumn(seccionAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSecciones(tablaSecciones));
         TableCellRenderer renderer1 = tablaSecciones.getDefaultRenderer(JButton.class);
         tablaSecciones.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaSecciones.getColumn("Editar"),40);
-        Utilities.alinearCentro(tablaSecciones.getColumn("Sección"));
         Utilities.definirTamaño(tablaSecciones.getColumn("Id"),35);
-        Utilities.alinearCentro(tablaSecciones.getColumn("Id"));
         Utilities.headerNegrita(tablaSecciones);
+        Utilities.cellsRendered(tablaSecciones);
     }
 }

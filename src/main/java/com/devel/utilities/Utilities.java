@@ -2,6 +2,7 @@ package com.devel.utilities;
 
 import com.devel.ForResources;
 import com.devel.models.Registro;
+import com.devel.models.Tarifa;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
 import com.github.weisj.darklaf.LafManager;
 import com.github.weisj.darklaf.theme.*;
@@ -33,6 +34,7 @@ public class Utilities {
 
     public static void tema(String tema){
         if(tema.equals("oscuro")){
+
             LafManager.install(new DarculaTheme());
         }else{
             LafManager.install(new IntelliJTheme());
@@ -116,8 +118,15 @@ public class Utilities {
         }
         return vector;
     }
+
     public static void cellsRendered(JTable table){
         TablesCellRendered tablesCellRendered=new TablesCellRendered();
+        for (int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
+        }
+    }
+    public static void cellsRendered(JTable table, Vector<Tarifa> vector){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered(vector);
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }

@@ -207,12 +207,10 @@ public class VMatricula extends JFrame{
         definirColumnas();
     }
     private void definirColumnas(){
+        tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
         Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
-        Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
-        Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
-        Utilities.definirTamaño(tablaCelulares.getColumn("Editar"),40);
-        Utilities.alinearCentro(tablaCelulares.getColumn("Número"));
-//        Utilities.alinearCentro(tablaCelulares.getColumn(""));
+        Utilities.definirTamaño(tablaCelulares.getColumn(""),30);
+        Utilities.definirTamaño(tablaCelulares.getColumn("Número"),120);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

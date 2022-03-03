@@ -54,6 +54,7 @@ public class DGestionTarifa extends JDialog{
         añadirTarifa.setVisible(true);
         tablaTarifas.updateUI();
         Utilities.headerNegrita(tablaTarifas);
+        Utilities.cellsRendered(tablaTarifas,VPrincipal.tarifas);
     }
     private void cargarTabla(){
         tarifasAbstractModel =new TarifasAbstractModel(VPrincipal.tarifas);
@@ -64,11 +65,8 @@ public class DGestionTarifa extends JDialog{
         tablaTarifas.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.definirTamaño(tablaTarifas.getColumn("Tarifa"),80);
         Utilities.definirTamaño(tablaTarifas.getColumn("Activa"),40);
-        Utilities.definirTamaño(tablaTarifas.getColumn("Editar"),40);
         Utilities.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
-        Utilities.alinearCentro(tablaTarifas.getColumn("Fecha creación"));
-        Utilities.alinearCentro(tablaTarifas.getColumn("Tarifa"));
-        Utilities.alinearIzquierda(tablaTarifas.getColumn("Descripción"));
         Utilities.headerNegrita(tablaTarifas);
+        Utilities.cellsRendered(tablaTarifas,VPrincipal.tarifas);
     }
 }

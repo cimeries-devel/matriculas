@@ -11,6 +11,7 @@ import com.devel.views.menus.MenuReportes;
 import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -88,7 +89,6 @@ public class VPrincipal extends JFrame{
                 vLogin.setVisible(true);
             }
         });
-
     }
 
     private void iniciarComponentes(){

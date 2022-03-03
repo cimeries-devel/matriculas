@@ -55,6 +55,7 @@ public class DGestionarGrados extends JDialog{
         dCrearGrado.setVisible(true);
         tablaGrados.updateUI();
         Utilities.headerNegrita(tablaGrados);
+        Utilities.cellsRendered(tablaGrados);
     }
     private void cargarTabla(){
         gradoAbstractModel=new GradoAbstractModel(VPrincipal.grados);
@@ -62,11 +63,12 @@ public class DGestionarGrados extends JDialog{
         tablaGrados.getColumnModel().getColumn(gradoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorGrados(tablaGrados));
         TableCellRenderer renderer1 = tablaGrados.getDefaultRenderer(JButton.class);
         tablaGrados.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaGrados.getColumn("Editar"),40);
-        Utilities.alinearCentro(tablaGrados.getColumn("Grado"));
-        Utilities.alinearCentro(tablaGrados.getColumn("Id"));
-        Utilities.alinearCentro(tablaGrados.getColumn("Nivel"));
+        Utilities.definirTamaño(tablaGrados.getColumn(""),30);
+//        Utilities.alinearCentro(tablaGrados.getColumn("Grado"));
+//        Utilities.alinearCentro(tablaGrados.getColumn("Id"));
+//        Utilities.alinearCentro(tablaGrados.getColumn("Nivel"));
         Utilities.definirTamaño(tablaGrados.getColumn("Id"),40);
         Utilities.headerNegrita(tablaGrados);
+        Utilities.cellsRendered(tablaGrados);
     }
 }

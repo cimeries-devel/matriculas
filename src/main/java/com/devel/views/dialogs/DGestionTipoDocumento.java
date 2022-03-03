@@ -50,16 +50,15 @@ public class DGestionTipoDocumento extends JDialog{
         tablaTipoDocumentos.getColumnModel().getColumn(tipoDocumentoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorTipoDocumento(tablaTipoDocumentos));
         TableCellRenderer renderer1 = tablaTipoDocumentos.getDefaultRenderer(JButton.class);
         tablaTipoDocumentos.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaTipoDocumentos.getColumn("Editar"),40);
         Utilities.definirTamaño(tablaTipoDocumentos.getColumn("Código"),80);
-        Utilities.alinearCentro(tablaTipoDocumentos.getColumn("Código"));
-        Utilities.alinearIzquierda(tablaTipoDocumentos.getColumn("Documento"));
         Utilities.headerNegrita(tablaTipoDocumentos);
+        Utilities.cellsRendered(tablaTipoDocumentos);
     }
     private void cargarNuevoTipoDeDocumento(){
         DAñadirTipoDocumento documento=new DAñadirTipoDocumento(null);
         documento.setVisible(true);
         tablaTipoDocumentos.updateUI();
         Utilities.headerNegrita(tablaTipoDocumentos);
+        Utilities.cellsRendered(tablaTipoDocumentos);
     }
 }

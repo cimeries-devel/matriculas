@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class GradoAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Id","Nivel","Grado","Editar"};
+    private String[] columnNames = {"Id","Nivel","Grado",""};
     public Class[] m_colTypes = {Integer.class,String.class,String.class, JButton.class};
     private Vector<Grado> vector;
     public GradoAbstractModel(Vector<Grado> vector){

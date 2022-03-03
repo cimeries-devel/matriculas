@@ -183,6 +183,7 @@ public class DNuevoEstudiante extends JDialog{
         cbbSeguro.setModel(new DefaultComboBoxModel(VPrincipal.seguros));
         cbbSeguro.setRenderer(new Seguro.ListCellRenderer());
     }
+
     private void cargarTablaFamiliares(Vector<Relacion> relaciones){
         modelFamiliares=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(modelFamiliares);
@@ -194,6 +195,7 @@ public class DNuevoEstudiante extends JDialog{
         Utilities.definirTamaño(tablaFamiliares.getColumn("Viven juntos"),80);
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
         Utilities.headerNegrita(tablaFamiliares);
+        Utilities.cellsRendered(tablaFamiliares);
     }
     private void cargarTablaCelulares(Vector<Celular> celulares){
         modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulars()));
@@ -202,15 +204,11 @@ public class DNuevoEstudiante extends JDialog{
         TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
         tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.headerNegrita(tablaCelulares);
+        Utilities.cellsRendered(tablaCelulares);
     }
     private void definirColumnas(){
         Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
-        Utilities.alinearCentro(tablaFamiliares.getColumn("Relación"));
-        Utilities.alinearCentro(tablaFamiliares.getColumn("Viven juntos"));
-        Utilities.definirTamaño(tablaCelulares.getColumn("Editar"),40);
-        Utilities.alinearCentro(tablaCelulares.getColumn("Número"));
-        Utilities.definirTamaño(tablaCelulares.getColumn("Número"),60);
-//        Utilities.alinearCentro(tablaCelulares.getColumn(""));
+        Utilities.definirTamaño(tablaCelulares.getColumn("Número"),90);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

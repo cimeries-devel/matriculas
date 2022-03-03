@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class SeccionAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Id","Sección","Editar"};
+    private String[] columnNames = {"Id","Sección",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
     private Vector<Seccion> vector;
 
