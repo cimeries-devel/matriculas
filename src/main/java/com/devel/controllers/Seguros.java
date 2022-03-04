@@ -31,7 +31,7 @@ public class Seguros extends Hibernate {
         todos= new Vector<>(session.createQuery(criteria).getResultList());
         System.out.println(todos.size());
         Seguro seguro=new Seguro();
-        seguro.setNombre("Todos");
+        seguro.setDescripcion("Todos");
         todos.add(0,seguro);
         return todos;
     }

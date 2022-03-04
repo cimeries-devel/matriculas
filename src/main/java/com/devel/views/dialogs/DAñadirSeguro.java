@@ -1,15 +1,21 @@
 package com.devel.views.dialogs;
 
+import com.devel.models.Celular;
 import com.devel.models.Seguro;
 import com.devel.utilities.Utilities;
+import com.devel.validators.CelularValidator;
+import com.devel.validators.SeguroValidator;
 import com.devel.views.VPrincipal;
 import com.sun.istack.Nullable;
+import jakarta.validation.ConstraintViolation;
+import jdk.jshell.SourceCodeAnalysis;
 import jdk.jshell.execution.Util;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Set;
 
 public class DAñadirSeguro extends JDialog{
     private JPanel panelPrincipal;
@@ -45,14 +51,24 @@ public class DAñadirSeguro extends JDialog{
         });
     }
     private boolean registrarSeguro(){
-        if(txtCodigo.getText().length()>0&&txtDescripcion.getText().length()>0){
-            seguro.setNombre(txtDescripcion.getText().trim());
-            seguro.setCodigo(txtCodigo.getText().trim());
+        String desripcion=txtDescripcion.getText().trim();
+        String codigo=txtCodigo.getText().trim();
+        seguro.setDescripcion(desripcion);
+        seguro.setCodigo(codigo);
+
+        SeguroValidator validator = new SeguroValidator();
+        Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
+        if(errors.isEmpty()){
             seguro.guardar();
             return true;
-        }else{
+        }else {
+            Object[] errores=errors.toArray();
+            ConstraintViolation<Seguro> error1= (ConstraintViolation<Seguro>) errores[0];
+            String error = "Verfique el campo: "+error1.getPropertyPath();
+            Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
             return false;
         }
+
     }
     private void registrar(Seguro seguro1){
         if(registrarSeguro()){
@@ -66,12 +82,10 @@ public class DAñadirSeguro extends JDialog{
             }else {
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
             }
-        }else{
-            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
         }
     }
     private void cargarSeguro(){
-        txtDescripcion.setText(seguro.getNombre());
+        txtDescripcion.setText(seguro.getDescripcion());
         txtCodigo.setText(seguro.getCodigo());
     }
     private void iniciarComponentes(){

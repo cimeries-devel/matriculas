@@ -47,7 +47,7 @@ public class SegurosAbstractModel extends AbstractTableModel {
         Seguro seguro=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return seguro.getNombre();
+                return seguro.getDescripcion();
             case 1:
                 return seguro.getCodigo();
             default:

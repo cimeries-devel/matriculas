@@ -14,22 +14,31 @@ public class Colegio extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
     private String direccion;
+
     @Column
     private String nombreColegio;
+
     @Column
     private Date creacion;
+
     @Column
     private String email;
+
     @Column
     private String numero;
+
     @Column
     private String ruc;
+
     @Column
     private Date actualizacion;
+
     @Column
     private String urbanizacion;
+
     @Column
     private String website;
 
