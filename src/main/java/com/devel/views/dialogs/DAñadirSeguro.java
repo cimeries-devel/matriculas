@@ -50,7 +50,7 @@ public class DAñadirSeguro extends JDialog{
             }
         });
     }
-    private boolean registrarSeguro(){
+    private void registrar(Seguro seguro1){
         String desripcion=txtDescripcion.getText().trim();
         String codigo=txtCodigo.getText().trim();
         seguro.setDescripcion(desripcion);
@@ -60,18 +60,6 @@ public class DAñadirSeguro extends JDialog{
         Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
-            return true;
-        }else {
-            Object[] errores=errors.toArray();
-            ConstraintViolation<Seguro> error1= (ConstraintViolation<Seguro>) errores[0];
-            String error = "Verfique el campo: "+error1.getPropertyPath();
-            Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
-            return false;
-        }
-
-    }
-    private void registrar(Seguro seguro1){
-        if(registrarSeguro()){
             if(seguro1==null){
                 VPrincipal.seguros.add(seguro);
                 seguro=null;
@@ -82,8 +70,14 @@ public class DAñadirSeguro extends JDialog{
             }else {
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
             }
+        }else {
+            Object[] errores=errors.toArray();
+            ConstraintViolation<Seguro> error1= (ConstraintViolation<Seguro>) errores[0];
+            String error = "Verfique el campo: "+error1.getPropertyPath();
+            Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
         }
     }
+
     private void cargarSeguro(){
         txtDescripcion.setText(seguro.getDescripcion());
         txtCodigo.setText(seguro.getCodigo());
