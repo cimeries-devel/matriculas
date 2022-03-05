@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
 
 @Entity(name = "tbl_celular")
 public class Celular extends Hibernate {
@@ -20,11 +20,12 @@ public class Celular extends Hibernate {
     private Integer id;
 
     @Column
+    @NotEmpty
     @Size(min = 3, max = 32)
     private String descripcion;
 
     @Column
-    @NotNull
+    @NotEmpty
     @Size(min = 9, max = 13)
     private String numero;
 

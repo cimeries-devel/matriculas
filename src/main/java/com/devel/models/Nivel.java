@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,16 +18,27 @@ public class Nivel extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
     private Date creacion;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String descripcion;
+
     @Column
+    @NotEmpty
     private Date horaFin;
+
     @Column
+    @NotEmpty
     private Date horaInicio;
+
     @OneToMany(mappedBy = "nivel")
     private List<Salon> salons =new ArrayList<>();
+
     @OneToMany(mappedBy = "nivel")
     private List<Grado> grados=new ArrayList<>();
 

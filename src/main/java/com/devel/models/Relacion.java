@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,18 +18,24 @@ public class Relacion extends Hibernate {
     private Integer id;
 
     @ManyToOne
+    @NotEmpty
     private Persona persona;
 
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String tipoRelacion;
 
     @Column
+    @NotEmpty
     private boolean apoderado;
 
     @ManyToOne
+    @NotEmpty
     private Persona persona1;
 
     @Column
+    @NotEmpty
     private boolean vivenJuntos;
 
     public Integer getId() {

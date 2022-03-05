@@ -4,8 +4,10 @@ import com.devel.ForResources;
 import com.devel.models.Registro;
 import com.devel.models.Tarifa;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
-import com.github.weisj.darklaf.LafManager;
-import com.github.weisj.darklaf.theme.*;
+import com.formdev.flatlaf.FlatDarkLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.IntelliJTheme;
 
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
@@ -28,17 +30,18 @@ public class Utilities {
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
 
-    public static void cambiarThemaIntellij(){
-        LafManager.install(new IntelliJTheme());
-    }
-
     public static void tema(String tema){
-        if(tema.equals("oscuro")){
+        try {
+            if(tema.equals("oscuro")){
+                UIManager.setLookAndFeel(new FlatDarkLaf());
+            }else{
+                UIManager.setLookAndFeel(new FlatIntelliJLaf());
+            }
 
-            LafManager.install(new DarculaTheme());
-        }else{
-            LafManager.install(new IntelliJTheme());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
         }
+
     }
     public static Boolean espacioEnblanco(JTextField textField){
         if(textField.getText().trim().length()>0){

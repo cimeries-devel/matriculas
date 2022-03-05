@@ -2,10 +2,14 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import com.devel.utilities.Utilities;
+import com.sun.istack.Nullable;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.swing.*;
+import javax.validation.constraints.NotNull;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,34 +25,64 @@ public class Persona extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String direccion;
+
     @Column
+    @NotEmpty
     private int edad;
+
     @Column
+    @NotEmpty
     private Date cumpleaños;
+
     @Column
+    @NotEmpty
     private Date creacion;
+
     @Column
+    @Nullable
+    @Size(min = 11,max = 32)
     private String email;
+
     @Column
+    @NotEmpty
     private boolean genero;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String nombres;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String apellidos;
+
     @Column
+    @NotEmpty
     private Date actualizacion;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String codigo;
+
     @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
+
     @OneToMany(mappedBy = "persona")
     private List<Relacion> relaciones = new ArrayList<>();
+
     @OneToMany(mappedBy = "estudiante")
     private List<Registro> registros = new ArrayList<>();
+
     @OneToMany
     private List<Celular> celulars = new ArrayList<>();
+
     @ManyToMany
     @JoinTable(
             name = "persona_secure",

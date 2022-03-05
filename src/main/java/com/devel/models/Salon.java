@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,14 +13,22 @@ public class Salon extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String nombre;
+
     @ManyToOne()
+    @NotEmpty
     private Seccion seccion;
+
     @ManyToOne()
+    @NotEmpty
     private Nivel nivel;
 
     @ManyToOne
+    @NotEmpty
     private Grado grado;
 
     public Integer getId() {

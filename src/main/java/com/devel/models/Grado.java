@@ -1,6 +1,10 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -15,10 +19,15 @@ public class Grado extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
+    @Size(min =1,max = 15)
     private String grado;
+
     @OneToMany(mappedBy = "grado")
     private List<Salon> salon =new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "fk_nivel")
     private Nivel nivel;

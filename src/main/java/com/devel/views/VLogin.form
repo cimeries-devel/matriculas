@@ -36,15 +36,25 @@
           </component>
           <component id="24bde" class="javax.swing.JCheckBox" binding="recordarUsuarioCheckBox" default-binding="true">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <focusCycleRoot value="false"/>
               <focusPainted value="false"/>
+              <focusTraversalPolicyProvider value="false"/>
               <font/>
               <foreground color="-16777216"/>
-              <iconTextGap value="5"/>
+              <hideActionText value="false"/>
+              <horizontalAlignment value="2"/>
+              <horizontalTextPosition value="4"/>
+              <icon value="com/devel/Icons/x32/switch.png"/>
+              <iconTextGap value="15"/>
+              <inheritsPopupMenu value="false"/>
+              <margin top="2" left="2" bottom="2" right="2"/>
               <opaque value="false"/>
+              <selectedIcon value="com/devel/Icons/x32/switchoff.png"/>
               <text value="Recordar usuario"/>
+              <verticalAlignment value="0"/>
             </properties>
           </component>
           <component id="6f5ca" class="javax.swing.JPasswordField" binding="psfContraseña">

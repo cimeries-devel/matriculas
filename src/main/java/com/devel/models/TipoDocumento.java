@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -18,9 +20,13 @@ public class TipoDocumento extends Hibernate {
     private Integer id;
 
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String codigo;
 
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String descripcion;
 
     public Integer getId() {

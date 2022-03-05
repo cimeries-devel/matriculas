@@ -1,6 +1,9 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -16,27 +19,36 @@ public class Colegio extends Hibernate {
     private Integer id;
 
     @Column
+    @NotEmpty
+    @Size(min = 3, max = 32)
     private String direccion;
 
     @Column
+    @NotEmpty
+    @Size(min = 3, max = 32)
     private String nombreColegio;
 
     @Column
+    @NotEmpty
     private Date creacion;
 
     @Column
+    @NotEmpty
+    @Size(min =12, max = 32)
     private String email;
 
     @Column
-    private String numero;
-
-    @Column
+    @NotEmpty
+    @Size(min = 11, max = 11)
     private String ruc;
 
     @Column
+    @NotEmpty
     private Date actualizacion;
 
     @Column
+    @NotEmpty
+    @Size(min = 3, max = 32)
     private String urbanizacion;
 
     @Column
@@ -44,6 +56,7 @@ public class Colegio extends Hibernate {
 
     @ManyToOne
     @JoinColumn(name = "fk_ubigeo")
+    @NotEmpty
     private Ubigeo ubigeo;
 
     @OneToMany
@@ -83,14 +96,6 @@ public class Colegio extends Hibernate {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
     }
 
     public String getRuc() {

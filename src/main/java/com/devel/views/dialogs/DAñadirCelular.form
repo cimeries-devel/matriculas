@@ -5,7 +5,9 @@
     <constraints>
       <xy x="20" y="20" width="296" height="139"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="263" height="80"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="f1aab" class="javax.swing.JLabel">

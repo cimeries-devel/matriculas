@@ -3,9 +3,11 @@
   <grid id="27dc6" binding="panelPrincipal" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="270" height="124"/>
+      <xy x="20" y="20" width="282" height="124"/>
     </constraints>
-    <properties/>
+    <properties>
+      <preferredSize width="282" height="80"/>
+    </properties>
     <border type="none"/>
     <children>
       <component id="48971" class="javax.swing.JLabel">

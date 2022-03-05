@@ -1,5 +1,7 @@
 package com.devel.models;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -17,13 +19,22 @@ public class Tarifa extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
     private boolean defecto;
+
     @Column
+    @NotEmpty
+    @Size(min = 1,max = 32)
     private String descripcion;
+
     @Column
+    @NotEmpty
     private Date creacion;
+
     @Column
+    @NotEmpty
     private Double precio;
 
     public Integer getId() {

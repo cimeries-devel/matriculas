@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,17 +16,33 @@ public class Ubigeo extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String codigo;
+
     @Column
+    @NotEmpty
     private Date creacion;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String departamento;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String distrito;
+
     @Column
+    @NotEmpty
+    @Size(min = 3,max = 32)
     private String provincia;
+
     @Column
+    @NotEmpty
     private Date actualizacion;
 
     @OneToMany(mappedBy = "ubigeo")

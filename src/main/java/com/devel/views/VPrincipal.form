@@ -190,14 +190,15 @@
                     </constraints>
                     <properties>
                       <font size="16"/>
-                      <horizontalAlignment value="0"/>
-                      <horizontalTextPosition value="0"/>
+                      <horizontalAlignment value="2"/>
+                      <horizontalTextPosition value="4"/>
                       <icon value="com/devel/Icons/x32/incioDefecto.png"/>
-                      <iconTextGap value="1"/>
+                      <iconTextGap value="10"/>
+                      <margin top="2" left="4" bottom="2" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/inicio.png"/>
                       <text value="Inicio"/>
                       <verticalAlignment value="3"/>
-                      <verticalTextPosition value="1"/>
+                      <verticalTextPosition value="0"/>
                     </properties>
                   </component>
                   <vspacer id="bb899">
@@ -211,14 +212,15 @@
                     </constraints>
                     <properties>
                       <font size="16"/>
-                      <horizontalAlignment value="0"/>
-                      <horizontalTextPosition value="0"/>
+                      <horizontalAlignment value="2"/>
+                      <horizontalTextPosition value="4"/>
                       <icon value="com/devel/Icons/x32/gestionarDefecto.png"/>
-                      <iconTextGap value="1"/>
+                      <iconTextGap value="10"/>
+                      <margin top="2" left="4" bottom="2" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/gestionar.png"/>
                       <text value="Gestionar"/>
                       <verticalAlignment value="3"/>
-                      <verticalTextPosition value="1"/>
+                      <verticalTextPosition value="0"/>
                     </properties>
                   </component>
                   <component id="45007" class="javax.swing.JButton" binding="reportesButton" default-binding="true">
@@ -227,14 +229,15 @@
                     </constraints>
                     <properties>
                       <font size="16"/>
-                      <horizontalAlignment value="0"/>
-                      <horizontalTextPosition value="0"/>
+                      <horizontalAlignment value="2"/>
+                      <horizontalTextPosition value="4"/>
                       <icon value="com/devel/Icons/x32/reportsDefecto.png"/>
-                      <iconTextGap value="1"/>
+                      <iconTextGap value="10"/>
+                      <margin top="2" left="4" bottom="2" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/reportes.png"/>
                       <text value="Reportes"/>
-                      <verticalAlignment value="3"/>
-                      <verticalTextPosition value="1"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="0"/>
                     </properties>
                   </component>
                   <component id="93546" class="javax.swing.JButton" binding="button1" default-binding="true">

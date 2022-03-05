@@ -1,6 +1,9 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import com.sun.istack.Nullable;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,21 +17,41 @@ public class Usuario extends Hibernate {
     @GeneratedValue(generator = "increment")
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
+
     @Column
+    @NotEmpty
     private Date creacion;
+
     @Column
+    @Nullable
+    @Size(min = 3,max = 32)
     private String email;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String nombres;
+
     @Column
     private String imagen;
+
     @Column
+    @NotEmpty
+    @Size(min = 2,max = 32)
     private String apellidos;
+
     @Column
+    @NotEmpty
+    @Size(min = 7,max = 32)
     private String contraseña;
+
     @Column
+    @NotEmpty
     private Date actualizacion;
+
     @Column
+    @NotEmpty
+    @Size(min = 7,max = 32)
     private String usuario;
 
     @OneToMany

@@ -1,6 +1,8 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,21 +15,27 @@ public class Registro extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date creacion;
     @Column
+    @NotEmpty
+    private Date creacion;
+
+    @Column
+    @NotEmpty
     private Date actualizacion;
 
     @ManyToOne
     @JoinColumn(name = "FK_CLASSROOM")
+    @NotEmpty
     private Salon salon;
 
     @ManyToOne
     @JoinColumn(name = "FK_STUDENT")
+    @NotEmpty
     private Persona estudiante;
 
     @ManyToOne
     @JoinColumn(name = "FK_RATE")
+    @NotEmpty
     private Tarifa tarifa;
 
     public Integer getId() {

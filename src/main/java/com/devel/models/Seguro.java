@@ -27,8 +27,6 @@ public class Seguro extends Hibernate {
     @Size(min = 5,max = 32)
     private String descripcion;
 
-
-
     public Integer getId() {
         return id;
     }

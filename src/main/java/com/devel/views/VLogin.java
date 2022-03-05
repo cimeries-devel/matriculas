@@ -88,6 +88,7 @@ public class VLogin extends JFrame{
         checkBox1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ingresarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         checkBox1.setFocusable(false);
+        recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
