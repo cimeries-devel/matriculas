@@ -101,7 +101,6 @@ public class VPrincipal extends JFrame{
         contentPane.updateUI();
         pack();
         setLocationRelativeTo(null);
-        inicioButton.setBackground(Color.RED);
     }
     private void cargarConfiguraciones(){
         ConfigSistema configSistema=new ConfigSistema(this,new Propiedades());

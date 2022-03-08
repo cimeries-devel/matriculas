@@ -1,6 +1,7 @@
 package com.devel.custom;
 
 import com.devel.ForResources;
+import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +14,7 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 
 public class DnDTabbedPane extends JTabbedPane {
+    private DnDTabbedPane jtabedpane=this;
     public static final long serialVersionUID = 1L;
     private static final int LINEWIDTH = 3;
     private static final String NAME = "TabTransferData";
@@ -20,10 +22,9 @@ public class DnDTabbedPane extends JTabbedPane {
     private static GhostGlassPane s_glassPane = new GhostGlassPane();
     private boolean m_isDrawRect = false;
     private final Rectangle2D m_lineRect = new Rectangle2D.Double();
-
     private final Color m_lineColor = new Color(0, 100, 255);
     private TabAcceptor m_acceptor = null;
-
+    private Double tamaño=0.0;
     @Override
     public Component add(String title, Component component) {
         Component component1=super.add(title, component);
@@ -33,6 +34,60 @@ public class DnDTabbedPane extends JTabbedPane {
 
     public DnDTabbedPane() {
         super();
+        //creacion de pop_up
+        JPopupMenu pop_up = new JPopupMenu();
+        JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
+        JMenuItem cerrarOtras = new JMenuItem("Cerrar Otras Pestañas");
+        JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");
+        cerrarPestaña.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(getSelectedIndex()!=-1){
+                    removeTabAt(getSelectedIndex());
+                }
+            }
+        });
+        cerrarOtras.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if(getSelectedIndex()!=-1){
+                    JPanel tab= (JPanel) getComponentAt(getSelectedIndex());
+                    String titulo= getTitleAt(getSelectedIndex());
+                    removeAll();
+                    add(tab,titulo);
+                    setTabComponentAt(indexOfTab(titulo), new Cross(jtabedpane,titulo));
+                }
+            }
+        });
+        cerrarTodas.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                removeAll();
+            }
+        });
+        pop_up.add(cerrarPestaña);
+        pop_up.addSeparator();
+        pop_up.add(cerrarOtras);
+        pop_up.add(cerrarTodas);
+
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                tamaño=0.0;
+                for (Component component : getComponents()) {
+                    if(indexOfComponent(component)!=-1){
+                        if(tamaño<getBoundsAt(indexOfComponent(component)).getMaxX()){
+                            tamaño=getBoundsAt(indexOfComponent(component)).getMaxX();
+                        }
+                    }
+                }
+                if(e.getButton()==3&&e.getY()<32&&e.getX()<=tamaño){
+                    pop_up.show(getComponentAt(getMousePosition()),getMousePosition().getLocation().x,getMousePosition().getLocation().y);
+                }
+            }
+        });
+        //Modificación tabPane
         final DragSourceListener dsl = new DragSourceListener() {
             public void dragEnter(DragSourceDragEvent e) {
                 e.getDragSourceContext().setCursor(DragSource.DefaultMoveDrop);
@@ -48,9 +103,6 @@ public class DnDTabbedPane extends JTabbedPane {
             }
 
             public void dragOver(DragSourceDragEvent e) {
-                //e.getLocation()
-                //This method returns a Point indicating the cursor location in screen coordinates at the moment
-
                 TabTransferData data = getTabTransferData(e);
                 if (data == null) {
                     e.getDragSourceContext().setCursor(
@@ -78,7 +130,6 @@ public class DnDTabbedPane extends JTabbedPane {
 
         final DragGestureListener dgl = new DragGestureListener() {
             public void dragGestureRecognized(DragGestureEvent e) {
-
                 Point tabPt = e.getDragOrigin();
                 int dragTabIndex = indexAtLocation(tabPt.x, tabPt.y);
                 if (dragTabIndex < 0) {
@@ -138,8 +189,7 @@ public class DnDTabbedPane extends JTabbedPane {
 
     private TabTransferData getTabTransferData(DragSourceDragEvent a_event) {
         try {
-            TabTransferData data = (TabTransferData) a_event.getDragSourceContext()
-                    .getTransferable().getTransferData(FLAVOR);
+            TabTransferData data = (TabTransferData) a_event.getDragSourceContext().getTransferable().getTransferData(FLAVOR);
             return data;
         } catch (Exception e) {
             e.printStackTrace();
@@ -157,7 +207,6 @@ public class DnDTabbedPane extends JTabbedPane {
 
         public Object getTransferData(DataFlavor flavor) {
             return m_data;
-            // return DnDTabbedPane.this;
         }
 
         public DataFlavor[] getTransferDataFlavors() {
@@ -641,46 +690,17 @@ class Cross extends JPanel {
         gbc.gridx++;
         gbc.weightx=0;
         add(B,gbc);
-        JPopupMenu pop_up = new JPopupMenu();
-        JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
-        JMenuItem cerrarOtras = new JMenuItem("Cerrar Otras Pestañas");
-        JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");
-        cerrarPestaña.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                jTabbedPane.removeTabAt(jTabbedPane.indexOfTab(title));
-            }
-        });
-        cerrarOtras.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                JPanel tab= (JPanel) jTabbedPane.getComponentAt(jTabbedPane.indexOfTab(title));
-                jTabbedPane.removeAll();
-                jTabbedPane.add(tab,title);
-                jTabbedPane.setTabComponentAt(jTabbedPane.indexOfTab(title), new Cross(jTabbedPane,title));
-            }
-        });
-        cerrarTodas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                jTabbedPane.removeAll();
-            }
-        });
-        pop_up.add(cerrarPestaña);
-        pop_up.addSeparator();
-        pop_up.add(cerrarOtras);
-        pop_up.add(cerrarTodas);
-        setComponentPopupMenu(pop_up);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(e.getButton()==3){
-                    pop_up.setVisible(true);
-                }else{
-                    jTabbedPane.setSelectedIndex(jTabbedPane.indexOfTab(title));
-                }
-            }
-        });
+//        addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e);
+//                if(e.getButton()==3){
+//                    pop_up.setVisible(true);
+//                }else{
+//                    jTabbedPane.setSelectedIndex(jTabbedPane.indexOfTab(title));
+//                }
+//            }
+//        });
     }
     private ImageIcon getImage(String icono) {
         Image IMG=null;
