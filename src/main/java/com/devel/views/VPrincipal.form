@@ -180,8 +180,8 @@
             </properties>
             <border type="none"/>
             <children>
-              <grid id="4f7b4" binding="paneControls" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-                <margin top="0" left="0" bottom="0" right="0"/>
+              <grid id="4f7b4" binding="paneControls" layout-manager="GridLayoutManager" row-count="5" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="5">
+                <margin top="2" left="2" bottom="2" right="2"/>
                 <constraints>
                   <splitpane position="left"/>
                 </constraints>
@@ -197,7 +197,7 @@
                       <font size="16"/>
                       <horizontalAlignment value="2"/>
                       <horizontalTextPosition value="4"/>
-                      <icon value="com/devel/Icons/x32/incioDefecto.png"/>
+                      <icon value="com/devel/Icons/x32/inicio.png"/>
                       <iconTextGap value="10"/>
                       <margin top="2" left="4" bottom="2" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/inicio.png"/>

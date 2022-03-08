@@ -12,6 +12,7 @@ import com.devel.views.menus.MenuReportes;
 import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
