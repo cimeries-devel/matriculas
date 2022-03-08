@@ -74,16 +74,18 @@ public class DnDTabbedPane extends JTabbedPane {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                tamaño=0.0;
-                for (Component component : getComponents()) {
-                    if(indexOfComponent(component)!=-1){
-                        if(tamaño<getBoundsAt(indexOfComponent(component)).getMaxX()){
-                            tamaño=getBoundsAt(indexOfComponent(component)).getMaxX();
+                if(e.getButton()==3){
+                    tamaño=0.0;
+                    for (Component component : getComponents()) {
+                        if(indexOfComponent(component)!=-1){
+                            if(tamaño<getBoundsAt(indexOfComponent(component)).getMaxX()){
+                                tamaño=getBoundsAt(indexOfComponent(component)).getMaxX();
+                            }
                         }
                     }
-                }
-                if(e.getButton()==3&&e.getY()<32&&e.getX()<=tamaño){
-                    pop_up.show(getComponentAt(getMousePosition()),getMousePosition().getLocation().x,getMousePosition().getLocation().y);
+                    if(e.getY()<32&&e.getX()<=tamaño){
+                        pop_up.show(getComponentAt(getMousePosition()),getMousePosition().getLocation().x,getMousePosition().getLocation().y);
+                    }
                 }
             }
         });
