@@ -28,8 +28,10 @@ public class DnDTabbedPane extends JTabbedPane {
     private final Rectangle2D m_lineRect = new Rectangle2D.Double();
     private final Color m_lineColor = new Color(0, 100, 255);
     private TabAcceptor m_acceptor = null;
-    private Double tamañoX=0.0;
-    private Double tamañoY=0.0;
+    private Double maxX=0.0;
+    private Double maxY=0.0;
+    private Double minX=0.0;
+    private Double minY=0.0;
     private int id=0;
     @Override
     public Component add(String title, Component component) {
@@ -81,18 +83,37 @@ public class DnDTabbedPane extends JTabbedPane {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton()==3){
-                    tamañoX=0.0;
+                    maxX=0.0;
+                    maxY=0.0;
+                    minX=10000.0;
+                    minY=10000.0;
                     for (Component component : getComponents()) {
                         if(indexOfComponent(component)!=-1){
-                            if(tamañoX<getBoundsAt(indexOfComponent(component)).getMaxX()){
-                                tamañoX=getBoundsAt(indexOfComponent(component)).getMaxX();
-                                tamañoY=getBoundsAt(indexOfComponent(component)).getMaxY();
+
+                            if(maxX<getBoundsAt(indexOfComponent(component)).getMaxX()){
+                                maxX=getBoundsAt(indexOfComponent(component)).getMaxX();
+                            }
+                            if(maxY<getBoundsAt(indexOfComponent(component)).getMaxY()){
+                                maxY=getBoundsAt(indexOfComponent(component)).getMaxY();
+                            }
+
+                            if(minX>getBoundsAt(indexOfComponent(component)).getLocation().getLocation().getX()){
+                                minX=getBoundsAt(indexOfComponent(component)).getLocation().getLocation().getX();
+                            }
+                            if(minY>getBoundsAt(indexOfComponent(component)).getLocation().getLocation().getY()){
+                                minY=getBoundsAt(indexOfComponent(component)).getLocation().getLocation().getY();
                             }
                         }
                     }
-                    if(e.getY()<tamañoY&&e.getX()<=tamañoX){
-                        pop_up.show(getComponentAt(getMousePosition()),getMousePosition().getLocation().x,getMousePosition().getLocation().y);
+                    if(e.getY()<=maxY&&e.getY()>=minY&&e.getX()<=maxX&&e.getX()>=minX){
+                        if(tabPlacement==3||tabPlacement==4){
+                            pop_up.show(getComponentAt(getSelectedIndex()),e.getX(),e.getY());
+                        }else{
+                            pop_up.show(getComponentAt(getMousePosition()),e.getX(),e.getY());
+                        }
+
                     }
+
                 }
             }
         });
