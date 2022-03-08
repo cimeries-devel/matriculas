@@ -60,7 +60,7 @@ public class VLogin extends JFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                VPrincipal vPrincipal=new VPrincipal();
+                VPrincipal vPrincipal=new VPrincipal(propiedades);
                 vPrincipal.setVisible(true);
                 dispose();
             }

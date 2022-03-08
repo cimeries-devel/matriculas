@@ -26,7 +26,7 @@ public class DNuevoEstudiante extends JDialog{
     private JTextField txtNombres;
     private JComboBox cbbTipoDocumento;
     private DatePicker datePicker1;
-    private JTextField txtEdad;
+    private JLabel txtEdad;
     private JPanel panelPrincipal;
     private JButton registrarEstudianteButton;
     private JButton hechoButton;
@@ -46,7 +46,6 @@ public class DNuevoEstudiante extends JDialog{
             public void dateChanged(DateChangeEvent dateChangeEvent) {
                 if(datePicker1.getDate()!=null){
                     int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
-                    txtEdad.setDisabledTextColor(new JTextField().getForeground());
                     txtEdad.setText(String.valueOf(edad));
                 }
             }
@@ -155,8 +154,7 @@ public class DNuevoEstudiante extends JDialog{
         datePicker1.setPreferredSize(new Dimension(200,ge));
         datePicker1.getComponentDateTextField().setPreferredSize(new JTextField().getPreferredSize());
         datePicker1.getComponentDateTextField().setHorizontalAlignment(JTextField.CENTER);
-//        datePicker1.setPreferredSize(new Dimension(200,new JTextField().getHeight()));
-//        DateTimeFormatter a=DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        datePicker1.getComponentDateTextField().setBackground(new JTextField().getBackground());
         datePicker1.getSettings().setFormatForDatesCommonEra("dd-MM-yyyy");
     }
 }
