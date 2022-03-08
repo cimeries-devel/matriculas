@@ -44,9 +44,11 @@ public class DNuevoEstudiante extends JDialog{
         datePicker1.addDateChangeListener(new DateChangeListener() {
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
-                int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
-                txtEdad.setDisabledTextColor(new JTextField().getForeground());
-                txtEdad.setText(String.valueOf(edad));
+                if(datePicker1.getDate()!=null){
+                    int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
+                    txtEdad.setDisabledTextColor(new JTextField().getForeground());
+                    txtEdad.setText(String.valueOf(edad));
+                }
             }
         });
         hechoButton.addMouseListener(new MouseAdapter() {
@@ -148,12 +150,13 @@ public class DNuevoEstudiante extends JDialog{
         // TODO: place custom component creation code here
         datePicker1=new DatePicker();
         datePicker1.getComponentDateTextField().setBorder(new JTextField().getBorder());
-        datePicker1.getComponentDateTextField().setEnabled(false);
         datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
-        datePicker1.getComponentDateTextField().setPreferredSize(new Dimension(150,new JTextField().getHeight()));
+        int ge=new JTextField().getHeight()+15;
+        datePicker1.setPreferredSize(new Dimension(200,ge));
+        datePicker1.getComponentDateTextField().setPreferredSize(new JTextField().getPreferredSize());
         datePicker1.getComponentDateTextField().setHorizontalAlignment(JTextField.CENTER);
 //        datePicker1.setPreferredSize(new Dimension(200,new JTextField().getHeight()));
 //        DateTimeFormatter a=DateTimeFormatter.ofPattern("dd/MM/yyyy");
-//        datePicker1.getSettings().setFormatForDatesCommonEra("dd/MM/yyyy");
+        datePicker1.getSettings().setFormatForDatesCommonEra("dd-MM-yyyy");
     }
 }

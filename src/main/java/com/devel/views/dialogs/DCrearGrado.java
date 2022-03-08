@@ -31,6 +31,7 @@ public class DCrearGrado extends JDialog {
             cbbNiveles.setSelectedItem(grado1.getNivel());
             setTitle("Editar grado");
             añadirButton.setText("Guardar");
+            btnHecho.setText("Cancelar");
         }
         añadirButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -64,6 +65,7 @@ public class DCrearGrado extends JDialog {
                 Utilities.sendNotification("Éxito","Grado creado", TrayIcon.MessageType.INFO);
             }else{
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                dispose();
             }
         }else{
             switch (error){

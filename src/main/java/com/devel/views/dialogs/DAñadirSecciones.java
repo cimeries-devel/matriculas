@@ -26,6 +26,7 @@ public class DAñadirSecciones extends JDialog{
             cargarSeccion();
             setTitle("Editar Sección");
             btnRegistrar.setText("Guardar");
+            btnHecho.setText("Cancelar");
         }
         iniciarComponentes();
         btnRegistrar.addMouseListener(new MouseAdapter() {
@@ -41,6 +42,7 @@ public class DAñadirSecciones extends JDialog{
                         seccion=new Seccion();
                     }else{
                         Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                        dispose();
                     }
                 }else{
                     Utilities.sendNotification("Error","Complete todos los campos", TrayIcon.MessageType.ERROR);

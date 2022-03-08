@@ -8,10 +8,14 @@ import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 public class DnDTabbedPane extends JTabbedPane {
     private DnDTabbedPane jtabedpane=this;
@@ -24,7 +28,9 @@ public class DnDTabbedPane extends JTabbedPane {
     private final Rectangle2D m_lineRect = new Rectangle2D.Double();
     private final Color m_lineColor = new Color(0, 100, 255);
     private TabAcceptor m_acceptor = null;
-    private Double tamaño=0.0;
+    private Double tamañoX=0.0;
+    private Double tamañoY=0.0;
+    private int id=0;
     @Override
     public Component add(String title, Component component) {
         Component component1=super.add(title, component);
@@ -75,15 +81,16 @@ public class DnDTabbedPane extends JTabbedPane {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if(e.getButton()==3){
-                    tamaño=0.0;
+                    tamañoX=0.0;
                     for (Component component : getComponents()) {
                         if(indexOfComponent(component)!=-1){
-                            if(tamaño<getBoundsAt(indexOfComponent(component)).getMaxX()){
-                                tamaño=getBoundsAt(indexOfComponent(component)).getMaxX();
+                            if(tamañoX<getBoundsAt(indexOfComponent(component)).getMaxX()){
+                                tamañoX=getBoundsAt(indexOfComponent(component)).getMaxX();
+                                tamañoY=getBoundsAt(indexOfComponent(component)).getMaxY();
                             }
                         }
                     }
-                    if(e.getY()<32&&e.getX()<=tamaño){
+                    if(e.getY()<tamañoY&&e.getX()<=tamañoX){
                         pop_up.show(getComponentAt(getMousePosition()),getMousePosition().getLocation().x,getMousePosition().getLocation().y);
                     }
                 }

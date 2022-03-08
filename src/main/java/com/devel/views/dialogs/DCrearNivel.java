@@ -36,7 +36,8 @@ public class DCrearNivel extends JDialog{
             nivel=nivel1;
             cargarNivel();
             setTitle("Editar nivel");
-
+            añadirButton.setText("Guardar");
+            hechoButton.setText("Cancelar");
         }
         iniciarComponentes();
         añadirButton.addMouseListener(new MouseAdapter() {
@@ -52,6 +53,7 @@ public class DCrearNivel extends JDialog{
                         Utilities.sendNotification("Éxito","Nivel creado", TrayIcon.MessageType.INFO);
                     }else{
                         Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                        dispose();
                     }
                 }else{
                     Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);

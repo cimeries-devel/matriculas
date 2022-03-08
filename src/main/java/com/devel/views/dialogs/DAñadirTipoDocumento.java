@@ -28,6 +28,7 @@ public class DAñadirTipoDocumento extends JDialog{
             tipoDocumento = tipoDocumento1;
             setTitle("Editar Tipo de documento");
             registrarButton.setText("Guardar");
+            hechoButton.setText("Cancelar");
             cargarTipoDeDocumento();
         }
         iniciarComponentes();
@@ -67,6 +68,7 @@ public class DAñadirTipoDocumento extends JDialog{
                 txtCodigo.setText(null);
             }else {
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                dispose();
             }
         }else{
             Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);

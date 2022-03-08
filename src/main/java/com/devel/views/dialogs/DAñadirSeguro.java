@@ -33,6 +33,7 @@ public class DAñadirSeguro extends JDialog{
             setTitle("Editar seguro");
             cargarSeguro();
             añadirButton.setText("Guardar");
+            hechoButton.setText("Cancelar");
         }
         iniciarComponentes();
         añadirButton.addMouseListener(new MouseAdapter() {
@@ -69,6 +70,7 @@ public class DAñadirSeguro extends JDialog{
                 txtCodigo.setText(null);
             }else {
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                dispose();
             }
         }else {
             Object[] errores=errors.toArray();

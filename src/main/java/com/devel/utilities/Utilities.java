@@ -141,7 +141,6 @@ public class Utilities {
         int años= hoy.get(Calendar.YEAR)-nacimiento.get(Calendar.YEAR);
         int meses= hoy.get(Calendar.MONTH)-nacimiento.get(Calendar.MONTH);
         int dias= hoy.get(Calendar.DAY_OF_MONTH)-nacimiento.get(Calendar.DAY_OF_MONTH);
-        JOptionPane.showMessageDialog(null,""+años);
         switch (meses){
             case 0:
                 if(dias<0){

@@ -29,6 +29,7 @@ public class DAñadirTarifa extends JDialog {
             tarifa = tarifa1;
             setTitle("Editar Tarifa");
             registrarButton.setText("Guardar");
+            hechoButton.setText("Cancelar");
             cargarTarifa();
         }
         iniciarComponentes();
@@ -71,6 +72,7 @@ public class DAñadirTarifa extends JDialog {
                 txtPrecio.setText(null);
             }else {
                 Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                dispose();
             }
         }else{
             Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);

@@ -1,5 +1,6 @@
 package com.devel.views;
 
+import com.devel.ForResources;
 import com.devel.controllers.*;
 import com.devel.custom.DnDTabbedPane;
 import com.devel.models.*;
@@ -51,6 +52,12 @@ public class VPrincipal extends JFrame{
         inicioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                gestionarButton.setBackground(new JButton().getBackground());
+                reportesButton.setBackground(new JButton().getBackground());
+                inicioButton.setBackground(new Color(230,230,230,255));
+                reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
+                gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
+                inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/inicio.png")));
                 splitPane.setRightComponent(null);
                 splitPane.setRightComponent(inicioOpciones.traerInicioOpciones());
                 contentPane.updateUI();
@@ -59,6 +66,12 @@ public class VPrincipal extends JFrame{
         reportesButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inicioButton.setBackground(new JButton().getBackground());
+                gestionarButton.setBackground(new JButton().getBackground());
+                reportesButton.setBackground(new Color(230,230,230,255));
+                inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
+                gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
+                reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportes.png")));
                 splitPane.setRightComponent(null);
                 splitPane.setRightComponent(menuReportes.traerReportesOpciones());
                 contentPane.updateUI();
@@ -67,6 +80,12 @@ public class VPrincipal extends JFrame{
         gestionarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                inicioButton.setBackground(new JButton().getBackground());
+                reportesButton.setBackground(new JButton().getBackground());
+                gestionarButton.setBackground(new Color(230,230,230,255));
+                inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
+                reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
+                gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionar.png")));
                 splitPane.setRightComponent(null);
                 splitPane.setRightComponent(menuGestiones.traerInicioOpciones());
                 contentPane.updateUI();
