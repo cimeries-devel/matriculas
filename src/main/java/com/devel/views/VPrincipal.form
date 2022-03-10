@@ -131,7 +131,11 @@
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <autoscrolls value="true"/>
+              <tabLayoutPolicy value="1"/>
+              <tabPlacement value="1"/>
+            </properties>
             <border type="none"/>
             <children/>
           </tabbedpane>
@@ -147,83 +151,87 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="58619" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="33"/>
-                <maximum-size width="-1" height="33"/>
-              </grid>
-            </constraints>
-            <properties/>
-            <border type="none"/>
-            <children>
-              <component id="ac4b5" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <text value="USUARIO:JAVIER"/>
-                </properties>
-              </component>
-            </children>
-          </grid>
-          <splitpane id="98b8a" binding="splitPane">
+          <splitpane id="cf735" binding="splitPane">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-                <preferred-size width="-1" height="200"/>
+                <preferred-size width="200" height="200"/>
               </grid>
             </constraints>
             <properties>
-              <dividerSize value="1"/>
+              <dividerSize value="0"/>
             </properties>
             <border type="none"/>
             <children>
-              <grid id="4f7b4" binding="paneControls" layout-manager="GridLayoutManager" row-count="5" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="1" vgap="1">
-                <margin top="2" left="2" bottom="2" right="2"/>
+              <grid id="8567c" binding="panelControles" layout-manager="GridLayoutManager" row-count="6" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <splitpane position="left"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <vspacer id="bb899">
+                  <component id="b4b92" class="javax.swing.JButton" binding="inicioButton">
                     <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
-                  <component id="831fa" class="javax.swing.JButton" binding="gestionarButton" default-binding="true">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <font size="16"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="4"/>
-                      <icon value="com/devel/Icons/x32/gestionarDefecto.png"/>
-                      <iconTextGap value="10"/>
-                      <margin top="2" left="4" bottom="2" right="2"/>
-                      <pressedIcon value="com/devel/Icons/x32/gestionar.png"/>
-                      <text value="Gestionar"/>
-                      <verticalAlignment value="3"/>
-                      <verticalTextPosition value="0"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/devel/Icons/x32/inicio.png"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="4" left="2" bottom="4" right="2"/>
+                      <pressedIcon value="com/devel/Icons/x32/inicio.png"/>
+                      <text value="Inicio"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="3"/>
                     </properties>
                   </component>
                   <component id="45007" class="javax.swing.JButton" binding="reportesButton" default-binding="true">
                     <constraints>
-                      <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <font size="16"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="4"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x32/reportsDefecto.png"/>
-                      <iconTextGap value="10"/>
-                      <margin top="2" left="4" bottom="2" right="2"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="4" left="2" bottom="4" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/reportes.png"/>
                       <text value="Reportes"/>
-                      <verticalAlignment value="3"/>
-                      <verticalTextPosition value="0"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="831fa" class="javax.swing.JButton" binding="gestionarButton" default-binding="true">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="16"/>
+                      <horizontalAlignment value="0"/>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/devel/Icons/x32/gestionarDefecto.png"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="4" left="2" bottom="4" right="2"/>
+                      <pressedIcon value="com/devel/Icons/x32/gestionar.png"/>
+                      <text value="Gestionar"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="3"/>
+                    </properties>
+                  </component>
+                  <component id="9c2b9" class="javax.swing.JButton" binding="setingsButton" default-binding="true">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <horizontalTextPosition value="0"/>
+                      <icon value="com/devel/Icons/x16/ajustes.png"/>
+                      <iconTextGap value="0"/>
+                      <pressedIcon value="com/devel/Icons/x16/ajustesSeleccionado.png"/>
+                      <text value="Setings"/>
+                      <verticalTextPosition value="3"/>
                     </properties>
                   </component>
                   <component id="93546" class="javax.swing.JButton" binding="button1">
@@ -232,46 +240,22 @@
                     </constraints>
                     <properties>
                       <horizontalTextPosition value="0"/>
-                      <icon value="com/devel/Icons/x32/ajustes.png"/>
+                      <icon value="com/devel/Icons/x16/ajustes.png"/>
                       <iconTextGap value="0"/>
-                      <pressedIcon value="com/devel/Icons/x32/ajustesSeleccionado.png"/>
+                      <pressedIcon value="com/devel/Icons/x16/ajustesSeleccionado.png"/>
                       <text value="Salir"/>
                       <verticalAlignment value="0"/>
                       <verticalTextPosition value="3"/>
                     </properties>
                   </component>
-                  <component id="f221b" class="javax.swing.JButton" binding="setingsButton" default-binding="true">
+                  <vspacer id="f5c05">
                     <constraints>
-                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                     </constraints>
-                    <properties>
-                      <horizontalTextPosition value="0"/>
-                      <icon value="com/devel/Icons/x32/ajustes.png"/>
-                      <iconTextGap value="0"/>
-                      <text value="Setings"/>
-                      <verticalTextPosition value="3"/>
-                    </properties>
-                  </component>
-                  <component id="b4b92" class="javax.swing.JButton" binding="inicioButton">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="16"/>
-                      <horizontalAlignment value="2"/>
-                      <horizontalTextPosition value="4"/>
-                      <icon value="com/devel/Icons/x32/inicio.png"/>
-                      <iconTextGap value="10"/>
-                      <margin top="2" left="4" bottom="2" right="2"/>
-                      <pressedIcon value="com/devel/Icons/x32/inicio.png"/>
-                      <text value="Inicio"/>
-                      <verticalAlignment value="3"/>
-                      <verticalTextPosition value="0"/>
-                    </properties>
-                  </component>
+                  </vspacer>
                 </children>
               </grid>
-              <grid id="c9223" binding="paneButtons" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+              <grid id="fd6d" binding="panelMenus" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <splitpane position="right"/>
@@ -282,6 +266,27 @@
               </grid>
             </children>
           </splitpane>
+          <grid id="a1558" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="33"/>
+                <maximum-size width="-1" height="33"/>
+              </grid>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="2c4b9" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="USUARIO:JAVIER"/>
+                </properties>
+              </component>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

@@ -1,17 +1,17 @@
 package com.devel.custom;
 
 import com.devel.ForResources;
+import com.devel.utilities.Utilities;
 import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.*;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
@@ -32,7 +32,7 @@ public class DnDTabbedPane extends JTabbedPane {
     private Double maxY=0.0;
     private Double minX=0.0;
     private Double minY=0.0;
-    private int id=0;
+
     @Override
     public Component add(String title, Component component) {
         Component component1=super.add(title, component);
@@ -40,8 +40,25 @@ public class DnDTabbedPane extends JTabbedPane {
         return component1;
     }
 
+
     public DnDTabbedPane() {
         super();
+        getModel().addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                for (Component component : jtabedpane.getComponents()) {
+                    if(indexOfComponent(component)!=-1){
+                        ((TabPanel) component).getOption().setBackground(new JButton().getBackground());
+                    }
+                }
+
+                if(getSelectedIndex()!=-1){
+                    TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
+                    tabPanel.getOption().requestFocus();
+                    Utilities.verificarTema(tabPanel.getOption());
+                }
+            }
+        });
         //creacion de pop_up
         JPopupMenu pop_up = new JPopupMenu();
         JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
@@ -59,7 +76,7 @@ public class DnDTabbedPane extends JTabbedPane {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(getSelectedIndex()!=-1){
-                    JPanel tab= (JPanel) getComponentAt(getSelectedIndex());
+                    TabPanel tab= (TabPanel) getComponentAt(getSelectedIndex());
                     String titulo= getTitleAt(getSelectedIndex());
                     removeAll();
                     add(tab,titulo);
@@ -67,6 +84,7 @@ public class DnDTabbedPane extends JTabbedPane {
                 }
             }
         });
+
         cerrarTodas.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -615,7 +633,89 @@ public class DnDTabbedPane extends JTabbedPane {
         boolean isDropAcceptable(DnDTabbedPane a_component, int a_index);
     }
 }
+class Cross extends JPanel {
+    private JLabel L;
+    private JLabel B;
+    private int size = 22;
+    private JTabbedPane jTabbedPane;
+    private String title;
 
+    public Cross(final JTabbedPane jTabbedPane, String title) {
+        this.jTabbedPane = jTabbedPane;
+        this.title = title;
+        setOpaque(false);
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1;
+        L = new JLabel(title + " ");
+        Dimension d = new Dimension(22, 22);
+        B = new JLabel();
+        B.setPreferredSize(d);
+        B.setMaximumSize(d);
+        B.setMinimumSize(d);
+        ImageIcon iconoNormal = getImage("cerrar.png");
+        ImageIcon iconoSegundo = getImage("cerrar2.png");
+        ImageIcon iconoTercero = getImage("cerrar3.png");
+        B.setToolTipText("Cerrar Pestaña " + title);
+        B.setIcon(iconoNormal);
+        //Listener para cierre de tabs con acceso estatico al `JTabbedPane`
+        B.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                jTabbedPane.removeTabAt(jTabbedPane.indexOfTab(title));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                B.setIcon(iconoSegundo);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                B.setIcon(iconoNormal);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                B.setIcon(iconoNormal);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                B.setIcon(iconoTercero);
+            }
+        });
+        add(L, gbc);
+        gbc.gridx++;
+        gbc.weightx = 0;
+        add(B, gbc);
+//        addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                super.mouseClicked(e);
+//                if(e.getButton()==3){
+//                    pop_up.setVisible(true);
+//                }else{
+//                    jTabbedPane.setSelectedIndex(jTabbedPane.indexOfTab(title));
+//                }
+//            }
+//        });
+    }
+
+    private ImageIcon getImage(String icono) {
+        Image IMG = null;
+        try {
+            IMG = new ImageIcon(ForResources.class.getResource(String.format("Icons/x32/" + icono))).getImage();
+            IMG = IMG.getScaledInstance(size, size, Image.SCALE_SMOOTH);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ImageIcon(IMG);
+    }
+}
 class GhostGlassPane extends JPanel {
     public static final long serialVersionUID = 1L;
     private final AlphaComposite m_composite;

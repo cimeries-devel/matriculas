@@ -1,19 +1,22 @@
 package com.devel.views.tabs;
 
 import com.devel.custom.FondoPanel;
+import com.devel.custom.TabPanel;
 
 import javax.swing.*;
 
 public class VWelcome extends JFrame{
-    private JPanel panelPrincipal;
+    private JPanel panelContenido;
+    private TabPanel panelPrincipal;
+
     public VWelcome() {
         setTitle("Inicio");
     }
-    public JPanel getPanelPrincipal() {
+    public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        panelPrincipal=new FondoPanel("Images/fondo2.jpg");
+        panelContenido=new FondoPanel("Images/fondo2.jpg");
     }
 }

@@ -1,5 +1,6 @@
 package com.devel.views.tabs;
 
+import com.devel.custom.TabPanel;
 import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
 import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
 import com.devel.views.VPrincipal;
@@ -7,7 +8,7 @@ import com.devel.views.VPrincipal;
 import javax.swing.*;
 
 public class VAlumnos extends JFrame{
-    private JPanel panelPrincipal;
+    private TabPanel panelPrincipal;
     private JTextField textField1;
     private JButton buscarButton;
     private JCheckBox soloMatriculadosCheckBox;
@@ -19,7 +20,8 @@ public class VAlumnos extends JFrame{
     public VAlumnos() {
         setTitle("Alumnos");
     }
-    public JPanel getPanelPrincipal() {
+
+    public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
 

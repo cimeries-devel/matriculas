@@ -1,6 +1,7 @@
 package com.devel.views.tabs;
 
 import com.devel.controllers.Documentos;
+import com.devel.custom.TabPanel;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
@@ -28,7 +29,7 @@ import java.util.Date;
 import java.util.Vector;
 
 public class VMatricula extends JFrame{
-    private JPanel panelPrincipal;
+    private TabPanel panelPrincipal;
     private JTable tablaFamiliares;
     private JTable tablaMatriculas;
     private JTextField txtEdad;
@@ -91,7 +92,7 @@ public class VMatricula extends JFrame{
             }
         });
     }
-    public JPanel getPanelPrincipal() {
+    public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
     private void cargarNuevoEstudiante(){

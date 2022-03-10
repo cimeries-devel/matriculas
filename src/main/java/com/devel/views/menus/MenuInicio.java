@@ -1,13 +1,19 @@
 package com.devel.views.menus;
 
 import com.devel.custom.DnDTabbedPane;
+import com.devel.custom.TabPanel;
+import com.devel.utilities.Propiedades;
+import com.devel.utilities.Utilities;
 import com.devel.views.tabs.VAlumnos;
 import com.devel.views.tabs.VMatricula;
 import com.devel.views.tabs.VWelcome;
+import jdk.jshell.execution.Util;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
 
 public class MenuInicio {
     private JButton inicioButton;
@@ -18,6 +24,8 @@ public class MenuInicio {
     private VWelcome welcome;
     private VAlumnos alumnos;
     private VMatricula matricula;
+    String titulo="tab 1";
+    int contador=1;
     public MenuInicio(final DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
         welcome=new VWelcome();
@@ -28,6 +36,9 @@ public class MenuInicio {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarBienvenida();
+                alumnosButton.setBackground(new JButton().getBackground());
+                matriculaButton.setBackground(new JButton().getBackground());
+                Utilities.verificarTema(inicioButton);
             }
         });
         alumnosButton.addMouseListener(new MouseAdapter() {
@@ -35,6 +46,9 @@ public class MenuInicio {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarAlumnos();
+                inicioButton.setBackground(new JButton().getBackground());
+                matriculaButton.setBackground(new JButton().getBackground());
+                Utilities.verificarTema(alumnosButton);
             }
         });
         matriculaButton.addMouseListener(new MouseAdapter() {
@@ -42,6 +56,9 @@ public class MenuInicio {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarMatricula();
+                alumnosButton.setBackground(new JButton().getBackground());
+                inicioButton.setBackground(new JButton().getBackground());
+                Utilities.verificarTema(matriculaButton);
             }
         });
     }
@@ -55,9 +72,11 @@ public class MenuInicio {
         }
         if (tabContenido.indexOfComponent(welcome.getPanelPrincipal()) == -1) {
             welcome = new VWelcome();
+            welcome.getPanelPrincipal().setOption(inicioButton);
             tabContenido.add(welcome.getTitle(), welcome.getPanelPrincipal());
         }
         tabContenido.setSelectedComponent(welcome.getPanelPrincipal());
+        inicioButton.requestFocus();
     }
     public void cargarAlumnos() {
         if (alumnos == null) {
@@ -65,7 +84,9 @@ public class MenuInicio {
         }
         if (tabContenido.indexOfComponent(alumnos.getPanelPrincipal()) == -1) {
             alumnos = new VAlumnos();
+            alumnos.getPanelPrincipal().setOption(alumnosButton);
             tabContenido.add(alumnos.getTitle(), alumnos.getPanelPrincipal());
+
         }
         tabContenido.setSelectedComponent(alumnos.getPanelPrincipal());
     }
@@ -75,7 +96,9 @@ public class MenuInicio {
         }
         if (tabContenido.indexOfComponent(matricula.getPanelPrincipal()) == -1) {
             matricula = new VMatricula();
+            matricula.getPanelPrincipal().setOption(matriculaButton);
             tabContenido.add(matricula.getTitle(), matricula.getPanelPrincipal());
+
         }
         tabContenido.setSelectedComponent(matricula.getPanelPrincipal());
     }

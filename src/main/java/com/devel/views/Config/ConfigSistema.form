@@ -47,7 +47,7 @@
                       <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Email:"/>
                     </properties>
@@ -72,7 +72,7 @@
                       <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Dirección:"/>
                     </properties>
@@ -93,7 +93,7 @@
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Nombre Colegio:"/>
                     </properties>
@@ -125,7 +125,7 @@
                       <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Ruc:"/>
                     </properties>
@@ -146,7 +146,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Token Api Perú:"/>
                     </properties>
@@ -167,7 +167,7 @@
                       <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Sitio Web:"/>
                     </properties>
@@ -188,7 +188,7 @@
                       <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Teléfono:"/>
                     </properties>
@@ -286,7 +286,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Matrícula :"/>
                     </properties>
@@ -370,7 +370,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <font size="14" style="1"/>
+                      <font size="14" style="0"/>
                       <foreground color="-16777216"/>
                       <text value="Tema:"/>
                     </properties>

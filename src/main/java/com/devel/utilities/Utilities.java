@@ -56,6 +56,13 @@ public class Utilities {
         }
         Utilities.sendNotification("Error","Revise los campos: "+errores, TrayIcon.MessageType.WARNING);
     }
+    public static void verificarTema(JButton boton){
+        if(new Propiedades().getTema().equals("oscuro")){
+            boton.setBackground(new Color(45, 47, 48,255));
+        }else{
+            boton.setBackground(new Color(189, 189, 189,255));
+        }
+    }
     public static void sendNotification(String title, String subtitle, TrayIcon.MessageType tipoMensaje) {
         if(isWindows(System.getProperty("os.name"))){
             if(primera){
