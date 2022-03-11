@@ -55,7 +55,7 @@ public class PlaceHolder extends JLabel implements FocusListener, DocumentListen
         component.add( this );
         checkForPrompt();
         if(new Propiedades().getTema().equals("oscuro")){
-            setForeground(new Color(164, 199, 246, 161));
+            setForeground(new Color(96, 113, 114, 255));
         }else{
             setForeground(new Color(47, 85, 151, 161));
         }
