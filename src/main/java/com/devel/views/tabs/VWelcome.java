@@ -1,9 +1,11 @@
 package com.devel.views.tabs;
 
+import com.devel.ForResources;
 import com.devel.custom.FondoPanel;
 import com.devel.custom.TabPanel;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class VWelcome extends JFrame{
     private JPanel panelContenido;
@@ -11,6 +13,7 @@ public class VWelcome extends JFrame{
 
     public VWelcome() {
         setTitle("Inicio");
+        panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
     }
     public TabPanel getPanelPrincipal() {
         return panelPrincipal;

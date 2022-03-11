@@ -1,5 +1,6 @@
 package com.devel.views.tabs;
 
+import com.devel.ForResources;
 import com.devel.custom.TabPanel;
 import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
 import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
@@ -18,7 +19,7 @@ public class VAlumnos extends JFrame{
     private JTable tablaAlumnos;
     private AlumnosAbstractModel matriculasAbstractModel;
     public VAlumnos() {
-        setTitle("Alumnos");
+        iniciarComponentes();
     }
 
     public TabPanel getPanelPrincipal() {
@@ -26,7 +27,8 @@ public class VAlumnos extends JFrame{
     }
 
     private void iniciarComponentes(){
-
+        setTitle("Alumnos");
+        panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
     }
 
     private void cargarAlumnos(){

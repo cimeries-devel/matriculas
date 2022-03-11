@@ -73,7 +73,7 @@ public class ConfigSistema extends JDialog {
         pack();
         setLocationRelativeTo(null);
         cargarCursores();
-        cargarTema();
+        cargarConfiguracion();
     }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -81,11 +81,16 @@ public class ConfigSistema extends JDialog {
         btnAvanzar.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
     }
-    private void cargarTema(){
-        if(propiedades.getTema().equals("oscuro")){
-            temaOscuro.setSelected(true);
-        }else{
-            temaClaro.setSelected(true);
+    private void cargarConfiguracion(){
+        switch (propiedades.getTema()){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                temaOscuro.setSelected(true);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                temaClaro.setSelected(true);
+                break;
         }
     }
     private void createUIComponents() {

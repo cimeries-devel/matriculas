@@ -23,7 +23,7 @@ public class MenuReportes {
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(alumnosButton);
+                Utilities.buttonSelectedOrEntered(alumnosButton);
             }
         });
         padresButton.addMouseListener(new MouseAdapter() {
@@ -33,7 +33,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(padresButton);
+                Utilities.buttonSelectedOrEntered(padresButton);
             }
         });
         matriculasButton.addMouseListener(new MouseAdapter() {
@@ -43,7 +43,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(matriculasButton);
+                Utilities.buttonSelectedOrEntered(matriculasButton);
             }
         });
         alumnosPersonalizadoButton.addMouseListener(new MouseAdapter() {
@@ -53,7 +53,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(alumnosPersonalizadoButton);
+                Utilities.buttonSelectedOrEntered(alumnosPersonalizadoButton);
             }
         });
     }

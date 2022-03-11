@@ -1,5 +1,6 @@
 package com.devel.views.menus;
 
+import com.devel.ForResources;
 import com.devel.custom.DnDTabbedPane;
 import com.devel.custom.TabPanel;
 import com.devel.utilities.Propiedades;
@@ -24,8 +25,7 @@ public class MenuInicio {
     private VWelcome welcome;
     private VAlumnos alumnos;
     private VMatricula matricula;
-    String titulo="tab 1";
-    int contador=1;
+
     public MenuInicio(final DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
         welcome=new VWelcome();
@@ -38,7 +38,7 @@ public class MenuInicio {
                 cargarBienvenida();
                 alumnosButton.setBackground(new JButton().getBackground());
                 matriculaButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(inicioButton);
+                Utilities.buttonSelectedOrEntered(inicioButton);
             }
         });
         alumnosButton.addMouseListener(new MouseAdapter() {
@@ -48,7 +48,7 @@ public class MenuInicio {
                 cargarAlumnos();
                 inicioButton.setBackground(new JButton().getBackground());
                 matriculaButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(alumnosButton);
+                Utilities.buttonSelectedOrEntered(alumnosButton);
             }
         });
         matriculaButton.addMouseListener(new MouseAdapter() {
@@ -58,7 +58,7 @@ public class MenuInicio {
                 cargarMatricula();
                 alumnosButton.setBackground(new JButton().getBackground());
                 inicioButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(matriculaButton);
+                Utilities.buttonSelectedOrEntered(matriculaButton);
             }
         });
     }
@@ -73,7 +73,7 @@ public class MenuInicio {
         if (tabContenido.indexOfComponent(welcome.getPanelPrincipal()) == -1) {
             welcome = new VWelcome();
             welcome.getPanelPrincipal().setOption(inicioButton);
-            tabContenido.add(welcome.getTitle(), welcome.getPanelPrincipal());
+            tabContenido.addTab(welcome.getTitle(), welcome.getPanelPrincipal().getIcon(),welcome.getPanelPrincipal());
         }
         tabContenido.setSelectedComponent(welcome.getPanelPrincipal());
         inicioButton.requestFocus();
@@ -85,7 +85,7 @@ public class MenuInicio {
         if (tabContenido.indexOfComponent(alumnos.getPanelPrincipal()) == -1) {
             alumnos = new VAlumnos();
             alumnos.getPanelPrincipal().setOption(alumnosButton);
-            tabContenido.add(alumnos.getTitle(), alumnos.getPanelPrincipal());
+            tabContenido.addTab(alumnos.getTitle(), alumnos.getPanelPrincipal().getIcon(),alumnos.getPanelPrincipal());
 
         }
         tabContenido.setSelectedComponent(alumnos.getPanelPrincipal());
@@ -97,7 +97,7 @@ public class MenuInicio {
         if (tabContenido.indexOfComponent(matricula.getPanelPrincipal()) == -1) {
             matricula = new VMatricula();
             matricula.getPanelPrincipal().setOption(matriculaButton);
-            tabContenido.add(matricula.getTitle(), matricula.getPanelPrincipal());
+            tabContenido.addTab(matricula.getTitle(),matricula.getPanelPrincipal().getIcon(), matricula.getPanelPrincipal());
 
         }
         tabContenido.setSelectedComponent(matricula.getPanelPrincipal());

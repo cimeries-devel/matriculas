@@ -1,5 +1,6 @@
 package com.devel.views.tabs;
 
+import com.devel.ForResources;
 import com.devel.controllers.Documentos;
 import com.devel.custom.TabPanel;
 import com.devel.models.*;
@@ -170,6 +171,7 @@ public class VMatricula extends JFrame{
         definirColumnas();
         cargarMatriculas();
         cargarComboBox();
+        panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
     }
     private void cargarComboBox(){
         cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));

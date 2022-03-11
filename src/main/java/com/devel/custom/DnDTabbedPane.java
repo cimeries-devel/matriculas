@@ -34,10 +34,9 @@ public class DnDTabbedPane extends JTabbedPane {
     private Double minY=0.0;
 
     @Override
-    public Component add(String title, Component component) {
-        Component component1=super.add(title, component);
-        setTabComponentAt(indexOfTab(title), new Cross(this, title));
-        return component1;
+    public void addTab(String title, Icon icon,Component component) {
+        super.addTab(title, icon,component);
+        setTabComponentAt(indexOfTab(title), new Cross(this, title,icon));
     }
 
 
@@ -55,7 +54,7 @@ public class DnDTabbedPane extends JTabbedPane {
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
                     tabPanel.getOption().requestFocus();
-                    Utilities.verificarTema(tabPanel.getOption());
+                    Utilities.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }
         });
@@ -80,7 +79,7 @@ public class DnDTabbedPane extends JTabbedPane {
                     String titulo= getTitleAt(getSelectedIndex());
                     removeAll();
                     add(tab,titulo);
-                    setTabComponentAt(indexOfTab(titulo), new Cross(jtabedpane,titulo));
+                    setTabComponentAt(indexOfTab(titulo), new Cross(jtabedpane,titulo,tab.getIcon()));
                 }
             }
         });
@@ -481,53 +480,45 @@ public class DnDTabbedPane extends JTabbedPane {
         int sourceIndex = a_data.getTabIndex();
         if (sourceIndex < 0) {
             return;
-        } // if
+        }
 
         Component cmp = source.getComponentAt(sourceIndex);
         String str = source.getTitleAt(sourceIndex);
+        Icon icon=source.getIconAt(sourceIndex);
         if (this != source) {
             source.remove(sourceIndex);
-
             if (a_targetIndex == getTabCount()) {
                 addTab(str, cmp);
             } else {
                 if (a_targetIndex < 0) {
                     a_targetIndex = 0;
-                } // if
-
-                insertTab(str, null, cmp, null, a_targetIndex);
-                setTabComponentAt(sourceIndex, new Cross(this, str));
-
-            } // if
+                }
+                insertTab(str, icon, cmp, null, a_targetIndex);
+                setTabComponentAt(sourceIndex, new Cross(this, str,icon));
+            }
 
             setSelectedComponent(cmp);
-            // System.out.println("press="+sourceIndex+" next="+a_targetIndex);
             return;
-        } // if
+        }
 
         if (a_targetIndex < 0 || sourceIndex == a_targetIndex) {
-            //System.out.println("press="+prev+" next="+next);
             return;
-        } // if
-
+        }
         if (a_targetIndex == getTabCount()) {
-            //System.out.println("last: press="+prev+" next="+next);
             source.remove(sourceIndex);
-            addTab(str, cmp);
+            addTab(str, icon,cmp);
             setSelectedIndex(getTabCount() - 1);
-            setTabComponentAt(getTabCount() - 1, new Cross(this, str));
+//            setTabComponentAt(getTabCount() - 1, new Cross(this, str,icon));
         } else if (sourceIndex > a_targetIndex) {
-            //System.out.println("   >: press="+prev+" next="+next);
             source.remove(sourceIndex);
-            insertTab(str, null, cmp, null, a_targetIndex);
+            insertTab(str, icon, cmp, null, a_targetIndex);
             setSelectedIndex(a_targetIndex);
-            setTabComponentAt(a_targetIndex, new Cross(this, str));
+            setTabComponentAt(a_targetIndex, new Cross(this, str,icon));
         } else {
-            //System.out.println("   <: press="+prev+" next="+next);
             source.remove(sourceIndex);
-            insertTab(str, null, cmp, null, a_targetIndex - 1);
+            insertTab(str, icon, cmp, null, a_targetIndex - 1);
             setSelectedIndex(a_targetIndex - 1);
-            setTabComponentAt(a_targetIndex - 1, new Cross(this, str));
+            setTabComponentAt(a_targetIndex - 1, new Cross(this, str,icon));
         }
     }
 
@@ -626,7 +617,7 @@ public class DnDTabbedPane extends JTabbedPane {
             Graphics2D g2 = (Graphics2D) g;
             g2.setPaint(m_lineColor);
             g2.fill(m_lineRect);
-        } // if
+        }
     }
 
     public interface TabAcceptor {
@@ -640,7 +631,7 @@ class Cross extends JPanel {
     private JTabbedPane jTabbedPane;
     private String title;
 
-    public Cross(final JTabbedPane jTabbedPane, String title) {
+    public Cross(final JTabbedPane jTabbedPane, String title,Icon icon) {
         this.jTabbedPane = jTabbedPane;
         this.title = title;
         setOpaque(false);
@@ -650,6 +641,8 @@ class Cross extends JPanel {
         gbc.gridy = 0;
         gbc.weightx = 1;
         L = new JLabel(title + " ");
+        L.setIcon(icon);
+        L.setIconTextGap(15);
         Dimension d = new Dimension(22, 22);
         B = new JLabel();
         B.setPreferredSize(d);
@@ -692,23 +685,12 @@ class Cross extends JPanel {
         gbc.gridx++;
         gbc.weightx = 0;
         add(B, gbc);
-//        addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                super.mouseClicked(e);
-//                if(e.getButton()==3){
-//                    pop_up.setVisible(true);
-//                }else{
-//                    jTabbedPane.setSelectedIndex(jTabbedPane.indexOfTab(title));
-//                }
-//            }
-//        });
     }
 
     private ImageIcon getImage(String icono) {
         Image IMG = null;
         try {
-            IMG = new ImageIcon(ForResources.class.getResource(String.format("Icons/x32/" + icono))).getImage();
+            IMG = new ImageIcon(ForResources.class.getResource(String.format("Icons/x24/" + icono))).getImage();
             IMG = IMG.getScaledInstance(size, size, Image.SCALE_SMOOTH);
         } catch (Exception e) {
             e.printStackTrace();

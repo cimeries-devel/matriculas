@@ -20,6 +20,7 @@ public class Principal
         VLogin vLogin=new VLogin();
         vLogin.setVisible(true);
 
+
 //        Celular celular = new Celular();
 //        CelularValidator validator = new CelularValidator();
 //

@@ -5,6 +5,7 @@ import com.devel.controllers.*;
 import com.devel.custom.DnDTabbedPane;
 import com.devel.custom.TabPanel;
 import com.devel.models.*;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilities;
 import com.devel.views.Config.ConfigSistema;
@@ -39,6 +40,7 @@ public class VPrincipal extends JFrame{
     private JPanel panelMenus;
     private JPanel panelControles;
     private VWelcome welcome;
+    private JButton jButton;
     private Propiedades propiedades;
     private MenuInicio inicioOpciones=new MenuInicio(tabContenido);
     private MenuReportes menuReportes=new MenuReportes(tabContenido);
@@ -60,7 +62,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 gestionarButton.setBackground(new JButton().getBackground());
                 reportesButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(inicioButton);
+                Utilities.buttonSelectedOrEntered(inicioButton);
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/inicio.png")));
@@ -74,7 +76,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 inicioButton.setBackground(new JButton().getBackground());
                 gestionarButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(reportesButton);
+                Utilities.buttonSelectedOrEntered(reportesButton);
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportes.png")));
@@ -88,7 +90,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 inicioButton.setBackground(new JButton().getBackground());
                 reportesButton.setBackground(new JButton().getBackground());
-                Utilities.verificarTema(gestionarButton);
+                Utilities.buttonSelectedOrEntered(gestionarButton);
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionar.png")));
@@ -101,7 +103,7 @@ public class VPrincipal extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                cargarConfiguraciones();
+                cargarVConfiguraciones();
             }
         });
 
@@ -123,21 +125,32 @@ public class VPrincipal extends JFrame{
         splitPane.setRightComponent(inicioOpciones.traerInicioOpciones());
         inicioOpciones.cargarBienvenida();
         contentPane.updateUI();
+        añadirButtonOnJTabedpane();
+        cargarConfiguracion();
         pack();
         setLocationRelativeTo(null);
-        añadirButtonOnJTabedpane();
-        Utilities.verificarTema(inicioButton);
-        ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().requestFocus();
-        Utilities.verificarTema(((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption());
+        setExtendedState(MAXIMIZED_BOTH);
     }
     private void añadirButtonOnJTabedpane(){
         tabContenido.setAlignmentX(1.0f);
         tabContenido.setAlignmentY(0.0f);
         panelDeTabPane.setLayout( new OverlayLayout(panelDeTabPane) );
-        JButton jButton=new JButton(new ImageIcon(ForResources.class.getResource("Icons/x16/menu.png")));
+        jButton=new JButton();
         jButton.setMargin(new Insets(6,3,6,3));
         jButton.setAlignmentX(1.0f);
         jButton.setAlignmentY(0.0f);
+        jButton.setFocusPainted(false);
+
+        jButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                Utilities.buttonSelectedOrEntered(jButton);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                Utilities.buttonExited(jButton);
+            }
+        });
         panelDeTabPane.add(jButton);
         panelDeTabPane.add(tabContenido);
         JPopupMenu pop_up = new JPopupMenu();
@@ -182,7 +195,22 @@ public class VPrincipal extends JFrame{
             }
         });
     }
-    private void cargarConfiguraciones(){
+    private void cargarConfiguracion(){
+        switch (propiedades.getTema()){
+            case "claro":
+                jButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/menu1.png")));
+                inicioButton.setBackground(Colors.buttonSelected1);
+                ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().setBackground(Colors.buttonSelected1);
+                break;
+            case "oscuro":
+                jButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/menu2.png")));
+                inicioButton.setBackground(Colors.buttonSelected2);
+                ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().setBackground(Colors.buttonSelected2);
+                break;
+        }
+        ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().requestFocus();
+    }
+    private void cargarVConfiguraciones(){
         ConfigSistema configSistema=new ConfigSistema(this,new Propiedades());
         configSistema.setVisible(true);
     }

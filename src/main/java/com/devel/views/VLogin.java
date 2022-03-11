@@ -60,11 +60,14 @@ public class VLogin extends JFrame{
         ingresarButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                VPrincipal vPrincipal=new VPrincipal(propiedades);
-                vPrincipal.setVisible(true);
-                dispose();
+                cargarVPrincipal();
             }
         });
+    }
+    public void cargarVPrincipal(){
+        VPrincipal vPrincipal=new VPrincipal(propiedades);
+        vPrincipal.setVisible(true);
+        dispose();
     }
     private void iniciarComponentes(){
         propiedades=new Propiedades();
@@ -76,8 +79,8 @@ public class VLogin extends JFrame{
         pack();
         setLocationRelativeTo(null);
         cargarCursores();
+        checkBox1.setHorizontalAlignment(SwingConstants.RIGHT);
         psfContraseña.add(checkBox1,1);
-        checkBox1.setBorder(BorderFactory.createEmptyBorder(5, 142, 0, 5));
         checkBox1.setVisible(false);
     }
     private void cargarCursores(){
@@ -85,7 +88,7 @@ public class VLogin extends JFrame{
         checkBox1.setOpaque(false);
         checkBox1.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/ocultarContraseña.png")));
         checkBox1.setSelectedIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/mostrarContraseña.png")));
-        checkBox1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//        checkBox1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ingresarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         checkBox1.setFocusable(false);
         recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
