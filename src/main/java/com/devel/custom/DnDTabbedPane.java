@@ -1,6 +1,7 @@
 package com.devel.custom;
 
 import com.devel.ForResources;
+import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilities;
 import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
 
@@ -50,7 +51,6 @@ public class DnDTabbedPane extends JTabbedPane {
                         ((TabPanel) component).getOption().setBackground(new JButton().getBackground());
                     }
                 }
-
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
                     tabPanel.getOption().requestFocus();

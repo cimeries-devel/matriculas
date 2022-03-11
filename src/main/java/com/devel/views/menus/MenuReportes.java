@@ -1,6 +1,7 @@
 package com.devel.views.menus;
 
 import com.devel.custom.DnDTabbedPane;
+import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilities;
 
 import javax.swing.*;
@@ -14,7 +15,9 @@ public class MenuReportes {
     private JButton matriculasButton;
     private JButton alumnosPersonalizadoButton;
     private DnDTabbedPane tabContenido;
+    private Propiedades propiedades;
     public MenuReportes(DnDTabbedPane tabContenido){
+        this.propiedades=propiedades;
         this.tabContenido=tabContenido;
         alumnosButton.addMouseListener(new MouseAdapter() {
             @Override

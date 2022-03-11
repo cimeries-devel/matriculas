@@ -25,8 +25,9 @@ public class MenuInicio {
     private VWelcome welcome;
     private VAlumnos alumnos;
     private VMatricula matricula;
-
+    private Propiedades propiedades;
     public MenuInicio(final DnDTabbedPane tabContenido){
+        this.propiedades=propiedades;
         this.tabContenido=tabContenido;
         welcome=new VWelcome();
         alumnos=new VAlumnos();

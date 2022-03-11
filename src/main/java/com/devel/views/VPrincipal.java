@@ -214,6 +214,8 @@ public class VPrincipal extends JFrame{
         ConfigSistema configSistema=new ConfigSistema(this,new Propiedades());
         configSistema.setVisible(true);
     }
-
-
+    private void createUIComponents() {
+        // TODO: place custom component creation code here
+        tabContenido=new DnDTabbedPane();
+    }
 }

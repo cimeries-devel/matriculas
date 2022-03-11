@@ -44,7 +44,7 @@ public class PlaceHolder extends JLabel implements FocusListener, DocumentListen
 
         setText( text );
         setFont( component.getFont() );
-        setForeground( component.getForeground() );
+        setForeground( component.getForeground());
         setBorder( new EmptyBorder(component.getInsets()) );
         setHorizontalAlignment(JLabel.LEADING);
 
@@ -54,7 +54,11 @@ public class PlaceHolder extends JLabel implements FocusListener, DocumentListen
         component.setLayout( new BorderLayout() );
         component.add( this );
         checkForPrompt();
-        setForeground(new Color(47, 85, 151, 161));
+        if(new Propiedades().getTema().equals("oscuro")){
+            setForeground(new Color(164, 199, 246, 161));
+        }else{
+            setForeground(new Color(47, 85, 151, 161));
+        }
     }
 
     /**

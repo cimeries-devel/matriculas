@@ -48,26 +48,13 @@
               <horizontalAlignment value="2"/>
               <horizontalTextPosition value="4"/>
               <icon value="com/devel/Icons/x32/switch.png"/>
-              <iconTextGap value="15"/>
+              <iconTextGap value="5"/>
               <inheritsPopupMenu value="false"/>
               <margin top="2" left="2" bottom="2" right="2"/>
               <opaque value="false"/>
               <selectedIcon value="com/devel/Icons/x32/switchoff.png"/>
               <text value="Recordar usuario"/>
               <verticalAlignment value="0"/>
-            </properties>
-          </component>
-          <component id="a408c" class="javax.swing.JTextField" binding="txtUsuario">
-            <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="180" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <caretColor color="-16777216"/>
-              <font size="17"/>
-              <foreground color="-16777216"/>
-              <opaque value="false"/>
             </properties>
           </component>
           <component id="9b80a" class="javax.swing.JPasswordField" binding="psfContraseña">
@@ -78,8 +65,20 @@
             </constraints>
             <properties>
               <font size="17"/>
-              <margin top="2" left="5" bottom="2" right="5"/>
+              <margin top="2" left="6" bottom="2" right="6"/>
+              <opaque value="false"/>
               <text value=""/>
+            </properties>
+          </component>
+          <component id="faf91" class="javax.swing.JTextField" binding="txtUsuario">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <font size="17"/>
+              <margin top="2" left="6" bottom="2" right="6"/>
             </properties>
           </component>
         </children>
