@@ -18,6 +18,7 @@ public class Relaciones extends Hibernate {
         Relacion relacion = session.find(Relacion.class, id, LockModeType.NONE);
         return relacion;
     }
+
     public static Vector<Relacion> getRelaciones(Persona persona){
         criteria= builder.createQuery(Relacion.class);
         root=criteria.from(Relacion.class);
@@ -25,4 +26,6 @@ public class Relaciones extends Hibernate {
         todas=new Vector<>(session.createQuery(criteria).getResultList());
         return todas;
     }
+
+
 }

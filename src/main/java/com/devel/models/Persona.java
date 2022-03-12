@@ -81,7 +81,7 @@ public class Persona extends Hibernate {
     private List<Registro> registros = new ArrayList<>();
 
     @OneToMany
-    private List<Celular> celulars = new ArrayList<>();
+    private List<Celular> celulares = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -91,25 +91,16 @@ public class Persona extends Hibernate {
     )
     private List<Seguro> seguros = new ArrayList<>();
 
-    public List<Celular> getPhones() {
-        return celulars;
-    }
-
-    public void setPhones(List<Celular> celulars) {
-        this.celulars = celulars;
-    }
-
     public List<Seguro> getSecures() {
         return seguros;
     }
 
-
-    public List<Celular> getCelulars() {
-        return celulars;
+    public List<Celular> getCelulares() {
+        return celulares;
     }
 
-    public void setCelulars(List<Celular> celulars) {
-        this.celulars = celulars;
+    public void setCelulares(List<Celular> celulars) {
+        this.celulares = celulares;
     }
 
     public List<Seguro> getSeguros() {
@@ -248,6 +239,14 @@ public class Persona extends Hibernate {
         }
         return null;
     }
+    public Relacion getRelacion(Persona persona1){
+        for(Relacion relacion:getRelaciones()){
+            if(relacion.getPersona1()==persona1){
+                return relacion;
+            }
+        }
+        return null;
+    }
     public String getRelacionDeApoderado(){
         for(Relacion relacion:getRelaciones()){
             if(relacion.isApoderado()){
@@ -255,6 +254,15 @@ public class Persona extends Hibernate {
             }
         }
         return null;
+    }
+
+    public void setRelacionDeApoderado(String Tiporelacion){
+        for(Relacion relacion:getRelaciones()){
+            if(relacion.isApoderado()){
+                relacion.setTipoRelacion(relacion.getTipoRelacion());
+                relacion.guardar();
+            }
+        }
     }
 
 

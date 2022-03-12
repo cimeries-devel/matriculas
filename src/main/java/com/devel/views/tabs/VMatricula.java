@@ -117,7 +117,7 @@ public class VMatricula extends JFrame{
                     txtNombres.setText(persona.getNombres()+" "+persona.getApellidos());
                     txtCodigo.setText(persona.getCodigo());
                     cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-                    cargarTablaCelulares(new Vector<>(persona.getCelulars()));
+                    cargarTablaCelulares(new Vector<>(persona.getCelulares()));
                     definirColumnas();
                     verificarMatricula();
                     nuevoFamiliarButton.addMouseListener(new MouseAdapter() {
@@ -167,7 +167,7 @@ public class VMatricula extends JFrame{
         persona=new Persona();
         setTitle("Matrícula");
         cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
+        cargarTablaCelulares(new Vector<>(persona.getCelulares()));
         definirColumnas();
         cargarMatriculas();
         cargarComboBox();
@@ -190,15 +190,16 @@ public class VMatricula extends JFrame{
     private void cargarTablaFamiliares(Vector<Relacion> relaciones){
         familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(familiaresAbstractModel);
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"editar"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.headerNegrita(tablaFamiliares);
     }
     private void cargarTablaCelulares(Vector<Celular> celulares){
-        modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulars()));
+        modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulares()));
         tablaCelulares.setModel(modelCelulares);
-        tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(celulares));
+        tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(tablaCelulares));
         TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
         tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.headerNegrita(tablaCelulares);
@@ -206,7 +207,7 @@ public class VMatricula extends JFrame{
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
         dañadirCelular.setVisible(true);
-        cargarTablaCelulares(new Vector<>(persona.getCelulars()));
+        cargarTablaCelulares(new Vector<>(persona.getCelulares()));
         definirColumnas();
     }
     private void definirColumnas(){

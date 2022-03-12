@@ -9,8 +9,8 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class FamiliaresAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Dirección","Apoderado"};
-    public Class[] m_colTypes = {String.class,String.class,String.class,String.class, JButton.class};
+    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Dirección","Apoderado",""};
+    public Class[] m_colTypes = {String.class,String.class,String.class,String.class, JButton.class, JButton.class};
     private Vector<Relacion> vector;
     public FamiliaresAbstractModel(Vector<Relacion> vector){
         this.vector=vector;
@@ -54,12 +54,14 @@ public class FamiliaresAbstractModel extends AbstractTableModel {
                 return relacion.isVivenJuntos()?"si":"no";
             case 3:
                 return relacion.getPersona1().getDireccion();
-            default:
+            case 4:
                 if(relacion.isApoderado()){
                     return new JButtonAction("x16/default.png");
                 }else {
                     return new JButtonAction("x16/Nodefault.png");
                 }
+            default:
+                return new JButtonAction("x16/editar.png");
         }
     }
     public Relacion traer(int row){

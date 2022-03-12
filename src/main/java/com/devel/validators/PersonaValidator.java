@@ -3,8 +3,11 @@ package com.devel.validators;
 import com.devel.hibernate.ProgramaValidator;
 import com.devel.models.Colegio;
 import com.devel.models.Persona;
+import com.devel.models.Seccion;
+import com.devel.utilities.Utilities;
 import jakarta.validation.ConstraintViolation;
 
+import java.awt.*;
 import java.util.Set;
 
 public class PersonaValidator extends ProgramaValidator {
@@ -14,4 +17,15 @@ public class PersonaValidator extends ProgramaValidator {
         return violations.isEmpty() ? null : violations.iterator().next();
     }
 
+    public static Set<ConstraintViolation<Persona>> loadViolations(Persona persona) {
+        Set<ConstraintViolation<Persona>> violations = PROGRAMA_VALIDATOR.validate(persona);
+        return violations;
+    }
+
+    public static void mostrarErrores(Set<ConstraintViolation<Persona>> errors){
+        Object[] errores=errors.toArray();
+        ConstraintViolation<Persona> error1= (ConstraintViolation<Persona>) errores[0];
+        String error = "Verfique el campo: "+error1.getPropertyPath();
+        Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+    }
 }

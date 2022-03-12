@@ -3,57 +3,101 @@ package com.devel.views.dialogs;
 import com.devel.models.Celular;
 import com.devel.models.Persona;
 import com.devel.utilities.Utilities;
+import com.devel.validators.CelularValidator;
+import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Set;
 
 public class DAñadirCelular extends JDialog{
-    private JTextField txtCelular;
-    private JButton añadirButton;
-    private JButton hechoButton;
+    private JTextField txtNumero;
+    private JButton btnAñadir;
+    private JButton btnHecho;
     private JPanel panelPrincipal;
     private JTextField txtDescripcion;
     private Persona persona;
+    private Celular celular;
 
     public DAñadirCelular(Persona persona) {
         this.persona=persona;
         iniciarComponentes();
-        hechoButton.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                registrar();
             }
         });
-        añadirButton.addMouseListener(new MouseAdapter() {
+        btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                añadir();
+                cerrar();
+            }
+        });
+
+    }
+
+    public DAñadirCelular(Celular celular) {
+        this.celular=celular;
+        iniciarComponentes();
+        paraActualizar();
+        guardarCopia();
+        btnAñadir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                actualizar();
+            }
+        });
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                onCancel();
             }
         });
     }
-    private void añadir(){
-        if(txtDescripcion.getText().length()>0&&txtCelular.getText().length()>5){
-            Celular celular=new Celular();
-            celular.setDescipcion(txtDescripcion.getText().trim());
-            celular.setNumero(txtCelular.getText().trim());
+
+    private void registrar(){
+        String desripcion=txtDescripcion.getText().trim();
+        String numero= txtNumero.getText().trim();
+        celular.setDescipcion(desripcion);
+        celular.setNumero(numero);
+        CelularValidator validator = new CelularValidator();
+        Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
+        if(errors.isEmpty()){
+            celular.guardar();
             persona.getCelulars().add(celular);
-            if(persona.getId()!=null){
-                celular.guardar();
-            }
+            celular=new Celular();
+            Utilities.sendNotification("Éxito","Número de celular registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
-            Utilities.sendNotification("Éxito","Celular añadido", TrayIcon.MessageType.INFO);
-        }else{
-            Utilities.sendNotification("Error","Complete todos los campos", TrayIcon.MessageType.ERROR);
+        }else {
+            CelularValidator.mostrarErrores(errors);
         }
     }
-    private void limpiarControles(){
-        txtCelular.setText(null);
-        txtDescripcion.setText(null);
+
+    private void actualizar(){
+        String desripcion=txtDescripcion.getText().trim();
+        String numero= txtNumero.getText().trim();
+        celular.setDescipcion(desripcion);
+        celular.setNumero(numero);
+        CelularValidator validator = new CelularValidator();
+        Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
+        if(errors.isEmpty()){
+            celular.guardar();
+            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            dispose();
+        }else {
+            CelularValidator.mostrarErrores(errors);
+        }
     }
+
     private void iniciarComponentes(){
         setTitle("Añadir número de celular");
         setContentPane(panelPrincipal);
@@ -61,5 +105,38 @@ public class DAñadirCelular extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+    }
+
+    private void limpiarControles(){
+        txtNumero.setText(null);
+        txtDescripcion.setText(null);
+    }
+
+    private void paraActualizar(){
+        setTitle("Editar Celular");
+        btnAñadir.setText("Guardar");
+        btnHecho.setText("Cancelar");
+        guardarCopia();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                onCancel();
+            }
+        });
+    }
+
+    private void guardarCopia(){
+        txtNumero.setText(celular.getNumero());
+        txtDescripcion.setName(celular.getDescipcion());
+    }
+    private void onCancel(){
+        celular.setNumero(txtNumero.getName());
+        celular.setDescipcion(txtDescripcion.getName());
+        cerrar();
+    }
+    private void cerrar(){
+        dispose();
     }
 }

@@ -22,18 +22,35 @@ public class DAñadirSecciones extends JDialog{
     private Seccion seccion;
 
     public DAñadirSecciones(){
-        this(null);
-    }
-
-    public DAñadirSecciones(Seccion seccion1) {
-        crearoActualizar(seccion1);
         iniciarComponentes();
-
+        seccion=new Seccion();
         btnRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                registrar(seccion1);
+                registrar();
+            }
+        });
+
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                cerrar();
+            }
+        });
+    }
+
+    public DAñadirSecciones(Seccion seccion) {
+        this.seccion=seccion;
+        iniciarComponentes();
+        paraActualizar();
+        guardarCopia();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                actualizar();
             }
         });
 
@@ -46,37 +63,49 @@ public class DAñadirSecciones extends JDialog{
         });
     }
 
-    private void onCancel(){
-        seccion.setSeccion(txtSeccion.getName());
-        dispose();
+    private void iniciarComponentes(){
+        setContentPane(panelPrincipal);
+        pack();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setModal(true);
     }
 
-    private void registrar(Seccion seccion1){
+    private void registrar(){
         String desripcion=txtSeccion.getText().trim();
         seccion.setSeccion(desripcion);
         SeccionValidator validator = new SeccionValidator();
         Set<ConstraintViolation<Seccion>> errors = validator.loadViolations(seccion);
         if(errors.isEmpty()){
             seccion.guardar();
-            if(seccion1==null){
-                VPrincipal.secciones.add(seccion);
-                seccion=new Seccion();
-                Utilities.sendNotification("Éxito","Sección registrado", TrayIcon.MessageType.INFO);
-                txtSeccion.setText(null);
-            }else {
-                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                dispose();
-            }
+            VPrincipal.secciones.add(seccion);
+            seccion=new Seccion();
+            Utilities.sendNotification("Éxito","Sección registrada", TrayIcon.MessageType.INFO);
+            limpiarControles();
         }else {
-            Object[] errores=errors.toArray();
-            ConstraintViolation<Seccion> error1= (ConstraintViolation<Seccion>) errores[0];
-            String error = "Verfique el campo: "+error1.getPropertyPath();
-            Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+            SeccionValidator.mostrarErrores(errors);
         }
     }
 
-    private void iniciarComponentes(){
-        setContentPane(panelPrincipal);
+    private void actualizar(){
+        String desripcion=txtSeccion.getText().trim();
+        seccion.setSeccion(desripcion);
+        SeccionValidator validator = new SeccionValidator();
+        Set<ConstraintViolation<Seccion>> errors = validator.loadViolations(seccion);
+        if(errors.isEmpty()){
+            seccion.guardar();
+            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            dispose();
+        }else {
+            SeccionValidator.mostrarErrores(errors);
+        }
+    }
+
+    private void paraActualizar(){
+        setTitle("Editar Sección");
+        btnRegistrar.setText("Guardar");
+        btnHecho.setText("Cancelar");
+        guardarCopia();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -85,27 +114,22 @@ public class DAñadirSecciones extends JDialog{
                 onCancel();
             }
         });
-        pack();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setModal(true);
-    }
-
-    private void crearoActualizar(Seccion seccion1){
-        if(seccion1==null){
-            setTitle("Registrar Sección");
-            seccion=new Seccion();
-        }else{
-            seccion=seccion1;
-            setTitle("Editar Sección");
-            btnRegistrar.setText("Guardar");
-            btnHecho.setText("Cancelar");
-            guardarCopia();
-        }
     }
 
     private void guardarCopia(){
         txtSeccion.setText(seccion.getSeccion());
         txtSeccion.setName(seccion.getSeccion());
+    }
+    private void onCancel(){
+        seccion.setSeccion(txtSeccion.getName());
+        cerrar();
+    }
+
+    private void cerrar(){
+        dispose();
+    }
+
+    private void limpiarControles(){
+        txtSeccion.setText(null);
     }
 }

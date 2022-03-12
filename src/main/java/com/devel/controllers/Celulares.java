@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class Phones extends Hibernate {
+public class Celulares extends Hibernate {
     private static Root<Celular> root;
     private static CriteriaQuery<Celular> criteria;
     private static Vector<Celular> todos;

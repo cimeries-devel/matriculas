@@ -2,8 +2,11 @@ package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
 import com.devel.models.Celular;
+import com.devel.models.Seccion;
+import com.devel.utilities.Utilities;
 import jakarta.validation.ConstraintViolation;
 
+import java.awt.*;
 import java.util.Set;
 
 public class CelularValidator extends ProgramaValidator {
@@ -28,5 +31,12 @@ public class CelularValidator extends ProgramaValidator {
 
     public ConstraintViolation<Celular> isValidNumber(Celular celular) {
         return isValidProperty(celular, NUMBER);
+    }
+
+    public static void mostrarErrores(Set<ConstraintViolation<Celular>> errors){
+        Object[] errores=errors.toArray();
+        ConstraintViolation<Celular> error1= (ConstraintViolation<Celular>) errores[0];
+        String error = "Verfique el campo: "+error1.getPropertyPath();
+        Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }
