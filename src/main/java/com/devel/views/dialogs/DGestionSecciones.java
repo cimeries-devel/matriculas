@@ -47,7 +47,7 @@ public class DGestionSecciones extends JDialog{
     }
 
     private void cargarNuevaSeccion(){
-        DAñadirSecciones dAñadirSecciones=new DAñadirSecciones(null);
+        DAñadirSecciones dAñadirSecciones=new DAñadirSecciones();
         dAñadirSecciones.setVisible(true);
         tablaSecciones.updateUI();
         Utilities.headerNegrita(tablaSecciones);

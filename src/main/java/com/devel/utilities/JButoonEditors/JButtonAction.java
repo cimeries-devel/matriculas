@@ -27,7 +27,7 @@ public class JButtonAction extends JButton {
         initialize();
     }
     private void initialize() {
-        setOpaque(true);
+        setOpaque(false);
         setBorderPainted(false);
         setFocusable(false);
         addMouseListener(new MouseAdapter() {

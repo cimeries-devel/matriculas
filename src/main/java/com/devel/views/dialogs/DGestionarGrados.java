@@ -64,9 +64,6 @@ public class DGestionarGrados extends JDialog{
         TableCellRenderer renderer1 = tablaGrados.getDefaultRenderer(JButton.class);
         tablaGrados.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilities.definirTamaño(tablaGrados.getColumn(""),30);
-//        Utilities.alinearCentro(tablaGrados.getColumn("Grado"));
-//        Utilities.alinearCentro(tablaGrados.getColumn("Id"));
-//        Utilities.alinearCentro(tablaGrados.getColumn("Nivel"));
         Utilities.definirTamaño(tablaGrados.getColumn("Id"),40);
         Utilities.headerNegrita(tablaGrados);
         Utilities.cellsRendered(tablaGrados);

@@ -30,7 +30,8 @@ public class VLogin extends JFrame{
     private JLabel label=new JLabel("");
     public static PlaceHolder placeholder;
     public Propiedades propiedades;
-    public VLogin(){
+    public VLogin(Propiedades propiedades){
+        this.propiedades=propiedades;
         iniciarComponentes();
         label.addMouseListener(new MouseAdapter() {
             @Override
@@ -76,7 +77,6 @@ public class VLogin extends JFrame{
         dispose();
     }
     private void iniciarComponentes()  {
-        propiedades=new Propiedades();
         setDefaultCloseOperation(3);
         setContentPane(panelLogin);
         setTitle("Login");
@@ -88,7 +88,7 @@ public class VLogin extends JFrame{
         cargarCursores();
         cargarConfiguracion();
     }
-    private void cargarMostrarContraseña(){
+    private void cargarMostrarContraseña() {
         JPanel panel=new JPanel();
         JLabel label1=new JLabel("                                              ");
         label1.setOpaque(false);
@@ -114,10 +114,12 @@ public class VLogin extends JFrame{
             case "claro":
                 txtUsuario.setForeground(new Color(0x000000));
                 psfContraseña.setForeground(new Color(0x000000));
+                recordarUsuarioCheckBox.setForeground(new Color(0x000000));
                 break;
             case "oscuro":
-                txtUsuario.setForeground(new Color(0xFFFFFF));
-                psfContraseña.setForeground(new Color(0xFFFFFF));
+                txtUsuario.setForeground(new Color(0xBABABA));
+                psfContraseña.setForeground(new Color(0xBABABA));
+                recordarUsuarioCheckBox.setForeground(new Color(0xBABABA));
                 break;
         }
     }

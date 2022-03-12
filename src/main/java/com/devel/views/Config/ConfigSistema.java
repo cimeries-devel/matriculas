@@ -19,9 +19,6 @@ public class ConfigSistema extends JDialog {
     private JTextField textField1;
     private JButton editarButton;
     private JTextField textField2;
-    private JRadioButton ImpresionPreguntarSiempreRadioButton;
-    private JRadioButton ImpresionSiempreRadioButton;
-    private JRadioButton ImpresionNoPreguntarRadioButton;
     private JPanel panelPrincipal;
     private JButton añdirCelularButton;
     private JTable tablaCelulares;
@@ -34,6 +31,9 @@ public class ConfigSistema extends JDialog {
     private JRadioButton temaOscuro;
     private JRadioButton temaClaro;
     private JPanel panelAplicacion;
+    private JRadioButton ImpresionPreguntarSiempreRadioButton;
+    private JRadioButton ImpresionSiempreRadioButton;
+    private JRadioButton ImpresionNoPreguntarRadioButton;
     private Propiedades propiedades;
     private VPrincipal vPrincipal;
     public ConfigSistema(VPrincipal vPrincipal,Propiedades propiedades){
@@ -74,22 +74,30 @@ public class ConfigSistema extends JDialog {
         setLocationRelativeTo(null);
         cargarCursores();
         cargarConfiguracion();
+        cargarColorBotones();
     }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnRetroceder.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnAvanzar.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
     }
     private void cargarConfiguracion(){
         switch (propiedades.getTema()){
             case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
                 temaOscuro.setSelected(true);
                 break;
             default:
-                btnHecho.setForeground(new Color(0x000000));
                 temaClaro.setSelected(true);
+                break;
+        }
+    }
+    private void cargarColorBotones(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
                 break;
         }
     }

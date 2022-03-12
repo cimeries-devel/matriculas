@@ -15,8 +15,6 @@ import com.devel.views.menus.MenuReportes;
 import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,10 +39,11 @@ public class VPrincipal extends JFrame{
     private JPanel panelControles;
     private VWelcome welcome;
     private JButton jButton;
-    private Propiedades propiedades;
-    private MenuInicio inicioOpciones=new MenuInicio(tabContenido);
-    private MenuReportes menuReportes=new MenuReportes(tabContenido);
-    private MenuGestiones menuGestiones=new MenuGestiones(tabContenido);
+    public static Propiedades propiedades;
+    public static String tema;
+    private MenuInicio inicioOpciones;
+    private MenuReportes menuReportes;
+    private MenuGestiones menuGestiones;
     public static Vector<TipoDocumento> tipoDocumentos=TipoDcoumentos.getTodos();
     public static Vector<Registro> alumnosMatriculados=Registros.getMatriculados();
     public static Vector<Nivel> niveles= Niveles.getTodos();
@@ -111,7 +110,8 @@ public class VPrincipal extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                VLogin vLogin=new VLogin();
+                Utilities.tema(propiedades.getTema());
+                VLogin vLogin=new VLogin(propiedades);
                 vLogin.setVisible(true);
             }
         });
@@ -120,6 +120,10 @@ public class VPrincipal extends JFrame{
     private void iniciarComponentes(){
         setContentPane(contentPane);
         setTitle("Gestión matrículas");
+        tema=propiedades.getTema();
+        inicioOpciones=new MenuInicio(tabContenido);
+        menuReportes=new MenuReportes(tabContenido);
+        menuGestiones=new MenuGestiones(tabContenido);
         setDefaultCloseOperation(3);
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(inicioOpciones.traerInicioOpciones());
@@ -172,7 +176,7 @@ public class VPrincipal extends JFrame{
                     TabPanel tab= (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
                     String titulo= tabContenido.getTitleAt(tabContenido.getSelectedIndex());
                     tabContenido.removeAll();
-                    tabContenido.add(titulo,tab);
+                    tabContenido.addTab(titulo,tab.getIcon(),tab);
                 }
             }
         });
@@ -196,7 +200,7 @@ public class VPrincipal extends JFrame{
         });
     }
     private void cargarConfiguracion(){
-        switch (propiedades.getTema()){
+        switch (tema){
             case "claro":
                 jButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/menu1.png")));
                 inicioButton.setBackground(Colors.buttonSelected1);
@@ -211,11 +215,7 @@ public class VPrincipal extends JFrame{
         ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().requestFocus();
     }
     private void cargarVConfiguraciones(){
-        ConfigSistema configSistema=new ConfigSistema(this,new Propiedades());
+        ConfigSistema configSistema=new ConfigSistema(this,propiedades);
         configSistema.setVisible(true);
-    }
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-        tabContenido=new DnDTabbedPane();
     }
 }

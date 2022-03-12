@@ -53,7 +53,7 @@ public class DnDTabbedPane extends JTabbedPane {
                 }
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
-                    tabPanel.getOption().requestFocus();
+//                    tabPanel.getOption().requestFocus();
                     Utilities.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }

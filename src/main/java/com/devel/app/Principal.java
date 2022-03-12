@@ -17,7 +17,7 @@ public class Principal
         Hibernate.initialize();
         Propiedades propiedades=new Propiedades();
         Utilities.tema(propiedades.getTema());
-        VLogin vLogin=new VLogin();
+        VLogin vLogin=new VLogin(propiedades);
         vLogin.setVisible(true);
 
 

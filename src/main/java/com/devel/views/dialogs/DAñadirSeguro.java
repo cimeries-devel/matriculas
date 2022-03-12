@@ -11,6 +11,7 @@ import jakarta.validation.ConstraintViolation;
 import jdk.jshell.SourceCodeAnalysis;
 import jdk.jshell.execution.Util;
 
+import javax.management.remote.JMXConnectionNotification;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -51,19 +52,18 @@ public class DAñadirSeguro extends JDialog{
             }
         });
     }
+
     private void registrar(Seguro seguro1){
         String desripcion=txtDescripcion.getText().trim();
         String codigo=txtCodigo.getText().trim();
         seguro.setDescripcion(desripcion);
         seguro.setCodigo(codigo);
-
         SeguroValidator validator = new SeguroValidator();
         Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
             if(seguro1==null){
                 VPrincipal.seguros.add(seguro);
-                seguro=null;
                 seguro=new Seguro();
                 Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
                 txtDescripcion.setText(null);

@@ -43,16 +43,6 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="8d721" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Email:"/>
-                    </properties>
-                  </component>
                   <component id="87185" class="javax.swing.JLabel" binding="labelLogo">
                     <constraints>
                       <grid row="1" column="2" row-span="7" col-span="1" vsize-policy="0" hsize-policy="5" anchor="0" fill="3" indent="0" use-parent-layout="false">
@@ -68,16 +58,6 @@
                       <text value="Logo"/>
                     </properties>
                   </component>
-                  <component id="1a9aa" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Dirección:"/>
-                    </properties>
-                  </component>
                   <component id="7da44" class="javax.swing.JTextField" default-binding="true">
                     <constraints>
                       <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -87,16 +67,6 @@
                     <properties>
                       <font size="14"/>
                       <opaque value="true"/>
-                    </properties>
-                  </component>
-                  <component id="b425e" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Nombre Colegio:"/>
                     </properties>
                   </component>
                   <component id="fff04" class="javax.swing.JTextField" default-binding="true">
@@ -121,16 +91,6 @@
                       <opaque value="true"/>
                     </properties>
                   </component>
-                  <component id="27b02" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Ruc:"/>
-                    </properties>
-                  </component>
                   <component id="5c435" class="javax.swing.JTextField" binding="textField2" default-binding="true">
                     <constraints>
                       <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -140,16 +100,6 @@
                     <properties>
                       <font size="14"/>
                       <opaque value="true"/>
-                    </properties>
-                  </component>
-                  <component id="ac06" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Token Api Perú:"/>
                     </properties>
                   </component>
                   <component id="b68a2" class="javax.swing.JTextField" binding="textField1" default-binding="true">
@@ -163,16 +113,6 @@
                       <opaque value="false"/>
                     </properties>
                   </component>
-                  <component id="7e446" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Sitio Web:"/>
-                    </properties>
-                  </component>
                   <component id="f4c1d" class="javax.swing.JTextField" default-binding="true">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -182,16 +122,6 @@
                     <properties>
                       <font size="14"/>
                       <opaque value="true"/>
-                    </properties>
-                  </component>
-                  <component id="b1168" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Teléfono:"/>
                     </properties>
                   </component>
                   <component id="420" class="javax.swing.JTextField" default-binding="true">
@@ -272,6 +202,69 @@
                       </component>
                     </children>
                   </grid>
+                  <component id="3a556" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Token Api Perú:"/>
+                    </properties>
+                  </component>
+                  <component id="37e22" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Ruc:"/>
+                    </properties>
+                  </component>
+                  <component id="125f4" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Nombre Colegio:"/>
+                    </properties>
+                  </component>
+                  <component id="4014c" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Dirección:"/>
+                    </properties>
+                  </component>
+                  <component id="591f9" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Teléfono:"/>
+                    </properties>
+                  </component>
+                  <component id="32e6b" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Sitio web:"/>
+                    </properties>
+                  </component>
+                  <component id="6f5f9" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Email:"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
               <grid id="893a8" binding="panelImpreciones" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="5">
@@ -282,16 +275,6 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="bc704" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Matrícula :"/>
-                    </properties>
-                  </component>
                   <hspacer id="60772">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -312,48 +295,41 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="9819e" class="javax.swing.JRadioButton" binding="ImpresionNoPreguntarRadioButton">
-                        <constraints>
-                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <focusPainted value="false"/>
-                          <font size="12"/>
-                          <foreground color="-16777216"/>
-                          <opaque value="false"/>
-                          <requestFocusEnabled value="true"/>
-                          <text value="No preguntar"/>
-                        </properties>
-                      </component>
-                      <component id="d5fd9" class="javax.swing.JRadioButton" binding="ImpresionSiempreRadioButton">
-                        <constraints>
-                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                        </constraints>
-                        <properties>
-                          <focusPainted value="false"/>
-                          <font size="12"/>
-                          <foreground color="-16777216"/>
-                          <opaque value="false"/>
-                          <requestFocusEnabled value="true"/>
-                          <text value="Imprimir siempre"/>
-                        </properties>
-                      </component>
-                      <component id="95b57" class="javax.swing.JRadioButton" binding="ImpresionPreguntarSiempreRadioButton">
+                      <component id="37292" class="javax.swing.JRadioButton" binding="ImpresionPreguntarSiempreRadioButton">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <focusPainted value="false"/>
-                          <font size="12"/>
-                          <foreground color="-16777216"/>
-                          <opaque value="false"/>
-                          <requestFocusEnabled value="true"/>
-                          <selected value="false"/>
                           <text value="Preguntar siempre"/>
+                        </properties>
+                      </component>
+                      <component id="c2b79" class="javax.swing.JRadioButton" binding="ImpresionSiempreRadioButton">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="Imprimir siempre"/>
+                        </properties>
+                      </component>
+                      <component id="a7635" class="javax.swing.JRadioButton" binding="ImpresionNoPreguntarRadioButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="No preguntar"/>
                         </properties>
                       </component>
                     </children>
                   </grid>
+                  <component id="bcbc5" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Matrícula:"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
               <grid id="c9ab4" binding="panelAplicacion" layout-manager="GridLayoutManager" row-count="2" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="5">
@@ -366,16 +342,6 @@
                 </properties>
                 <border type="none"/>
                 <children>
-                  <component id="39ee6" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14" style="0"/>
-                      <foreground color="-16777216"/>
-                      <text value="Tema:"/>
-                    </properties>
-                  </component>
                   <hspacer id="9b23e">
                     <constraints>
                       <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -396,35 +362,33 @@
                     </properties>
                     <border type="none"/>
                     <children>
-                      <component id="1fe39" class="javax.swing.JRadioButton" binding="temaClaro">
+                      <component id="870b2" class="javax.swing.JRadioButton" binding="temaClaro">
                         <constraints>
                           <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <focusPainted value="false"/>
-                          <font size="12"/>
-                          <foreground color="-16777216"/>
-                          <opaque value="false"/>
-                          <requestFocusEnabled value="true"/>
-                          <text value="Claro"/>
+                          <text value="claro"/>
                         </properties>
                       </component>
-                      <component id="ded77" class="javax.swing.JRadioButton" binding="temaOscuro">
+                      <component id="6d4ef" class="javax.swing.JRadioButton" binding="temaOscuro">
                         <constraints>
                           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                         </constraints>
                         <properties>
-                          <focusPainted value="false"/>
-                          <font size="12"/>
-                          <foreground color="-16777216"/>
-                          <opaque value="false"/>
-                          <requestFocusEnabled value="true"/>
-                          <selected value="false"/>
-                          <text value="Oscuro"/>
+                          <text value="oscuro"/>
                         </properties>
                       </component>
                     </children>
                   </grid>
+                  <component id="f4e3f" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Tema:"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
             </children>
@@ -509,10 +473,15 @@
       <member id="95b57"/>
       <member id="d5fd9"/>
       <member id="9819e"/>
+      <member id="37292"/>
+      <member id="c2b79"/>
+      <member id="a7635"/>
     </group>
     <group name="buttonGroup2">
       <member id="ded77"/>
       <member id="1fe39"/>
+      <member id="870b2"/>
+      <member id="6d4ef"/>
     </group>
   </buttonGroups>
 </form>

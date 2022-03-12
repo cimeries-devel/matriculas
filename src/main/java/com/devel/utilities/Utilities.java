@@ -1,20 +1,15 @@
 package com.devel.utilities;
 
 import com.devel.ForResources;
-import com.devel.models.Registro;
 import com.devel.models.Tarifa;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
+import com.devel.views.VPrincipal;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
-import com.formdev.flatlaf.FlatLightLaf;
-import com.formdev.flatlaf.IntelliJTheme;
-
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.beans.JavaBean;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -58,7 +53,7 @@ public class Utilities {
     }
 
     public static void buttonSelectedOrEntered(JButton boton){
-        if(new Propiedades().getTema().equals("oscuro")){
+        if(VPrincipal.tema.equals("oscuro")){
             boton.setBackground(Colors.buttonSelected2);
         }else{
             boton.setBackground(Colors.buttonSelected1);
@@ -66,7 +61,7 @@ public class Utilities {
     }
 
     public static void buttonExited(JButton boton){
-        if(new Propiedades().getTema().equals("oscuro")){
+        if(VPrincipal.tema.equals("oscuro")){
             boton.setBackground(Colors.buttonExited2);
         }else{
             boton.setBackground(Colors.buttonExited1);

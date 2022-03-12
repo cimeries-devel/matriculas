@@ -127,7 +127,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <tabbedpane id="ec47f" class="com.devel.custom.DnDTabbedPane" binding="tabContenido" custom-create="true">
+          <tabbedpane id="ec47f" class="com.devel.custom.DnDTabbedPane" binding="tabContenido">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -180,8 +180,8 @@
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x32/inicio.png"/>
-                      <iconTextGap value="4"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="5" left="2" bottom="5" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/inicio.png"/>
                       <text value="Inicio"/>
                       <verticalAlignment value="0"/>
@@ -198,8 +198,8 @@
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x32/reportsDefecto.png"/>
-                      <iconTextGap value="4"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="5" left="2" bottom="5" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/reportes.png"/>
                       <text value="Reportes"/>
                       <verticalAlignment value="0"/>
@@ -216,8 +216,8 @@
                       <horizontalAlignment value="0"/>
                       <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x32/gestionarDefecto.png"/>
-                      <iconTextGap value="4"/>
-                      <margin top="0" left="0" bottom="0" right="0"/>
+                      <iconTextGap value="-4"/>
+                      <margin top="5" left="2" bottom="5" right="2"/>
                       <pressedIcon value="com/devel/Icons/x32/gestionar.png"/>
                       <text value="Gestionar"/>
                       <verticalAlignment value="0"/>
