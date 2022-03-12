@@ -1,12 +1,9 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Seccion;
-import com.devel.models.Seguro;
 import com.devel.utilities.Utilities;
 import com.devel.validators.SeccionValidator;
-import com.devel.validators.SeguroValidator;
 import com.devel.views.VPrincipal;
-import com.sun.istack.Nullable;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
