@@ -1,21 +1,14 @@
 package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.sun.istack.Nullable;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.swing.*;
-import javax.validation.constraints.NotNull;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -128,7 +121,7 @@ public class Persona extends Hibernate {
     }
 
     public int getEdad() {
-        return Utilities.calcularaños(getCumpleaños());
+        return Utilidades.calcularaños(getCumpleaños());
     }
 
     public void setEdad(int edad) {
@@ -264,6 +257,8 @@ public class Persona extends Hibernate {
             }
         }
     }
+
+
 
 
 }

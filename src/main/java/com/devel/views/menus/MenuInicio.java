@@ -1,17 +1,13 @@
 package com.devel.views.menus;
 
-import com.devel.ForResources;
 import com.devel.custom.DnDTabbedPane;
-import com.devel.custom.TabPanel;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.views.tabs.VAlumnos;
 import com.devel.views.tabs.VMatricula;
 import com.devel.views.tabs.VWelcome;
-import jdk.jshell.execution.Util;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -39,7 +35,7 @@ public class MenuInicio {
                 cargarBienvenida();
                 alumnosButton.setBackground(new JButton().getBackground());
                 matriculaButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(inicioButton);
+                Utilidades.buttonSelectedOrEntered(inicioButton);
             }
         });
         alumnosButton.addMouseListener(new MouseAdapter() {
@@ -49,7 +45,7 @@ public class MenuInicio {
                 cargarAlumnos();
                 inicioButton.setBackground(new JButton().getBackground());
                 matriculaButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(alumnosButton);
+                Utilidades.buttonSelectedOrEntered(alumnosButton);
             }
         });
         matriculaButton.addMouseListener(new MouseAdapter() {
@@ -59,7 +55,7 @@ public class MenuInicio {
                 cargarMatricula();
                 alumnosButton.setBackground(new JButton().getBackground());
                 inicioButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(matriculaButton);
+                Utilidades.buttonSelectedOrEntered(matriculaButton);
             }
         });
     }

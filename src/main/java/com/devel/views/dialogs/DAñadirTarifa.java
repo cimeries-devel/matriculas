@@ -1,17 +1,14 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Tarifa;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.TarifaValidator;
 import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -38,7 +35,15 @@ public class DAñadirTarifa extends JDialog {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
+            }
+        });
+        txtPrecio.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Utilidades.precioEsValido(e, txtPrecio.getText().trim())) {
+                    e.consume();
+                }
             }
         });
     }
@@ -60,6 +65,14 @@ public class DAñadirTarifa extends JDialog {
                 onCancel();
             }
         });
+        txtPrecio.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                if (!Utilidades.precioEsValido(e, txtPrecio.getText().trim())) {
+                    e.consume();
+                }
+            }
+        });
     }
 
 
@@ -77,7 +90,7 @@ public class DAñadirTarifa extends JDialog {
             tarifa.guardar();
             VPrincipal.tarifas.add(tarifa);
             tarifa=new Tarifa();
-            Utilities.sendNotification("Éxito","Tarifa registrado", TrayIcon.MessageType.INFO);
+            Utilidades.sendNotification("Éxito","Tarifa registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {
             TarifaValidator.mostrarErrores(errors);
@@ -86,7 +99,7 @@ public class DAñadirTarifa extends JDialog {
 
     private void actualizar(){
         String desripcion=txtDescripcion.getText().trim();
-        Double precio= Double.valueOf(txtPrecio.getText().trim());
+        Double precio= Double.valueOf(String.valueOf(txtPrecio.getText().trim().isEmpty()?0:txtPrecio.getText().trim()));
         tarifa.setDescripcion(desripcion);
         tarifa.setPrecio(precio);
 
@@ -94,8 +107,8 @@ public class DAñadirTarifa extends JDialog {
         Set<ConstraintViolation<Tarifa>> errors = validator.loadViolations(tarifa);
         if(errors.isEmpty()){
             tarifa.guardar();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            dispose();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
         }else {
             TarifaValidator.mostrarErrores(errors);
         }

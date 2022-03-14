@@ -3,7 +3,7 @@ package com.devel.views.dialogs;
 import com.devel.models.Grado;
 import com.devel.utilities.JButoonEditors.JButtonEditorGrados;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.GradoAbstractModel;
 import com.devel.views.VPrincipal;
 
@@ -44,18 +44,19 @@ public class DGestionarGrados extends JDialog{
     private void iniciarComponentes(){
         setTitle("Grados");
         setContentPane(panelPrincipal);
+        cargarTabla();
         pack();
         setLocationRelativeTo(null);
         setModal(true);
         setResizable(false);
-        cargarTabla();
+
     }
     private void cargarNuevoGrado(){
         DCrearGrado dCrearGrado=new DCrearGrado();
         dCrearGrado.setVisible(true);
         tablaGrados.updateUI();
-        Utilities.headerNegrita(tablaGrados);
-        Utilities.cellsRendered(tablaGrados);
+        Utilidades.headerNegrita(tablaGrados);
+        Utilidades.cellsRendered(tablaGrados);
     }
     private void cargarTabla(){
         gradoAbstractModel=new GradoAbstractModel(VPrincipal.grados);
@@ -63,9 +64,9 @@ public class DGestionarGrados extends JDialog{
         tablaGrados.getColumnModel().getColumn(gradoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorGrados(tablaGrados));
         TableCellRenderer renderer1 = tablaGrados.getDefaultRenderer(JButton.class);
         tablaGrados.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaGrados.getColumn(""),30);
-        Utilities.definirTamaño(tablaGrados.getColumn("Id"),40);
-        Utilities.headerNegrita(tablaGrados);
-        Utilities.cellsRendered(tablaGrados);
+        Utilidades.definirTamaño(tablaGrados.getColumn(""),30);
+        Utilidades.definirTamaño(tablaGrados.getColumn("Id"),40);
+        Utilidades.headerNegrita(tablaGrados);
+        Utilidades.cellsRendered(tablaGrados);
     }
 }

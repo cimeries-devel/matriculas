@@ -2,7 +2,7 @@ package com.devel.views.dialogs;
 
 import com.devel.utilities.JButoonEditors.JButtonEditorTipoDocumento;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.TipoDocumentoAbstractModel;
 import com.devel.views.VPrincipal;
 
@@ -38,11 +38,11 @@ public class DGestionTipoDocumento extends JDialog{
     private void iniciarComponentes(){
         setTitle("Tipo de documentos");
         setContentPane(panelPrincipal);
+        cargarTabla();
         pack();
         setResizable(false);
         setModal(true);
         setLocationRelativeTo(null);
-        cargarTabla();
     }
     private void cargarTabla(){
         tipoDocumentoAbstractModel =new TipoDocumentoAbstractModel(VPrincipal.tipoDocumentos);
@@ -50,15 +50,15 @@ public class DGestionTipoDocumento extends JDialog{
         tablaTipoDocumentos.getColumnModel().getColumn(tipoDocumentoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorTipoDocumento(tablaTipoDocumentos));
         TableCellRenderer renderer1 = tablaTipoDocumentos.getDefaultRenderer(JButton.class);
         tablaTipoDocumentos.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaTipoDocumentos.getColumn("Código"),80);
-        Utilities.headerNegrita(tablaTipoDocumentos);
-        Utilities.cellsRendered(tablaTipoDocumentos);
+        Utilidades.definirTamaño(tablaTipoDocumentos.getColumn("Código"),80);
+        Utilidades.headerNegrita(tablaTipoDocumentos);
+        Utilidades.cellsRendered(tablaTipoDocumentos);
     }
     private void cargarNuevoTipoDeDocumento(){
-        DAñadirTipoDocumento documento=new DAñadirTipoDocumento(null);
+        DAñadirTipoDocumento documento=new DAñadirTipoDocumento();
         documento.setVisible(true);
         tablaTipoDocumentos.updateUI();
-        Utilities.headerNegrita(tablaTipoDocumentos);
-        Utilities.cellsRendered(tablaTipoDocumentos);
+        Utilidades.headerNegrita(tablaTipoDocumentos);
+        Utilidades.cellsRendered(tablaTipoDocumentos);
     }
 }

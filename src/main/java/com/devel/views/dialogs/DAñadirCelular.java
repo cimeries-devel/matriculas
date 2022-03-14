@@ -2,7 +2,7 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Celular;
 import com.devel.models.Persona;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.CelularValidator;
 import jakarta.validation.ConstraintViolation;
 
@@ -75,7 +75,7 @@ public class DAñadirCelular extends JDialog{
             celular.guardar();
             persona.getCelulares().add(celular);
             celular=new Celular();
-            Utilities.sendNotification("Éxito","Número de celular registrado", TrayIcon.MessageType.INFO);
+            Utilidades.sendNotification("Éxito","Número de celular registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {
             CelularValidator.mostrarErrores(errors);
@@ -91,8 +91,8 @@ public class DAñadirCelular extends JDialog{
         Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
         if(errors.isEmpty()){
             celular.guardar();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            dispose();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
         }else {
             CelularValidator.mostrarErrores(errors);
         }

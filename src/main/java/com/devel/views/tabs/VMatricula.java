@@ -7,7 +7,7 @@ import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
 import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
 import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
@@ -98,8 +98,6 @@ public class VMatricula extends JFrame{
     }
     private void cargarNuevoEstudiante(){
         DNuevoEstudiante dNuevoEstudiante=new DNuevoEstudiante();
-        dNuevoEstudiante.pack();
-        dNuevoEstudiante.setLocationRelativeTo(null);
         dNuevoEstudiante.setVisible(true);
     }
     private void cargarAgregarFamiliar(){
@@ -135,15 +133,15 @@ public class VMatricula extends JFrame{
                         }
                     });
                 }else{
-                    Utilities.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
+                    Utilidades.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
                 }
 
             }else{
-                Utilities.sendNotification("No hay datos","Alumno no encontrado", TrayIcon.MessageType.INFO);
+                Utilidades.sendNotification("No hay datos","Alumno no encontrado", TrayIcon.MessageType.INFO);
                 nuevoFamiliarButton.removeAll();
             }
         }else{
-            Utilities.sendNotification("Error","Ingrese el dni", TrayIcon.MessageType.ERROR);
+            Utilidades.sendNotification("Error","Ingrese el dni", TrayIcon.MessageType.ERROR);
         }
 
     }
@@ -184,8 +182,8 @@ public class VMatricula extends JFrame{
     private void cargarMatriculas(){
         matriculadosAbstractModel=new MatriculasAbstractModel(VPrincipal.alumnosMatriculados);
         tablaMatriculas.setModel(matriculadosAbstractModel);
-        Utilities.cellsRendered(tablaMatriculas);
-        Utilities.headerNegrita(tablaMatriculas);
+        Utilidades.cellsRendered(tablaMatriculas);
+        Utilidades.headerNegrita(tablaMatriculas);
     }
     private void cargarTablaFamiliares(Vector<Relacion> relaciones){
         familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
@@ -194,7 +192,7 @@ public class VMatricula extends JFrame{
         tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.headerNegrita(tablaFamiliares);
+        Utilidades.headerNegrita(tablaFamiliares);
     }
     private void cargarTablaCelulares(Vector<Celular> celulares){
         modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulares()));
@@ -202,7 +200,7 @@ public class VMatricula extends JFrame{
         tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(tablaCelulares));
         TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
         tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.headerNegrita(tablaCelulares);
+        Utilidades.headerNegrita(tablaCelulares);
     }
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
@@ -212,9 +210,9 @@ public class VMatricula extends JFrame{
     }
     private void definirColumnas(){
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
-        Utilities.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
-        Utilities.definirTamaño(tablaCelulares.getColumn(""),30);
-        Utilities.definirTamaño(tablaCelulares.getColumn("Número"),120);
+        Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
+        Utilidades.definirTamaño(tablaCelulares.getColumn(""),30);
+        Utilidades.definirTamaño(tablaCelulares.getColumn("Número"),120);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

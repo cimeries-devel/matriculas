@@ -7,7 +7,7 @@ import com.devel.custom.TabPanel;
 import com.devel.models.*;
 import com.devel.utilities.Colors;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.views.Config.ConfigSistema;
 import com.devel.views.menus.MenuGestiones;
 import com.devel.views.menus.MenuInicio;
@@ -61,7 +61,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 gestionarButton.setBackground(new JButton().getBackground());
                 reportesButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(inicioButton);
+                Utilidades.buttonSelectedOrEntered(inicioButton);
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/inicio.png")));
@@ -75,7 +75,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 inicioButton.setBackground(new JButton().getBackground());
                 gestionarButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(reportesButton);
+                Utilidades.buttonSelectedOrEntered(reportesButton);
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionarDefecto.png")));
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportes.png")));
@@ -89,7 +89,7 @@ public class VPrincipal extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 inicioButton.setBackground(new JButton().getBackground());
                 reportesButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(gestionarButton);
+                Utilidades.buttonSelectedOrEntered(gestionarButton);
                 inicioButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/incioDefecto.png")));
                 reportesButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/reportsDefecto.png")));
                 gestionarButton.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x32/gestionar.png")));
@@ -110,7 +110,7 @@ public class VPrincipal extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 dispose();
-                Utilities.tema(propiedades.getTema());
+                Utilidades.tema(propiedades.getTema());
                 VLogin vLogin=new VLogin(propiedades);
                 vLogin.setVisible(true);
             }
@@ -148,11 +148,11 @@ public class VPrincipal extends JFrame{
         jButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                Utilities.buttonSelectedOrEntered(jButton);
+                Utilidades.buttonSelectedOrEntered(jButton);
             }
             @Override
             public void mouseExited(MouseEvent e) {
-                Utilities.buttonExited(jButton);
+                Utilidades.buttonExited(jButton);
             }
         });
         panelDeTabPane.add(jButton);

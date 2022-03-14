@@ -1,7 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Seccion;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.SeccionValidator;
 import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
@@ -80,7 +80,7 @@ public class DAñadirSecciones extends JDialog{
             seccion.guardar();
             VPrincipal.secciones.add(seccion);
             seccion=new Seccion();
-            Utilities.sendNotification("Éxito","Sección registrada", TrayIcon.MessageType.INFO);
+            Utilidades.sendNotification("Éxito","Sección registrada", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {
             SeccionValidator.mostrarErrores(errors);
@@ -94,8 +94,8 @@ public class DAñadirSecciones extends JDialog{
         Set<ConstraintViolation<Seccion>> errors = validator.loadViolations(seccion);
         if(errors.isEmpty()){
             seccion.guardar();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            dispose();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
         }else {
             SeccionValidator.mostrarErrores(errors);
         }

@@ -1,10 +1,8 @@
 package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
-import com.devel.models.Colegio;
-import com.devel.models.Seccion;
 import com.devel.models.Tarifa;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import jakarta.validation.ConstraintViolation;
 
 import java.awt.*;
@@ -26,6 +24,6 @@ public class TarifaValidator extends ProgramaValidator {
         Object[] errores=errors.toArray();
         ConstraintViolation<Tarifa> error1= (ConstraintViolation<Tarifa>) errores[0];
         String error = "Verfique el campo: "+error1.getPropertyPath();
-        Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+        Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

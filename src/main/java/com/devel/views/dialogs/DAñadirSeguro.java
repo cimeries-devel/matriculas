@@ -1,9 +1,7 @@
 package com.devel.views.dialogs;
 
-import com.devel.models.Celular;
 import com.devel.models.Seguro;
-import com.devel.utilities.Utilities;
-import com.devel.validators.CelularValidator;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.SeguroValidator;
 import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
@@ -38,7 +36,7 @@ public class DAñadirSeguro extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
             }
         });
     }
@@ -77,7 +75,7 @@ public class DAñadirSeguro extends JDialog{
             VPrincipal.seguros.add(seguro);
             VPrincipal.segurosConTodos.add(seguro);
             seguro=new Seguro();
-            Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
+            Utilidades.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {
             SeguroValidator.mostrarErrores(errors);
@@ -94,8 +92,8 @@ public class DAñadirSeguro extends JDialog{
         Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            dispose();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
         }else {
             SeguroValidator.mostrarErrores(errors);
         }

@@ -10,13 +10,19 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Vector;
 
-public class Utilities {
+public class Utilidades {
     private static TrayIcon mainTrayIcon;
     private static DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     private static DefaultTableCellRenderer izquierda = new DefaultTableCellRenderer();
@@ -24,7 +30,7 @@ public class Utilities {
     private static SystemTray mainTray;
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
-
+    public static DateFormat formatoHora=new SimpleDateFormat("HH:mm");
     public static void tema(String tema){
         try {
             if(tema.equals("oscuro")){
@@ -44,12 +50,24 @@ public class Utilities {
         }
         return true;
     }
-    public static void leerErrores(Vector<String> vector){
-        String errores="";
-        for(String error:vector){
-            errores=errores +error+",";
+    public static boolean precioEsValido(KeyEvent e, String precio){
+        int caracter = e.getKeyChar();
+        if(caracter==46){
+            if(precio.lastIndexOf('.')==-1){
+                if(precio.length()>0){
+                    return true;
+                }
+                return false;
+            }else{
+                return false;
+            }
+        }else{
+            if(caracter >= 48 && caracter <= 57){
+                return true;
+            }else{
+                return false;
+            }
         }
-        Utilities.sendNotification("Error","Revise los campos: "+errores, TrayIcon.MessageType.WARNING);
     }
 
     public static void buttonSelectedOrEntered(JButton boton){
@@ -67,7 +85,17 @@ public class Utilities {
             boton.setBackground(Colors.buttonExited1);
         }
     }
-
+    public static Date convertLocalTimeToDate(LocalTime time) {
+        Instant instant = time.atDate(LocalDate.now()).atZone(ZoneId.systemDefault()).toInstant();
+        return toDate(instant);
+    }
+    private static Date toDate(Instant instant) {
+        BigInteger millis = BigInteger.valueOf(instant.getEpochSecond()).multiply(
+                BigInteger.valueOf(1000));
+        millis = millis.add(BigInteger.valueOf(instant.getNano()).divide(
+                BigInteger.valueOf(1_000_000)));
+        return new Date(millis.longValue());
+    }
     public static void sendNotification(String title, String subtitle, TrayIcon.MessageType tipoMensaje) {
         if(isWindows(System.getProperty("os.name"))){
             if(primera){

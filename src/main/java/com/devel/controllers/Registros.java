@@ -2,7 +2,7 @@ package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
 import com.devel.models.Registro;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -33,6 +33,6 @@ public class Registros extends Hibernate {
                 builder.between(root.get("creacion"),primerDia.getTime(),new Date())
         );
         todos=new Vector<>(session.createQuery(criteria).getResultList());
-        return Utilities.invertirVector(todos);
+        return Utilidades.invertirVector(todos);
     }
 }

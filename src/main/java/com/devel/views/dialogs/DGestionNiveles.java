@@ -1,10 +1,8 @@
 package com.devel.views.dialogs;
 
-import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
-import com.devel.utilities.JButoonEditors.JButtonEditorFamiliares;
 import com.devel.utilities.JButoonEditors.JButtonEditroNiveles;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.NivelesAbstractModel;
 import com.devel.views.VPrincipal;
 
@@ -39,17 +37,18 @@ public class DGestionNiveles extends JDialog{
     private void iniciarComponentes(){
         setTitle("Niveles");
         setContentPane(panelPrincipal);
+        cargarTabla();
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
-        cargarTabla();
+
     }private void cargarCrearNivel(){
-        DCrearNivel dCrearNivel=new DCrearNivel(null);
+        DCrearNivel dCrearNivel=new DCrearNivel();
         dCrearNivel.setVisible(true);
         tablaNiveles.updateUI();
-        Utilities.headerNegrita(tablaNiveles);
-        Utilities.cellsRendered(tablaNiveles);
+        Utilidades.headerNegrita(tablaNiveles);
+        Utilidades.cellsRendered(tablaNiveles);
     }
     private void cargarTabla(){
         nivelesAbstractModel=new NivelesAbstractModel(VPrincipal.niveles);
@@ -57,8 +56,8 @@ public class DGestionNiveles extends JDialog{
         tablaNiveles.getColumnModel().getColumn(nivelesAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroNiveles(tablaNiveles));
         TableCellRenderer renderer1 = tablaNiveles.getDefaultRenderer(JButton.class);
         tablaNiveles.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.headerNegrita(tablaNiveles);
-        Utilities.cellsRendered(tablaNiveles);
+        Utilidades.headerNegrita(tablaNiveles);
+        Utilidades.cellsRendered(tablaNiveles);
     }
 
 }

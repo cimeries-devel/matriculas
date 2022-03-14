@@ -1,9 +1,8 @@
 package com.devel.views.dialogs;
 
-import com.devel.utilities.JButoonEditors.JButtonEditorSecciones;
 import com.devel.utilities.JButoonEditors.JButtonEditroTarifas;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.TarifasAbstractModel;
 import com.devel.views.VPrincipal;
 
@@ -44,18 +43,18 @@ public class DGestionTarifa extends JDialog{
     private void iniciarComponentes(){
         setTitle("Tarifas");
         setContentPane(panelPrincipal);
+        cargarTabla();
         pack();
         setResizable(false);
         setModal(true);
         setLocationRelativeTo(null);
-        cargarTabla();
     }
     private void cargarNueva(){
         DAñadirTarifa añadirTarifa=new DAñadirTarifa();
         añadirTarifa.setVisible(true);
         tablaTarifas.updateUI();
-        Utilities.headerNegrita(tablaTarifas);
-        Utilities.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.headerNegrita(tablaTarifas);
+        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
     }
     private void cargarTabla(){
         tarifasAbstractModel =new TarifasAbstractModel(VPrincipal.tarifas);
@@ -64,10 +63,10 @@ public class DGestionTarifa extends JDialog{
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-2).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"defecto"));
         TableCellRenderer renderer1 = tablaTarifas.getDefaultRenderer(JButton.class);
         tablaTarifas.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaTarifas.getColumn("Tarifa"),80);
-        Utilities.definirTamaño(tablaTarifas.getColumn("Activa"),40);
-        Utilities.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
-        Utilities.headerNegrita(tablaTarifas);
-        Utilities.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.definirTamaño(tablaTarifas.getColumn("Tarifa"),80);
+        Utilidades.definirTamaño(tablaTarifas.getColumn("Activa"),40);
+        Utilidades.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
+        Utilidades.headerNegrita(tablaTarifas);
+        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
     }
 }

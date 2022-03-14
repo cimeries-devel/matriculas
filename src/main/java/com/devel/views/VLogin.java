@@ -1,23 +1,12 @@
 package com.devel.views;
 
 import com.devel.ForResources;
-import com.devel.custom.FondoPanel;
 import com.devel.utilities.PlaceHolder;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
-import com.intellij.uiDesigner.lw.LwHSpacer;
-import org.jdesktop.swingx.JXLoginPane;
-import org.jdesktop.swingx.JXSearchField;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class VLogin extends JFrame{
     private JPanel panelLogin;

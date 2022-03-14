@@ -1,9 +1,8 @@
 package com.devel.views.dialogs;
 
 import com.devel.controllers.Documentos;
-import com.devel.controllers.Relaciones;
 import com.devel.models.*;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.*;
 import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
@@ -51,7 +50,7 @@ public class DAñadirFamiliar extends JDialog{
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
                 if(datePicker1.getDate()!=null){
-                    int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
+                    int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
                     lblEdad.setText(String.valueOf(edad));
                 }
             }
@@ -60,7 +59,7 @@ public class DAñadirFamiliar extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
             }
         });
         btnAñadir.addMouseListener(new MouseAdapter() {
@@ -88,7 +87,7 @@ public class DAñadirFamiliar extends JDialog{
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
                 if(datePicker1.getDate()!=null){
-                    int edad=Utilities.calcularaños(Date.valueOf(datePicker1.getDate()));
+                    int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
                     lblEdad.setText(String.valueOf(edad));
                 }
             }
@@ -199,7 +198,7 @@ public class DAñadirFamiliar extends JDialog{
                     Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
                     if(errors4.isEmpty()){
                         persona.getRelaciones().add(relacion);
-                        Utilities.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
+                        Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
                         limpiarControles();
                     }else {
                         RelacionValidator.mostrarErrores(errors4);
@@ -261,8 +260,8 @@ public class DAñadirFamiliar extends JDialog{
                     relacion.guardar();
                     celular.guardar();
                     familiar.guardar();
-                    Utilities.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
-                    limpiarControles();
+                    Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                    cerrar();
                 }else {
                     RelacionValidator.mostrarErrores(errors4);
                 }
@@ -284,7 +283,7 @@ public class DAñadirFamiliar extends JDialog{
             if(dataAPIDNI!=null){
                 cargarDatosDataappi(dataAPIDNI);
             }else{
-                Utilities.sendNotification("Sin datos","", TrayIcon.MessageType.INFO);
+                Utilidades.sendNotification("Sin datos","", TrayIcon.MessageType.INFO);
             }
         }
     }

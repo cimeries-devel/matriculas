@@ -2,87 +2,147 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Tarifa;
 import com.devel.models.TipoDocumento;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
+import com.devel.validators.TarifaValidator;
+import com.devel.validators.TipoDocumentoValidator;
 import com.devel.views.VPrincipal;
-import com.sun.istack.Nullable;
+import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Date;
+import java.util.Set;
 
 public class DAñadirTipoDocumento extends JDialog{
-    private JTextField txtDocumento;
-    private JButton registrarButton;
-    private JButton hechoButton;
+    private JTextField txtDescripcion;
+    private JButton btnRegistrar;
+    private JButton btnHecho;
     private JPanel panelPrincipal;
     private JTextField txtCodigo;
     private TipoDocumento tipoDocumento;
 
-    public DAñadirTipoDocumento(@Nullable TipoDocumento tipoDocumento1) {
-        if (tipoDocumento1 == null) {
-            tipoDocumento = new TipoDocumento();
-            setTitle("Crear Tipo de documento");
-        } else {
-            tipoDocumento = tipoDocumento1;
-            setTitle("Editar Tipo de documento");
-            registrarButton.setText("Guardar");
-            hechoButton.setText("Cancelar");
-            cargarTipoDeDocumento();
-        }
+    public DAñadirTipoDocumento(){
         iniciarComponentes();
-        hechoButton.addMouseListener(new MouseAdapter() {
+        tipoDocumento=new TipoDocumento();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                registrar();
             }
         });
-        registrarButton.addMouseListener(new MouseAdapter() {
+        btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                registrar(tipoDocumento1);
+                cerrar();
             }
         });
+
     }
-    private boolean registrarTarifa(){
-        if(txtDocumento.getText().length()>0&&txtCodigo.getText().length()>0){
-            tipoDocumento.setCodigo(txtCodigo.getText().trim());
-            tipoDocumento.setDescripcion(txtDocumento.getText().trim());
+    public DAñadirTipoDocumento(TipoDocumento tipoDocumento1) {
+        iniciarComponentes();
+        this.tipoDocumento=tipoDocumento1;
+        paraActualizar();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                actualizar();
+            }
+        });
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                onCancel();
+            }
+        });
+
+    }
+
+    private void registrar(){
+        String desripcion=txtDescripcion.getText().trim();
+        String codigo=txtCodigo.getText().trim();
+        tipoDocumento.setDescripcion(desripcion);
+        tipoDocumento.setCodigo(codigo);
+
+        TipoDocumentoValidator validator = new TipoDocumentoValidator();
+        Set<ConstraintViolation<TipoDocumento>> errors = validator.loadViolations(tipoDocumento);
+        if(errors.isEmpty()){
             tipoDocumento.guardar();
-            return true;
-        }else{
-            return false;
+            VPrincipal.tipoDocumentos.add(tipoDocumento);
+            tipoDocumento=new TipoDocumento();
+            Utilidades.sendNotification("Éxito","Tipo de documento registrado", TrayIcon.MessageType.INFO);
+            limpiarControles();
+        }else {
+            TipoDocumentoValidator.mostrarErrores(errors);
         }
     }
-    private void registrar(TipoDocumento tipoDocumento1){
-        if(registrarTarifa()){
-            if(tipoDocumento1==null){
-                VPrincipal.tipoDocumentos.add(tipoDocumento);
-                tipoDocumento=null;
-                tipoDocumento=new TipoDocumento();
-                Utilities.sendNotification("Éxito","Tipo de documento registrada", TrayIcon.MessageType.INFO);
-                txtDocumento.setText(null);
-                txtCodigo.setText(null);
-            }else {
-                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                dispose();
-            }
-        }else{
-            Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
+
+    private void actualizar(){
+        String desripcion=txtDescripcion.getText().trim();
+        String codigo=txtCodigo.getText().trim();
+        tipoDocumento.setDescripcion(desripcion);
+        tipoDocumento.setCodigo(codigo);
+
+        TipoDocumentoValidator validator = new TipoDocumentoValidator();
+        Set<ConstraintViolation<TipoDocumento>> errors = validator.loadViolations(tipoDocumento);
+        if(errors.isEmpty()){
+            tipoDocumento.guardar();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
+        }else {
+            TipoDocumentoValidator.mostrarErrores(errors);
         }
     }
     private void iniciarComponentes(){
+        setTitle("Editar Tipo de documento");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
-        setModal(true);
         setResizable(false);
+        setModal(true);
     }
+    private void paraActualizar(){
+        setTitle("Editar Tipo de documento");
+        btnRegistrar.setText("Guardar");
+        btnHecho.setText("Cancelar");
+        cargarTipoDeDocumento();
+        guardarCopia();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                onCancel();
+            }
+        });
+    }
+    private void guardarCopia(){
+        txtDescripcion.setName(tipoDocumento.getDescripcion());
+        txtCodigo.setName(tipoDocumento.getCodigo());
+    }
+    private void onCancel(){
+        tipoDocumento.setDescripcion(txtDescripcion.getName());
+        tipoDocumento.setCodigo(txtCodigo.getName());
+        cerrar();
+    }
+    private void cerrar(){
+        dispose();
+    }
+
     private void cargarTipoDeDocumento(){
-        txtDocumento.setText(tipoDocumento.getDescripcion());
+        txtDescripcion.setText(tipoDocumento.getDescripcion());
         txtCodigo.setText(tipoDocumento.getCodigo());
+    }
+
+    private void limpiarControles(){
+        txtDescripcion.setText(null);
+        txtCodigo.setText(null);
     }
 }

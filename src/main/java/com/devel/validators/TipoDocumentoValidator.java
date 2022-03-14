@@ -1,10 +1,8 @@
 package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
-import com.devel.models.Colegio;
-import com.devel.models.Seccion;
 import com.devel.models.TipoDocumento;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import jakarta.validation.ConstraintViolation;
 
 import java.awt.*;
@@ -26,6 +24,6 @@ public class TipoDocumentoValidator extends ProgramaValidator {
         Object[] errores=errors.toArray();
         ConstraintViolation<TipoDocumento> error1= (ConstraintViolation<TipoDocumento>) errores[0];
         String error = "Verfique el campo: "+error1.getPropertyPath();
-        Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+        Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

@@ -1,10 +1,8 @@
 package com.devel.views.dialogs;
 
 import com.devel.utilities.JButoonEditors.JButtonEditorSecciones;
-import com.devel.utilities.JButoonEditors.JButtonEditroNiveles;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
-import com.devel.utilities.Utilities;
-import com.devel.utilities.modelosTablas.NivelesAbstractModel;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.SeccionAbstractModel;
 import com.devel.views.VPrincipal;
 
@@ -50,8 +48,8 @@ public class DGestionSecciones extends JDialog{
         DAñadirSecciones dAñadirSecciones=new DAñadirSecciones();
         dAñadirSecciones.setVisible(true);
         tablaSecciones.updateUI();
-        Utilities.headerNegrita(tablaSecciones);
-        Utilities.cellsRendered(tablaSecciones);
+        Utilidades.headerNegrita(tablaSecciones);
+        Utilidades.cellsRendered(tablaSecciones);
     }
     private void cargarTabla(){
         seccionAbstractModel=new SeccionAbstractModel(VPrincipal.secciones);
@@ -59,8 +57,8 @@ public class DGestionSecciones extends JDialog{
         tablaSecciones.getColumnModel().getColumn(seccionAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSecciones(tablaSecciones));
         TableCellRenderer renderer1 = tablaSecciones.getDefaultRenderer(JButton.class);
         tablaSecciones.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilities.definirTamaño(tablaSecciones.getColumn("Id"),35);
-        Utilities.headerNegrita(tablaSecciones);
-        Utilities.cellsRendered(tablaSecciones);
+        Utilidades.definirTamaño(tablaSecciones.getColumn("Id"),35);
+        Utilidades.headerNegrita(tablaSecciones);
+        Utilidades.cellsRendered(tablaSecciones);
     }
 }

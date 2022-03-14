@@ -17,6 +17,7 @@ public class MenuGestiones {
     private JButton btnEscalasDePago;
     private JButton btnTiposdeDocumentos;
     private DnDTabbedPane tabContenido;
+
     public MenuGestiones(DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
 

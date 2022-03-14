@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,7 +21,7 @@ public class Nivel extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
@@ -29,11 +30,11 @@ public class Nivel extends Hibernate {
     private String descripcion;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date horaFin;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date horaInicio;
 
     @OneToMany(mappedBy = "nivel")

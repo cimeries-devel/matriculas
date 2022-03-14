@@ -41,12 +41,12 @@ public class ClientAPI {
                     System.out.println(response.body());
                     return new Gson().fromJson(response.body(), ModeloApiDNI.class);
                 }else{
-                    Utilities.sendNotification("Error","Token invalido, ingrese un token válido", TrayIcon.MessageType.ERROR);
+                    Utilidades.sendNotification("Error","Token invalido, ingrese un token válido", TrayIcon.MessageType.ERROR);
                 }
         }catch (HttpTimeoutException e){
-            Utilities.sendNotification("Error","Tiempo de espera agotado", TrayIcon.MessageType.ERROR);
+            Utilidades.sendNotification("Error","Tiempo de espera agotado", TrayIcon.MessageType.ERROR);
         }catch (ConnectException e){
-            Utilities.sendNotification("Error","Error de conexión", TrayIcon.MessageType.ERROR);
+            Utilidades.sendNotification("Error","Error de conexión", TrayIcon.MessageType.ERROR);
         } catch (URISyntaxException |InterruptedException |IOException e) {
             e.printStackTrace();
         }

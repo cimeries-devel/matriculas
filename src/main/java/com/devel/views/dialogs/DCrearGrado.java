@@ -2,13 +2,9 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Grado;
 import com.devel.models.Nivel;
-import com.devel.models.Tarifa;
-import com.devel.models.TipoDocumento;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.validators.GradoValidator;
-import com.devel.validators.TarifaValidator;
 import com.devel.views.VPrincipal;
-import com.sun.istack.Nullable;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
@@ -17,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Date;
 import java.util.Set;
 
 public class DCrearGrado extends JDialog {
@@ -41,7 +36,7 @@ public class DCrearGrado extends JDialog {
         btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                dispose();
+                cerrar();
             }
         });
     }
@@ -77,7 +72,7 @@ public class DCrearGrado extends JDialog {
             grado.guardar();
             VPrincipal.grados.add(grado);
             grado=new Grado();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            Utilidades.sendNotification("Éxito","Grado registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {
             GradoValidator.mostrarErrores(errors);
@@ -94,8 +89,8 @@ public class DCrearGrado extends JDialog {
         Set<ConstraintViolation<Grado>> errors = validator.loadViolations(grado);
         if(errors.isEmpty()){
             grado.guardar();
-            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            dispose();
+            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            cerrar();
         }else {
             GradoValidator.mostrarErrores(errors);
         }
@@ -104,11 +99,11 @@ public class DCrearGrado extends JDialog {
     private void iniciarComponentes(){
         setTitle("Registrar Grado");
         setContentPane(panelPrincipal);
+        cargarNiveles();
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
-        cargarNiveles();
     }
 
     private void cargarNiveles(){
@@ -151,6 +146,5 @@ public class DCrearGrado extends JDialog {
 
     private void limpiarControles(){
         txtGrado.setText(null);
-        cbbNiveles.setSelectedIndex(0);
     }
 }

@@ -1,8 +1,7 @@
 package com.devel.views.Config;
 
-import com.devel.custom.FondoPanel;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import com.devel.views.VPrincipal;
 
 import javax.swing.*;
@@ -62,7 +61,7 @@ public class ConfigSistema extends JDialog {
             propiedades.setTema("claro");
         }
         propiedades.guardar();
-        Utilities.sendNotification("Éxito","Cambios guardados, algunos cambios se aplciarán despues del reinicio", TrayIcon.MessageType.INFO);
+        Utilidades.sendNotification("Éxito","Cambios guardados, algunos cambios se aplciarán despues del reinicio", TrayIcon.MessageType.INFO);
         dispose();
     }
     private void iniciarComponentes(){

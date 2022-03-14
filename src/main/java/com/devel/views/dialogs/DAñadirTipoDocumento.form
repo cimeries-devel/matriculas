@@ -5,9 +5,7 @@
     <constraints>
       <xy x="20" y="20" width="284" height="124"/>
     </constraints>
-    <properties>
-      <preferredSize width="284" height="110"/>
-    </properties>
+    <properties/>
     <border type="none"/>
     <children>
       <component id="1afa1" class="javax.swing.JLabel">
@@ -16,10 +14,10 @@
         </constraints>
         <properties>
           <font size="14"/>
-          <text value="Documento:"/>
+          <text value="Descripción:"/>
         </properties>
       </component>
-      <component id="11eea" class="javax.swing.JTextField" binding="txtDocumento">
+      <component id="11eea" class="javax.swing.JTextField" binding="txtDescripcion">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="180" height="-1"/>
@@ -44,7 +42,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="db3f8" class="javax.swing.JButton" binding="registrarButton" default-binding="true">
+      <component id="db3f8" class="javax.swing.JButton" binding="btnRegistrar">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -52,7 +50,7 @@
           <text value="Registrar"/>
         </properties>
       </component>
-      <component id="c920d" class="javax.swing.JButton" binding="hechoButton" default-binding="true">
+      <component id="c920d" class="javax.swing.JButton" binding="btnHecho">
         <constraints>
           <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

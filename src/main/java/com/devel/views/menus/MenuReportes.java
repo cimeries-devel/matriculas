@@ -2,7 +2,7 @@ package com.devel.views.menus;
 
 import com.devel.custom.DnDTabbedPane;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -26,7 +26,7 @@ public class MenuReportes {
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(alumnosButton);
+                Utilidades.buttonSelectedOrEntered(alumnosButton);
             }
         });
         padresButton.addMouseListener(new MouseAdapter() {
@@ -36,7 +36,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(padresButton);
+                Utilidades.buttonSelectedOrEntered(padresButton);
             }
         });
         matriculasButton.addMouseListener(new MouseAdapter() {
@@ -46,7 +46,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(matriculasButton);
+                Utilidades.buttonSelectedOrEntered(matriculasButton);
             }
         });
         alumnosPersonalizadoButton.addMouseListener(new MouseAdapter() {
@@ -56,7 +56,7 @@ public class MenuReportes {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
-                Utilities.buttonSelectedOrEntered(alumnosPersonalizadoButton);
+                Utilidades.buttonSelectedOrEntered(alumnosPersonalizadoButton);
             }
         });
     }

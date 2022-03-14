@@ -1,9 +1,7 @@
 package com.devel.custom;
 
 import com.devel.ForResources;
-import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
-import org.hibernate.metamodel.model.convert.spi.JpaAttributeConverter;
+import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -15,8 +13,6 @@ import java.awt.dnd.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 public class DnDTabbedPane extends JTabbedPane {
     private DnDTabbedPane jtabedpane=this;
@@ -54,7 +50,7 @@ public class DnDTabbedPane extends JTabbedPane {
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
 //                    tabPanel.getOption().requestFocus();
-                    Utilities.buttonSelectedOrEntered(tabPanel.getOption());
+                    Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }
         });

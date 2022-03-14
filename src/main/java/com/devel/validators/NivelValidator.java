@@ -1,10 +1,9 @@
 package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
-import com.devel.models.Colegio;
 import com.devel.models.Nivel;
 import com.devel.models.Seccion;
-import com.devel.utilities.Utilities;
+import com.devel.utilities.Utilidades;
 import jakarta.validation.ConstraintViolation;
 
 import java.awt.*;
@@ -17,8 +16,8 @@ public class NivelValidator extends ProgramaValidator {
         return violations.isEmpty() ? null : violations.iterator().next();
     }
 
-    public static Set<ConstraintViolation<Seccion>> loadViolations(Seccion seccion) {
-        Set<ConstraintViolation<Seccion>> violations = PROGRAMA_VALIDATOR.validate(seccion);
+    public static Set<ConstraintViolation<Nivel>> loadViolations(Nivel nivel) {
+        Set<ConstraintViolation<Nivel>> violations = PROGRAMA_VALIDATOR.validate(nivel);
         return violations;
     }
 
@@ -26,6 +25,6 @@ public class NivelValidator extends ProgramaValidator {
         Object[] errores=errors.toArray();
         ConstraintViolation<Nivel> error1= (ConstraintViolation<Nivel>) errores[0];
         String error = "Verfique el campo: "+error1.getPropertyPath();
-        Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+        Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

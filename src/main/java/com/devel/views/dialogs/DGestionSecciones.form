@@ -5,11 +5,7 @@
     <constraints>
       <xy x="20" y="20" width="205" height="270"/>
     </constraints>
-    <properties>
-      <maximumSize width="205" height="270"/>
-      <minimumSize width="205" height="270"/>
-      <preferredSize width="205" height="270"/>
-    </properties>
+    <properties/>
     <border type="none"/>
     <children>
       <scrollpane id="36c29">

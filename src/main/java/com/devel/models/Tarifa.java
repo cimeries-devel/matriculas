@@ -34,7 +34,7 @@ public class Tarifa extends Hibernate {
 
     @Column
     @Digits(integer = 10,fraction = 2)
-    @DecimalMin("0.10")
+    @DecimalMin("0.1")
     private Double precio;
 
     public Integer getId() {

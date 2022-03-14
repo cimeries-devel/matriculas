@@ -1,22 +1,16 @@
 package com.devel.app;
 
 import com.devel.hibernate.Hibernate;
-import com.devel.models.Celular;
 import com.devel.utilities.Propiedades;
-import com.devel.utilities.Utilities;
-import com.devel.validators.CelularValidator;
+import com.devel.utilities.Utilidades;
 import com.devel.views.VLogin;
-import jakarta.validation.Constraint;
-import jakarta.validation.ConstraintViolation;
-
-import java.util.Set;
 
 public class Principal
 {
     public static void main( String[] args ) {
         Hibernate.initialize();
         Propiedades propiedades=new Propiedades();
-        Utilities.tema(propiedades.getTema());
+        Utilidades.tema(propiedades.getTema());
         VLogin vLogin=new VLogin(propiedades);
         vLogin.setVisible(true);
 
