@@ -642,7 +642,7 @@ class Cross extends JPanel {
         gbc.weightx = 1;
         L = new JLabel(title + " ");
         L.setIcon(icon);
-        L.setIconTextGap(15);
+        L.setIconTextGap(5);
         Dimension d = new Dimension(22, 22);
         B = new JLabel();
         B.setPreferredSize(d);

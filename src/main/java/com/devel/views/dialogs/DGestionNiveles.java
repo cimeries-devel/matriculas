@@ -37,7 +37,7 @@ public class DGestionNiveles extends JDialog{
         });
     }
     private void iniciarComponentes(){
-        setTitle("Gestión niveles");
+        setTitle("Niveles");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);

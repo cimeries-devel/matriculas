@@ -42,8 +42,8 @@ public class DAñadirSecciones extends JDialog{
     }
 
     public DAñadirSecciones(Seccion seccion) {
-        this.seccion=seccion;
         iniciarComponentes();
+        this.seccion=seccion;
         paraActualizar();
         guardarCopia();
         btnRegistrar.addMouseListener(new MouseAdapter() {

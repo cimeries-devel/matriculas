@@ -2,42 +2,40 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Grado;
 import com.devel.models.Nivel;
+import com.devel.models.Tarifa;
 import com.devel.models.TipoDocumento;
 import com.devel.utilities.Utilities;
+import com.devel.validators.GradoValidator;
+import com.devel.validators.TarifaValidator;
 import com.devel.views.VPrincipal;
 import com.sun.istack.Nullable;
+import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Date;
+import java.util.Set;
 
 public class DCrearGrado extends JDialog {
     private JTextField txtGrado;
-    private JButton añadirButton;
+    private JButton btnRegistrar;
     private JPanel panelPrincipal;
     private JButton btnHecho;
     private JComboBox cbbNiveles;
     private Grado grado;
-    private String error;
-    public DCrearGrado(@Nullable Grado grado1) {
+
+    public DCrearGrado() {
         iniciarComponentes();
-        if(grado1==null){
-            grado=new Grado();
-            setTitle("Crear grado");
-        }else{
-            grado=grado1;
-            txtGrado.setText(grado1.getGrado());
-            cbbNiveles.setSelectedItem(grado1.getNivel());
-            setTitle("Editar grado");
-            añadirButton.setText("Guardar");
-            btnHecho.setText("Cancelar");
-        }
-        añadirButton.addMouseListener(new MouseAdapter() {
+        grado=new Grado();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                registrar(grado1);
+                registrar();
             }
         });
         btnHecho.addMouseListener(new MouseAdapter() {
@@ -47,55 +45,112 @@ public class DCrearGrado extends JDialog {
             }
         });
     }
+
+    public DCrearGrado(Grado grado) {
+        iniciarComponentes();
+        this.grado=grado;
+        paraActualizar();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                actualizar();
+            }
+        });
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                onCancel();
+            }
+        });
+    }
+
+    private void registrar(){
+        String sgrado=txtGrado.getText().trim();
+        Nivel nivel= (Nivel) cbbNiveles.getSelectedItem();
+        grado.setGrado(sgrado);
+        grado.setNivel(nivel);
+
+        GradoValidator validator = new GradoValidator();
+        Set<ConstraintViolation<Grado>> errors = validator.loadViolations(grado);
+        if(errors.isEmpty()){
+            grado.guardar();
+            VPrincipal.grados.add(grado);
+            grado=new Grado();
+            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            limpiarControles();
+        }else {
+            GradoValidator.mostrarErrores(errors);
+        }
+    }
+
+    private void actualizar(){
+        String sgrado=txtGrado.getText().trim();
+        Nivel nivel= (Nivel) cbbNiveles.getSelectedItem();
+        grado.setGrado(sgrado);
+        grado.setNivel(nivel);
+
+        GradoValidator validator = new GradoValidator();
+        Set<ConstraintViolation<Grado>> errors = validator.loadViolations(grado);
+        if(errors.isEmpty()){
+            grado.guardar();
+            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            dispose();
+        }else {
+            GradoValidator.mostrarErrores(errors);
+        }
+    }
+
     private void iniciarComponentes(){
+        setTitle("Registrar Grado");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
-        cargarCombox();
+        cargarNiveles();
     }
-    private void registrar(Grado grado1){
-        if(guardarGrado()){
-            if(grado1==null){
-                VPrincipal.grados.add(grado);
-                txtGrado.setText(null);
-                grado=null;
-                grado=new Grado();
-                Utilities.sendNotification("Éxito","Grado creado", TrayIcon.MessageType.INFO);
-            }else{
-                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                dispose();
-            }
-        }else{
-            switch (error){
-                case "nivel":
-                    Utilities.sendNotification("Error","Primero debe registrar un nivel", TrayIcon.MessageType.ERROR);
-                    break;
-                case "grado":
-                    Utilities.sendNotification("Error","Rellene todos los campos", TrayIcon.MessageType.ERROR);
-                    break;
-            }
-        }
-    }
-    private void cargarCombox(){
+
+    private void cargarNiveles(){
         cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
+
     }
-    private boolean guardarGrado(){
-        if(txtGrado.getText().length()>0){
-            if(cbbNiveles.getItemCount()!=0){
-                grado.setNivel((Nivel) cbbNiveles.getSelectedItem());
-                grado.setGrado(txtGrado.getText().trim());
-                grado.guardar();
-                ((Nivel) cbbNiveles.getSelectedItem()).getGrados().add(grado);
-                return true;
-            }else{
-                error="nivel";
+
+    private void paraActualizar(){
+        setTitle("Editar Grado");
+        btnRegistrar.setText("Guardar");
+        btnHecho.setText("Cancelar");
+        cargarTarifa();
+        guardarCopia();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                onCancel();
             }
-        }else{
-            error="grado";
-        }
-        return false;
+        });
+    }
+    private void cargarTarifa(){
+        txtGrado.setText(grado.getGrado());
+        cbbNiveles.setSelectedItem(grado.getNivel());
+    }
+    private void guardarCopia(){
+        txtGrado.setName(grado.getGrado());
+        cbbNiveles.setName(String.valueOf(cbbNiveles.getSelectedIndex()));
+    }
+    private void onCancel(){
+        grado.setGrado(txtGrado.getName());
+        grado.setNivel((Nivel) cbbNiveles.getItemAt(Integer.parseInt(cbbNiveles.getName())));
+        cerrar();
+    }
+    private void cerrar(){
+        dispose();
+    }
+
+    private void limpiarControles(){
+        txtGrado.setText(null);
+        cbbNiveles.setSelectedIndex(0);
     }
 }

@@ -1,7 +1,6 @@
 package com.devel.models;
 
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
@@ -21,7 +20,7 @@ public class Tarifa extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
+    @NotNull
     private boolean defecto;
 
     @Column
@@ -30,11 +29,12 @@ public class Tarifa extends Hibernate {
     private String descripcion;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
-    @NotEmpty
+    @Digits(integer = 10,fraction = 2)
+    @DecimalMin("0.10")
     private Double precio;
 
     public Integer getId() {

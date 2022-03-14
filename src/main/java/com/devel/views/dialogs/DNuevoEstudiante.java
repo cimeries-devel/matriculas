@@ -69,7 +69,7 @@ public class DNuevoEstudiante extends JDialog{
         nuevoButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                DAñadirSeguro añadirSeguro=new DAñadirSeguro(null);
+                DAñadirSeguro añadirSeguro=new DAñadirSeguro();
                 añadirSeguro.setVisible(true);
                 cbbSeguro.setSelectedIndex(cbbSeguro.getItemCount()-1);
             }
@@ -112,7 +112,7 @@ public class DNuevoEstudiante extends JDialog{
         for(Relacion relacion:persona.getRelaciones()){
             relacion.guardar();
         }
-        for (Celular celular:persona.getCelulars()){
+        for (Celular celular:persona.getCelulares()){
             celular.guardar();
         }
         Documento documento= Documentos.getByDni(txtDni.getText().trim());

@@ -6,45 +6,35 @@ import com.devel.utilities.Utilities;
 import com.devel.validators.CelularValidator;
 import com.devel.validators.SeguroValidator;
 import com.devel.views.VPrincipal;
-import com.sun.istack.Nullable;
 import jakarta.validation.ConstraintViolation;
-import jdk.jshell.SourceCodeAnalysis;
-import jdk.jshell.execution.Util;
 
-import javax.management.remote.JMXConnectionNotification;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Set;
 
 public class DAñadirSeguro extends JDialog{
     private JPanel panelPrincipal;
     private JTextField txtCodigo;
-    private JButton añadirButton;
-    private JButton hechoButton;
+    private JButton btnRegistrar;
+    private JButton btnHecho;
     private JTextField txtDescripcion;
     private Seguro seguro;
-    public DAñadirSeguro(@Nullable Seguro seguro1) {
-        if(seguro1==null){
-            setTitle("Registrar Seguro");
-            seguro=new Seguro();
-        }else{
-            seguro=seguro1;
-            setTitle("Editar seguro");
-            cargarSeguro();
-            añadirButton.setText("Guardar");
-            hechoButton.setText("Cancelar");
-        }
+
+    public  DAñadirSeguro(){
         iniciarComponentes();
-        añadirButton.addMouseListener(new MouseAdapter() {
+        seguro=new Seguro();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                registrar(seguro1);
+                registrar();
             }
         });
-        hechoButton.addMouseListener(new MouseAdapter() {
+        btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -53,42 +43,107 @@ public class DAñadirSeguro extends JDialog{
         });
     }
 
-    private void registrar(Seguro seguro1){
+    public DAñadirSeguro(Seguro seguro) {
+        iniciarComponentes();
+        this.seguro=seguro;
+        paraActualizar();
+        btnRegistrar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                actualizar();
+            }
+        });
+        btnHecho.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                onCancel();
+            }
+        });
+    }
+
+
+    private void registrar(){
         String desripcion=txtDescripcion.getText().trim();
         String codigo=txtCodigo.getText().trim();
         seguro.setDescripcion(desripcion);
         seguro.setCodigo(codigo);
+
         SeguroValidator validator = new SeguroValidator();
         Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
-            if(seguro1==null){
-                VPrincipal.seguros.add(seguro);
-                seguro=new Seguro();
-                Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
-                txtDescripcion.setText(null);
-                txtCodigo.setText(null);
-            }else {
-                Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                dispose();
-            }
+            VPrincipal.seguros.add(seguro);
+            VPrincipal.segurosConTodos.add(seguro);
+            seguro=new Seguro();
+            Utilities.sendNotification("Éxito","Seguro registrado", TrayIcon.MessageType.INFO);
+            limpiarControles();
         }else {
-            Object[] errores=errors.toArray();
-            ConstraintViolation<Seguro> error1= (ConstraintViolation<Seguro>) errores[0];
-            String error = "Verfique el campo: "+error1.getPropertyPath();
-            Utilities.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
+            SeguroValidator.mostrarErrores(errors);
         }
     }
 
-    private void cargarSeguro(){
-        txtDescripcion.setText(seguro.getDescripcion());
-        txtCodigo.setText(seguro.getCodigo());
+    private void actualizar(){
+        String desripcion=txtDescripcion.getText().trim();
+        String codigo=txtCodigo.getText().trim();
+        seguro.setDescripcion(desripcion);
+        seguro.setCodigo(codigo);
+
+        SeguroValidator validator = new SeguroValidator();
+        Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
+        if(errors.isEmpty()){
+            seguro.guardar();
+            Utilities.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+            dispose();
+        }else {
+            SeguroValidator.mostrarErrores(errors);
+        }
     }
+
     private void iniciarComponentes(){
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+    }
+
+    private void limpiarControles(){
+        txtDescripcion.setText(null);
+        txtCodigo.setText(null);
+    }
+
+    private void paraActualizar() {
+        setTitle("Editar Seguro");
+        btnRegistrar.setText("Guardar");
+        btnHecho.setText("Cancelar");
+        guardarCopia();
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                onCancel();
+            }
+        });
+    }
+    private void guardarCopia(){
+        txtCodigo.setName(seguro.getCodigo());
+        txtDescripcion.setName(seguro.getDescripcion());
+        cargarSeguro();
+    }
+    private void cargarSeguro(){
+        txtDescripcion.setText(seguro.getDescripcion());
+        txtCodigo.setText(seguro.getCodigo());
+    }
+    private void onCancel(){
+        seguro.setCodigo(txtCodigo.getName());
+        seguro.setDescripcion(txtDescripcion.getName());
+        cerrar();
+    }
+
+    private void cerrar(){
+        dispose();
     }
 }

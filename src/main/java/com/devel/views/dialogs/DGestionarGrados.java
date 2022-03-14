@@ -42,7 +42,7 @@ public class DGestionarGrados extends JDialog{
         });
     }
     private void iniciarComponentes(){
-        setTitle("Gestión Grados");
+        setTitle("Grados");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
@@ -51,7 +51,7 @@ public class DGestionarGrados extends JDialog{
         cargarTabla();
     }
     private void cargarNuevoGrado(){
-        DCrearGrado dCrearGrado=new DCrearGrado(null);
+        DCrearGrado dCrearGrado=new DCrearGrado();
         dCrearGrado.setVisible(true);
         tablaGrados.updateUI();
         Utilities.headerNegrita(tablaGrados);

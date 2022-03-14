@@ -42,6 +42,7 @@ public class DGestionTarifa extends JDialog{
         });
     }
     private void iniciarComponentes(){
+        setTitle("Tarifas");
         setContentPane(panelPrincipal);
         pack();
         setResizable(false);
@@ -50,7 +51,7 @@ public class DGestionTarifa extends JDialog{
         cargarTabla();
     }
     private void cargarNueva(){
-        DAñadirTarifa añadirTarifa=new DAñadirTarifa(null);
+        DAñadirTarifa añadirTarifa=new DAñadirTarifa();
         añadirTarifa.setVisible(true);
         tablaTarifas.updateUI();
         Utilities.headerNegrita(tablaTarifas);

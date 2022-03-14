@@ -36,7 +36,7 @@ public class DGestionTipoDocumento extends JDialog{
     }
 
     private void iniciarComponentes(){
-        setTitle("Gestión tipo de documentos");
+        setTitle("Tipo de documentos");
         setContentPane(panelPrincipal);
         pack();
         setResizable(false);

@@ -17,8 +17,8 @@ public class GradoValidator extends ProgramaValidator {
         return violations.isEmpty() ? null : violations.iterator().next();
     }
 
-    public static Set<ConstraintViolation<Seccion>> loadViolations(Seccion seccion) {
-        Set<ConstraintViolation<Seccion>> violations = PROGRAMA_VALIDATOR.validate(seccion);
+    public static Set<ConstraintViolation<Grado>> loadViolations(Grado grado) {
+        Set<ConstraintViolation<Grado>> violations = PROGRAMA_VALIDATOR.validate(grado);
         return violations;
     }
 

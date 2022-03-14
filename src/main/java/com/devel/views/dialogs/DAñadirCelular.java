@@ -73,7 +73,7 @@ public class DAñadirCelular extends JDialog{
         Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
         if(errors.isEmpty()){
             celular.guardar();
-            persona.getCelulars().add(celular);
+            persona.getCelulares().add(celular);
             celular=new Celular();
             Utilities.sendNotification("Éxito","Número de celular registrado", TrayIcon.MessageType.INFO);
             limpiarControles();

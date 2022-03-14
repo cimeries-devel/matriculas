@@ -36,7 +36,7 @@ public class DGestionarSeguros extends JDialog{
         });
     }
     private void iniciarComponentes(){
-        setTitle("Gestión seguros");
+        setTitle("Seguros");
         setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
@@ -45,7 +45,7 @@ public class DGestionarSeguros extends JDialog{
         cargarTabla();
     }
     private void cargarCrearSeguro(){
-        DAñadirSeguro dAñadirSeguro=new DAñadirSeguro(null);
+        DAñadirSeguro dAñadirSeguro=new DAñadirSeguro();
         dAñadirSeguro.setVisible(true);
         tablaSeguros.updateUI();
         Utilities.headerNegrita(tablaSeguros);
