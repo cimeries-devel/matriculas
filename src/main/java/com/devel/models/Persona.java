@@ -230,7 +230,7 @@ public class Persona extends Hibernate {
     }
     public Relacion getRelacion(Persona persona1){
         for(Relacion relacion:getRelaciones()){
-            if(relacion.getPersona1()==persona1){
+            if(relacion.getPersona1()==persona1||relacion.getPersona()==persona1){
                 return relacion;
             }
         }

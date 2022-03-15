@@ -25,7 +25,7 @@ public class ClientAPI {
             token=propiedades.getTokenApiperu();
         }
         ModeloApiDNI model = null;
-        HttpResponse<String> response = null;
+        HttpResponse<String> response;
         try{
             propiedades=new Propiedades();
             client = HttpClient.newHttpClient();

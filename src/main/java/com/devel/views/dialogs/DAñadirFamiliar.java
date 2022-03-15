@@ -132,6 +132,7 @@ public class DAñadirFamiliar extends JDialog{
         btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
+        cargarFamiliar();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -206,6 +207,7 @@ public class DAñadirFamiliar extends JDialog{
                     Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
                     if(errors4.isEmpty()){
                         persona.getRelaciones().add(relacion);
+                        familiar.getRelaciones().add(relacion);
                         Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
                         limpiarControles();
                     }else {
