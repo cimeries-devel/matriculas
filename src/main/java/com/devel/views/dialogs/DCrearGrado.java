@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Set;
+import java.util.Vector;
 
 public class DCrearGrado extends JDialog {
     private JTextField txtGrado;
@@ -107,7 +108,7 @@ public class DCrearGrado extends JDialog {
     }
 
     private void cargarNiveles(){
-        cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));
+        cbbNiveles.setModel(new DefaultComboBoxModel((Vector) VPrincipal.niveles));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
 
     }

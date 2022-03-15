@@ -1,6 +1,7 @@
 package com.devel.utilities;
 
 import com.devel.ForResources;
+import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
 import com.devel.views.VPrincipal;
@@ -14,12 +15,10 @@ import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Vector;
 
 public class Utilidades {
@@ -96,6 +95,11 @@ public class Utilidades {
                 BigInteger.valueOf(1_000_000)));
         return new Date(millis.longValue());
     }
+    public static Date localDateToDate(LocalDate dateToConvert) {
+        return java.util.Date.from(dateToConvert.atStartOfDay()
+                .atZone(ZoneId.systemDefault())
+                .toInstant());
+    }
     public static void sendNotification(String title, String subtitle, TrayIcon.MessageType tipoMensaje) {
         if(isWindows(System.getProperty("os.name"))){
             if(primera){
@@ -164,6 +168,12 @@ public class Utilidades {
 
     public static void cellsRendered(JTable table){
         TablesCellRendered tablesCellRendered=new TablesCellRendered();
+        for (int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
+        }
+    }
+    public static void cellsRendered(JTable table, Vector<Relacion> vector,boolean a){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered(vector,a);
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }

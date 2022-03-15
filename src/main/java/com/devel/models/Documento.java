@@ -22,12 +22,12 @@ public class Documento extends Hibernate {
 
     @ManyToOne
     @JoinColumn(name = "fk_persona")
-    @NotEmpty
+    @NotNull
     private Persona persona;
 
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "fk_tipoDcoumento")
-    @NotEmpty
     private TipoDocumento tipoDocumento;
 
     public Integer getId() {

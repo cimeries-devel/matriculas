@@ -47,7 +47,6 @@ public class DAñadirCelular extends JDialog{
         this.celular=celular;
         iniciarComponentes();
         paraActualizar();
-        guardarCopia();
         btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -65,6 +64,7 @@ public class DAñadirCelular extends JDialog{
     }
 
     private void registrar(){
+        celular=new Celular();
         String desripcion=txtDescripcion.getText().trim();
         String numero= txtNumero.getText().trim();
         celular.setDescipcion(desripcion);
@@ -128,8 +128,10 @@ public class DAñadirCelular extends JDialog{
     }
 
     private void guardarCopia(){
-        txtNumero.setText(celular.getNumero());
+        txtNumero.setName(celular.getNumero());
         txtDescripcion.setName(celular.getDescipcion());
+        txtDescripcion.setText(celular.getDescipcion());
+        txtNumero.setText(celular.getNumero());
     }
     private void onCancel(){
         celular.setNumero(txtNumero.getName());

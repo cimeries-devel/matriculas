@@ -1,5 +1,6 @@
 package com.devel.views.dialogs;
 
+import com.devel.models.Seguro;
 import com.devel.utilities.JButoonEditors.JButtonEditorSeguros;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class DGestionarSeguros extends JDialog{
     private JTable tablaSeguros;
@@ -51,7 +53,7 @@ public class DGestionarSeguros extends JDialog{
         Utilidades.cellsRendered(tablaSeguros);
     }
     private void cargarTabla(){
-        segurosAbstractModel=new SegurosAbstractModel(VPrincipal.seguros);
+        segurosAbstractModel=new SegurosAbstractModel((Vector<Seguro>) VPrincipal.seguros);
         tablaSeguros.setModel(segurosAbstractModel);
         tablaSeguros.getColumnModel().getColumn(segurosAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSeguros(tablaSeguros));
         TableCellRenderer renderer1 = tablaSeguros.getDefaultRenderer(JButton.class);

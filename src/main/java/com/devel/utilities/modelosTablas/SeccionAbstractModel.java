@@ -8,14 +8,15 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Vector;
 
 public class SeccionAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Id","Sección",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
-    private Vector<Seccion> vector;
+    private List<Seccion> vector;
 
-    public SeccionAbstractModel(Vector<Seccion> vector){
+    public SeccionAbstractModel(List<Seccion> vector){
         this.vector=vector;
     }
     @Override

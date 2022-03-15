@@ -1,5 +1,7 @@
 package com.devel.utilities.TablecellRendered;
 
+import com.devel.models.Persona;
+import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
@@ -9,10 +11,13 @@ import java.awt.*;
 import java.util.Vector;
 
 public class TablesCellRendered extends DefaultTableCellRenderer {
-    private Vector<Tarifa> vector;
-
-    public TablesCellRendered(Vector<Tarifa> vector){
-        this.vector=vector;
+    private Vector<Tarifa> tarifas;
+    private Vector<Relacion> familiares;
+    public TablesCellRendered(Vector<Tarifa> tarifas){
+        this.tarifas=tarifas;
+    }
+    public TablesCellRendered(Vector<Relacion> familiares,boolean a){
+        this.familiares=familiares;
     }
     public TablesCellRendered(){
 
@@ -20,34 +25,32 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        int columnCount=table.getColumnCount()-1;
         if(table.getColumnClass(column).equals(JButton.class)){
-            if(columnCount==column){
-                table.getColumn(table.getModel().getColumnName(column)).setMaxWidth(30);
-                table.getColumn(table.getModel().getColumnName(column)).setMinWidth(30);
-                if(isSelected){
-                    return new JButtonAction("x16/editar.png",new Color(38,117,191));
-                }else{
-                    return new JButtonAction("x16/editar.png");
-                }
-
-            }else{
-                table.getColumn(table.getModel().getColumnName(column)).setMaxWidth(80);
-                table.getColumn(table.getModel().getColumnName(column)).setMinWidth(80);
-                if(vector.get(table.convertRowIndexToModel(row)).isDefecto()){
-                    if(isSelected){
-                        return new JButtonAction("x16/default.png",new Color(38,117,191));
+            table.getColumn(table.getColumnName(column)).setMaxWidth(40);
+            table.getColumn(table.getColumnName(column)).setMaxWidth(40);
+            switch (table.getColumnName(column)){
+                case "Apoderado":
+                case "Activa":
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
+                    if(tarifas!=null){
+                        if(tarifas.get(table.convertRowIndexToModel(row)).isDefecto()){
+                            return seleccionada(isSelected,"default");
+                        }else{
+                            return seleccionada(isSelected,"nodefault");
+                        }
                     }else{
-                        return new JButtonAction("x16/default.png");
-                    }
-                }else{
-                    if(isSelected){
-                        return new JButtonAction("x16/Nodefault.png",new Color(38,117,191));
-                    }else{
-                        return new JButtonAction("x16/Nodefault.png");
+                        if(familiares.get(table.convertRowIndexToModel(row)).isApoderado()){
+                            return seleccionada(isSelected,"default");
+                        }else{
+                            return seleccionada(isSelected,"nodefault");
+                        }
                     }
 
-                }
+                case "Quitar":
+                    return seleccionada(isSelected,"cancelar");
+                default:
+                    return seleccionada(isSelected,"editar");
             }
         }else{
             switch (table.getColumnName(column)){
@@ -62,5 +65,35 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
             }
         }
         return this;
+    }
+    private Component seleccionada(boolean isSelected, String icono){
+        switch (icono){
+            case "default":
+                if(isSelected){
+                    return new JButtonAction("x16/default.png",new Color(38,117,191));
+                }else{
+                    return new JButtonAction("x16/default.png");
+                }
+            case "nodefault":
+                if(isSelected){
+                    return new JButtonAction("x16/Nodefault.png",new Color(38,117,191));
+                }else{
+                    return new JButtonAction("x16/Nodefault.png");
+                }
+            case "cancelar":
+                if(isSelected){
+                    return new JButtonAction("x16/cancelar.png",new Color(38,117,191));
+                }else{
+                    return new JButtonAction("x16/cancelar.png");
+                }
+            default:
+                if(isSelected){
+                    return new JButtonAction("x16/editar.png",new Color(38,117,191));
+                }else{
+                    return new JButtonAction("x16/editar.png");
+                }
+
+        }
+
     }
 }

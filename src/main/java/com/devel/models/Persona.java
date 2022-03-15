@@ -3,8 +3,7 @@ package com.devel.models;
 import com.devel.hibernate.Hibernate;
 import com.devel.utilities.Utilidades;
 import com.sun.istack.Nullable;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -20,34 +19,32 @@ public class Persona extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
-    @Size(min = 3,max = 32)
     private String direccion;
 
     @Column
-    @NotEmpty
+    @Digits(integer = 3,fraction = 0)
     private int edad;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date cumpleaños;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
-    @Nullable
+    @Email
     @Size(min = 11,max = 32)
     private String email;
 
     @Column
-    @NotEmpty
+    @NotNull
     private boolean genero;
 
     @Column
     @NotEmpty
-    @Size(min = 2,max = 32)
+    @Size(min = 1,max = 32)
     private String nombres;
 
     @Column
@@ -56,11 +53,10 @@ public class Persona extends Hibernate {
     private String apellidos;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date actualizacion;
 
     @Column
-    @NotEmpty
     @Size(min = 2,max = 32)
     private String codigo;
 

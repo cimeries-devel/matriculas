@@ -30,7 +30,6 @@ public class Hibernate {
         Integer id = null;
         if (this instanceof Persona) {
             id = ((Persona)(this)).getId();
-            System.out.println("ratatata");
         }
         if (this instanceof Usuario) {
             id = ((Usuario)(this)).getId();

@@ -1,7 +1,7 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Celular;
-import com.devel.models.Relacion;
+import com.devel.models.Documento;
+import com.devel.models.Seguro;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
@@ -9,11 +9,13 @@ import javax.swing.table.AbstractTableModel;
 import java.util.List;
 import java.util.Vector;
 
-public class CelularesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Número",""};
+public class SeguroPersonaAbstractModel  extends AbstractTableModel {
+    private String[] columnNames = {"Nombre","Código","Quitar"};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
-    private List<Celular> vector;
-    public CelularesAbstractModel(List<Celular> vector){
+
+    private List<Seguro> vector;
+
+    public SeguroPersonaAbstractModel(List<Seguro> vector){
         this.vector=vector;
     }
     @Override
@@ -45,17 +47,17 @@ public class CelularesAbstractModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Celular celular=vector.get(rowIndex);
+        Seguro seguro=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return celular.getDescipcion();
+                return seguro.getDescripcion();
             case 1:
-                return celular.getNumero();
+                return seguro.getCodigo();
             default:
-                return new JButtonAction("x16/editar.png");
+                return new JButtonAction("x16/cancelar.png");
         }
     }
-    public Celular traer(int row){
+    public Seguro traer(int row){
         return vector.get(row);
     }
 }

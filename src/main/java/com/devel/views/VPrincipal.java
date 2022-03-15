@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import java.util.Vector;
 
 public class VPrincipal extends JFrame{
@@ -51,7 +52,7 @@ public class VPrincipal extends JFrame{
     public static Vector<Tarifa> tarifas= Tarifas.getTodas();
     public static Vector<Seguro> seguros= Seguros.todos();
     public static Vector<Seccion> secciones= Secciones.todos();
-    public static Vector<Seguro> segurosConTodos=new Vector<>(Seguros.todosconTodos());
+    public static Vector<Seguro> segurosConTodos= Seguros.todosconTodos();
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;

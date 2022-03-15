@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Set;
+import java.util.Vector;
 
 public class DAñadirFamiliar extends JDialog{
     private DatePicker datePicker1;
@@ -83,6 +84,7 @@ public class DAñadirFamiliar extends JDialog{
         this.persona=persona;
         this.familiar=familiar;
         iniciarComponentes();
+        paraActualizar();
         datePicker1.addDateChangeListener(new DateChangeListener() {
             @Override
             public void dateChanged(DateChangeEvent dateChangeEvent) {
@@ -141,9 +143,10 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void registrar(){
+        familiar=new Persona();
         String nombres=txtNombres.getText().trim();
         String apellidos=txtNombres.getText().trim();
-        Date cumpleaños=Date.valueOf(datePicker1.getDate());
+        Date cumpleaños=datePicker1.getDate()==null?null:Date.valueOf(datePicker1.getDate());
         String direccion=txtNombres.getText().trim();
         int edad= Integer.parseInt(lblEdad.getText().trim());
         String email=txtEmail.getText().trim();
@@ -162,6 +165,7 @@ public class DAñadirFamiliar extends JDialog{
         PersonaValidator validator = new PersonaValidator();
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(familiar);
         if(errors.isEmpty()){
+            System.out.println("está en celular");
             Celular celular=new Celular();
             String numero=txtCelular.getText().trim();
             String descCelular=txtDescripcionCelular.getText().trim();
@@ -172,6 +176,8 @@ public class DAñadirFamiliar extends JDialog{
             CelularValidator validator2 = new CelularValidator();
             Set<ConstraintViolation<Celular>> errors2 = validator2.loadViolations(celular);
             if(errors2.isEmpty()){
+                familiar.getCelulares().add(celular);
+                System.out.println("está en documento");
                 Documento documento=new Documento();
                 String numeroDocumento=txtDni.getText().trim();
                 TipoDocumento tipoDocumento=(TipoDocumento) cbbTipoDocumento.getSelectedItem();
@@ -183,6 +189,8 @@ public class DAñadirFamiliar extends JDialog{
                 DocumentoValidator validator3 = new DocumentoValidator();
                 Set<ConstraintViolation<Documento>> errors3 = validator3.loadViolations(documento);
                 if(errors3.isEmpty()){
+                    familiar.getDocumentos().add(documento);
+                    System.out.println("está en relacion");
                     Relacion relacion=new Relacion();
                     String tipoRelacion=txtRelacion.getText().trim();
                     boolean vivenJuntos=ckVivenJuntos.isSelected();
@@ -217,7 +225,7 @@ public class DAñadirFamiliar extends JDialog{
     private void actualizar(){
         String nombres=txtNombres.getText().trim();
         String apellidos=txtNombres.getText().trim();
-        Date cumpleaños=Date.valueOf(datePicker1.getDate());
+        Date cumpleaños=datePicker1.getDate()==null?null:Date.valueOf(datePicker1.getDate());
         String direccion=txtNombres.getText().trim();
         int edad= Integer.parseInt(lblEdad.getText().trim());
         String email=txtEmail.getText().trim();
@@ -304,14 +312,14 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void cargarComboBox(){
-        cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoDocumentos));
+        cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(new Vector<>(VPrincipal.tipoDocumentos)));
         cbbTipoDocumento.setRenderer(new TipoDocumento.ListCellRenderer());
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         datePicker1=new DatePicker();
         datePicker1.getComponentDateTextField().setBorder(new JTextField().getBorder());
-        datePicker1.getComponentDateTextField().setEnabled(false);
+        datePicker1.getSettings().setFormatForDatesCommonEra("dd-MM-yyyy");
         datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
         datePicker1.setSize(new JTextField().getSize());
     }
@@ -325,7 +333,15 @@ public class DAñadirFamiliar extends JDialog{
         txtDescripcionCelular.setName(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setName(familiar.getCelulares().get(0).getNumero());
     }
-
+    private void cargarFamiliar(){
+        txtNombres.setText(familiar.getNombres());
+        txtApellidos.setText(familiar.getApellidos());
+        txtEmail.setText(familiar.getEmail());
+        txtDireccion.setText(familiar.getDireccion());
+        txtRelacion.setText(familiar.getRelacion(persona).getTipoRelacion());
+        txtDescripcionCelular.setText(familiar.getCelulares().get(0).getDescipcion());
+        txtCelular.setText(familiar.getCelulares().get(0).getNumero());
+    }
     private void onCancel(){
         familiar.setNombres(txtNombres.getName());
         familiar.setApellidos(txtApellidos.getName());

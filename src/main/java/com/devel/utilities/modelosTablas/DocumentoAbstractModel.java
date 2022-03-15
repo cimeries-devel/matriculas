@@ -1,21 +1,25 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Celular;
-import com.devel.models.Relacion;
+import com.devel.models.Documento;
+import com.devel.models.Persona;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
+import javax.print.Doc;
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.List;
 import java.util.Vector;
 
-public class CelularesAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Descripción","Número",""};
-    public Class[] m_colTypes = {String.class,String.class, JButton.class};
-    private List<Celular> vector;
-    public CelularesAbstractModel(List<Celular> vector){
+public class DocumentoAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Tipo de documento","Número","Editar","Quitar"};
+    public Class[] m_colTypes = {String.class,String.class, JButton.class, JButton.class};
+    private List<Documento> vector;
+
+    public DocumentoAbstractModel(List<Documento> vector){
         this.vector=vector;
     }
+
     @Override
     public int getColumnCount() {
         return columnNames.length;
@@ -42,20 +46,21 @@ public class CelularesAbstractModel extends AbstractTableModel {
         }
         return false;
     }
-
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Celular celular=vector.get(rowIndex);
+        Documento documento=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return celular.getDescipcion();
+                return documento.getTypeDocument().getCodigo();
             case 1:
-                return celular.getNumero();
-            default:
+                return documento.getNumero();
+            case 2:
                 return new JButtonAction("x16/editar.png");
+            default:
+                return new JButtonAction("x16/cancelar.png");
         }
     }
-    public Celular traer(int row){
+    public Documento traer(int row){
         return vector.get(row);
     }
 }

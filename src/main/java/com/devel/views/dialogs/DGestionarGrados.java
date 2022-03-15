@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class DGestionarGrados extends JDialog{
     private JTable tablaGrados;
@@ -59,7 +60,7 @@ public class DGestionarGrados extends JDialog{
         Utilidades.cellsRendered(tablaGrados);
     }
     private void cargarTabla(){
-        gradoAbstractModel=new GradoAbstractModel(VPrincipal.grados);
+        gradoAbstractModel=new GradoAbstractModel((Vector<Grado>) VPrincipal.grados);
         tablaGrados.setModel(gradoAbstractModel);
         tablaGrados.getColumnModel().getColumn(gradoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorGrados(tablaGrados));
         TableCellRenderer renderer1 = tablaGrados.getDefaultRenderer(JButton.class);

@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class DGestionTipoDocumento extends JDialog{
     private JTable tablaTipoDocumentos;
@@ -45,7 +46,7 @@ public class DGestionTipoDocumento extends JDialog{
         setLocationRelativeTo(null);
     }
     private void cargarTabla(){
-        tipoDocumentoAbstractModel =new TipoDocumentoAbstractModel(VPrincipal.tipoDocumentos);
+        tipoDocumentoAbstractModel =new TipoDocumentoAbstractModel(new Vector<>(VPrincipal.tipoDocumentos));
         tablaTipoDocumentos.setModel(tipoDocumentoAbstractModel);
         tablaTipoDocumentos.getColumnModel().getColumn(tipoDocumentoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorTipoDocumento(tablaTipoDocumentos));
         TableCellRenderer renderer1 = tablaTipoDocumentos.getDefaultRenderer(JButton.class);

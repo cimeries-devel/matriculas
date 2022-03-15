@@ -1,5 +1,6 @@
 package com.devel.views.dialogs;
 
+import com.devel.models.Nivel;
 import com.devel.utilities.JButoonEditors.JButtonEditroNiveles;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class DGestionNiveles extends JDialog{
     private JPanel panelPrincipal;
@@ -51,7 +53,7 @@ public class DGestionNiveles extends JDialog{
         Utilidades.cellsRendered(tablaNiveles);
     }
     private void cargarTabla(){
-        nivelesAbstractModel=new NivelesAbstractModel(VPrincipal.niveles);
+        nivelesAbstractModel=new NivelesAbstractModel((Vector<Nivel>) VPrincipal.niveles);
         tablaNiveles.setModel(nivelesAbstractModel);
         tablaNiveles.getColumnModel().getColumn(nivelesAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroNiveles(tablaNiveles));
         TableCellRenderer renderer1 = tablaNiveles.getDefaultRenderer(JButton.class);

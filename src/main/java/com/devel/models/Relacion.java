@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -18,7 +19,7 @@ public class Relacion extends Hibernate {
     private Integer id;
 
     @ManyToOne
-    @NotEmpty
+    @NotNull
     private Persona persona;
 
     @Column
@@ -27,15 +28,15 @@ public class Relacion extends Hibernate {
     private String tipoRelacion;
 
     @Column
-    @NotEmpty
+    @NotNull
     private boolean apoderado;
 
     @ManyToOne
-    @NotEmpty
+    @NotNull
     private Persona persona1;
 
     @Column
-    @NotEmpty
+    @NotNull
     private boolean vivenJuntos;
 
     public Integer getId() {

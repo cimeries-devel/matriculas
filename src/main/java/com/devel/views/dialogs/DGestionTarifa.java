@@ -1,5 +1,6 @@
 package com.devel.views.dialogs;
 
+import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonEditroTarifas;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 
 public class DGestionTarifa extends JDialog{
     private JTable tablaTarifas;
@@ -54,10 +56,10 @@ public class DGestionTarifa extends JDialog{
         añadirTarifa.setVisible(true);
         tablaTarifas.updateUI();
         Utilidades.headerNegrita(tablaTarifas);
-        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.cellsRendered(tablaTarifas, (Vector<Tarifa>) VPrincipal.tarifas);
     }
     private void cargarTabla(){
-        tarifasAbstractModel =new TarifasAbstractModel(VPrincipal.tarifas);
+        tarifasAbstractModel =new TarifasAbstractModel((Vector<Tarifa>) VPrincipal.tarifas);
         tablaTarifas.setModel(tarifasAbstractModel);
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"editar"));
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-2).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"defecto"));
@@ -67,6 +69,6 @@ public class DGestionTarifa extends JDialog{
         Utilidades.definirTamaño(tablaTarifas.getColumn("Activa"),40);
         Utilidades.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
         Utilidades.headerNegrita(tablaTarifas);
-        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.cellsRendered(tablaTarifas, (Vector<Tarifa>) VPrincipal.tarifas);
     }
 }

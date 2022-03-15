@@ -172,18 +172,19 @@ public class VMatricula extends JFrame{
         panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
     }
     private void cargarComboBox(){
-        cbbNiveles.setModel(new DefaultComboBoxModel<>(VPrincipal.niveles));
+        cbbNiveles.setModel(new DefaultComboBoxModel(VPrincipal.niveles));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
-        cbbGrados.setModel(new DefaultComboBoxModel(VPrincipal.grados));
+        cbbGrados.setModel(new DefaultComboBoxModel( VPrincipal.grados));
         cbbGrados.setRenderer(new Grado.ListCellRenderer());
-        cbbTarifas.setModel(new DefaultComboBoxModel(VPrincipal.tarifas));
+        cbbTarifas.setModel(new DefaultComboBoxModel( VPrincipal.tarifas));
         cbbTarifas.setRenderer(new Tarifa.ListCellRenderer());
     }
     private void cargarMatriculas(){
         matriculadosAbstractModel=new MatriculasAbstractModel(VPrincipal.alumnosMatriculados);
         tablaMatriculas.setModel(matriculadosAbstractModel);
-        Utilidades.cellsRendered(tablaMatriculas);
         Utilidades.headerNegrita(tablaMatriculas);
+        Utilidades.cellsRendered(tablaMatriculas);
+
     }
     private void cargarTablaFamiliares(Vector<Relacion> relaciones){
         familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
@@ -193,14 +194,16 @@ public class VMatricula extends JFrame{
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilidades.headerNegrita(tablaFamiliares);
+        Utilidades.cellsRendered(tablaMatriculas);
     }
     private void cargarTablaCelulares(Vector<Celular> celulares){
-        modelCelulares=new CelularesAbstractModel(new Vector<>(persona.getCelulares()));
+        modelCelulares=new CelularesAbstractModel(persona.getCelulares());
         tablaCelulares.setModel(modelCelulares);
         tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(tablaCelulares));
         TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
         tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilidades.headerNegrita(tablaCelulares);
+        Utilidades.cellsRendered(tablaMatriculas);
     }
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
@@ -211,8 +214,6 @@ public class VMatricula extends JFrame{
     private void definirColumnas(){
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
         Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
-        Utilidades.definirTamaño(tablaCelulares.getColumn(""),30);
-        Utilidades.definirTamaño(tablaCelulares.getColumn("Número"),120);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
