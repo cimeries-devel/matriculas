@@ -245,11 +245,10 @@ public class Persona extends Hibernate {
         return null;
     }
 
-    public void setRelacionDeApoderado(String Tiporelacion){
+    public void setRelacionDeApoderado(String tiporelacion){
         for(Relacion relacion:getRelaciones()){
             if(relacion.isApoderado()){
-                relacion.setTipoRelacion(relacion.getTipoRelacion());
-                relacion.guardar();
+                relacion.setTipoRelacion(tiporelacion);
             }
         }
     }

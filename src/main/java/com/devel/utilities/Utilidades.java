@@ -100,6 +100,11 @@ public class Utilidades {
                 .atZone(ZoneId.systemDefault())
                 .toInstant());
     }
+    public static LocalDate dateToLocalDate(Date dateToConvert) {
+        return Instant.ofEpochMilli(dateToConvert.getTime())
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
     public static void sendNotification(String title, String subtitle, TrayIcon.MessageType tipoMensaje) {
         if(isWindows(System.getProperty("os.name"))){
             if(primera){
