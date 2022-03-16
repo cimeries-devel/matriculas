@@ -71,7 +71,6 @@ public class Hibernate {
             session.save(this);
         }
         session.getTransaction().commit();
-        session.flush();
 
     }
 }

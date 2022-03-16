@@ -188,7 +188,20 @@ public class DNuevoEstudiante extends JDialog{
             } else if(persona.getApoderado()==null){
                 Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
             }else{
+                for(Celular celular:persona.getCelulares()){
+                    celular.guardar();
+                }
                 persona.guardar();
+                for (Relacion relacion:persona.getRelaciones()){
+                    relacion.getPersona1().getCelulares().get(0).guardar();
+                    relacion.getPersona1().guardar();
+                    relacion.getPersona1().getDocumentos().get(0).guardar();
+                    relacion.guardar();
+                }
+                for (Documento documento:persona.getDocumentos()){
+                    documento.guardar();
+                }
+
                 Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
                 limpiarControles();
             }

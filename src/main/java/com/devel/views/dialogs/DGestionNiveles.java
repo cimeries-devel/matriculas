@@ -53,7 +53,7 @@ public class DGestionNiveles extends JDialog{
         Utilidades.cellsRendered(tablaNiveles);
     }
     private void cargarTabla(){
-        nivelesAbstractModel=new NivelesAbstractModel((Vector<Nivel>) VPrincipal.niveles);
+        nivelesAbstractModel=new NivelesAbstractModel(VPrincipal.niveles);
         tablaNiveles.setModel(nivelesAbstractModel);
         tablaNiveles.getColumnModel().getColumn(nivelesAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroNiveles(tablaNiveles));
         TableCellRenderer renderer1 = tablaNiveles.getDefaultRenderer(JButton.class);

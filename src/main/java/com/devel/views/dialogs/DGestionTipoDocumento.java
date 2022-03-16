@@ -46,7 +46,7 @@ public class DGestionTipoDocumento extends JDialog{
         setLocationRelativeTo(null);
     }
     private void cargarTabla(){
-        tipoDocumentoAbstractModel =new TipoDocumentoAbstractModel(new Vector<>(VPrincipal.tipoDocumentos));
+        tipoDocumentoAbstractModel =new TipoDocumentoAbstractModel(VPrincipal.tipoDocumentos);
         tablaTipoDocumentos.setModel(tipoDocumentoAbstractModel);
         tablaTipoDocumentos.getColumnModel().getColumn(tipoDocumentoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorTipoDocumento(tablaTipoDocumentos));
         TableCellRenderer renderer1 = tablaTipoDocumentos.getDefaultRenderer(JButton.class);

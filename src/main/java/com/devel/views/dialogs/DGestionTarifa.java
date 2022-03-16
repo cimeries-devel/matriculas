@@ -56,10 +56,10 @@ public class DGestionTarifa extends JDialog{
         añadirTarifa.setVisible(true);
         tablaTarifas.updateUI();
         Utilidades.headerNegrita(tablaTarifas);
-        Utilidades.cellsRendered(tablaTarifas, (Vector<Tarifa>) VPrincipal.tarifas);
+        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
     }
     private void cargarTabla(){
-        tarifasAbstractModel =new TarifasAbstractModel((Vector<Tarifa>) VPrincipal.tarifas);
+        tarifasAbstractModel =new TarifasAbstractModel(VPrincipal.tarifas);
         tablaTarifas.setModel(tarifasAbstractModel);
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"editar"));
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-2).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"defecto"));

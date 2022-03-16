@@ -15,7 +15,7 @@ public class Documento extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
 
-    @Column
+    @Column(unique = true)
     @NotEmpty
     @Size(min = 8,max = 15)
     private String numero;

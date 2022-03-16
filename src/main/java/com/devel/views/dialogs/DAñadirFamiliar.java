@@ -337,7 +337,7 @@ public class DAñadirFamiliar extends JDialog{
         txtCelular.setName(familiar.getCelulares().get(0).getNumero());
         nacimiento=familiar.getCumpleaños();
         genero=familiar.isGenero();
-        vivenJuntos=familiar.getRelacion(persona).isVivenJuntos();
+        vivenJuntos=persona.getRelacion(familiar).isVivenJuntos();
     }
     private void cargarFamiliar(){
         cbbTipoDocumento.setSelectedItem(familiar.getDocumentos().get(0).getTypeDocument());
@@ -346,11 +346,11 @@ public class DAñadirFamiliar extends JDialog{
         txtApellidos.setText(familiar.getApellidos());
         txtEmail.setText(familiar.getEmail());
         txtDireccion.setText(familiar.getDireccion());
-        txtRelacion.setText(familiar.getRelacion(persona).getTipoRelacion());
+        txtRelacion.setText(persona.getRelacion(familiar).getTipoRelacion());
         txtDescripcionCelular.setText(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setText(familiar.getCelulares().get(0).getNumero());
         cbbGenero.setSelectedIndex(familiar.isGenero()?0:1);
-        ckVivenJuntos.setSelected(familiar.getRelacion(persona).isVivenJuntos());
+        ckVivenJuntos.setSelected(persona.getRelacion(familiar).isVivenJuntos());
         datePicker1.setDate(Utilidades.dateToLocalDate(familiar.getCumpleaños()));
         lblEdad.setText(String.valueOf(familiar.getEdad()));
     }

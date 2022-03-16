@@ -53,7 +53,7 @@ public class DGestionarSeguros extends JDialog{
         Utilidades.cellsRendered(tablaSeguros);
     }
     private void cargarTabla(){
-        segurosAbstractModel=new SegurosAbstractModel((Vector<Seguro>) VPrincipal.seguros);
+        segurosAbstractModel=new SegurosAbstractModel( VPrincipal.seguros);
         tablaSeguros.setModel(segurosAbstractModel);
         tablaSeguros.getColumnModel().getColumn(segurosAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSeguros(tablaSeguros));
         TableCellRenderer renderer1 = tablaSeguros.getDefaultRenderer(JButton.class);
