@@ -177,7 +177,7 @@ public class Utilidades {
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }
     }
-    public static void cellsRendered(JTable table, Vector<Relacion> vector,boolean a){
+    public static void cellsRendered(JTable table, List<Relacion> vector,boolean a){
         TablesCellRendered tablesCellRendered=new TablesCellRendered(vector,a);
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);

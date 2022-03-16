@@ -14,10 +14,11 @@ import java.util.Vector;
 
 public class JButtonEditorFamiliares extends AbstractCellEditor implements TableCellEditor, ActionListener {
     JButtonAction button;
-    private Vector<Relacion> relaciones;
+    private List<Relacion> relaciones;
     private JTable table;
     private String opcion;
-    public JButtonEditorFamiliares(Vector<Relacion> relaciones,JTable table,String opcion) {
+
+    public JButtonEditorFamiliares(List<Relacion> relaciones,JTable table,String opcion) {
         this.relaciones=relaciones;
         this.table=table;
         this.opcion=opcion;

@@ -8,15 +8,17 @@ import com.devel.utilities.JButoonEditors.JButtonAction;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.util.List;
 import java.util.Vector;
 
 public class TablesCellRendered extends DefaultTableCellRenderer {
     private Vector<Tarifa> tarifas;
-    private Vector<Relacion> familiares;
+    private List<Relacion> familiares;
+    private JTable table;
     public TablesCellRendered(Vector<Tarifa> tarifas){
         this.tarifas=tarifas;
     }
-    public TablesCellRendered(Vector<Relacion> familiares,boolean a){
+    public TablesCellRendered(List<Relacion> familiares, boolean a){
         this.familiares=familiares;
     }
     public TablesCellRendered(){
@@ -24,32 +26,36 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
     }
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        this.table=table;
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if(table.getColumnClass(column).equals(JButton.class)){
-            table.getColumn(table.getColumnName(column)).setMaxWidth(40);
-            table.getColumn(table.getColumnName(column)).setMaxWidth(40);
             switch (table.getColumnName(column)){
                 case "Apoderado":
                 case "Activa":
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(80);
                     if(tarifas!=null){
+                        table.getColumn(table.getColumnName(column)).setMaxWidth(80);
+                        table.getColumn(table.getColumnName(column)).setMaxWidth(80);
                         if(tarifas.get(table.convertRowIndexToModel(row)).isDefecto()){
                             return seleccionada(isSelected,"default");
                         }else{
                             return seleccionada(isSelected,"nodefault");
                         }
                     }else{
+                        table.getColumn(table.getColumnName(column)).setMaxWidth(120);
+                        table.getColumn(table.getColumnName(column)).setMaxWidth(120);
                         if(familiares.get(table.convertRowIndexToModel(row)).isApoderado()){
                             return seleccionada(isSelected,"default");
                         }else{
                             return seleccionada(isSelected,"nodefault");
                         }
                     }
-
                 case "Quitar":
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(40);
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(40);
                     return seleccionada(isSelected,"cancelar");
                 default:
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(40);
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(40);
                     return seleccionada(isSelected,"editar");
             }
         }else{
@@ -76,7 +82,7 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 }
             case "nodefault":
                 if(isSelected){
-                    return new JButtonAction("x16/Nodefault.png",new Color(38,117,191));
+                        return new JButtonAction("x16/Nodefault.png",new Color(38,117,191));
                 }else{
                     return new JButtonAction("x16/Nodefault.png");
                 }

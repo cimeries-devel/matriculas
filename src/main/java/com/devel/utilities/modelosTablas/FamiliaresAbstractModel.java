@@ -6,13 +6,14 @@ import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.List;
 import java.util.Vector;
 
 public class FamiliaresAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Dirección","Apoderado",""};
     public Class[] m_colTypes = {String.class,String.class,String.class,String.class, JButton.class, JButton.class};
-    private Vector<Relacion> vector;
-    public FamiliaresAbstractModel(Vector<Relacion> vector){
+    private List<Relacion> vector;
+    public FamiliaresAbstractModel(List<Relacion> vector){
         this.vector=vector;
     }
     @Override

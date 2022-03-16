@@ -198,10 +198,10 @@ public class DAñadirFamiliar extends JDialog{
                     Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
                     if(errors4.isEmpty()){
                         if(persona.getId()!=null){
-                            familiar.guardar();
-                            relacion.guardar();
-                            documento.guardar();
                             celular.guardar();
+                            familiar.guardar();
+                            documento.guardar();
+                            relacion.guardar();
                             persona.guardar();
                         }
                         persona.getRelaciones().add(relacion);
@@ -365,7 +365,7 @@ public class DAñadirFamiliar extends JDialog{
         familiar.setCumpleaños(nacimiento);
         familiar.setEdad(Utilidades.calcularaños(familiar.getCumpleaños()));
         familiar.setGenero(genero);
-        familiar.getRelacion(persona).setVivenJuntos(vivenJuntos);
+        persona.getRelacion(familiar).setVivenJuntos(vivenJuntos);
         cerrar();
     }
 

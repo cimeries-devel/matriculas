@@ -103,7 +103,7 @@ public class VMatricula extends JFrame{
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
         dAñadirFamiliar.setVisible(true);
-        cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
+        cargarTablaFamiliares();
         definirColumnas();
     }
     private void buscarAlumno(){
@@ -114,8 +114,8 @@ public class VMatricula extends JFrame{
                     persona=dni.getPerson();
                     txtNombres.setText(persona.getNombres()+" "+persona.getApellidos());
                     txtCodigo.setText(persona.getCodigo());
-                    cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-                    cargarTablaCelulares(new Vector<>(persona.getCelulares()));
+                    cargarTablaFamiliares();
+                    cargarTablaCelulares();
                     definirColumnas();
                     verificarMatricula();
                     nuevoFamiliarButton.addMouseListener(new MouseAdapter() {
@@ -164,8 +164,8 @@ public class VMatricula extends JFrame{
     private void iniciarComponentes(){
         persona=new Persona();
         setTitle("Matrícula");
-        cargarTablaFamiliares(new Vector<>(persona.getRelaciones()));
-        cargarTablaCelulares(new Vector<>(persona.getCelulares()));
+        cargarTablaFamiliares();
+        cargarTablaCelulares();
         definirColumnas();
         cargarMatriculas();
         cargarComboBox();
@@ -186,34 +186,33 @@ public class VMatricula extends JFrame{
         Utilidades.cellsRendered(tablaMatriculas);
 
     }
-    private void cargarTablaFamiliares(Vector<Relacion> relaciones){
-        familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
+    private void cargarTablaFamiliares( ){
+        familiaresAbstractModel=new FamiliaresAbstractModel(persona.getRelaciones());
         tablaFamiliares.setModel(familiaresAbstractModel);
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"editar"));
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"apoderado"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(persona.getRelaciones(),tablaFamiliares,"editar"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(persona.getRelaciones(),tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
+        Utilidades.cellsRendered(tablaFamiliares,persona.getRelaciones(),true);
         Utilidades.headerNegrita(tablaFamiliares);
-        Utilidades.cellsRendered(tablaMatriculas);
     }
-    private void cargarTablaCelulares(Vector<Celular> celulares){
+    private void cargarTablaCelulares(){
         modelCelulares=new CelularesAbstractModel(persona.getCelulares());
         tablaCelulares.setModel(modelCelulares);
         tablaCelulares.getColumnModel().getColumn(modelCelulares.getColumnCount()-1).setCellEditor(new JButtonEditorCelulares(tablaCelulares));
         TableCellRenderer renderer1=tablaCelulares.getDefaultRenderer(JButton.class);
         tablaCelulares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
+        Utilidades.cellsRendered(tablaCelulares);
         Utilidades.headerNegrita(tablaCelulares);
-        Utilidades.cellsRendered(tablaMatriculas);
     }
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
         dañadirCelular.setVisible(true);
-        cargarTablaCelulares(new Vector<>(persona.getCelulares()));
+        cargarTablaCelulares();
         definirColumnas();
     }
     private void definirColumnas(){
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
-        Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
