@@ -397,10 +397,6 @@ public class DNuevoEstudiante extends JDialog{
         // TODO: place custom component creation code here
         pickerEdad =new DatePicker();
         pickerEdad.getComponentDateTextField().setBorder(new JTextField().getBorder());
-        pickerEdad.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
-        int ge=new JTextField().getHeight()+15;
-        pickerEdad.setPreferredSize(new Dimension(200,ge));
-        pickerEdad.getComponentDateTextField().setPreferredSize(new JTextField().getPreferredSize());
         pickerEdad.getComponentDateTextField().setHorizontalAlignment(JTextField.CENTER);
         pickerEdad.getComponentDateTextField().setBackground(new JTextField().getBackground());
         pickerEdad.getSettings().setFormatForDatesCommonEra("dd-MM-yyyy");

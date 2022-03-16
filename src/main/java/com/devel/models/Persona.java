@@ -7,6 +7,7 @@ import jakarta.validation.constraints.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -253,7 +254,17 @@ public class Persona extends Hibernate {
         }
     }
 
-
-
-
+    @Override
+    public void guardar() {
+        super.guardar();
+        for (Relacion relacion:getRelaciones()){
+            relacion.getPersona1().guardar();
+            relacion.getPersona1().getCelulares().get(0).guardar();
+            relacion.getPersona1().getDocumentos().get(0).guardar();
+            relacion.guardar();
+        }
+        for (Documento documento:getDocumentos()){
+            documento.guardar();
+        }
+    }
 }

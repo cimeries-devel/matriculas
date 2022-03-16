@@ -12,16 +12,15 @@ import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.Vector;
+
+import static com.github.lgooddatepicker.components.DatePickerSettings.DateArea.*;
 
 public class DAñadirFamiliar extends JDialog{
     private DatePicker datePicker1;
@@ -45,16 +44,15 @@ public class DAñadirFamiliar extends JDialog{
     private Persona familiar;
     private java.util.Date nacimiento;
     private boolean genero;
+    private boolean vivenJuntos;
+
     public DAñadirFamiliar(Persona persona){
         this.persona=persona;
         iniciarComponentes();
-        datePicker1.addDateChangeListener(new DateChangeListener() {
-            @Override
-            public void dateChanged(DateChangeEvent dateChangeEvent) {
-                if(datePicker1.getDate()!=null){
-                    int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
-                    lblEdad.setText(String.valueOf(edad));
-                }
+        datePicker1.addDateChangeListener(dateChangeEvent -> {
+            if(datePicker1.getDate()!=null){
+                int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
+                lblEdad.setText(String.valueOf(edad));
             }
         });
         btnHecho.addMouseListener(new MouseAdapter() {
@@ -86,13 +84,10 @@ public class DAñadirFamiliar extends JDialog{
         this.familiar=familiar;
         iniciarComponentes();
         paraActualizar();
-        datePicker1.addDateChangeListener(new DateChangeListener() {
-            @Override
-            public void dateChanged(DateChangeEvent dateChangeEvent) {
-                if(datePicker1.getDate()!=null){
-                    int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
-                    lblEdad.setText(String.valueOf(edad));
-                }
+        datePicker1.addDateChangeListener(dateChangeEvent -> {
+            if(datePicker1.getDate()!=null){
+                int edad= Utilidades.calcularaños(Date.valueOf(datePicker1.getDate()));
+                lblEdad.setText(String.valueOf(edad));
             }
         });
         btnHecho.addMouseListener(new MouseAdapter() {
@@ -107,14 +102,6 @@ public class DAñadirFamiliar extends JDialog{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 actualizar();
-            }
-        });
-        btnBuscar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if(txtDni.getText().length()==8){
-                    buscarPersona();
-                }
             }
         });
     }
@@ -237,9 +224,9 @@ public class DAñadirFamiliar extends JDialog{
 
     private void actualizar(){
         String nombres=txtNombres.getText().trim();
-        String apellidos=txtNombres.getText().trim();
+        String apellidos=txtApellidos.getText().trim();
         Date cumpleaños=datePicker1.getDate()==null?null:Date.valueOf(datePicker1.getDate());
-        String direccion=txtNombres.getText().trim();
+        String direccion=txtDireccion.getText().trim();
         int edad= Integer.parseInt(lblEdad.getText().trim());
         String email=txtEmail.getText().trim();
         boolean genero=cbbGenero.getSelectedIndex() == 0;
@@ -333,11 +320,11 @@ public class DAñadirFamiliar extends JDialog{
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
-        datePicker1=new DatePicker();
+        datePicker1 =new DatePicker();
         datePicker1.getComponentDateTextField().setBorder(new JTextField().getBorder());
+        datePicker1.getComponentDateTextField().setHorizontalAlignment(JTextField.CENTER);
+        datePicker1.getComponentDateTextField().setBackground(new JTextField().getBackground());
         datePicker1.getSettings().setFormatForDatesCommonEra("dd-MM-yyyy");
-        datePicker1.getComponentDateTextField().setDisabledTextColor(new JTextField().getForeground());
-        datePicker1.setSize(new JTextField().getSize());
     }
 
     private void guardarCopia(){
@@ -350,6 +337,7 @@ public class DAñadirFamiliar extends JDialog{
         txtCelular.setName(familiar.getCelulares().get(0).getNumero());
         nacimiento=familiar.getCumpleaños();
         genero=familiar.isGenero();
+        vivenJuntos=familiar.getRelacion(persona).isVivenJuntos();
     }
     private void cargarFamiliar(){
         cbbTipoDocumento.setSelectedItem(familiar.getDocumentos().get(0).getTypeDocument());
@@ -362,6 +350,7 @@ public class DAñadirFamiliar extends JDialog{
         txtDescripcionCelular.setText(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setText(familiar.getCelulares().get(0).getNumero());
         cbbGenero.setSelectedIndex(familiar.isGenero()?0:1);
+        ckVivenJuntos.setSelected(familiar.getRelacion(persona).isVivenJuntos());
         datePicker1.setDate(Utilidades.dateToLocalDate(familiar.getCumpleaños()));
         lblEdad.setText(String.valueOf(familiar.getEdad()));
     }
@@ -376,6 +365,7 @@ public class DAñadirFamiliar extends JDialog{
         familiar.setCumpleaños(nacimiento);
         familiar.setEdad(Utilidades.calcularaños(familiar.getCumpleaños()));
         familiar.setGenero(genero);
+        familiar.getRelacion(persona).setVivenJuntos(vivenJuntos);
         cerrar();
     }
 
