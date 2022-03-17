@@ -192,7 +192,7 @@ public class DNuevoEstudiante extends JDialog{
                     celular.guardar();
                 }
                 persona.guardar();
-                for (Relacion relacion:persona.getRelaciones()){
+                for (Relacion relacion:persona.getFamiliaresparaEstudiante()){
                     relacion.getPersona1().getCelulares().get(0).guardar();
                     relacion.getPersona1().guardar();
                     relacion.getPersona1().getDocumentos().get(0).guardar();
@@ -390,7 +390,7 @@ public class DNuevoEstudiante extends JDialog{
     }
 
     private void cargarFamiliares(){
-        Vector<Relacion> relaciones=new Vector<>(persona.getRelaciones());
+        Vector<Relacion> relaciones=new Vector<>(persona.getFamiliaresparaEstudiante());
         familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
         tablaFamiliares.setModel(familiaresAbstractModel);
         tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"editar"));

@@ -204,7 +204,7 @@ public class DAñadirFamiliar extends JDialog{
                             relacion.guardar();
                             persona.guardar();
                         }
-                        persona.getRelaciones().add(relacion);
+                        persona.getFamiliaresparaEstudiante().add(relacion);
                         familiar.getRelaciones().add(relacion);
                         Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
                         limpiarControles();

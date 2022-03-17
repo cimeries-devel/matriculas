@@ -46,7 +46,6 @@ public class JButtonEditorFamiliares extends AbstractCellEditor implements Table
                 dAñadirFamiliar.setVisible(true);
                 break;
         }
-
         if(!relacion.isApoderado()){
             for (Relacion relacion1:relaciones){
                 relacion1.setApoderado(false);

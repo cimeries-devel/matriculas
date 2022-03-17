@@ -4,9 +4,13 @@ import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Check;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+
 
 @Entity(name = "tbl_documento")
 public class Documento extends Hibernate {
@@ -15,7 +19,7 @@ public class Documento extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
 
-    @Column(unique = true)
+//    @Column(unique = true)
     @NotEmpty
     @Size(min = 8,max = 15)
     private String numero;
