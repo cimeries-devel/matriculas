@@ -8,7 +8,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Vector;
 
-public class TipoDcoumentos extends Hibernate {
+public class TipoDocumentos extends Hibernate {
     private static Root<TipoDocumento> root;
     private static CriteriaQuery<TipoDocumento> criteria;
     private static Vector<TipoDocumento> todos;
@@ -21,6 +21,21 @@ public class TipoDcoumentos extends Hibernate {
         criteria = builder.createQuery(TipoDocumento.class);
         criteria.select(criteria.from(TipoDocumento.class));
         todos = new Vector<>(session.createQuery(criteria).getResultList());
+        verificarDocumentos();
         return todos;
+    }
+    private static void verificarDocumentos(){
+        if(todos.isEmpty()){
+            TipoDocumento dni=new TipoDocumento();
+            dni.setCodigo("DNI");
+            dni.setDescripcion("Documento Nacional de Identidad");
+            dni.guardar();
+            TipoDocumento pasaporte=new TipoDocumento();
+            pasaporte.setCodigo("PASAPORTE");
+            pasaporte.setDescripcion("Pasaporte");
+            pasaporte.guardar();
+            todos.add(dni);
+            todos.add(pasaporte);
+        }
     }
 }

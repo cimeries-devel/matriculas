@@ -22,17 +22,33 @@ public class Seguros extends Hibernate {
         criteria = builder.createQuery(Seguro.class);
         criteria.select(criteria.from(Seguro.class));
         todos= new Vector<>(session.createQuery(criteria).getResultList());
-        System.out.println(todos.size());
+        verificarSeguros();
         return todos;
     }
     public static Vector<Seguro> todosconTodos(){
         criteria = builder.createQuery(Seguro.class);
         criteria.select(criteria.from(Seguro.class));
         todos= new Vector<>(session.createQuery(criteria).getResultList());
+        verificarSeguros();
         System.out.println(todos.size());
         Seguro seguro=new Seguro();
         seguro.setDescripcion("Todos");
         todos.add(0,seguro);
         return todos;
+    }
+
+    private static void verificarSeguros(){
+        if (todos.isEmpty()){
+            Seguro sis=new Seguro();
+            sis.setCodigo("SIS");
+            sis.setDescripcion("Seguro Integral de Salud");
+            sis.guardar();
+            Seguro essalud=new Seguro();
+            essalud.setCodigo("EsSalud");
+            essalud.setDescripcion("Seguro Social de Salud del Perú");
+            essalud.guardar();
+            todos.add(sis);
+            todos.add(essalud);
+        }
     }
 }
