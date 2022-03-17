@@ -64,8 +64,11 @@ public class Persona extends Hibernate {
     @OneToMany(mappedBy = "persona")
     private List<Documento> documentos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "persona")
+    @OneToMany(mappedBy = "persona1")
     private List<Relacion> relaciones = new ArrayList<>();
+
+    @OneToMany(mappedBy = "persona")
+    private List<Relacion> familiaresparaEstudiante = new ArrayList<>();
 
     @OneToMany(mappedBy = "estudiante")
     private List<Registro> registros = new ArrayList<>();
@@ -208,6 +211,7 @@ public class Persona extends Hibernate {
     public List<Registro> getRegistros() {
         return registros;
     }
+
     public Registro ultimaMatricula(){
         Registro ultimoRegistro=getRegistros().get(0);
         for (Registro registro:getRegistros()){
@@ -222,36 +226,44 @@ public class Persona extends Hibernate {
     }
 
     public Persona getApoderado(){
-        for(Relacion relacion:getRelaciones()){
+        for(Relacion relacion:getFamiliaresparaEstudiante()){
             if(relacion.isApoderado()){
                 return relacion.getPersona1();
             }
         }
         return null;
     }
-    public Relacion getRelacion(Persona persona1){
+    public Relacion getRelacion(Persona persona){
         for(Relacion relacion:getRelaciones()){
-            if(relacion.getPersona1()==persona1||relacion.getPersona()==persona1){
+            if(relacion.getPersona()==persona){
                 return relacion;
             }
         }
         return null;
     }
-    public String getRelacionDeApoderado(){
+    public String getTipoRelacion(Persona persona){
         for(Relacion relacion:getRelaciones()){
-            if(relacion.isApoderado()){
+            if(relacion.getPersona()==persona){
                 return relacion.getTipoRelacion();
             }
         }
         return null;
     }
 
-    public void setRelacionDeApoderado(String tiporelacion){
+    public void setTipoRelacionRelacion(Persona persona,String tiporelacion){
         for(Relacion relacion:getRelaciones()){
-            if(relacion.isApoderado()){
+            if(relacion.getPersona1()==persona){
                 relacion.setTipoRelacion(tiporelacion);
             }
         }
+    }
+
+    public List<Relacion> getFamiliaresparaEstudiante() {
+        return familiaresparaEstudiante;
+    }
+
+    public void setFamiliaresparaEstudiante(List<Relacion> familiaresparaEstudiante) {
+        this.familiaresparaEstudiante = familiaresparaEstudiante;
     }
 
     @Override

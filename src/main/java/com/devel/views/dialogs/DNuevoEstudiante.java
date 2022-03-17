@@ -201,7 +201,8 @@ public class DNuevoEstudiante extends JDialog{
                 for (Documento documento:persona.getDocumentos()){
                     documento.guardar();
                 }
-
+                persona=new Persona();
+                cargarTablas();
                 Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
                 limpiarControles();
             }

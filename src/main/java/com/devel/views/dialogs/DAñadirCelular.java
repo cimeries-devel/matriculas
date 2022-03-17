@@ -74,8 +74,11 @@ public class DAñadirCelular extends JDialog{
         if(errors.isEmpty()){
             if(persona.getId()!=null){
                 celular.guardar();
+                persona.getCelulares().add(celular);
+                persona.guardar();
+            }else{
+                persona.getCelulares().add(celular);
             }
-            persona.getCelulares().add(celular);
             Utilidades.sendNotification("Éxito","Número de celular registrado", TrayIcon.MessageType.INFO);
             limpiarControles();
         }else {

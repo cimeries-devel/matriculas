@@ -96,6 +96,7 @@ public class VMatricula extends JFrame{
     public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
+
     private void cargarNuevoEstudiante(){
         DNuevoEstudiante dNuevoEstudiante=new DNuevoEstudiante();
         dNuevoEstudiante.setVisible(true);
@@ -103,8 +104,7 @@ public class VMatricula extends JFrame{
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
         dAñadirFamiliar.setVisible(true);
-        cargarTablaFamiliares();
-        definirColumnas();
+        tablaFamiliares.updateUI();
     }
     private void buscarAlumno(){
         if(txtDni.getText().length()>=8){
@@ -187,13 +187,13 @@ public class VMatricula extends JFrame{
 
     }
     private void cargarTablaFamiliares( ){
-        familiaresAbstractModel=new FamiliaresAbstractModel(persona.getRelaciones());
+        familiaresAbstractModel=new FamiliaresAbstractModel(persona.getFamiliaresparaEstudiante());
         tablaFamiliares.setModel(familiaresAbstractModel);
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(persona.getRelaciones(),tablaFamiliares,"editar"));
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(persona.getRelaciones(),tablaFamiliares,"apoderado"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(persona.getFamiliaresparaEstudiante(),tablaFamiliares,"editar"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(persona.getFamiliaresparaEstudiante(),tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.cellsRendered(tablaFamiliares,persona.getRelaciones(),true);
+        Utilidades.cellsRendered(tablaFamiliares,persona.getFamiliaresparaEstudiante(),true);
         Utilidades.headerNegrita(tablaFamiliares);
     }
     private void cargarTablaCelulares(){
@@ -208,13 +208,9 @@ public class VMatricula extends JFrame{
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
         dañadirCelular.setVisible(true);
-        cargarTablaCelulares();
-        definirColumnas();
+        tablaCelulares.updateUI();
     }
     private void definirColumnas(){
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
-    }
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }
