@@ -9,8 +9,7 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionarGrados extends JDialog{
@@ -38,9 +37,14 @@ public class DGestionarGrados extends JDialog{
         btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                dispose();
+                cerrar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Grados");
@@ -55,9 +59,7 @@ public class DGestionarGrados extends JDialog{
     private void cargarNuevoGrado(){
         DCrearGrado dCrearGrado=new DCrearGrado();
         dCrearGrado.setVisible(true);
-        tablaGrados.updateUI();
-        Utilidades.headerNegrita(tablaGrados);
-        Utilidades.cellsRendered(tablaGrados);
+        Utilidades.actualizarTabla(tablaGrados);
     }
     private void cargarTabla(){
         gradoAbstractModel=new GradoAbstractModel((Vector<Grado>) VPrincipal.grados);
@@ -69,5 +71,8 @@ public class DGestionarGrados extends JDialog{
         Utilidades.definirTamaño(tablaGrados.getColumn("Id"),40);
         Utilidades.headerNegrita(tablaGrados);
         Utilidades.cellsRendered(tablaGrados);
+    }
+    private void cerrar(){
+        dispose();
     }
 }

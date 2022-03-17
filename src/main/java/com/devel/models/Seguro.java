@@ -19,12 +19,12 @@ public class Seguro extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 2,max = 32)
+    @Size(min = 2,max = 32,message = "Código")
     private String codigo;
 
     @Column
     @NotEmpty
-    @Size(min = 5,max = 32)
+    @Size(min = 5,max = 32,message = "Descripción")
     private String descripcion;
 
     public Integer getId() {

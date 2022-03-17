@@ -100,12 +100,4 @@ public class ConfigSistema extends JDialog {
                 break;
         }
     }
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-//        panelPrincipal=new FondoPanel("Images/fondo2.jpg");
-//        panelDatos =new FondoPanel("Images/fondo2.jpg");
-//        panelImpreciones=new FondoPanel("Images/fondo2.jpg");
-//        panelContenido=new FondoPanel("Images/fondo2.jpg");
-//        panelAplicacion=new FondoPanel("Images/fondo2.jpg");
-    }
 }

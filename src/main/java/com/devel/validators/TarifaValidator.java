@@ -23,7 +23,7 @@ public class TarifaValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Tarifa>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Tarifa> error1= (ConstraintViolation<Tarifa>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

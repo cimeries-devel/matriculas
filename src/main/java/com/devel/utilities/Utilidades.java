@@ -148,13 +148,16 @@ public class Utilidades {
         column.setMinWidth(Width);
         column.setMaxWidth(Width);
     }
-
+    public static void actualizarTabla(JTable tabla){
+        tabla.setVisible(false);
+        tabla.setVisible(true);
+    }
     public static void headerNegrita(JTable table){
         ((DefaultTableCellRenderer) (table.getTableHeader()).getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
         DefaultTableCellRenderer header = new DefaultTableCellRenderer();
         header.setFont(header.getFont().deriveFont(Font.BOLD));
         header.setForeground(Color.white);
-        header.setBackground(new Color(0xFF3A3434, true));
+        header.setBackground(new Color(0xFF000000, true));
         header.setHorizontalAlignment(JLabel.CENTER);
         for(int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setHeaderRenderer(header);
@@ -182,6 +185,7 @@ public class Utilidades {
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }
+
     }
     public static void cellsRendered(JTable table, Vector<Tarifa> vector){
         TablesCellRendered tablesCellRendered=new TablesCellRendered(vector);

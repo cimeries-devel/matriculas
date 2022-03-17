@@ -21,12 +21,12 @@ public class Celular extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 3, max = 32)
+    @Size(min = 3, max = 32,message = "Descripicón")
     private String descripcion;
 
     @Column
     @NotEmpty
-    @Size(min = 9, max = 13)
+    @Size(min = 9, max = 13,message = "Número")
     private String numero;
 
     public Integer getId() {

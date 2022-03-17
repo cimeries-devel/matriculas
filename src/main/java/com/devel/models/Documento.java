@@ -10,6 +10,7 @@ import org.hibernate.annotations.NaturalId;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 
 
 @Entity(name = "tbl_documento")
@@ -19,9 +20,9 @@ public class Documento extends Hibernate {
     @GenericGenerator(name = "incremnet", strategy = "incremnet")
     private Integer id;
 
-//    @Column(unique = true)
+    @Column(unique = true)
     @NotEmpty
-    @Size(min = 8,max = 15)
+    @Size(min = 8,max = 15,message = "Número")
     private String numero;
 
     @ManyToOne

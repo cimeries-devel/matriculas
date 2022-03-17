@@ -23,7 +23,7 @@ public class RegistroValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Registro>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Registro> error1= (ConstraintViolation<Registro>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

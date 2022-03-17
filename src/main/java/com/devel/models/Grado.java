@@ -22,7 +22,7 @@ public class Grado extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min =1,max = 15)
+    @Size(min =1,max = 15,message = "Grado")
     private String grado;
 
     @OneToMany(mappedBy = "grado")

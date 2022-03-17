@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import com.sun.istack.Nullable;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
@@ -23,13 +24,12 @@ public class Usuario extends Hibernate {
     private Date creacion;
 
     @Column
-    @Nullable
-    @Size(min = 3,max = 32)
+    @Email(message = "Email")
     private String email;
 
     @Column
     @NotEmpty
-    @Size(min = 2,max = 32)
+    @Size(min = 2,max = 32,message = "Nombres")
     private String nombres;
 
     @Column
@@ -37,12 +37,12 @@ public class Usuario extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 2,max = 32)
+    @Size(min = 2,max = 32,message = "Apellidos")
     private String apellidos;
 
     @Column
     @NotEmpty
-    @Size(min = 7,max = 32)
+    @Size(min = 7,max = 32,message = "Contraseña")
     private String contraseña;
 
     @Column
@@ -51,7 +51,7 @@ public class Usuario extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 7,max = 32)
+    @Size(min = 5,max = 32,message = "Usuario")
     private String usuario;
 
     @OneToMany

@@ -126,7 +126,8 @@
                       </grid>
                     </constraints>
                     <properties>
-                      <editable value="false"/>
+                      <editable value="true"/>
+                      <enabled value="false"/>
                     </properties>
                   </component>
                   <component id="b599" class="javax.swing.JLabel">
@@ -196,11 +197,12 @@
                       </model>
                     </properties>
                   </component>
-                  <component id="fbad4" class="javax.swing.JButton" binding="registrarMatriculaButton" default-binding="true">
+                  <component id="fbad4" class="javax.swing.JButton" binding="btnRegistrarMatricula">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <enabled value="false"/>
                       <text value="Registrar Matricula"/>
                     </properties>
                   </component>
@@ -225,6 +227,7 @@
                       <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <enabled value="true"/>
                       <focusPainted value="false"/>
                       <horizontalTextPosition value="2"/>
                       <requestFocusEnabled value="true"/>
@@ -242,11 +245,12 @@
                 <properties/>
                 <border type="none" title="Celulares"/>
                 <children>
-                  <component id="87840" class="javax.swing.JButton" binding="añdirCelularButton" default-binding="true">
+                  <component id="87840" class="javax.swing.JButton" binding="btnAñadirCelular">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
+                      <enabled value="false"/>
                       <text value="Añadir celular"/>
                     </properties>
                   </component>
@@ -261,7 +265,9 @@
                     <children>
                       <component id="4d878" class="javax.swing.JTable" binding="tablaCelulares">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <rowHeight value="25"/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>
@@ -275,12 +281,12 @@
                 <properties/>
                 <border type="none" title="Familiares"/>
                 <children>
-                  <component id="da686" class="javax.swing.JButton" binding="nuevoFamiliarButton" default-binding="true">
+                  <component id="da686" class="javax.swing.JButton" binding="btnAñadirFamiliar">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <enabled value="true"/>
+                      <enabled value="false"/>
                       <focusable value="true"/>
                       <text value="Nuevo familiar"/>
                     </properties>
@@ -294,7 +300,9 @@
                     <children>
                       <component id="1b1aa" class="javax.swing.JTable" binding="tablaFamiliares">
                         <constraints/>
-                        <properties/>
+                        <properties>
+                          <rowHeight value="25"/>
+                        </properties>
                       </component>
                     </children>
                   </scrollpane>

@@ -9,8 +9,7 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionTarifa extends JDialog{
@@ -38,9 +37,14 @@ public class DGestionTarifa extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Tarifas");
@@ -54,9 +58,7 @@ public class DGestionTarifa extends JDialog{
     private void cargarNueva(){
         DAñadirTarifa añadirTarifa=new DAñadirTarifa();
         añadirTarifa.setVisible(true);
-        tablaTarifas.updateUI();
-        Utilidades.headerNegrita(tablaTarifas);
-        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.actualizarTabla(tablaTarifas);
     }
     private void cargarTabla(){
         tarifasAbstractModel =new TarifasAbstractModel(VPrincipal.tarifas);
@@ -65,10 +67,10 @@ public class DGestionTarifa extends JDialog{
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-2).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"defecto"));
         TableCellRenderer renderer1 = tablaTarifas.getDefaultRenderer(JButton.class);
         tablaTarifas.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-//        Utilidades.definirTamaño(tablaTarifas.getColumn("Tarifa"),80);
-//        Utilidades.definirTamaño(tablaTarifas.getColumn("Activa"),40);
-//        Utilidades.definirTamaño(tablaTarifas.getColumn("Fecha creación"),110);
         Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
         Utilidades.headerNegrita(tablaTarifas);
+    }
+    private void cerrar(){
+        dispose();
     }
 }

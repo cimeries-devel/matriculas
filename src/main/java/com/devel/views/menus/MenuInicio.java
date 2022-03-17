@@ -22,12 +22,9 @@ public class MenuInicio {
     private VAlumnos alumnos;
     private VMatricula matricula;
     private Propiedades propiedades;
+
     public MenuInicio(final DnDTabbedPane tabContenido){
-        this.propiedades=propiedades;
         this.tabContenido=tabContenido;
-        welcome=new VWelcome();
-        alumnos=new VAlumnos();
-        matricula=new VMatricula();
         inicioButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

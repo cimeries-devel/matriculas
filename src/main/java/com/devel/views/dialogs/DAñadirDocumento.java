@@ -1,7 +1,6 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Documento;
-import com.devel.models.TipoDocumento;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.DocumentoValidator;
 import jakarta.validation.ConstraintViolation;
@@ -12,7 +11,7 @@ import java.awt.event.*;
 import java.util.Set;
 
 public class DAñadirDocumento extends JDialog {
-    private JPanel contentPane;
+    private JPanel panelPrincipal;
     private JButton btnGuardar;
     private JButton btnCancelar;
     private JTextField txtNumero;
@@ -32,11 +31,15 @@ public class DAñadirDocumento extends JDialog {
                 onCancel();
             }
         });
-
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Editar Documento");
-        setContentPane(contentPane);
+        setContentPane(panelPrincipal);
         pack();
         setLocationRelativeTo(null);
         setResizable(false);

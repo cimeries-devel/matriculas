@@ -23,7 +23,7 @@ public class SalonValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Salon>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Salon> error1= (ConstraintViolation<Salon>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

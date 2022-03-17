@@ -112,8 +112,4 @@ public class VLogin extends JFrame{
                 break;
         }
     }
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-//        panelLogin=new FondoPanel("Images/fondo.jpg");
-    }
 }

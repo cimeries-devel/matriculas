@@ -9,8 +9,7 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionarSeguros extends JDialog{
@@ -32,9 +31,14 @@ public class DGestionarSeguros extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Seguros");
@@ -48,9 +52,7 @@ public class DGestionarSeguros extends JDialog{
     private void cargarCrearSeguro(){
         DAñadirSeguro dAñadirSeguro=new DAñadirSeguro();
         dAñadirSeguro.setVisible(true);
-        tablaSeguros.updateUI();
-        Utilidades.headerNegrita(tablaSeguros);
-        Utilidades.cellsRendered(tablaSeguros);
+        Utilidades.actualizarTabla(tablaSeguros);
     }
     private void cargarTabla(){
         segurosAbstractModel=new SegurosAbstractModel( VPrincipal.seguros);
@@ -61,5 +63,8 @@ public class DGestionarSeguros extends JDialog{
         Utilidades.definirTamaño(tablaSeguros.getColumn(""),30);
         Utilidades.headerNegrita(tablaSeguros);
         Utilidades.cellsRendered(tablaSeguros);
+    }
+    private void cerrar(){
+        dispose();
     }
 }

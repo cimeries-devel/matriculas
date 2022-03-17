@@ -26,4 +26,12 @@ public class Tarifas extends Hibernate {
         todas = new Vector<>(session.createQuery(criteria).getResultList());
         return todas;
     }
+    public static Tarifa tarifaActiva(){
+        criteria= builder.createQuery(Tarifa.class);
+        root=criteria.from(Tarifa.class);
+        criteria.select(root)
+                .where(builder.isTrue(root.get("defecto"))
+                );
+        return session.createQuery(criteria).uniqueResult();
+    }
 }

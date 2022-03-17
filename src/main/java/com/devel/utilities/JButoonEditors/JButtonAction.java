@@ -4,9 +4,7 @@ import com.devel.ForResources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class JButtonAction extends JButton {
 
@@ -33,11 +31,8 @@ public class JButtonAction extends JButton {
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                setBackground(new Color(38,117,191));
-                JTable parent = (JTable) getParent();
-                parent.setSelectionForeground(new Color(0XFFFFFF));
-                parent.setSelectionBackground(new Color(38,117,191));
+                JTable table = (JTable) getParent();
+                setBackground(table.getSelectionBackground());
             }
         });
     }

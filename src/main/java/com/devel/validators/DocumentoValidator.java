@@ -23,7 +23,7 @@ public class DocumentoValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Documento>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Documento> error1= (ConstraintViolation<Documento>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

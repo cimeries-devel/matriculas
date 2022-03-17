@@ -77,6 +77,11 @@ public class DAñadirFamiliar extends JDialog{
                 }
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     public DAñadirFamiliar(Persona persona,Persona familiar){
@@ -104,6 +109,11 @@ public class DAñadirFamiliar extends JDialog{
                 actualizar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void iniciarComponentes(){
@@ -312,6 +322,7 @@ public class DAñadirFamiliar extends JDialog{
         txtDireccion.setText(familiar.getDireccion());
         datePicker1.setDate(LocalDate.parse(a.format(familiar.getCumpleaños())));
         txtEmail.setText(familiar.getEmail());
+        JOptionPane.showMessageDialog(null,"si encontró");
     }
 
     private void cargarComboBox(){

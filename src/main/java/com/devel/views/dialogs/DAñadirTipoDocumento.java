@@ -10,10 +10,7 @@ import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.Date;
 import java.util.Set;
 
@@ -42,6 +39,11 @@ public class DAñadirTipoDocumento extends JDialog{
                 cerrar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
     public DAñadirTipoDocumento(TipoDocumento tipoDocumento1) {
@@ -62,6 +64,11 @@ public class DAñadirTipoDocumento extends JDialog{
                 onCancel();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
 

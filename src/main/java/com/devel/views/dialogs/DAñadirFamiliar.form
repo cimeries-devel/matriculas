@@ -254,7 +254,7 @@
                 </constraints>
                 <properties>
                   <font size="14"/>
-                  <text value="Celular:"/>
+                  <text value="Número:"/>
                 </properties>
               </component>
               <component id="99bdc" class="javax.swing.JTextField" binding="txtCelular">

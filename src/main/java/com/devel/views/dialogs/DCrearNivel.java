@@ -11,10 +11,7 @@ import jakarta.validation.ConstraintViolation;
 import javax.swing.*;
 import javax.swing.text.DateFormatter;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -49,6 +46,11 @@ public class DCrearNivel extends JDialog{
                 cerrar();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     public DCrearNivel(Nivel nivel){
         iniciarComponentes();
@@ -67,6 +69,11 @@ public class DCrearNivel extends JDialog{
                 onCancel();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                onCancel();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Registrar Nivel");
@@ -76,23 +83,6 @@ public class DCrearNivel extends JDialog{
         setResizable(false);
         setModal(true);
     }
-//    private boolean registrarNivel(){
-//        if(txtDescripcion.getText().length()>0&&horaFin.getTime()!=null&&horaFin.getTime()!=null){
-//            Calendar calendar=Calendar.getInstance();
-//            calendar.set(Calendar.HOUR_OF_DAY,horaInicio.getTime().getHour());
-//            calendar.set(Calendar.MINUTE,horaInicio.getTime().getMinute());
-//            nivel.setDescripcion(txtDescripcion.getText().trim());
-//            nivel.setCreacion(new Date());
-//            nivel.setHoraInicio(calendar.getTime());
-//            calendar.set(Calendar.HOUR_OF_DAY,horaFin.getTime().getHour());
-//            calendar.set(Calendar.MINUTE,horaFin.getTime().getMinute());
-//            nivel.setHoraFin(calendar.getTime());
-//            nivel.guardar();
-//            return true;
-//        }else{
-//            return false;
-//        }
-//    }
 
     private void registrar(){
         String descripcion=txtDescripcion.getText().trim();

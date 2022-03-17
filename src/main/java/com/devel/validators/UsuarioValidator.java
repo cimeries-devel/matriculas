@@ -23,7 +23,7 @@ public class UsuarioValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Usuario>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Usuario> error1= (ConstraintViolation<Usuario>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

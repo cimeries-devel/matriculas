@@ -20,14 +20,15 @@ public class Persona extends Hibernate {
     private Integer id;
 
     @Column
+    @Size(min = 2,max = 32,message = "Dirección")
     private String direccion;
 
     @Column
-    @Digits(integer = 3,fraction = 0)
+    @Digits(integer = 3,fraction = 0,message = "Edad")
     private int edad;
 
     @Column
-    @NotNull
+    @NotNull(message = "Cumpleaños")
     private Date cumpleaños;
 
     @Column
@@ -35,8 +36,7 @@ public class Persona extends Hibernate {
     private Date creacion;
 
     @Column
-    @Email
-    @Size(min = 11,max = 32)
+    @Email(message = "Email")
     private String email;
 
     @Column
@@ -44,13 +44,11 @@ public class Persona extends Hibernate {
     private boolean genero;
 
     @Column
-    @NotEmpty
-    @Size(min = 1,max = 32)
+    @NotEmpty(message = "Nombres")
     private String nombres;
 
     @Column
-    @NotEmpty
-    @Size(min = 2,max = 32)
+    @NotEmpty(message = "Apellidos")
     private String apellidos;
 
     @Column
@@ -58,7 +56,7 @@ public class Persona extends Hibernate {
     private Date actualizacion;
 
     @Column
-    @Size(min = 2,max = 32)
+    @Size(min = 2,max = 32,message = "Código")
     private String codigo;
 
     @OneToMany(mappedBy = "persona")

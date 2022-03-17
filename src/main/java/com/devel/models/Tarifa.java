@@ -25,7 +25,7 @@ public class Tarifa extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 1,max = 32)
+    @Size(min = 1,max = 32,message = "Descripción")
     private String descripcion;
 
     @Column
@@ -33,7 +33,7 @@ public class Tarifa extends Hibernate {
     private Date creacion;
 
     @Column
-    @Digits(integer = 10,fraction = 2)
+    @Digits(integer = 10,fraction = 2,message = "Precio")
     @DecimalMin("0.1")
     private Double precio;
 

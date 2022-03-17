@@ -15,11 +15,9 @@ import com.devel.views.menus.MenuReportes;
 import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
+import javax.swing.event.MenuListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class VPrincipal extends JFrame{
@@ -98,21 +96,16 @@ public class VPrincipal extends JFrame{
                 contentPane.updateUI();
             }
         });
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarLogin();
+            }
+        });
         btnConfiguraciones.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
                 cargarVConfiguraciones();
-            }
-        });
-
-        button1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                dispose();
-                Utilidades.tema(propiedades.getTema());
-                VLogin vLogin=new VLogin(propiedades);
-                vLogin.setVisible(true);
             }
         });
     }
@@ -134,6 +127,14 @@ public class VPrincipal extends JFrame{
         pack();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                cargarLogin();
+            }
+        });
     }
     private void añadirButtonOnJTabedpane(){
         tabContenido.setAlignmentX(1.0f);
@@ -161,31 +162,20 @@ public class VPrincipal extends JFrame{
         JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
         JMenuItem cerrarOtras = new JMenuItem("Cerrar Otras Pestañas");
         JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");
-        cerrarPestaña.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if(tabContenido.getSelectedIndex()!=-1){
-                    tabContenido.removeTabAt(tabContenido.getSelectedIndex());
-                }
+        cerrarPestaña.addActionListener(e -> {
+            if(tabContenido.getSelectedIndex()!=-1){
+                tabContenido.removeTabAt(tabContenido.getSelectedIndex());
             }
         });
-        cerrarOtras.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                if(tabContenido.getSelectedIndex()!=-1){
-                    TabPanel tab= (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
-                    String titulo= tabContenido.getTitleAt(tabContenido.getSelectedIndex());
-                    tabContenido.removeAll();
-                    tabContenido.addTab(titulo,tab.getIcon(),tab);
-                }
-            }
-        });
-        cerrarTodas.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
+        cerrarOtras.addActionListener(e -> {
+            if(tabContenido.getSelectedIndex()!=-1){
+                TabPanel tab= (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
+                String titulo= tabContenido.getTitleAt(tabContenido.getSelectedIndex());
                 tabContenido.removeAll();
+                tabContenido.addTab(titulo,tab.getIcon(),tab);
             }
         });
+        cerrarTodas.addActionListener(e -> tabContenido.removeAll());
         pop_up.add(cerrarPestaña);
         pop_up.addSeparator();
         pop_up.add(cerrarOtras);
@@ -217,5 +207,15 @@ public class VPrincipal extends JFrame{
     private void cargarVConfiguraciones(){
         ConfigSistema configSistema=new ConfigSistema(this,propiedades);
         configSistema.setVisible(true);
+    }
+    private void cargarLogin(){
+        int sioNo=JOptionPane.showOptionDialog(null, "¿Está seguro?","Cerrar Sesión",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+        if(sioNo==0){
+            dispose();
+            Utilidades.tema(propiedades.getTema());
+            VLogin vLogin=new VLogin(propiedades);
+            vLogin.setVisible(true);
+        }
+
     }
 }

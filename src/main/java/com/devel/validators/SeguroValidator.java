@@ -35,7 +35,7 @@ public class SeguroValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Seguro>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Seguro> error1= (ConstraintViolation<Seguro>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

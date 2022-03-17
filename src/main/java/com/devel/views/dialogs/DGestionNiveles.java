@@ -9,8 +9,7 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionNiveles extends JDialog{
@@ -35,6 +34,11 @@ public class DGestionNiveles extends JDialog{
                 dispose();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     private void iniciarComponentes(){
         setTitle("Niveles");
@@ -48,9 +52,7 @@ public class DGestionNiveles extends JDialog{
     }private void cargarCrearNivel(){
         DCrearNivel dCrearNivel=new DCrearNivel();
         dCrearNivel.setVisible(true);
-        tablaNiveles.updateUI();
-        Utilidades.headerNegrita(tablaNiveles);
-        Utilidades.cellsRendered(tablaNiveles);
+        Utilidades.actualizarTabla(tablaNiveles);
     }
     private void cargarTabla(){
         nivelesAbstractModel=new NivelesAbstractModel(VPrincipal.niveles);
@@ -61,5 +63,7 @@ public class DGestionNiveles extends JDialog{
         Utilidades.headerNegrita(tablaNiveles);
         Utilidades.cellsRendered(tablaNiveles);
     }
-
+    private void cerrar(){
+        dispose();
+    }
 }

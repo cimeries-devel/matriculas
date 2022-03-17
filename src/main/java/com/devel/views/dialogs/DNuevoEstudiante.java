@@ -148,11 +148,13 @@ public class DNuevoEstudiante extends JDialog{
                 cargarAgregarDocumento();
             }
         });
+
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cerrar();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
         btnAñadirSeguro.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -183,28 +185,32 @@ public class DNuevoEstudiante extends JDialog{
         PersonaValidator validator = new PersonaValidator();
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(persona);
         if(errors.isEmpty()){
-            if(persona.getDocumentos().isEmpty()){
-                Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
-            } else if(persona.getApoderado()==null){
-                Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+            if(persona.getCodigo().length()>=4){
+                if(persona.getDocumentos().isEmpty()){
+                    Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
+                } else if(persona.getApoderado()==null){
+                    Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                }else{
+                    for(Celular celular:persona.getCelulares()){
+                        celular.guardar();
+                    }
+                    persona.guardar();
+                    for (Relacion relacion:persona.getFamiliaresparaEstudiante()){
+                        relacion.getPersona1().getCelulares().get(0).guardar();
+                        relacion.getPersona1().guardar();
+                        relacion.getPersona1().getDocumentos().get(0).guardar();
+                        relacion.guardar();
+                    }
+                    for (Documento documento:persona.getDocumentos()){
+                        documento.guardar();
+                    }
+                    persona=new Persona();
+                    cargarTablas();
+                    Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
+                    limpiarControles();
+                }
             }else{
-                for(Celular celular:persona.getCelulares()){
-                    celular.guardar();
-                }
-                persona.guardar();
-                for (Relacion relacion:persona.getFamiliaresparaEstudiante()){
-                    relacion.getPersona1().getCelulares().get(0).guardar();
-                    relacion.getPersona1().guardar();
-                    relacion.getPersona1().getDocumentos().get(0).guardar();
-                    relacion.guardar();
-                }
-                for (Documento documento:persona.getDocumentos()){
-                    documento.guardar();
-                }
-                persona=new Persona();
-                cargarTablas();
-                Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
-                limpiarControles();
+                Utilidades.sendNotification("Error","verifique el campo Código", TrayIcon.MessageType.WARNING);
             }
         }else {
             PersonaValidator.mostrarErrores(errors);
@@ -231,15 +237,19 @@ public class DNuevoEstudiante extends JDialog{
         PersonaValidator validator = new PersonaValidator();
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(persona);
         if(errors.isEmpty()){
-            if(persona.getDocumentos().isEmpty()){
-                Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
-            } else if(persona.getApoderado()==null){
-                Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+            if(persona.getCodigo().length()>=4){
+                if(persona.getDocumentos().isEmpty()){
+                    Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
+                } else if(persona.getApoderado()==null){
+                    Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                }else{
+                    persona.guardar();
+                    Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                    limpiarControles();
+                }
             }else{
-                persona.guardar();
+                Utilidades.sendNotification("Error","verifique el campo Código", TrayIcon.MessageType.WARNING);
             }
-            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-            limpiarControles();
         }else {
             PersonaValidator.mostrarErrores(errors);
         }
@@ -326,17 +336,17 @@ public class DNuevoEstudiante extends JDialog{
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
         dAñadirFamiliar.setVisible(true);
-        cargarFamiliares();
+        Utilidades.actualizarTabla(tablaFamiliares);
     }
 
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
         dañadirCelular.setVisible(true);
-        cargarCelulares();
+        Utilidades.actualizarTabla(tablaCelulares);
     }
     private void cargarAgregarSeguro(){
         persona.getSeguros().add((Seguro) cbbSeguro.getSelectedItem());
-        cargarSeguros();
+        Utilidades.actualizarTabla(tablaSeguros);
     }
     private void cargarAgregarDocumento(){
         Documento documento=new Documento();
@@ -347,7 +357,7 @@ public class DNuevoEstudiante extends JDialog{
         Set<ConstraintViolation<Documento>> errors = validator.loadViolations(documento);
         if(errors.isEmpty()){
             persona.getDocumentos().add(documento);
-            cargarDocumentos();
+            Utilidades.actualizarTabla(tablaDocumentos);
             Utilidades.sendNotification("Éxito","Documento registrado", TrayIcon.MessageType.INFO);
             txtDni.setText(null);
         }else {

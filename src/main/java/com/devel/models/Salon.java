@@ -16,7 +16,7 @@ public class Salon extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 3,max = 32)
+    @Size(min = 3,max = 32,message = "Nombre")
     private String nombre;
 
     @ManyToOne()

@@ -23,7 +23,7 @@ public class GradoValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Grado>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Grado> error1= (ConstraintViolation<Grado>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

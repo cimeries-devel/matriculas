@@ -4,11 +4,12 @@ import com.devel.custom.DnDTabbedPane;
 import com.devel.views.dialogs.*;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MenuGestiones {
-    private JButton usuariosButton;
     private JPanel panelPrincipal;
     private JButton nivelesButton;
     private JButton btnGrados;
@@ -16,52 +17,28 @@ public class MenuGestiones {
     private JButton btnSecciones;
     private JButton btnEscalasDePago;
     private JButton btnTiposdeDocumentos;
+    private JButton usuariosButton;
     private DnDTabbedPane tabContenido;
 
     public MenuGestiones(DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
-
-        nivelesButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionNiveles();
-            }
+        nivelesButton.addActionListener(e -> {
+            cargarGestionNiveles();
         });
-        btnGrados.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionarGrados();
-            }
+        btnGrados.addActionListener(e -> {
+            cargarGestionarGrados();
         });
-        btnSeguros.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionSeguros();
-            }
+        btnSeguros.addActionListener(e -> {
+            cargarGestionSeguros();
         });
-        btnSecciones.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionarSecciones();
-            }
+        btnSecciones.addActionListener(e -> {
+            cargarGestionarSecciones();
         });
-        btnEscalasDePago.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionTarifas();
-            }
+        btnEscalasDePago.addActionListener(e -> {
+            cargarGestionTarifas();
         });
-        btnTiposdeDocumentos.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarGestionTipoDocumentos();
-            }
+        btnTiposdeDocumentos.addActionListener(e -> {
+            cargarGestionTipoDocumentos();
         });
     }
     public JPanel traerInicioOpciones() {

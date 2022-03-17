@@ -8,8 +8,7 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionTipoDocumento extends JDialog{
@@ -24,7 +23,7 @@ public class DGestionTipoDocumento extends JDialog{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                dispose();
+                cerrar();
             }
         });
         nuevoButton.addMouseListener(new MouseAdapter() {
@@ -34,6 +33,11 @@ public class DGestionTipoDocumento extends JDialog{
                 cargarNuevoTipoDeDocumento();
             }
         });
+        panelPrincipal.registerKeyboardAction(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cerrar();
+            }
+        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
 
     private void iniciarComponentes(){
@@ -51,15 +55,15 @@ public class DGestionTipoDocumento extends JDialog{
         tablaTipoDocumentos.getColumnModel().getColumn(tipoDocumentoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorTipoDocumento(tablaTipoDocumentos));
         TableCellRenderer renderer1 = tablaTipoDocumentos.getDefaultRenderer(JButton.class);
         tablaTipoDocumentos.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.definirTamaño(tablaTipoDocumentos.getColumn("Código"),80);
         Utilidades.headerNegrita(tablaTipoDocumentos);
         Utilidades.cellsRendered(tablaTipoDocumentos);
     }
     private void cargarNuevoTipoDeDocumento(){
         DAñadirTipoDocumento documento=new DAñadirTipoDocumento();
         documento.setVisible(true);
-        tablaTipoDocumentos.updateUI();
-        Utilidades.headerNegrita(tablaTipoDocumentos);
-        Utilidades.cellsRendered(tablaTipoDocumentos);
+        Utilidades.actualizarTabla(tablaTipoDocumentos);
+    }
+    private void cerrar(){
+        dispose();
     }
 }

@@ -59,11 +59,11 @@ public class AlumnosAbstractModel extends AbstractTableModel {
             case 4:
                 return persona.ultimaMatricula().getSalon().getGrado();
             case 5:
-                return año.format(persona.ultimaMatricula().getSalon().getSeccion());
+                return persona.ultimaMatricula().getSalon().getSeccion();
             case 6:
-                return persona.ultimaMatricula().getCreacion();
+                return año.format(persona.ultimaMatricula().getCreacion());
             case 7:
-                return new JButtonAction("x16/editar.png");
+                return persona.ultimaMatricula().getCreacion();
             default:
                 return new JButtonAction("x16/editar.png");
         }

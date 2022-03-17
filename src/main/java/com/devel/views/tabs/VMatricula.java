@@ -2,6 +2,7 @@ package com.devel.views.tabs;
 
 import com.devel.ForResources;
 import com.devel.controllers.Documentos;
+import com.devel.controllers.Tarifas;
 import com.devel.custom.TabPanel;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.JButtonEditorCelulares;
@@ -19,10 +20,8 @@ import com.devel.views.dialogs.DNuevoEstudiante;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -38,14 +37,14 @@ public class VMatricula extends JFrame{
     private JTextField txtDni;
     private JButton buscarButton;
     private JButton btnNuevoEstudiante;
-    private JButton registrarMatriculaButton;
-    private JButton nuevoFamiliarButton;
+    private JButton btnRegistrarMatricula;
+    private JButton btnAñadirFamiliar;
     private JTextField txtNombres;
     private JCheckBox matriculadoCheckBox;
     private JTextField txtMonto;
     private JTextField txtCodigo;
     private JTable tablaCelulares;
-    private JButton añdirCelularButton;
+    private JButton btnAñadirCelular;
     private JComboBox cbbGrados;
     private JComboBox cbbTarifas;
     private JScrollPane jScrollPane1;
@@ -58,38 +57,40 @@ public class VMatricula extends JFrame{
 
     public VMatricula() {
         iniciarComponentes();
-        btnNuevoEstudiante.addMouseListener(new MouseAdapter() {
+        btnNuevoEstudiante.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarNuevoEstudiante();
             }
         });
-        buscarButton.addMouseListener(new MouseAdapter() {
+        buscarButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 buscarAlumno();
             }
         });
-        cbbTarifas.addPropertyChangeListener(new PropertyChangeListener() {
+        cbbNiveles.addActionListener(evt -> {
+            cargarNiveles();
+        });
+        cbbTarifas.addActionListener(e -> {
+            cargarMonto();
+        });
+        btnAñadirFamiliar.addActionListener(e -> {
+            cargarAgregarFamiliar();
+        });
+        btnAñadirCelular.addActionListener(e -> {
+            cargarAgregarCelular();
+        });
+        matriculadoCheckBox.addActionListener(new ActionListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if(cbbTarifas.getItemCount()>0){
-                    if(cbbTarifas.getSelectedItem()!=null){
-                        txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
-                    }
-                }
+            public void actionPerformed(ActionEvent e) {
+                verificarMatricula();
             }
         });
-        cbbNiveles.addPropertyChangeListener(new PropertyChangeListener() {
+        btnRegistrarMatricula.addActionListener(new ActionListener() {
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if(cbbNiveles.getItemCount()>0){
-                    if(cbbNiveles.getSelectedItem()!=null){
-                        cargarGradosPorNivel();
-                    }
-                }
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
@@ -104,7 +105,21 @@ public class VMatricula extends JFrame{
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);
         dAñadirFamiliar.setVisible(true);
-        tablaFamiliares.updateUI();
+        Utilidades.actualizarTabla(tablaFamiliares);
+    }
+    private void cargarMonto(){
+        if(cbbTarifas.getItemCount()>0){
+            if(cbbTarifas.getSelectedItem()!=null){
+                txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+            }
+        }
+    }
+    private void cargarNiveles(){
+        if(cbbNiveles.getItemCount()>0){
+            if(cbbNiveles.getSelectedItem()!=null){
+                cargarGradosPorNivel();
+            }
+        }
     }
     private void buscarAlumno(){
         if(txtDni.getText().length()>=8){
@@ -118,31 +133,22 @@ public class VMatricula extends JFrame{
                     cargarTablaCelulares();
                     definirColumnas();
                     verificarMatricula();
-                    nuevoFamiliarButton.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-                            cargarAgregarFamiliar();
-                        }
-                    });
-                    añdirCelularButton.addMouseListener(new MouseAdapter() {
-                        @Override
-                        public void mouseClicked(MouseEvent e) {
-                            super.mouseClicked(e);
-                            cargarAgregarCelular();
-                        }
-                    });
+                    btnAñadirCelular.setEnabled(true);
+                    btnAñadirFamiliar.setEnabled(true);
+                    btnRegistrarMatricula.setEnabled(true);
                 }else{
                     Utilidades.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
                 }
 
             }else{
                 Utilidades.sendNotification("No hay datos","Alumno no encontrado", TrayIcon.MessageType.INFO);
-                nuevoFamiliarButton.removeAll();
+                btnAñadirFamiliar.removeAll();
             }
         }else{
             Utilidades.sendNotification("Error","Ingrese el dni", TrayIcon.MessageType.ERROR);
         }
+    }
+    private void registrarMatricula() {
 
     }
     private void verificarMatricula(){
@@ -170,6 +176,14 @@ public class VMatricula extends JFrame{
         cargarMatriculas();
         cargarComboBox();
         panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
+        cargarTarifaPorDefecto();
+        cargarGradosPorNivel();
+    }
+    private void cargarTarifaPorDefecto(){
+        if(!VPrincipal.tarifas.isEmpty()){
+            cbbTarifas.setSelectedItem(Tarifas.tarifaActiva());
+            txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+        }
     }
     private void cargarComboBox(){
         cbbNiveles.setModel(new DefaultComboBoxModel(VPrincipal.niveles));
@@ -208,7 +222,7 @@ public class VMatricula extends JFrame{
     private void cargarAgregarCelular(){
         DAñadirCelular dañadirCelular=new DAñadirCelular(persona);
         dañadirCelular.setVisible(true);
-        tablaCelulares.updateUI();
+        Utilidades.actualizarTabla(tablaCelulares);
     }
     private void definirColumnas(){
         tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));

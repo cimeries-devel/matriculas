@@ -35,7 +35,7 @@ public class CelularValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Celular>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Celular> error1= (ConstraintViolation<Celular>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

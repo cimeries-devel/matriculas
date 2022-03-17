@@ -19,7 +19,7 @@ public class Ubigeo extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 3,max = 32)
+    @Size(min = 3,max = 32,message = "Código")
     private String codigo;
 
     @Column
@@ -28,17 +28,17 @@ public class Ubigeo extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 3,max = 32)
+    @Size(min = 3,max = 32,message = "Departamento")
     private String departamento;
 
     @Column
     @NotEmpty
-    @Size(min = 3,max = 32)
+    @Size(min = 3,max = 32,message = "Distrito")
     private String distrito;
 
     @Column
     @NotEmpty
-    @Size(min = 3,max = 32)
+    @Size(min = 3,max = 32,message = "Provincia")
     private String provincia;
 
     @Column

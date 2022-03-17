@@ -26,15 +26,15 @@ public class Nivel extends Hibernate {
 
     @Column
     @NotEmpty
-    @Size(min = 2,max = 32)
+    @Size(min = 2,max = 32,message = "Descripción")
     private String descripcion;
 
     @Column
-    @NotNull
+    @NotNull(message = "Hora fin")
     private Date horaFin;
 
     @Column
-    @NotNull
+    @NotNull(message = "Hora inicio")
     private Date horaInicio;
 
     @OneToMany(mappedBy = "nivel")

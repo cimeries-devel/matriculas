@@ -24,7 +24,7 @@ public class NivelValidator extends ProgramaValidator {
     public static void mostrarErrores(Set<ConstraintViolation<Nivel>> errors){
         Object[] errores=errors.toArray();
         ConstraintViolation<Nivel> error1= (ConstraintViolation<Nivel>) errores[0];
-        String error = "Verfique el campo: "+error1.getPropertyPath();
+        String error = "Verfique el campo: "+error1.getMessage();
         Utilidades.sendNotification("Error", error, TrayIcon.MessageType.ERROR);
     }
 }

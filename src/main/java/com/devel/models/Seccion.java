@@ -16,7 +16,7 @@ public class Seccion extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Sección")
     private String seccion;
 
     @OneToMany(mappedBy = "seccion")
