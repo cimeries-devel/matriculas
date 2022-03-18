@@ -39,10 +39,10 @@ public class VMatricula extends JFrame{
     private JButton btnNuevoEstudiante;
     private JButton btnRegistrarMatricula;
     private JButton btnAñadirFamiliar;
-    private JTextField txtNombres;
+    private JLabel lblNombres;
     private JCheckBox matriculadoCheckBox;
     private JTextField txtMonto;
-    private JTextField txtCodigo;
+    private JLabel lblCodigo;
     private JTable tablaCelulares;
     private JButton btnAñadirCelular;
     private JComboBox cbbGrados;
@@ -127,8 +127,8 @@ public class VMatricula extends JFrame{
             if(dni!=null){
                 if(dni.getPerson().getCodigo()!=null){
                     persona=dni.getPerson();
-                    txtNombres.setText(persona.getNombres()+" "+persona.getApellidos());
-                    txtCodigo.setText(persona.getCodigo());
+                    lblNombres.setText(persona.getNombres()+" "+persona.getApellidos());
+                    lblCodigo.setText(persona.getCodigo());
                     cargarTablaFamiliares();
                     cargarTablaCelulares();
                     definirColumnas();
@@ -137,9 +137,17 @@ public class VMatricula extends JFrame{
                     btnAñadirFamiliar.setEnabled(true);
                     btnRegistrarMatricula.setEnabled(true);
                 }else{
+                    persona=new Persona();
+                    lblNombres.setText("--");
+                    lblCodigo.setText("--");
+                    cargarTablaFamiliares();
+                    cargarTablaCelulares();
+                    definirColumnas();
+                    btnAñadirCelular.setEnabled(false);
+                    btnAñadirFamiliar.setEnabled(false);
+                    btnRegistrarMatricula.setEnabled(false);
                     Utilidades.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
                 }
-
             }else{
                 Utilidades.sendNotification("No hay datos","Alumno no encontrado", TrayIcon.MessageType.INFO);
                 btnAñadirFamiliar.removeAll();
@@ -163,9 +171,12 @@ public class VMatricula extends JFrame{
             matriculadoCheckBox.setSelected(false);
         }
     }
+
     private void cargarGradosPorNivel(){
-        cbbGrados.setModel(new DefaultComboBoxModel(new Vector(((Nivel)cbbNiveles.getSelectedItem()).getGrados())));
-        cbbGrados.setRenderer(new Grado.ListCellRenderer());
+        if(cbbNiveles.getSelectedItem()!=null){
+            cbbGrados.setModel(new DefaultComboBoxModel(new Vector(((Nivel)cbbNiveles.getSelectedItem()).getGrados())));
+            cbbGrados.setRenderer(new Grado.ListCellRenderer());
+        }
     }
     private void iniciarComponentes(){
         persona=new Persona();
@@ -198,7 +209,6 @@ public class VMatricula extends JFrame{
         tablaMatriculas.setModel(matriculadosAbstractModel);
         Utilidades.headerNegrita(tablaMatriculas);
         Utilidades.cellsRendered(tablaMatriculas);
-
     }
     private void cargarTablaFamiliares( ){
         familiaresAbstractModel=new FamiliaresAbstractModel(persona.getFamiliaresparaEstudiante());

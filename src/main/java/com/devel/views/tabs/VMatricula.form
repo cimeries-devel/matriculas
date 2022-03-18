@@ -60,16 +60,6 @@
                       <text value="Alumno:"/>
                     </properties>
                   </component>
-                  <component id="d5806" class="javax.swing.JTextField" binding="txtNombres">
-                    <constraints>
-                      <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="200" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value=""/>
-                    </properties>
-                  </component>
                   <component id="b1bf6" class="javax.swing.JLabel">
                     <constraints>
                       <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -96,7 +86,7 @@
                     </constraints>
                     <properties>
                       <font size="14"/>
-                      <text value="Escala pago:"/>
+                      <text value="Pago por:"/>
                     </properties>
                   </component>
                   <component id="c9e48" class="javax.swing.JComboBox" binding="cbbTarifas">
@@ -137,16 +127,6 @@
                     <properties>
                       <font size="14"/>
                       <text value="Código:"/>
-                    </properties>
-                  </component>
-                  <component id="95fd9" class="javax.swing.JTextField" binding="txtCodigo">
-                    <constraints>
-                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="150" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <text value=""/>
                     </properties>
                   </component>
                   <component id="32dea" class="javax.swing.JLabel">
@@ -233,6 +213,22 @@
                       <requestFocusEnabled value="true"/>
                       <text value="Matriculado"/>
                       <visible value="true"/>
+                    </properties>
+                  </component>
+                  <component id="39910" class="javax.swing.JLabel" binding="lblNombres">
+                    <constraints>
+                      <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="--"/>
+                    </properties>
+                  </component>
+                  <component id="cf61f" class="javax.swing.JLabel" binding="lblCodigo">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="1" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <text value="--"/>
                     </properties>
                   </component>
                 </children>

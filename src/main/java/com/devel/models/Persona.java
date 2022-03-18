@@ -153,7 +153,7 @@ public class Persona extends Hibernate {
     }
 
     public void setNombres(String nombres) {
-        this.nombres = nombres;
+        this.nombres = nombres.toUpperCase();
     }
 
     public String getApellidos() {
@@ -161,7 +161,7 @@ public class Persona extends Hibernate {
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        this.apellidos = apellidos.toUpperCase();
     }
 
     public Date getActualizacion() {

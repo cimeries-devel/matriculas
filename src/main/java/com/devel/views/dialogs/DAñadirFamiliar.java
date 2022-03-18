@@ -43,8 +43,6 @@ public class DAñadirFamiliar extends JDialog{
     private JComboBox cbbGenero;
     private Persona persona;
     private Persona familiar;
-    private java.util.Date nacimiento;
-    private boolean genero;
     private boolean vivenJuntos;
 
     public DAñadirFamiliar(Persona persona){
@@ -130,6 +128,10 @@ public class DAñadirFamiliar extends JDialog{
         txtDni.setEnabled(false);
         btnBuscar.setEnabled(false);
         cbbTipoDocumento.setEnabled(false);
+        txtNombres.setEnabled(false);
+        txtApellidos.setEnabled(false);
+        cbbGenero.setEnabled(false);
+        datePicker1.setEnabled(false);
         guardarCopia();
         cargarFamiliar();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -247,22 +249,12 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void actualizar(){
-        String nombres=txtNombres.getText().trim();
-        String apellidos=txtApellidos.getText().trim();
-        Date cumpleaños=datePicker1.getDate()==null?null:Date.valueOf(datePicker1.getDate());
         String direccion=txtDireccion.getText().trim();
-        int edad= Integer.parseInt(lblEdad.getText().trim());
         String email=txtEmail.getText().trim();
-        boolean genero=cbbGenero.getSelectedIndex() == 0;
 
-        familiar.setNombres(nombres);
-        familiar.setApellidos(apellidos);
-        familiar.setCumpleaños(cumpleaños);
         familiar.setActualizacion(new java.util.Date());
         familiar.setDireccion(direccion);
-        familiar.setEdad(edad);
         familiar.setEmail(email);
-        familiar.setGenero(genero);
 
         PersonaValidator validator = new PersonaValidator();
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(familiar);
@@ -355,15 +347,11 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void guardarCopia(){
-        txtNombres.setName(familiar.getNombres());
-        txtApellidos.setName(familiar.getApellidos());
         txtEmail.setName(familiar.getEmail());
         txtDireccion.setName(familiar.getDireccion());
         txtRelacion.setName(familiar.getTipoRelacion(persona));
         txtDescripcionCelular.setName(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setName(familiar.getCelulares().get(0).getNumero());
-        nacimiento=familiar.getCumpleaños();
-        genero=familiar.isGenero();
         vivenJuntos=familiar.getRelacion(persona).isVivenJuntos();
     }
     private void cargarFamiliar(){
@@ -382,16 +370,11 @@ public class DAñadirFamiliar extends JDialog{
         lblEdad.setText(String.valueOf(familiar.getEdad()));
     }
     private void onCancel(){
-        familiar.setNombres(txtNombres.getName());
-        familiar.setApellidos(txtApellidos.getName());
         familiar.setEmail(txtEmail.getName());
         familiar.setDireccion(txtDireccion.getName());
         familiar.setTipoRelacionRelacion(persona,txtRelacion.getName());
         familiar.getCelulares().get(0).setDescipcion(txtDescripcionCelular.getName());
         familiar.getCelulares().get(0).setNumero(txtCelular.getName());
-        familiar.setCumpleaños(nacimiento);
-        familiar.setEdad(Utilidades.calcularaños(familiar.getCumpleaños()));
-        familiar.setGenero(genero);
         familiar.getRelacion(persona).setVivenJuntos(vivenJuntos);
         cerrar();
     }
