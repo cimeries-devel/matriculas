@@ -27,7 +27,6 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         this.table=table;
-
         super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         if(table.getColumnClass(column).equals(JButton.class)){
             switch (table.getColumnName(column)){

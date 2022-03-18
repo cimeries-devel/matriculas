@@ -45,15 +45,18 @@ public class JButtonEditorFamiliares extends AbstractCellEditor implements Table
                 dAñadirFamiliar.pack();
                 dAñadirFamiliar.setVisible(true);
                 break;
-        }
-        if(!relacion.isApoderado()){
-            for (Relacion relacion1:relaciones){
-                relacion1.setApoderado(false);
-            }
-            relacion.setApoderado(true);
+            case "apoderado":
+                for (Relacion relacion1:relaciones){
+                    relacion1.setApoderado(false);
+                    relacion1.guardar();
+                }
+                relacion.setApoderado(true);
+                relacion.guardar();
+                break;
         }
         table.setVisible(false);
         table.setVisible(true);
+        table.getParent().requestFocus();
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

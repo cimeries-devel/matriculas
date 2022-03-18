@@ -10,6 +10,7 @@ import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
 import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import jakarta.validation.ConstraintViolation;
 
+import javax.print.Doc;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -48,6 +49,7 @@ public class DAñadirFamiliar extends JDialog{
 
     public DAñadirFamiliar(Persona persona){
         this.persona=persona;
+        familiar=new Persona();
         iniciarComponentes();
         datePicker1.addDateChangeListener(dateChangeEvent -> {
             if(datePicker1.getDate()!=null){
@@ -55,23 +57,21 @@ public class DAñadirFamiliar extends JDialog{
                 lblEdad.setText(String.valueOf(edad));
             }
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
+        btnHecho.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cerrar();
             }
         });
-        btnAñadir.addMouseListener(new MouseAdapter() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 registrar();
             }
         });
-        btnBuscar.addMouseListener(new MouseAdapter() {
+        btnBuscar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if(txtDni.getText().length()==8){
                     buscarPersona();
                 }
@@ -95,17 +95,15 @@ public class DAñadirFamiliar extends JDialog{
                 lblEdad.setText(String.valueOf(edad));
             }
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
+        btnHecho.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
-        btnAñadir.addMouseListener(new MouseAdapter() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 actualizar();
             }
         });
@@ -145,7 +143,18 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void registrar(){
-        familiar=new Persona();
+        Documento documento;
+        Celular celular;
+        if(familiar.getId()==null){
+            familiar=new Persona();
+            documento=new Documento();
+            celular=new Celular();
+            familiar.getCelulares().add(celular);
+            familiar.getDocumentos().add(documento);
+        }else{
+            documento=familiar.getDocumentos().get(0);
+            celular=familiar.getCelulares().get(0);
+        }
         String nombres=txtNombres.getText().trim();
         String apellidos=txtApellidos.getText().trim();
         Date cumpleaños=datePicker1.getDate()==null?null:Date.valueOf(datePicker1.getDate());
@@ -168,7 +177,6 @@ public class DAñadirFamiliar extends JDialog{
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(familiar);
         if(errors.isEmpty()){
             System.out.println("está en celular");
-            Celular celular=new Celular();
             String numero=txtCelular.getText().trim();
             String descCelular=txtDescripcionCelular.getText().trim();
 
@@ -178,9 +186,7 @@ public class DAñadirFamiliar extends JDialog{
             CelularValidator validator2 = new CelularValidator();
             Set<ConstraintViolation<Celular>> errors2 = validator2.loadViolations(celular);
             if(errors2.isEmpty()){
-                familiar.getCelulares().add(celular);
                 System.out.println("está en documento");
-                Documento documento=new Documento();
                 String numeroDocumento=txtDni.getText().trim();
                 TipoDocumento tipoDocumento=(TipoDocumento) cbbTipoDocumento.getSelectedItem();
 
@@ -191,35 +197,39 @@ public class DAñadirFamiliar extends JDialog{
                 DocumentoValidator validator3 = new DocumentoValidator();
                 Set<ConstraintViolation<Documento>> errors3 = validator3.loadViolations(documento);
                 if(errors3.isEmpty()){
-                    familiar.getDocumentos().add(documento);
                     System.out.println("está en relacion");
-                    Relacion relacion=new Relacion();
-                    String tipoRelacion=txtRelacion.getText().trim();
-                    boolean vivenJuntos=ckVivenJuntos.isSelected();
-                    boolean esApoderado=persona.getApoderado()==null? true:false;
+                    if(persona.getRelacionAFamiliar(familiar)==null){
+                        Relacion relacion=new Relacion();
+                        String tipoRelacion=txtRelacion.getText().trim();
+                        boolean vivenJuntos=ckVivenJuntos.isSelected();
+                        boolean esApoderado=persona.getApoderado()==null? true:false;
 
-                    relacion.setTipoRelacion(tipoRelacion);
-                    relacion.setVivenJuntos(vivenJuntos);
-                    relacion.setPersona(persona);
-                    relacion.setPersona1(familiar);
-                    relacion.setApoderado(esApoderado);
+                        relacion.setTipoRelacion(tipoRelacion);
+                        relacion.setVivenJuntos(vivenJuntos);
+                        relacion.setPersona(persona);
+                        relacion.setPersona1(familiar);
+                        relacion.setApoderado(esApoderado);
 
-                    RelacionValidator validator4 = new RelacionValidator();
-                    Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
-                    if(errors4.isEmpty()){
-                        if(persona.getId()!=null){
-                            celular.guardar();
-                            familiar.guardar();
-                            documento.guardar();
-                            relacion.guardar();
-                            persona.guardar();
+                        RelacionValidator validator4 = new RelacionValidator();
+                        Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
+                        if(errors4.isEmpty()){
+                            if(persona.getId()!=null){
+                                celular.guardar();
+                                familiar.guardar();
+                                documento.guardar();
+                                relacion.guardar();
+                                persona.guardar();
+                            }
+                            persona.getFamiliaresparaEstudiante().add(relacion);
+                            familiar.getRelaciones().add(relacion);
+                            Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
+                            limpiarControles();
+                            familiar=new Persona();
+                        }else {
+                            RelacionValidator.mostrarErrores(errors4);
                         }
-                        persona.getFamiliaresparaEstudiante().add(relacion);
-                        familiar.getRelaciones().add(relacion);
-                        Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
-                        limpiarControles();
-                    }else {
-                        RelacionValidator.mostrarErrores(errors4);
+                    }else{
+                        Utilidades.sendNotification("Error","familiar ya registrado", TrayIcon.MessageType.ERROR);
                     }
                 }else {
                     DocumentoValidator.mostrarErrores(errors3);
@@ -312,17 +322,19 @@ public class DAñadirFamiliar extends JDialog{
     private void cargarDatosDataappi(DataAPIDNI dataAPIDNI){
         txtApellidos.setText(dataAPIDNI.getApellido_paterno()+" "+dataAPIDNI.getApellido_materno());
         txtNombres.setText(dataAPIDNI.getNombres());
-        txtDireccion.setText(dataAPIDNI.getDireccion_completa()==null?"-":dataAPIDNI.getDireccion_completa());
+        txtDireccion.setText(dataAPIDNI.getDireccion_completa()==null?"--":dataAPIDNI.getDireccion_completa());
     }
 
     private void cargarDatos(){
-        DateFormat a=new SimpleDateFormat("yyyy-MM-dd");
         txtNombres.setText(familiar.getNombres());
         txtApellidos.setText(familiar.getApellidos());
         txtDireccion.setText(familiar.getDireccion());
-        datePicker1.setDate(LocalDate.parse(a.format(familiar.getCumpleaños())));
         txtEmail.setText(familiar.getEmail());
-        JOptionPane.showMessageDialog(null,"si encontró");
+        cbbGenero.setSelectedIndex(familiar.isGenero()?0:1);
+        datePicker1.setDate(Utilidades.dateToLocalDate(familiar.getCumpleaños()));
+        lblEdad.setText(String.valueOf(familiar.getEdad()));
+        txtDescripcionCelular.setText(familiar.getCelulares().get(0).getDescipcion());
+        txtCelular.setText(familiar.getCelulares().get(0).getNumero());
     }
 
     private void cargarComboBox(){

@@ -43,24 +43,21 @@ public class JButtonEditroTarifas extends AbstractCellEditor implements TableCel
             case "defecto":
                 if(!tarifa.isDefecto()){
                     for (Tarifa tarifa1: VPrincipal.tarifas){
-                        if(tarifa1.isDefecto()){
-                            tarifa1.setDefecto(false);
-                            tarifa1.guardar();
-                        }
+                        tarifa1.setDefecto(false);
+                        tarifa1.guardar();
                     }
                     tarifa.setDefecto(true);
                     tarifa.guardar();
-                    table.setVisible(false);
-                    table.setVisible(true);
                 }
                 break;
             case "editar":
                 DAñadirTarifa dAñadirTarifa=new DAñadirTarifa(tarifa);
                 dAñadirTarifa.setVisible(true);
-                table.setVisible(false);
-                table.setVisible(true);
                 break;
         }
+        table.setVisible(false);
+        table.setVisible(true);
+        table.getParent().requestFocus();
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

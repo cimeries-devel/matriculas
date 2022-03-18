@@ -239,6 +239,14 @@ public class Persona extends Hibernate {
         }
         return null;
     }
+    public Relacion getRelacionAFamiliar(Persona persona1){
+        for(Relacion relacion:getFamiliaresparaEstudiante()){
+            if(relacion.getPersona1()==persona1){
+                return relacion;
+            }
+        }
+        return null;
+    }
     public String getTipoRelacion(Persona persona){
         for(Relacion relacion:getRelaciones()){
             if(relacion.getPersona()==persona){

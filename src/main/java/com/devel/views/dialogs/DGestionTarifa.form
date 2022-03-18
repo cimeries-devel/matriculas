@@ -19,7 +19,6 @@
             <constraints/>
             <properties>
               <rowHeight value="25"/>
-              <rowMargin value="1"/>
             </properties>
           </component>
         </children>

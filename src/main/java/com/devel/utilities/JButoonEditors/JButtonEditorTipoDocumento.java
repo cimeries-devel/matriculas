@@ -32,6 +32,7 @@ public class JButtonEditorTipoDocumento extends AbstractCellEditor implements Ta
         dCrearNivel.setVisible(true);
         table.setVisible(false);
         table.setVisible(true);
+        table.getParent().requestFocus();
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

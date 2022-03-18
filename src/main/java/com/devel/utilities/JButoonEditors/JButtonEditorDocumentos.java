@@ -59,6 +59,7 @@ public class JButtonEditorDocumentos extends AbstractCellEditor implements Table
         }
         table.setVisible(false);
         table.setVisible(true);
+        table.getParent().requestFocus();
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
