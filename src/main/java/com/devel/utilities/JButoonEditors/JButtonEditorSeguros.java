@@ -49,9 +49,7 @@ public class JButtonEditorSeguros extends AbstractCellEditor implements TableCel
                 Utilidades.sendNotification("Éxito","Seguro quitado", TrayIcon.MessageType.INFO);
             }
         }
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

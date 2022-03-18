@@ -5,6 +5,8 @@ import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,40 +21,36 @@ public class MenuReportes {
     public MenuReportes(DnDTabbedPane tabContenido){
         this.propiedades=propiedades;
         this.tabContenido=tabContenido;
-        alumnosButton.addMouseListener(new MouseAdapter() {
+        alumnosButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
                 Utilidades.buttonSelectedOrEntered(alumnosButton);
             }
         });
-        padresButton.addMouseListener(new MouseAdapter() {
+        padresButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 alumnosButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
                 Utilidades.buttonSelectedOrEntered(padresButton);
             }
         });
-        matriculasButton.addMouseListener(new MouseAdapter() {
+        matriculasButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 alumnosPersonalizadoButton.setBackground(new JButton().getBackground());
                 Utilidades.buttonSelectedOrEntered(matriculasButton);
             }
         });
-        alumnosPersonalizadoButton.addMouseListener(new MouseAdapter() {
+        alumnosPersonalizadoButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 alumnosButton.setBackground(new JButton().getBackground());
                 padresButton.setBackground(new JButton().getBackground());
                 matriculasButton.setBackground(new JButton().getBackground());

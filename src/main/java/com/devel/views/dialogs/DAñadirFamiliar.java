@@ -199,34 +199,38 @@ public class DAñadirFamiliar extends JDialog{
                 if(errors3.isEmpty()){
                     System.out.println("está en relacion");
                     if(persona.getRelacionAFamiliar(familiar)==null){
-                        Relacion relacion=new Relacion();
-                        String tipoRelacion=txtRelacion.getText().trim();
-                        boolean vivenJuntos=ckVivenJuntos.isSelected();
-                        boolean esApoderado=persona.getApoderado()==null? true:false;
+                        if(!persona.existeDocumento(documento.getNumero())){
+                            Relacion relacion=new Relacion();
+                            String tipoRelacion=txtRelacion.getText().trim();
+                            boolean vivenJuntos=ckVivenJuntos.isSelected();
+                            boolean esApoderado=persona.getApoderado()==null? true:false;
 
-                        relacion.setTipoRelacion(tipoRelacion);
-                        relacion.setVivenJuntos(vivenJuntos);
-                        relacion.setPersona(persona);
-                        relacion.setPersona1(familiar);
-                        relacion.setApoderado(esApoderado);
+                            relacion.setTipoRelacion(tipoRelacion);
+                            relacion.setVivenJuntos(vivenJuntos);
+                            relacion.setPersona(persona);
+                            relacion.setPersona1(familiar);
+                            relacion.setApoderado(esApoderado);
 
-                        RelacionValidator validator4 = new RelacionValidator();
-                        Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
-                        if(errors4.isEmpty()){
-                            if(persona.getId()!=null){
-                                celular.guardar();
-                                familiar.guardar();
-                                documento.guardar();
-                                relacion.guardar();
-                                persona.guardar();
+                            RelacionValidator validator4 = new RelacionValidator();
+                            Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
+                            if(errors4.isEmpty()){
+                                if(persona.getId()!=null){
+                                    celular.guardar();
+                                    familiar.guardar();
+                                    documento.guardar();
+                                    relacion.guardar();
+                                    persona.guardar();
+                                }
+                                persona.getFamiliaresparaEstudiante().add(relacion);
+                                familiar.getRelaciones().add(relacion);
+                                Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
+                                limpiarControles();
+                                familiar=new Persona();
+                            }else {
+                                RelacionValidator.mostrarErrores(errors4);
                             }
-                            persona.getFamiliaresparaEstudiante().add(relacion);
-                            familiar.getRelaciones().add(relacion);
-                            Utilidades.sendNotification("Éxito","Familiar registrado", TrayIcon.MessageType.INFO);
-                            limpiarControles();
-                            familiar=new Persona();
-                        }else {
-                            RelacionValidator.mostrarErrores(errors4);
+                        }else{
+                            Utilidades.sendNotification("Error","Es la misma persona",TrayIcon.MessageType.ERROR);
                         }
                     }else{
                         Utilidades.sendNotification("Error","familiar ya registrado", TrayIcon.MessageType.ERROR);

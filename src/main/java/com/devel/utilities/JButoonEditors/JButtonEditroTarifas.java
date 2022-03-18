@@ -2,6 +2,7 @@ package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Nivel;
 import com.devel.models.Tarifa;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.NivelesAbstractModel;
 import com.devel.utilities.modelosTablas.TarifasAbstractModel;
 import com.devel.views.VPrincipal;
@@ -43,8 +44,10 @@ public class JButtonEditroTarifas extends AbstractCellEditor implements TableCel
             case "defecto":
                 if(!tarifa.isDefecto()){
                     for (Tarifa tarifa1: VPrincipal.tarifas){
-                        tarifa1.setDefecto(false);
-                        tarifa1.guardar();
+                        if(tarifa1.isDefecto()){
+                            tarifa1.setDefecto(false);
+                            tarifa1.guardar();
+                        }
                     }
                     tarifa.setDefecto(true);
                     tarifa.guardar();
@@ -55,9 +58,7 @@ public class JButtonEditroTarifas extends AbstractCellEditor implements TableCel
                 dAñadirTarifa.setVisible(true);
                 break;
         }
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

@@ -1,6 +1,7 @@
 package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Relacion;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.views.dialogs.DAñadirFamiliar;
 
@@ -47,16 +48,16 @@ public class JButtonEditorFamiliares extends AbstractCellEditor implements Table
                 break;
             case "apoderado":
                 for (Relacion relacion1:relaciones){
-                    relacion1.setApoderado(false);
-                    relacion1.guardar();
+                    if(relacion1.isApoderado()){
+                        relacion1.setApoderado(false);
+                        relacion1.guardar();
+                    }
                 }
                 relacion.setApoderado(true);
                 relacion.guardar();
                 break;
         }
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

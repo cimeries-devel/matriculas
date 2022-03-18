@@ -3,6 +3,7 @@ package com.devel.utilities.JButoonEditors;
 import com.devel.models.Celular;
 import com.devel.models.Grado;
 import com.devel.models.Relacion;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.utilities.modelosTablas.GradoAbstractModel;
@@ -34,9 +35,7 @@ public class JButtonEditorCelulares extends AbstractCellEditor implements TableC
         Celular celular=((CelularesAbstractModel) table.getModel()).traer(table.convertRowIndexToModel(table.getSelectedRow()));
         DAñadirCelular dAñadirCelular=new DAñadirCelular(celular);
         dAñadirCelular.setVisible(true);
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

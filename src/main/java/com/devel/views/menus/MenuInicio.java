@@ -8,6 +8,8 @@ import com.devel.views.tabs.VMatricula;
 import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -25,30 +27,24 @@ public class MenuInicio {
 
     public MenuInicio(final DnDTabbedPane tabContenido){
         this.tabContenido=tabContenido;
-        inicioButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarBienvenida();
-                alumnosButton.setBackground(new JButton().getBackground());
-                matriculaButton.setBackground(new JButton().getBackground());
-                Utilidades.buttonSelectedOrEntered(inicioButton);
-            }
+        inicioButton.addActionListener(e -> {
+            cargarBienvenida();
+            alumnosButton.setBackground(new JButton().getBackground());
+            matriculaButton.setBackground(new JButton().getBackground());
+            Utilidades.buttonSelectedOrEntered(inicioButton);
         });
-        alumnosButton.addMouseListener(new MouseAdapter() {
+        alumnosButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAlumnos();
                 inicioButton.setBackground(new JButton().getBackground());
                 matriculaButton.setBackground(new JButton().getBackground());
                 Utilidades.buttonSelectedOrEntered(alumnosButton);
             }
         });
-        matriculaButton.addMouseListener(new MouseAdapter() {
+        matriculaButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarMatricula();
                 alumnosButton.setBackground(new JButton().getBackground());
                 inicioButton.setBackground(new JButton().getBackground());

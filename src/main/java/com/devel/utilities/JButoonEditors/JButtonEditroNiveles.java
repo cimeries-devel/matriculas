@@ -2,6 +2,7 @@ package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Nivel;
 import com.devel.models.Relacion;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
 import com.devel.utilities.modelosTablas.NivelesAbstractModel;
 import com.devel.views.dialogs.DCrearNivel;
@@ -30,9 +31,7 @@ public class JButtonEditroNiveles extends AbstractCellEditor implements TableCel
         Nivel nivel=((NivelesAbstractModel) table.getModel()).traer(table.convertRowIndexToModel(table.getSelectedRow()));
         DCrearNivel dCrearNivel=new DCrearNivel(nivel);
         dCrearNivel.setVisible(true);
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

@@ -2,6 +2,7 @@ package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Seguro;
 import com.devel.models.TipoDocumento;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.SegurosAbstractModel;
 import com.devel.utilities.modelosTablas.TipoDocumentoAbstractModel;
 import com.devel.views.dialogs.DAñadirSeguro;
@@ -30,9 +31,7 @@ public class JButtonEditorTipoDocumento extends AbstractCellEditor implements Ta
         TipoDocumento tipoDocumento=((TipoDocumentoAbstractModel) table.getModel()).traer(table.convertRowIndexToModel(table.getSelectedRow()));
         DAñadirTipoDocumento dCrearNivel=new DAñadirTipoDocumento(tipoDocumento);
         dCrearNivel.setVisible(true);
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

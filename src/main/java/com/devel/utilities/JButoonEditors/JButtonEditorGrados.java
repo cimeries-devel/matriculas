@@ -2,6 +2,7 @@ package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Grado;
 import com.devel.models.Nivel;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.GradoAbstractModel;
 import com.devel.utilities.modelosTablas.NivelesAbstractModel;
 import com.devel.views.dialogs.DCrearGrado;
@@ -30,9 +31,7 @@ public class JButtonEditorGrados extends AbstractCellEditor implements TableCell
         Grado grado=((GradoAbstractModel) table.getModel()).traer(table.convertRowIndexToModel(table.getSelectedRow()));
         DCrearGrado dCrearGrado=new DCrearGrado(grado);
         dCrearGrado.setVisible(true);
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

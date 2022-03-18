@@ -2,6 +2,7 @@ package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Seccion;
 import com.devel.models.Seguro;
+import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.SeccionAbstractModel;
 import com.devel.utilities.modelosTablas.SegurosAbstractModel;
 import com.devel.views.dialogs.DAñadirSecciones;
@@ -31,9 +32,7 @@ public class JButtonEditorSecciones extends AbstractCellEditor implements TableC
         Seccion seccion=((SeccionAbstractModel) table.getModel()).traer(table.convertRowIndexToModel(table.getSelectedRow()));
         DAñadirSecciones dAñadirSecciones=new DAñadirSecciones(seccion);
         dAñadirSecciones.setVisible(true);
-        table.setVisible(false);
-        table.setVisible(true);
-        table.getParent().requestFocus();
+        Utilidades.actualizarTabla(table);
     }
 
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {

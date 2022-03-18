@@ -2,12 +2,10 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import com.devel.utilities.Utilidades;
-import com.sun.istack.Nullable;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +26,7 @@ public class Persona extends Hibernate {
     private int edad;
 
     @Column
-    @NotNull(message = "Cumpleaños")
+    @NotNull(message = "Nacimiento")
     private Date cumpleaños;
 
     @Column
@@ -271,7 +269,14 @@ public class Persona extends Hibernate {
     public void setFamiliaresparaEstudiante(List<Relacion> familiaresparaEstudiante) {
         this.familiaresparaEstudiante = familiaresparaEstudiante;
     }
-
+    public boolean existeDocumento(String dni){
+        for(Documento documento:getDocumentos()){
+            if(documento.getNumero().equals(dni)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public void guardar() {
         super.guardar();

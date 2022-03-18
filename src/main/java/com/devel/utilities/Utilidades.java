@@ -151,6 +151,7 @@ public class Utilidades {
     public static void actualizarTabla(JTable tabla){
         tabla.setVisible(false);
         tabla.setVisible(true);
+        tabla.getParent().requestFocus();
     }
     public static void headerNegrita(JTable table){
         ((DefaultTableCellRenderer) (table.getTableHeader()).getDefaultRenderer()).setHorizontalAlignment(JLabel.CENTER);
