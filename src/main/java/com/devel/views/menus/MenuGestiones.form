@@ -24,7 +24,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="&lt;html&gt;&lt;center&gt;Escala de pago&lt;center&gt;&lt;/html&gt;"/>
         </properties>
@@ -35,7 +35,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Niveles"/>
         </properties>
@@ -46,7 +46,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Grados"/>
         </properties>
@@ -57,7 +57,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Secciones"/>
         </properties>
@@ -68,7 +68,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="&lt;html&gt;&lt;center&gt;Tipos de documentos&lt;center&gt;&lt;/html&gt;"/>
         </properties>
@@ -79,7 +79,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Seguros"/>
         </properties>
@@ -90,7 +90,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Salones"/>
         </properties>
@@ -109,7 +109,7 @@
         </constraints>
         <properties>
           <borderPainted value="true"/>
-          <focusPainted value="true"/>
+          <focusPainted value="false"/>
           <font size="14"/>
           <text value="Usuarios"/>
         </properties>

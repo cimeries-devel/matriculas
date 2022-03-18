@@ -61,39 +61,40 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnRegistrar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 actualizar();
             }
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
+        btnHecho.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
         });
-        btnNuevoFamiliar.addMouseListener(new MouseAdapter() {
+        btnNuevoFamiliar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarFamiliar();
             }
         });
-        btnNuevoCelular.addMouseListener(new MouseAdapter() {
+        btnNuevoCelular.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarCelular();
             }
         });
-        btnAñadirDocumento.addMouseListener(new MouseAdapter() {
+        btnAñadirDocumento.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarDocumento();
+            }
+        });
+        btnAñadirSeguro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarAgregarSeguro();
             }
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
@@ -112,56 +113,49 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnRegistrar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 registrar();
             }
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
+        btnHecho.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cerrar();
             }
         });
-        btnNuevoFamiliar.addMouseListener(new MouseAdapter() {
+        btnNuevoFamiliar.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarFamiliar();
             }
         });
-        btnNuevoCelular.addMouseListener(new MouseAdapter() {
+        btnNuevoCelular.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarCelular();
             }
         });
-
-        btnAñadirDocumento.addMouseListener(new MouseAdapter() {
+        btnAñadirDocumento.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 cargarAgregarDocumento();
             }
         });
-
+        btnAñadirSeguro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cargarAgregarSeguro();
+            }
+        });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 cerrar();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
-        btnAñadirSeguro.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarAgregarSeguro();
-            }
-        });
+
     }
 
     private void registrar(){
