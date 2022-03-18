@@ -1,4 +1,5 @@
 package com.devel.views.dialogs;
+import com.devel.controllers.Documentos;
 import com.devel.models.*;
 import com.devel.utilities.JButoonEditors.*;
 import com.devel.utilities.Utilidades;
@@ -350,10 +351,15 @@ public class DNuevoEstudiante extends JDialog{
         DocumentoValidator validator=new DocumentoValidator();
         Set<ConstraintViolation<Documento>> errors = validator.loadViolations(documento);
         if(errors.isEmpty()){
-            persona.getDocumentos().add(documento);
-            Utilidades.actualizarTabla(tablaDocumentos);
-            Utilidades.sendNotification("Éxito","Documento registrado", TrayIcon.MessageType.INFO);
-            txtDni.setText(null);
+            if(!Documentos.existe(documento.getNumero())){
+                persona.getDocumentos().add(documento);
+                Utilidades.actualizarTabla(tablaDocumentos);
+                Utilidades.sendNotification("Éxito","Documento registrado", TrayIcon.MessageType.INFO);
+                txtDni.setText(null);
+            }else {
+                Utilidades.sendNotification("Error","Documento pertenece a otra persona", TrayIcon.MessageType.ERROR);
+            }
+
         }else {
             DocumentoValidator.mostrarErrores(errors);
         }

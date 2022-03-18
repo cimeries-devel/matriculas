@@ -27,4 +27,12 @@ public class Documentos extends Hibernate {
         Documento documento = session.createQuery(criteria).uniqueResult();
         return documento;
     }
+    public static boolean existe(String dni) {
+        criteria = builder.createQuery(Documento.class);
+        root = criteria.from(Documento.class);
+        criteria.select(root)
+                .where(builder.equal(root.get("numero"), dni));
+        Documento documento = session.createQuery(criteria).uniqueResult();
+        return documento==null?false:true;
+    }
 }

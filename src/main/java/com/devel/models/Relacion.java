@@ -23,8 +23,8 @@ public class Relacion extends Hibernate {
     private Persona persona;
 
     @Column
-    @NotEmpty
-    @Size(min = 3,max = 32,message = "Tipo de relación")
+    @NotEmpty(message = "Relación")
+    @Size(min = 3,max = 32,message = "Relación")
     private String tipoRelacion;
 
     @Column
