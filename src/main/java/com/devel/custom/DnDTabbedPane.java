@@ -1,6 +1,6 @@
 package com.devel.custom;
 
-import com.devel.ForResources;
+import com.devel.Principal;
 import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
@@ -686,7 +686,7 @@ class Cross extends JPanel {
     private ImageIcon getImage(String icono) {
         Image IMG = null;
         try {
-            IMG = new ImageIcon(ForResources.class.getResource(String.format("Icons/x24/" + icono))).getImage();
+            IMG = new ImageIcon(Principal.class.getResource(String.format("Icons/x24/" + icono))).getImage();
             IMG = IMG.getScaledInstance(size, size, Image.SCALE_SMOOTH);
         } catch (Exception e) {
             e.printStackTrace();

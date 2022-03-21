@@ -1,6 +1,5 @@
 package com.devel.views.dialogs;
 
-import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonEditroTarifas;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -10,23 +9,22 @@ import com.devel.views.VPrincipal;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.event.*;
-import java.util.Vector;
 
 public class DGestionTarifa extends JDialog{
     private JTable tablaTarifas;
     private JButton hechoButton;
-    private JButton nuevoButton;
+    private JButton btnNuevo;
     private JPanel panelPrincipal;
     private TarifasAbstractModel tarifasAbstractModel;
     public DGestionTarifa() {
         iniciarComponentes();
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnNuevo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
             }
         });
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnNuevo.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);

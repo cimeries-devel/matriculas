@@ -329,7 +329,9 @@
         <children>
           <component id="fc42a" class="javax.swing.JButton" binding="btnAñadir">
             <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="32"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Añadir"/>
@@ -337,7 +339,9 @@
           </component>
           <component id="fc893" class="javax.swing.JButton" binding="btnHecho">
             <constraints>
-              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="32"/>
+              </grid>
             </constraints>
             <properties>
               <text value="Hecho"/>

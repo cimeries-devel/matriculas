@@ -1,10 +1,8 @@
 package com.devel.views.tabs;
 
-import com.devel.ForResources;
+import com.devel.Principal;
 import com.devel.custom.TabPanel;
 import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
-import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
-import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 
@@ -28,7 +26,7 @@ public class VAlumnos extends JFrame{
 
     private void iniciarComponentes(){
         setTitle("Alumnos");
-        panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
+        panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
     }
 
     private void cargarAlumnos(){

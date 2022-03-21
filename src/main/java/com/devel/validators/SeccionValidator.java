@@ -1,6 +1,7 @@
 package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
+import com.devel.models.Salon;
 import com.devel.models.Seccion;
 import com.devel.utilities.Utilidades;
 import jakarta.validation.ConstraintViolation;

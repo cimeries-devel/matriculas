@@ -18,6 +18,7 @@ public class MenuGestiones {
     private JButton btnEscalasDePago;
     private JButton btnTiposdeDocumentos;
     private JButton usuariosButton;
+    private JButton btnSalones;
     private DnDTabbedPane tabContenido;
 
     public MenuGestiones(DnDTabbedPane tabContenido){
@@ -39,6 +40,9 @@ public class MenuGestiones {
         });
         btnTiposdeDocumentos.addActionListener(e -> {
             cargarGestionTipoDocumentos();
+        });
+        btnSalones.addActionListener(e -> {
+            cargarGestionSalones();
         });
     }
     public JPanel traerInicioOpciones() {
@@ -68,6 +72,10 @@ public class MenuGestiones {
     private void cargarGestionTipoDocumentos(){
         DGestionTipoDocumento dGestionarGrados=new DGestionTipoDocumento();
         dGestionarGrados.setVisible(true);
+    }
+    private void cargarGestionSalones(){
+        DGestionSalon dGestionSalon=new DGestionSalon();
+        dGestionSalon.setVisible(true);
     }
 
 }

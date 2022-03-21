@@ -1,6 +1,6 @@
 package com.devel.utilities;
 
-import com.devel.ForResources;
+import com.devel.Principal;
 import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
 import com.devel.utilities.TablecellRendered.TablesCellRendered;
@@ -25,7 +25,7 @@ public class Utilidades {
     private static TrayIcon mainTrayIcon;
     private static DefaultTableCellRenderer centro = new DefaultTableCellRenderer();
     private static DefaultTableCellRenderer izquierda = new DefaultTableCellRenderer();
-    private static Image trayIconImage = Toolkit.getDefaultToolkit().createImage(ForResources.class.getResource("Icons/x32/fedora.png"));
+    private static Image trayIconImage = Toolkit.getDefaultToolkit().createImage(Principal.class.getResource("Icons/x32/fedora.png"));
     private static SystemTray mainTray;
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");

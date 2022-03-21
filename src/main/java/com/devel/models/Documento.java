@@ -21,7 +21,7 @@ public class Documento extends Hibernate {
     private Integer id;
 
     @Column(unique = true)
-    @NotEmpty
+    @NotEmpty(message = "Número")
     @Size(min = 8,max = 15,message = "Número")
     private String numero;
 
@@ -31,7 +31,7 @@ public class Documento extends Hibernate {
     private Persona persona;
 
     @ManyToOne
-    @NotNull
+    @NotNull(message = "Tipo de documento")
     @JoinColumn(name = "fk_tipoDcoumento")
     private TipoDocumento tipoDocumento;
 

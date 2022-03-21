@@ -117,7 +117,6 @@ public class DCrearGrado extends JDialog {
     private void cargarNiveles(){
         cbbNiveles.setModel(new DefaultComboBoxModel((Vector) VPrincipal.niveles));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
-
     }
 
     private void paraActualizar(){

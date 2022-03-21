@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,5 +46,15 @@ public class Seccion extends Hibernate {
 
     public void setSalons(List<Salon> salons) {
         this.salons = salons;
+    }
+
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Grado) {
+                value = ((Seccion) value).getSeccion();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
     }
 }

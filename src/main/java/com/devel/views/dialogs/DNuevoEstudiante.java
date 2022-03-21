@@ -361,7 +361,6 @@ public class DNuevoEstudiante extends JDialog{
             }else {
                 Utilidades.sendNotification("Error","Documento pertenece a otra persona", TrayIcon.MessageType.ERROR);
             }
-
         }else {
             DocumentoValidator.mostrarErrores(errors);
         }

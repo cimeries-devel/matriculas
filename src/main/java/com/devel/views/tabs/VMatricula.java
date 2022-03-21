@@ -1,6 +1,6 @@
 package com.devel.views.tabs;
 
-import com.devel.ForResources;
+import com.devel.Principal;
 import com.devel.controllers.Documentos;
 import com.devel.controllers.Tarifas;
 import com.devel.custom.TabPanel;
@@ -186,7 +186,7 @@ public class VMatricula extends JFrame{
         definirColumnas();
         cargarMatriculas();
         cargarComboBox();
-        panelPrincipal.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x24/inicio.png")));
+        panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         cargarTarifaPorDefecto();
         cargarGradosPorNivel();
     }

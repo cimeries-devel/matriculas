@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,20 +16,19 @@ public class Salon extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
     @Size(min = 3,max = 32,message = "Nombre")
     private String nombre;
 
     @ManyToOne()
-    @NotEmpty
+    @NotNull(message = "Sección")
     private Seccion seccion;
 
     @ManyToOne()
-    @NotEmpty
+    @NotNull(message = "Nivel")
     private Nivel nivel;
 
     @ManyToOne
-    @NotEmpty
+    @NotNull(message = "Grado")
     private Grado grado;
 
     public Integer getId() {

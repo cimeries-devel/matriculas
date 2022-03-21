@@ -1,6 +1,6 @@
 package com.devel.views;
 
-import com.devel.ForResources;
+import com.devel.Principal;
 import com.devel.utilities.PlaceHolder;
 import com.devel.utilities.Propiedades;
 
@@ -28,10 +28,10 @@ public class VLogin extends JFrame{
                 super.mouseClicked(e);
                 if (psfContraseña.getEchoChar()=='•') {
                     psfContraseña.setEchoChar((char) 0);
-                    label.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/mostrarContraseña.png")));
+                    label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/mostrarContraseña.png")));
                 } else {
                     psfContraseña.setEchoChar('•');
-                    label.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/ocultarContraseña.png")));
+                    label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
                 }
             }
         });
@@ -92,7 +92,7 @@ public class VLogin extends JFrame{
     private void cargarCursores(){
         psfContraseña.setEchoChar('•');
         label.setOpaque(false);
-        label.setIcon(new ImageIcon(ForResources.class.getResource("Icons/x16/ocultarContraseña.png")));
+        label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
         label.setCursor(new Cursor(Cursor.HAND_CURSOR));
         ingresarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         label.setFocusable(false);
@@ -112,4 +112,6 @@ public class VLogin extends JFrame{
                 break;
         }
     }
+
+
 }

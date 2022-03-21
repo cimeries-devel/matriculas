@@ -135,7 +135,7 @@
           <configuration>
             <archive>
               <manifest>
-                <mainClass>com.devel.app.Principal</mainClass>
+                <mainClass>com.devel.Principal</mainClass>
               </manifest>
             </archive>
             <descriptorRefs>
