@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 import com.devel.controllers.Documentos;
 import com.devel.models.*;
+import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.*;
 import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.*;
@@ -259,6 +260,7 @@ public class DNuevoEstudiante extends JDialog{
         setResizable(false);
         setModal(true);
         cargarTablas();
+        cargarConfiguracion();
     }
 
     private void paraActualizar(){
@@ -416,7 +418,19 @@ public class DNuevoEstudiante extends JDialog{
     private void cerrar(){
         dispose();
     }
-
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnRegistrar.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnRegistrar.setForeground(Color.white);
+                btnRegistrar.setBackground(Colors.buttonDefect1);
+                break;
+        }
+    }
     private void createUIComponents() {
         // TODO: place custom component creation code here
         pickerEdad =new DatePicker();

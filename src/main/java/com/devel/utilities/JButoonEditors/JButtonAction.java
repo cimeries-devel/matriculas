@@ -12,7 +12,6 @@ import java.awt.event.*;
 
 public class JButtonAction extends JButton {
     Color selected= VPrincipal.propiedades.getTema().equals("oscuro")? Colors.selectedRow2:Colors.selectedRow1;
-    Color focus=VPrincipal.propiedades.getTema().equals("oscuro")?Colors.focusRow2:Colors.focusRow1;
     public JButtonAction(String icon, String texto) {
         setIcon(new ImageIcon(ForResources.class.getResource("Icons/"+icon)));
         setText(texto);

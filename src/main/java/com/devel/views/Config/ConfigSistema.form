@@ -443,13 +443,11 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="c9c20" class="javax.swing.JButton" binding="guardarButton" default-binding="true">
+          <component id="c9c20" class="javax.swing.JButton" binding="btnGuardar">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <background color="-13215616"/>
-              <foreground color="-1"/>
               <opaque value="true"/>
               <text value="Guardar"/>
             </properties>
@@ -459,7 +457,6 @@
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <foreground color="-16777216"/>
               <opaque value="true"/>
               <text value="Hecho"/>
             </properties>

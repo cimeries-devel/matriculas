@@ -1,5 +1,6 @@
 package com.devel.views.Config;
 
+import com.devel.utilities.Colors;
 import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilidades;
 import com.devel.views.VPrincipal;
@@ -25,7 +26,7 @@ public class ConfigSistema extends JDialog {
     private JPanel panelImpreciones;
     private JPanel panelToken;
     private JPanel panelCelulares;
-    private JButton guardarButton;
+    private JButton btnGuardar;
     private JButton btnHecho;
     private JRadioButton temaOscuro;
     private JRadioButton temaClaro;
@@ -46,7 +47,7 @@ public class ConfigSistema extends JDialog {
                 dispose();
             }
         });
-        guardarButton.addMouseListener(new MouseAdapter() {
+        btnGuardar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -73,7 +74,6 @@ public class ConfigSistema extends JDialog {
         setLocationRelativeTo(null);
         cargarCursores();
         cargarConfiguracion();
-        cargarColorBotones();
     }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -84,19 +84,14 @@ public class ConfigSistema extends JDialog {
         switch (propiedades.getTema()){
             case "oscuro":
                 temaOscuro.setSelected(true);
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnGuardar.setBackground(Colors.buttonDefect2);
                 break;
             default:
                 temaClaro.setSelected(true);
-                break;
-        }
-    }
-    private void cargarColorBotones(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                break;
-            default:
                 btnHecho.setForeground(new Color(0x000000));
+                btnGuardar.setForeground(Color.white);
+                btnGuardar.setBackground(Colors.buttonDefect1);
                 break;
         }
     }
