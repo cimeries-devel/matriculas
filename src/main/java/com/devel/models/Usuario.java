@@ -4,6 +4,7 @@ import com.devel.hibernate.Hibernate;
 import com.sun.istack.Nullable;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,7 +21,7 @@ public class Usuario extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
@@ -46,7 +47,7 @@ public class Usuario extends Hibernate {
     private String contraseña;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date actualizacion;
 
     @Column
@@ -82,7 +83,7 @@ public class Usuario extends Hibernate {
     }
 
     public void setNombres(String nombres) {
-        this.nombres = nombres;
+        this.nombres = nombres.toUpperCase();
     }
 
     public String getImagen() {
@@ -98,7 +99,7 @@ public class Usuario extends Hibernate {
     }
 
     public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+        this.apellidos = apellidos.toUpperCase();
     }
 
     public String getContraseña() {

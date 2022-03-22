@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.Set;
 import java.util.Vector;
 
-public class DNuevoEstudiante extends JDialog{
+public class DAñadirEstudiante extends JDialog{
     private JTextField txtNombres;
     private JComboBox cbbTipoDocumento;
     private DatePicker pickerEdad;
@@ -51,7 +51,7 @@ public class DNuevoEstudiante extends JDialog{
     private DocumentoAbstractModel documentoAbstractModel;
     private java.util.Date nacimiento;
 
-    public DNuevoEstudiante(Persona persona){
+    public DAñadirEstudiante(Persona persona){
         this.persona=persona;
         iniciarComponentes();
         paraActualizar();
@@ -70,7 +70,7 @@ public class DNuevoEstudiante extends JDialog{
 
     }
 
-    public DNuevoEstudiante(){
+    public DAñadirEstudiante(){
         persona=new Persona();
         iniciarComponentes();
         pickerEdad.addDateChangeListener(dateChangeEvent -> {
@@ -169,8 +169,8 @@ public class DNuevoEstudiante extends JDialog{
                     Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
                 }else{
                     persona.guardar();
+                    cerrar();
                     Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
-                    limpiarControles();
                 }
             }else{
                 Utilidades.sendNotification("Error","verifique el campo Código", TrayIcon.MessageType.WARNING);
@@ -193,7 +193,7 @@ public class DNuevoEstudiante extends JDialog{
     }
 
     private void paraActualizar(){
-        setTitle("Editar Tipo de documento");
+        setTitle("Datos Estudiante");
         btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
@@ -210,10 +210,9 @@ public class DNuevoEstudiante extends JDialog{
     private void cargarEstudiante(){
         txtNombres.setText(persona.getNombres());
         txtApellidos.setText(persona.getApellidos());
-        txtDni.setText(persona.getDocumentos().get(0).getNumero());
         txtCodigo.setText(persona.getCodigo());
         txtEmail.setText(persona.getEmail());
-        pickerEdad.setDate(LocalDate.from(persona.getCumpleaños().toInstant()));
+        pickerEdad.setDate(Utilidades.dateToLocalDate(persona.getCumpleaños()));
         labelEdad.setText(String.valueOf(persona.getEdad()));
         cbbGenero.setSelectedIndex(persona.isGenero()?0:1);
     }

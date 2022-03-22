@@ -57,6 +57,10 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                     table.getColumn(table.getColumnName(column)).setMaxWidth(50);
                     table.getColumn(table.getColumnName(column)).setMinWidth(50);
                     return seleccionada(isSelected,"editar");
+                case "Más":
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(40);
+                    table.getColumn(table.getColumnName(column)).setMinWidth(40);
+                    return seleccionada(isSelected,"mostrar");
                 default:
                     table.getColumn(table.getColumnName(column)).setMaxWidth(40);
                     table.getColumn(table.getColumnName(column)).setMinWidth(40);
@@ -84,7 +88,10 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                     break;
                 case "Código":
                 case "Tarifa":
+                case "Monto":
                 case "Número":
+                case "Edad":
+                case "Sección":
                 case "Viven juntos":
                     table.getColumn(table.getColumnName(column)).setMaxWidth(90);
                     table.getColumn(table.getColumnName(column)).setMinWidth(90);
@@ -97,6 +104,7 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
         }
         return this;
     }
+
     private Component seleccionada(boolean isSelected, String icono){
         switch (icono){
             case "default":
@@ -116,6 +124,12 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                     return new JButtonAction("x16/cancelar.png",table.getSelectionBackground());
                 }else{
                     return new JButtonAction("x16/cancelar.png",table.getBackground());
+                }
+            case "mostrar":
+                if(isSelected){
+                    return new JButtonAction("x16/mostrarContraseña.png",table.getSelectionBackground());
+                }else{
+                    return new JButtonAction("x16/mostrarContraseña.png",table.getBackground());
                 }
             default:
                 if(isSelected){

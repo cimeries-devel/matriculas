@@ -10,6 +10,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @Entity(name = "tbl_colegio")
 public class Colegio extends Hibernate {
@@ -29,7 +30,7 @@ public class Colegio extends Hibernate {
     private String nombreColegio;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
@@ -43,7 +44,7 @@ public class Colegio extends Hibernate {
     private String ruc;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date actualizacion;
 
     @Column
@@ -56,7 +57,7 @@ public class Colegio extends Hibernate {
 
     @ManyToOne
     @JoinColumn(name = "fk_ubigeo")
-    @NotEmpty
+    @NotNull
     private Ubigeo ubigeo;
 
     @OneToMany
@@ -71,7 +72,7 @@ public class Colegio extends Hibernate {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.direccion = direccion.toUpperCase();
     }
 
     public String getNombreColegio() {
@@ -79,7 +80,7 @@ public class Colegio extends Hibernate {
     }
 
     public void setNombreColegio(String nombreColegio) {
-        this.nombreColegio = nombreColegio;
+        this.nombreColegio = nombreColegio.toUpperCase();
     }
 
     public Date getCreacion() {
@@ -119,7 +120,7 @@ public class Colegio extends Hibernate {
     }
 
     public void setUrbanizacion(String urbanizacion) {
-        this.urbanizacion = urbanizacion;
+        this.urbanizacion = urbanizacion.toUpperCase();
     }
 
     public String getWebsite() {

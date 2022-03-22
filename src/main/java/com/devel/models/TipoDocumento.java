@@ -38,7 +38,7 @@ public class TipoDocumento extends Hibernate {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.codigo = codigo.toUpperCase();
     }
 
     public String getDescripcion() {
@@ -46,7 +46,7 @@ public class TipoDocumento extends Hibernate {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.toUpperCase();
     }
 
     public static class ListCellRenderer extends DefaultListCellRenderer {

@@ -34,6 +34,9 @@ public class VPrincipal extends JFrame{
     private JButton setingsButton;
     private JPanel panelMenus;
     private JPanel panelControles;
+    public  JLabel lblDerecha;
+    public  JLabel lblCentro;
+    public  JLabel lblIzquierdo;
     private VWelcome welcome;
     private JButton jButton;
     public static Propiedades propiedades;
@@ -43,6 +46,7 @@ public class VPrincipal extends JFrame{
     private MenuGestiones menuGestiones;
     public static Vector<TipoDocumento> tipoDocumentos= TipoDocumentos.getTodos();
     public static Vector<Registro> alumnosMatriculados=Registros.getMatriculados();
+    public static Vector<Persona> alumnos=Personas.alumnos();
     public static Vector<Nivel> niveles= Niveles.getTodos();
     public static Vector<Grado> grados= Grados.getTodos();
     public static Vector<Tarifa> tarifas= Tarifas.getTodas();
@@ -216,6 +220,6 @@ public class VPrincipal extends JFrame{
             VLogin vLogin=new VLogin(propiedades);
             vLogin.setVisible(true);
         }
-
     }
+
 }

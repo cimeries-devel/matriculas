@@ -40,7 +40,7 @@ public class Seguro extends Hibernate {
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.toUpperCase();
     }
 
     public String getCodigo() {

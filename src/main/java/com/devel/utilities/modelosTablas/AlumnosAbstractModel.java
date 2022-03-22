@@ -1,7 +1,7 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Celular;
 import com.devel.models.Persona;
+import com.devel.models.Registro;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
@@ -11,8 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class AlumnosAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Código","Nombres y apellidos","Edad","Nivel","Grado","Sección","Última matrícula","Familiares","Nro. celular"};
-    public Class[] m_colTypes = {String.class,String.class,Integer.class,String.class,String.class,String.class,String.class,JButton.class,JButton.class};
+    private String[] columnNames = {"Código","Nombres y apellidos","Apoderado","Edad","Nivel","Grado","Sección","Última matrícula","Más"};
+    public Class[] m_colTypes = {String.class,String.class,String.class,Integer.class,String.class,String.class,String.class,String.class,JButton.class};
     private DateFormat año=new SimpleDateFormat("yyyy");
     private Vector<Persona> vector;
     public AlumnosAbstractModel(Vector<Persona> vector){
@@ -53,19 +53,19 @@ public class AlumnosAbstractModel extends AbstractTableModel {
             case 1:
                 return persona.getNombres()+" "+persona.getApellidos();
             case 2:
-                return persona.getEdad();
+                return persona.getApoderado().getNombres()+" "+persona.getApoderado().getApellidos();
             case 3:
-                return persona.ultimaMatricula().getSalon().getNivel();
+                return persona.getEdad();
             case 4:
-                return persona.ultimaMatricula().getSalon().getGrado();
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getNivel().getDescripcion();
             case 5:
-                return persona.ultimaMatricula().getSalon().getSeccion();
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getGrado().getGrado();
             case 6:
-                return año.format(persona.ultimaMatricula().getCreacion());
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getSeccion().getSeccion();
             case 7:
-                return persona.ultimaMatricula().getCreacion();
+                return persona.getRegistros().isEmpty()?"Sin registros":año.format(persona.ultimaMatricula().getCreacion());
             default:
-                return new JButtonAction("x16/editar.png");
+                return new JButtonAction("x16/mostrarContraseña.png");
         }
     }
     public Persona traer(int row){

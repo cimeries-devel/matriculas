@@ -30,6 +30,7 @@ public class Grado extends Hibernate {
 
     @ManyToOne
     @JoinColumn(name = "fk_nivel")
+    @NotNull(message = "Nivel")
     private Nivel nivel;
 
     public Integer getId() {
@@ -41,7 +42,7 @@ public class Grado extends Hibernate {
     }
 
     public void setGrado(String grado) {
-        this.grado = grado;
+        this.grado = grado.toUpperCase();
     }
 
     public List<Salon> getSalon() {

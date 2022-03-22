@@ -50,10 +50,14 @@ public class JButtonEditorDocumentos extends AbstractCellEditor implements Table
                 dAñadirDocumento.setVisible(true);
                 break;
             case "eliminar":
-                int sioNo=JOptionPane.showOptionDialog(null, "¿Está seguro?","Eliminar documento",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
-                if(sioNo==0){
-                    persona.getDocumentos().remove(documento);
-                    Utilidades.sendNotification("Éxito","documento cancelado", TrayIcon.MessageType.INFO);
+                if(documento.getPerson().getDocumentos().size()>1){
+                    int sioNo=JOptionPane.showOptionDialog(null, "¿Está seguro?","Eliminar documento",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+                    if(sioNo==0){
+                        persona.getDocumentos().remove(documento);
+                        Utilidades.sendNotification("Éxito","Documento cancelado", TrayIcon.MessageType.INFO);
+                    }
+                }else{
+                    Utilidades.sendNotification("Advertencia","Debe tener al menos un documento", TrayIcon.MessageType.WARNING);
                 }
                 break;
         }

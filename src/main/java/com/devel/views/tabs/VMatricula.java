@@ -12,12 +12,11 @@ import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
 import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
-import com.devel.validators.DocumentoValidator;
 import com.devel.validators.RegistroValidator;
 import com.devel.views.VPrincipal;
 import com.devel.views.dialogs.DAñadirCelular;
 import com.devel.views.dialogs.DAñadirFamiliar;
-import com.devel.views.dialogs.DNuevoEstudiante;
+import com.devel.views.dialogs.DAñadirEstudiante;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
@@ -105,8 +104,8 @@ public class VMatricula extends JFrame{
     }
 
     private void cargarNuevoEstudiante(){
-        DNuevoEstudiante dNuevoEstudiante=new DNuevoEstudiante();
-        dNuevoEstudiante.setVisible(true);
+        DAñadirEstudiante dAñadirEstudiante =new DAñadirEstudiante();
+        dAñadirEstudiante.setVisible(true);
     }
     private void cargarAgregarFamiliar(){
         DAñadirFamiliar dAñadirFamiliar=new DAñadirFamiliar(persona);

@@ -57,7 +57,7 @@ public class Relacion extends Hibernate {
     }
 
     public void setTipoRelacion(String tipoRelacion) {
-        this.tipoRelacion = tipoRelacion;
+        this.tipoRelacion = tipoRelacion.toUpperCase();
     }
 
     public boolean isApoderado() {

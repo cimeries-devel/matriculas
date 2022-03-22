@@ -38,7 +38,7 @@ public class Celular extends Hibernate {
     }
 
     public void setDescipcion(String descipcion) {
-        this.descripcion = descipcion;
+        this.descripcion = descipcion.toUpperCase();
     }
 
     public String getNumero() {

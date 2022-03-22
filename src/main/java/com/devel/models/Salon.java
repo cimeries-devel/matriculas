@@ -42,7 +42,7 @@ public class Salon extends Hibernate {
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
     }
 
     public Seccion getSeccion() {

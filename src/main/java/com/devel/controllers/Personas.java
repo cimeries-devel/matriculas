@@ -1,7 +1,9 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
+import com.devel.models.Nivel;
 import com.devel.models.Persona;
+import com.devel.models.Relacion;
 
 import javax.persistence.LockModeType;
 import javax.persistence.criteria.CriteriaQuery;
@@ -16,5 +18,21 @@ public class Personas extends Hibernate {
     public static Persona get(Integer id) {
         Persona persona = session.find(Persona.class, id, LockModeType.NONE);
         return persona;
+    }
+
+    public static Vector<Persona> alumnosPorCodigo(String codigo){
+        criteria= builder.createQuery(Persona.class);
+        root=criteria.from(Persona.class);
+        criteria.select(root).where(builder.equal(root.get("codigo"),codigo));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
+    }
+
+    public static Vector<Persona> alumnos(){
+        criteria= builder.createQuery(Persona.class);
+        root=criteria.from(Persona.class);
+        criteria.select(root).where(builder.isNotNull(root.get("codigo")));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
     }
 }

@@ -37,7 +37,7 @@ public class Seccion extends Hibernate {
     }
 
     public void setSeccion(String seccion) {
-        this.seccion = seccion;
+        this.seccion = seccion.toUpperCase();
     }
 
     public List<Salon> getSalons() {

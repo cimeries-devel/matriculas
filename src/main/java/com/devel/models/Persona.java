@@ -113,7 +113,7 @@ public class Persona extends Hibernate {
     }
 
     public void setDireccion(String direccion) {
-        this.direccion = direccion;
+        this.direccion = direccion.toUpperCase();
     }
 
     public int getEdad() {
@@ -177,7 +177,7 @@ public class Persona extends Hibernate {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.codigo = codigo.toUpperCase();
     }
 
     public List<Documento> getDocumentos() {
@@ -257,7 +257,7 @@ public class Persona extends Hibernate {
     public void setTipoRelacionRelacion(Persona persona,String tiporelacion){
         for(Relacion relacion:getRelaciones()){
             if(relacion.getPersona1()==persona){
-                relacion.setTipoRelacion(tiporelacion);
+                relacion.setTipoRelacion(tiporelacion.toUpperCase());
             }
         }
     }

@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -23,7 +24,7 @@ public class Ubigeo extends Hibernate {
     private String codigo;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
@@ -42,7 +43,7 @@ public class Ubigeo extends Hibernate {
     private String provincia;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date actualizacion;
 
     @OneToMany(mappedBy = "ubigeo")
@@ -57,7 +58,7 @@ public class Ubigeo extends Hibernate {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.codigo = codigo.toUpperCase();
     }
 
     public Date getCreacion() {
@@ -73,7 +74,7 @@ public class Ubigeo extends Hibernate {
     }
 
     public void setDepartamento(String departamento) {
-        this.departamento = departamento;
+        this.departamento = departamento.toUpperCase();
     }
 
     public String getDistrito() {
@@ -81,7 +82,7 @@ public class Ubigeo extends Hibernate {
     }
 
     public void setDistrito(String distrito) {
-        this.distrito = distrito;
+        this.distrito = distrito.toUpperCase();
     }
 
     public String getProvincia() {
@@ -89,7 +90,7 @@ public class Ubigeo extends Hibernate {
     }
 
     public void setProvincia(String provincia) {
-        this.provincia = provincia;
+        this.provincia = provincia.toUpperCase();
     }
 
     public Date getActualizacion() {
