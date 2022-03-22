@@ -20,19 +20,11 @@ public class DGestionNiveles extends JDialog{
     private NivelesAbstractModel nivelesAbstractModel;
     public DGestionNiveles() {
         iniciarComponentes();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarCrearNivel();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarCrearNivel();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                dispose();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

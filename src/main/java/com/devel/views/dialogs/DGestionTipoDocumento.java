@@ -20,19 +20,11 @@ public class DGestionTipoDocumento extends JDialog{
     private TipoDocumentoAbstractModel tipoDocumentoAbstractModel;
     public DGestionTipoDocumento() {
         iniciarComponentes();
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarNuevoTipoDeDocumento();
         });
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarNuevoTipoDeDocumento();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

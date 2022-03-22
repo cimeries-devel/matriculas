@@ -30,18 +30,11 @@ public class DCrearNivel extends JDialog{
     public DCrearNivel(){
         nivel=new Nivel();
         iniciarComponentes();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                registrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            registrar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -53,18 +46,11 @@ public class DCrearNivel extends JDialog{
         this.nivel=nivel;
         iniciarComponentes();
         paraActualizar();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -26,19 +26,11 @@ public class DGestionTarifa extends JDialog{
                 super.mouseClicked(e);
             }
         });
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarNueva();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarNuevaTarifa();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -58,7 +50,7 @@ public class DGestionTarifa extends JDialog{
         cargarConfiguracion();
     }
 
-    private void cargarNueva(){
+    private void cargarNuevaTarifa(){
         DAñadirTarifa añadirTarifa=new DAñadirTarifa();
         añadirTarifa.setVisible(true);
         Utilidades.actualizarTabla(tablaTarifas);

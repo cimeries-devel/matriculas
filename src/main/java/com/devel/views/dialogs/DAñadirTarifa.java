@@ -25,19 +25,11 @@ public class DAñadirTarifa extends JDialog {
         iniciarComponentes();
         tarifa = new Tarifa();
 
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                registrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            registrar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         txtPrecio.addKeyListener(new KeyAdapter() {
             @Override
@@ -57,19 +49,11 @@ public class DAñadirTarifa extends JDialog {
         iniciarComponentes();
         this.tarifa=tarifa;
         paraActualizar();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         txtPrecio.addKeyListener(new KeyAdapter() {
             @Override

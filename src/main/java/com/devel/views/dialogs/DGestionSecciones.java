@@ -20,19 +20,11 @@ public class DGestionSecciones extends JDialog{
     private SeccionAbstractModel seccionAbstractModel;
     public DGestionSecciones() {
         iniciarComponentes();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarNuevaSeccion();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarNuevaSeccion();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

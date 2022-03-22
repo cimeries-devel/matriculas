@@ -60,47 +60,13 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizar();
-            }
-        });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
-        btnNuevoFamiliar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarFamiliar();
-            }
-        });
-        btnNuevoCelular.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarCelular();
-            }
-        });
-        btnAñadirDocumento.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarDocumento();
-            }
-        });
-        btnAñadirSeguro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarSeguro();
-            }
-        });
-        panelPrincipal.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        btnAñadir.addActionListener(e -> actualizar());
+        btnHecho.addActionListener(e -> onCancel());
+        btnNuevoFamiliar.addActionListener(e -> cargarAgregarFamiliar());
+        btnNuevoCelular.addActionListener(e -> cargarAgregarCelular());
+        btnAñadirDocumento.addActionListener(e -> cargarAgregarDocumento());
+        btnAñadirSeguro.addActionListener(e -> cargarAgregarSeguro());
+        panelPrincipal.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     }
 
@@ -112,47 +78,13 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrar();
-            }
-        });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cerrar();
-            }
-        });
-        btnNuevoFamiliar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarFamiliar();
-            }
-        });
-        btnNuevoCelular.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarCelular();
-            }
-        });
-        btnAñadirDocumento.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarDocumento();
-            }
-        });
-        btnAñadirSeguro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAgregarSeguro();
-            }
-        });
-        panelPrincipal.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cerrar();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        btnAñadir.addActionListener(e -> registrar());
+        btnHecho.addActionListener(e -> cerrar());
+        btnNuevoFamiliar.addActionListener(e -> cargarAgregarFamiliar());
+        btnNuevoCelular.addActionListener(e -> cargarAgregarCelular());
+        btnAñadirDocumento.addActionListener(e -> cargarAgregarDocumento());
+        btnAñadirSeguro.addActionListener(e -> cargarAgregarSeguro());
+        panelPrincipal.registerKeyboardAction(e -> cerrar(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
 
     }

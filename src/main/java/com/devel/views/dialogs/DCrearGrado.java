@@ -25,18 +25,14 @@ public class DCrearGrado extends JDialog {
     public DCrearGrado() {
         iniciarComponentes();
         grado=new Grado();
-        btnAñadir.addMouseListener(new MouseAdapter() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+            public void actionPerformed(ActionEvent e) {
                 registrar();
             }
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -49,18 +45,11 @@ public class DCrearGrado extends JDialog {
         iniciarComponentes();
         this.grado=grado;
         paraActualizar();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -79,6 +68,7 @@ public class DCrearGrado extends JDialog {
         if(errors.isEmpty()){
             grado.guardar();
             VPrincipal.grados.add(grado);
+            grado.getNivel().getGrados().add(grado);
             grado=new Grado();
             Utilidades.sendNotification("Éxito","Grado registrado", TrayIcon.MessageType.INFO);
             limpiarControles();

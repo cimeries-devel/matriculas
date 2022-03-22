@@ -23,24 +23,11 @@ public class DGestionarGrados extends JDialog{
     private GradoAbstractModel gradoAbstractModel;
     public DGestionarGrados() {
         iniciarComponentes();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarNuevoGrado();
         });
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarNuevoGrado();
-            }
-        });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

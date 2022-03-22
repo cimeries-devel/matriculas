@@ -30,17 +30,11 @@ public class DAñadirSalon extends JDialog{
     public DAñadirSalon() {
         salon=new Salon();
         iniciarComponentes();
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            registrar();
         });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -53,17 +47,11 @@ public class DAñadirSalon extends JDialog{
         this.salon=salon;
         iniciarComponentes();
         paraActualizar();
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

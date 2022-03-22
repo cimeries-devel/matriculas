@@ -23,19 +23,11 @@ public class DAñadirTipoDocumento extends JDialog{
     public DAñadirTipoDocumento(){
         iniciarComponentes();
         tipoDocumento=new TipoDocumento();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                registrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            registrar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -48,19 +40,11 @@ public class DAñadirTipoDocumento extends JDialog{
         iniciarComponentes();
         this.tipoDocumento=tipoDocumento1;
         paraActualizar();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

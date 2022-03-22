@@ -22,16 +22,11 @@ public class DAñadirDocumento extends JDialog {
     public DAñadirDocumento(Documento documento) {
         this.documento=documento;
         iniciarComponentes();
-        btnAñadir.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                actualizar();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-
-        btnHecho.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -26,17 +26,17 @@ public class Registro extends Hibernate {
 
     @ManyToOne
     @JoinColumn(name = "FK_CLASSROOM")
-    @NotNull
+    @NotNull(message = "Salón")
     private Salon salon;
 
     @ManyToOne
     @JoinColumn(name = "FK_STUDENT")
-    @NotNull
+    @NotNull(message = "Estudiante")
     private Persona estudiante;
 
     @ManyToOne
     @JoinColumn(name = "FK_RATE")
-    @NotNull
+    @NotNull(message = "Tarifa")
     private Tarifa tarifa;
 
     public Integer getId() {

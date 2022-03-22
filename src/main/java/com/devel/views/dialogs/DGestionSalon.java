@@ -22,17 +22,11 @@ public class DGestionSalon extends JDialog{
     private SalonesAbstractModel salonesAbstractModel;
     public DGestionSalon(){
         iniciarComponentes();
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarNuevoSalon();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarNuevoSalon();
         });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

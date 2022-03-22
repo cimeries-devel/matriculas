@@ -56,17 +56,11 @@ public class DAñadirFamiliar extends JDialog{
                 lblEdad.setText(String.valueOf(edad));
             }
         });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cerrar();
-            }
+        btnAñadir.addActionListener(e -> {
+            registrar();
         });
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         btnBuscar.addActionListener(new ActionListener() {
             @Override
@@ -94,17 +88,11 @@ public class DAñadirFamiliar extends JDialog{
                 lblEdad.setText(String.valueOf(edad));
             }
         });
-        btnHecho.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
+        btnAñadir.addActionListener(e -> {
+            actualizar();
         });
-        btnAñadir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizar();
-            }
+        btnHecho.addActionListener(e -> {
+            onCancel();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

@@ -20,19 +20,11 @@ public class DGestionarSeguros extends JDialog{
     private SegurosAbstractModel segurosAbstractModel;
     public DGestionarSeguros() {
         iniciarComponentes();
-        btnAñadir.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cargarCrearSeguro();
-            }
+        btnAñadir.addActionListener(e -> {
+            cargarCrearSeguro();
         });
-        btnHecho.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                cerrar();
-            }
+        btnHecho.addActionListener(e -> {
+            cerrar();
         });
         panelPrincipal.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
