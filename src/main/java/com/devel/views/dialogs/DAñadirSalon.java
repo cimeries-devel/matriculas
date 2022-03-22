@@ -4,6 +4,7 @@ import com.devel.models.Grado;
 import com.devel.models.Nivel;
 import com.devel.models.Salon;
 import com.devel.models.Seccion;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.SalonValidator;
 import com.devel.views.VPrincipal;
@@ -13,7 +14,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Set;
-import java.util.Vector;
 
 public class DAñadirSalon extends JDialog{
     private JPanel panelPrincipal;
@@ -21,7 +21,7 @@ public class DAñadirSalon extends JDialog{
     private JComboBox cbbGrado;
     private JComboBox cbbSeccion;
     private JButton btnHecho;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private Salon salon;
     private Nivel nivel;
     private Grado grado;
@@ -30,7 +30,7 @@ public class DAñadirSalon extends JDialog{
     public DAñadirSalon() {
         salon=new Salon();
         iniciarComponentes();
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 registrar();
@@ -53,7 +53,7 @@ public class DAñadirSalon extends JDialog{
         this.salon=salon;
         iniciarComponentes();
         paraActualizar();
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualizar();
@@ -79,6 +79,7 @@ public class DAñadirSalon extends JDialog{
         setResizable(false);
         setModal(true);
         cargarComboBox();
+        cargarConfiguracion();
     }
 
     private void registrar(){
@@ -90,8 +91,7 @@ public class DAñadirSalon extends JDialog{
         salon.setGrado(grado);
         salon.setSeccion(seccion);
 
-        SalonValidator validator = new SalonValidator();
-        Set<ConstraintViolation<Salon>> errors = validator.loadViolations(salon);
+        Set<ConstraintViolation<Salon>> errors = SalonValidator.loadViolations(salon);
         if(errors.isEmpty()){
             salon.setNombre(grado.getGrado()+ " "+seccion.getSeccion());
             salon.guardar();
@@ -114,8 +114,7 @@ public class DAñadirSalon extends JDialog{
         salon.setSeccion(seccion);
         salon.setNombre(grado.getGrado()+ " "+seccion.getSeccion());
 
-        SalonValidator validator = new SalonValidator();
-        Set<ConstraintViolation<Salon>> errors = validator.loadViolations(salon);
+        Set<ConstraintViolation<Salon>> errors = SalonValidator.loadViolations(salon);
         if(errors.isEmpty()){
             salon.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -127,7 +126,7 @@ public class DAñadirSalon extends JDialog{
 
     private void paraActualizar(){
         setTitle("Editar Salón");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -155,6 +154,7 @@ public class DAñadirSalon extends JDialog{
         grado=salon.getGrado();
         seccion=salon.getSeccion();
         cbbGrado.setName(salon.getNombre());
+        cargarSalon();
     }
 
     private void onCancel(){
@@ -168,9 +168,29 @@ public class DAñadirSalon extends JDialog{
     private void cerrar(){
         dispose();
     }
+
+    private void cargarSalon(){
+        cbbNiveles.setSelectedItem(salon.getNivel());
+        cbbSeccion.setSelectedItem(salon.getSeccion());
+        cbbGrado.setSelectedItem(salon.getGrado());
+    }
     private void limpiarControles(){
         cbbNiveles.setSelectedItem(0);
         cbbGrado.setSelectedItem(0);
         cbbSeccion.setSelectedItem(0);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

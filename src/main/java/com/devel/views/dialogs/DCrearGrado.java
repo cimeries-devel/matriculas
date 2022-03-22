@@ -2,6 +2,7 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Grado;
 import com.devel.models.Nivel;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.GradoValidator;
 import com.devel.views.VPrincipal;
@@ -15,7 +16,7 @@ import java.util.Vector;
 
 public class DCrearGrado extends JDialog {
     private JTextField txtGrado;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JPanel panelPrincipal;
     private JButton btnHecho;
     private JComboBox cbbNiveles;
@@ -24,7 +25,7 @@ public class DCrearGrado extends JDialog {
     public DCrearGrado() {
         iniciarComponentes();
         grado=new Grado();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -48,7 +49,7 @@ public class DCrearGrado extends JDialog {
         iniciarComponentes();
         this.grado=grado;
         paraActualizar();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -74,8 +75,7 @@ public class DCrearGrado extends JDialog {
         grado.setGrado(sgrado);
         grado.setNivel(nivel);
 
-        GradoValidator validator = new GradoValidator();
-        Set<ConstraintViolation<Grado>> errors = validator.loadViolations(grado);
+        Set<ConstraintViolation<Grado>> errors = GradoValidator.loadViolations(grado);
         if(errors.isEmpty()){
             grado.guardar();
             VPrincipal.grados.add(grado);
@@ -93,8 +93,7 @@ public class DCrearGrado extends JDialog {
         grado.setGrado(sgrado);
         grado.setNivel(nivel);
 
-        GradoValidator validator = new GradoValidator();
-        Set<ConstraintViolation<Grado>> errors = validator.loadViolations(grado);
+        Set<ConstraintViolation<Grado>> errors = GradoValidator.loadViolations(grado);
         if(errors.isEmpty()){
             grado.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -112,16 +111,17 @@ public class DCrearGrado extends JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void cargarNiveles(){
-        cbbNiveles.setModel(new DefaultComboBoxModel((Vector) VPrincipal.niveles));
+        cbbNiveles.setModel(new DefaultComboBoxModel(VPrincipal.niveles));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
     }
 
     private void paraActualizar(){
         setTitle("Editar Grado");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         cargarTarifa();
         guardarCopia();
@@ -153,5 +153,19 @@ public class DCrearGrado extends JDialog {
 
     private void limpiarControles(){
         txtGrado.setText(null);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

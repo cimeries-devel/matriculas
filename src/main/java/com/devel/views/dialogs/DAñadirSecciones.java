@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Seccion;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.SeccionValidator;
 import com.devel.views.VPrincipal;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 public class DAñadirSecciones extends JDialog{
     private JTextField txtSeccion;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JPanel panelPrincipal;
     private JButton btnHecho;
     private Seccion seccion;
@@ -21,7 +22,7 @@ public class DAñadirSecciones extends JDialog{
     public DAñadirSecciones(){
         iniciarComponentes();
         seccion=new Seccion();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -48,7 +49,7 @@ public class DAñadirSecciones extends JDialog{
         this.seccion=seccion;
         paraActualizar();
         guardarCopia();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -76,13 +77,14 @@ public class DAñadirSecciones extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void registrar(){
         String desripcion=txtSeccion.getText().trim();
         seccion.setSeccion(desripcion);
-        SeccionValidator validator = new SeccionValidator();
-        Set<ConstraintViolation<Seccion>> errors = validator.loadViolations(seccion);
+
+        Set<ConstraintViolation<Seccion>> errors = SeccionValidator.loadViolations(seccion);
         if(errors.isEmpty()){
             seccion.guardar();
             VPrincipal.secciones.add(seccion);
@@ -97,8 +99,8 @@ public class DAñadirSecciones extends JDialog{
     private void actualizar(){
         String desripcion=txtSeccion.getText().trim();
         seccion.setSeccion(desripcion);
-        SeccionValidator validator = new SeccionValidator();
-        Set<ConstraintViolation<Seccion>> errors = validator.loadViolations(seccion);
+
+        Set<ConstraintViolation<Seccion>> errors = SeccionValidator.loadViolations(seccion);
         if(errors.isEmpty()){
             seccion.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -110,7 +112,7 @@ public class DAñadirSecciones extends JDialog{
 
     private void paraActualizar(){
         setTitle("Editar Sección");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -138,5 +140,19 @@ public class DAñadirSecciones extends JDialog{
 
     private void limpiarControles(){
         txtSeccion.setText(null);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

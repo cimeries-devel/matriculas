@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.swing.*;
+import java.awt.*;
 
 @Entity(name = "tbl_salon")
 public class Salon extends Hibernate {
@@ -67,4 +69,13 @@ public class Salon extends Hibernate {
         this.grado = grado;
     }
 
+    public static class ListCellRenderer extends DefaultListCellRenderer {
+        public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            if (value instanceof Salon) {
+                value = ((Salon) value).getNombre();
+            }
+            super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            return this;
+        }
+    }
 }

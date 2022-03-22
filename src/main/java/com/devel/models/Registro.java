@@ -2,6 +2,7 @@ package com.devel.models;
 
 import com.devel.hibernate.Hibernate;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,26 +17,26 @@ public class Registro extends Hibernate {
     private Integer id;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date creacion;
 
     @Column
-    @NotEmpty
+    @NotNull
     private Date actualizacion;
 
     @ManyToOne
     @JoinColumn(name = "FK_CLASSROOM")
-    @NotEmpty
+    @NotNull
     private Salon salon;
 
     @ManyToOne
     @JoinColumn(name = "FK_STUDENT")
-    @NotEmpty
+    @NotNull
     private Persona estudiante;
 
     @ManyToOne
     @JoinColumn(name = "FK_RATE")
-    @NotEmpty
+    @NotNull
     private Tarifa tarifa;
 
     public Integer getId() {

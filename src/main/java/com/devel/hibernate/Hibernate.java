@@ -64,7 +64,7 @@ public class Hibernate {
         if (this instanceof Salon) {
             id = ((Salon)(this)).getId();
         }
-        if (this instanceof Salon) {
+        if (this instanceof Documento) {
             id = ((Documento)(this)).getId();
         }
         session.beginTransaction();

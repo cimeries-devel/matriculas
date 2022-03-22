@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.Vector;
 
 public class FamiliaresAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Dirección","Apoderado",""};
-    public Class[] m_colTypes = {String.class,String.class,String.class,String.class, JButton.class, JButton.class};
+    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Apoderado",""};
+    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
     private List<Relacion> vector;
+
     public FamiliaresAbstractModel(List<Relacion> vector){
         this.vector=vector;
     }
@@ -54,8 +55,6 @@ public class FamiliaresAbstractModel extends AbstractTableModel {
             case 2:
                 return relacion.isVivenJuntos()?"si":"no";
             case 3:
-                return relacion.getPersona1().getDireccion();
-            case 4:
                 if(relacion.isApoderado()){
                     return new JButtonAction("x16/default.png");
                 }else {

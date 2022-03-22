@@ -90,7 +90,7 @@ public class ConfigSistema extends JDialog {
             default:
                 temaClaro.setSelected(true);
                 btnHecho.setForeground(new Color(0x000000));
-                btnGuardar.setForeground(Color.white);
+                btnGuardar.setForeground(new Color(0xFFFFFF));
                 btnGuardar.setBackground(Colors.buttonDefect1);
                 break;
         }

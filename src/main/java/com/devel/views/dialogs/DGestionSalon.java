@@ -2,11 +2,9 @@ package com.devel.views.dialogs;
 
 import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.JButtonEditorSalones;
-import com.devel.utilities.JButoonEditors.JButtonEditroTarifas;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.SalonesAbstractModel;
-import com.devel.utilities.modelosTablas.TarifasAbstractModel;
 import com.devel.views.VPrincipal;
 
 import javax.swing.*;
@@ -18,13 +16,13 @@ import java.awt.event.KeyEvent;
 
 public class DGestionSalon extends JDialog{
     private JTable tablaSalones;
-    private JButton btnNuevo;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JPanel panelPrincipal;
     private SalonesAbstractModel salonesAbstractModel;
     public DGestionSalon(){
         iniciarComponentes();
-        btnNuevo.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarNuevoSalon();
@@ -44,13 +42,13 @@ public class DGestionSalon extends JDialog{
     }
     private void iniciarComponentes(){
         setTitle("Salones");
-        cargarConfiguracion();
         setContentPane(panelPrincipal);
         cargarTabla();
         pack();
         setResizable(false);
         setModal(true);
         setLocationRelativeTo(null);
+        cargarConfiguracion();
     }
     private void cargarNuevoSalon(){
         DAñadirSalon dAñadirSalon=new DAñadirSalon();
@@ -74,12 +72,12 @@ public class DGestionSalon extends JDialog{
         switch (VPrincipal.tema){
             case "oscuro":
                 btnHecho.setForeground(new Color(0xFFFFFF));
-                btnNuevo.setBackground(Colors.buttonDefect2);
+                btnAñadir.setBackground(Colors.buttonDefect2);
                 break;
             default:
                 btnHecho.setForeground(new Color(0x000000));
-                btnNuevo.setForeground(Color.white);
-                btnNuevo.setBackground(Colors.buttonDefect1);
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
                 break;
         }
     }

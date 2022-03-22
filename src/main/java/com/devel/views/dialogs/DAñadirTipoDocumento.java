@@ -1,9 +1,8 @@
 package com.devel.views.dialogs;
 
-import com.devel.models.Tarifa;
 import com.devel.models.TipoDocumento;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
-import com.devel.validators.TarifaValidator;
 import com.devel.validators.TipoDocumentoValidator;
 import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
@@ -11,12 +10,11 @@ import jakarta.validation.ConstraintViolation;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Date;
 import java.util.Set;
 
 public class DAñadirTipoDocumento extends JDialog{
     private JTextField txtDescripcion;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JPanel panelPrincipal;
     private JTextField txtCodigo;
@@ -25,7 +23,7 @@ public class DAñadirTipoDocumento extends JDialog{
     public DAñadirTipoDocumento(){
         iniciarComponentes();
         tipoDocumento=new TipoDocumento();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -50,7 +48,7 @@ public class DAñadirTipoDocumento extends JDialog{
         iniciarComponentes();
         this.tipoDocumento=tipoDocumento1;
         paraActualizar();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -78,8 +76,7 @@ public class DAñadirTipoDocumento extends JDialog{
         tipoDocumento.setDescripcion(desripcion);
         tipoDocumento.setCodigo(codigo);
 
-        TipoDocumentoValidator validator = new TipoDocumentoValidator();
-        Set<ConstraintViolation<TipoDocumento>> errors = validator.loadViolations(tipoDocumento);
+        Set<ConstraintViolation<TipoDocumento>> errors = TipoDocumentoValidator.loadViolations(tipoDocumento);
         if(errors.isEmpty()){
             tipoDocumento.guardar();
             VPrincipal.tipoDocumentos.add(tipoDocumento);
@@ -97,8 +94,7 @@ public class DAñadirTipoDocumento extends JDialog{
         tipoDocumento.setDescripcion(desripcion);
         tipoDocumento.setCodigo(codigo);
 
-        TipoDocumentoValidator validator = new TipoDocumentoValidator();
-        Set<ConstraintViolation<TipoDocumento>> errors = validator.loadViolations(tipoDocumento);
+        Set<ConstraintViolation<TipoDocumento>> errors = TipoDocumentoValidator.loadViolations(tipoDocumento);
         if(errors.isEmpty()){
             tipoDocumento.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -114,10 +110,11 @@ public class DAñadirTipoDocumento extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
     private void paraActualizar(){
         setTitle("Editar Tipo de documento");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         cargarTipoDeDocumento();
         guardarCopia();
@@ -151,5 +148,19 @@ public class DAñadirTipoDocumento extends JDialog{
     private void limpiarControles(){
         txtDescripcion.setText(null);
         txtCodigo.setText(null);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

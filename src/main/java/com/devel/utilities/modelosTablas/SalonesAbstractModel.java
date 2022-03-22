@@ -53,7 +53,7 @@ public class SalonesAbstractModel extends AbstractTableModel {
             case 1:
                 return salon.getGrado().getGrado();
             case 2:
-                return salon.getSeccion();
+                return salon.getSeccion().getSeccion();
             default:
                 return new JButtonAction("x16/editar.png");
         }

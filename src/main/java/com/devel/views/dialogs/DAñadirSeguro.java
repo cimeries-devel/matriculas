@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Seguro;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.SeguroValidator;
 import com.devel.views.VPrincipal;
@@ -14,7 +15,7 @@ import java.util.Set;
 public class DAñadirSeguro extends JDialog{
     private JPanel panelPrincipal;
     private JTextField txtCodigo;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JTextField txtDescripcion;
     private Seguro seguro;
@@ -22,7 +23,7 @@ public class DAñadirSeguro extends JDialog{
     public  DAñadirSeguro(){
         iniciarComponentes();
         seguro=new Seguro();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -47,7 +48,7 @@ public class DAñadirSeguro extends JDialog{
         iniciarComponentes();
         this.seguro=seguro;
         paraActualizar();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -75,8 +76,7 @@ public class DAñadirSeguro extends JDialog{
         seguro.setDescripcion(desripcion);
         seguro.setCodigo(codigo);
 
-        SeguroValidator validator = new SeguroValidator();
-        Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
+        Set<ConstraintViolation<Seguro>> errors = SeguroValidator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
             VPrincipal.seguros.add(seguro);
@@ -95,8 +95,7 @@ public class DAñadirSeguro extends JDialog{
         seguro.setDescripcion(desripcion);
         seguro.setCodigo(codigo);
 
-        SeguroValidator validator = new SeguroValidator();
-        Set<ConstraintViolation<Seguro>> errors = validator.loadViolations(seguro);
+        Set<ConstraintViolation<Seguro>> errors = SeguroValidator.loadViolations(seguro);
         if(errors.isEmpty()){
             seguro.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -112,6 +111,7 @@ public class DAñadirSeguro extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void limpiarControles(){
@@ -121,7 +121,7 @@ public class DAñadirSeguro extends JDialog{
 
     private void paraActualizar() {
         setTitle("Editar Seguro");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -150,5 +150,19 @@ public class DAñadirSeguro extends JDialog{
 
     private void cerrar(){
         dispose();
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

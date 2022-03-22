@@ -1,16 +1,18 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Registro;
+import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Vector;
 
 public class MatriculasAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Código","Alumno","Apoderado","Nivel","Grado","Sección","Fecha Matrícula"};
-    public Class[] m_colTypes = {String.class,String.class, String.class,String.class,String.class,String.class,String.class};
+    private String[] columnNames = {"Fecha Matrícula","Tipo","Monto","Código","Alumno","Apoderado","Relacion apoderado","Nivel","Grado","Sección"};
+    public Class[] m_colTypes = {String.class,String.class,String.class,String.class, String.class,String.class,String.class,String.class,String.class,String.class};
     private Vector<Registro> vector;
     private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -49,19 +51,26 @@ public class MatriculasAbstractModel extends AbstractTableModel {
         Registro registro=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return registro.getEstudiante().getCodigo();
-            case 1:
-                return registro.getEstudiante().getNombres()+" "+registro.getEstudiante().getNombres();
-            case 2:
-                return registro.getEstudiante().getApoderado().getNombres()+" "+registro.getEstudiante().getApoderado().getApellidos()+" - "+registro.getEstudiante().getRelacion(registro.getEstudiante().getApoderado());
-            case 3:
-                return registro.getSalon().getNivel().getDescripcion();
-            case 4:
-                return registro.getSalon().getGrado().getGrado();
-            case 5:
-                return registro.getSalon().getSeccion().getSeccion();
-            default:
                 return formatoFecha.format(registro.getActualizacion());
+            case 1:
+                return registro.getTarifa().getDescripcion();
+            case 2:
+                return Utilidades.sol.format(registro.getTarifa().getPrecio());
+            case 3:
+                return registro.getEstudiante().getCodigo();
+            case 4:
+                return registro.getEstudiante().getNombres()+" "+registro.getEstudiante().getNombres();
+            case 5:
+                return registro.getEstudiante().getApoderado().getNombres()+" "+registro.getEstudiante().getApoderado().getApellidos();
+            case 6:
+                return registro.getEstudiante().getRelacionAFamiliar(registro.getEstudiante().getApoderado()).getTipoRelacion();
+            case 7:
+                return registro.getSalon().getNivel().getDescripcion();
+            case 8:
+                return registro.getSalon().getGrado().getGrado();
+            default:
+                return registro.getSalon().getSeccion().getSeccion();
+
         }
     }
 

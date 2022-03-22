@@ -69,6 +69,11 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 case "Documento":
                     setHorizontalAlignment(SwingConstants.LEFT);
                     break;
+                case "Tipo":
+                    table.getColumn(table.getColumnName(column)).setMaxWidth(130);
+                    table.getColumn(table.getColumnName(column)).setMinWidth(130);
+                    setHorizontalAlignment(SwingConstants.LEFT);
+                    break;
                 case "Fecha creación":
                 case "Fecha Matrícula":
                 case "Última matrícula":

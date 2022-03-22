@@ -12,10 +12,13 @@ import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
 import com.devel.utilities.modelosTablas.CelularesAbstractModel;
 import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
+import com.devel.validators.DocumentoValidator;
+import com.devel.validators.RegistroValidator;
 import com.devel.views.VPrincipal;
 import com.devel.views.dialogs.DAñadirCelular;
 import com.devel.views.dialogs.DAñadirFamiliar;
 import com.devel.views.dialogs.DNuevoEstudiante;
+import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
@@ -26,13 +29,13 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Set;
 import java.util.Vector;
 
 public class VMatricula extends JFrame{
     private TabPanel panelPrincipal;
     private JTable tablaFamiliares;
     private JTable tablaMatriculas;
-    private JTextField txtEdad;
     private JComboBox cbbNiveles;
     private JTextField txtDni;
     private JButton buscarButton;
@@ -41,21 +44,24 @@ public class VMatricula extends JFrame{
     private JButton btnAñadirFamiliar;
     private JLabel lblNombres;
     private JCheckBox matriculadoCheckBox;
-    private JTextField txtMonto;
     private JLabel lblCodigo;
     private JTable tablaCelulares;
     private JButton btnAñadirCelular;
     private JComboBox cbbGrados;
     private JComboBox cbbTarifas;
-    private JScrollPane jScrollPane1;
+    private JComboBox cbbSalones;
+    private JComboBox cbbSecciones;
+    private JLabel lblMonto;
     private FamiliaresAbstractModel familiaresAbstractModel;
-    private Persona persona;
     private DateFormat año=new SimpleDateFormat("yyyy");
     private MatriculasAbstractModel matriculadosAbstractModel;
     private CelularesAbstractModel modelCelulares;
     private NumberFormat sol = NumberFormat.getCurrencyInstance();
+    private Persona persona;
+    private Registro registro;
 
     public VMatricula() {
+        persona=new Persona();
         iniciarComponentes();
         btnNuevoEstudiante.addActionListener(new ActionListener() {
             @Override
@@ -90,7 +96,7 @@ public class VMatricula extends JFrame{
         btnRegistrarMatricula.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                registrarMatricula();
             }
         });
     }
@@ -110,7 +116,7 @@ public class VMatricula extends JFrame{
     private void cargarMonto(){
         if(cbbTarifas.getItemCount()>0){
             if(cbbTarifas.getSelectedItem()!=null){
-                txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+                lblMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
             }
         }
     }
@@ -129,23 +135,14 @@ public class VMatricula extends JFrame{
                     persona=dni.getPerson();
                     lblNombres.setText(persona.getNombres()+" "+persona.getApellidos());
                     lblCodigo.setText(persona.getCodigo());
-                    cargarTablaFamiliares();
-                    cargarTablaCelulares();
-                    definirColumnas();
-                    verificarMatricula();
-                    btnAñadirCelular.setEnabled(true);
-                    btnAñadirFamiliar.setEnabled(true);
-                    btnRegistrarMatricula.setEnabled(true);
+                    cargarTablasDelEstudiante();
+                    habilitarBotones();
                 }else{
                     persona=new Persona();
                     lblNombres.setText("--");
                     lblCodigo.setText("--");
-                    cargarTablaFamiliares();
-                    cargarTablaCelulares();
-                    definirColumnas();
-                    btnAñadirCelular.setEnabled(false);
-                    btnAñadirFamiliar.setEnabled(false);
-                    btnRegistrarMatricula.setEnabled(false);
+                    cargarTablasDelEstudiante();
+                    deshabilitarBotones();
                     Utilidades.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
                 }
             }else{
@@ -156,12 +153,40 @@ public class VMatricula extends JFrame{
             Utilidades.sendNotification("Error","Ingrese el dni", TrayIcon.MessageType.ERROR);
         }
     }
+
     private void registrarMatricula() {
+        if(!matriculadoCheckBox.isSelected()){
+            registro=new Registro();
+            Tarifa tarifa=(Tarifa) cbbTarifas.getSelectedItem();
+            Salon salon=(Salon) cbbSalones.getSelectedItem();
+
+            registro.setCreacion(new Date());
+            registro.setActualizacion(new Date());
+            registro.setEstudiante(persona);
+            registro.setSalon(salon);
+            registro.setTarifa(tarifa);
+
+            Set<ConstraintViolation<Registro>> errors = RegistroValidator.loadViolations(registro);
+            if(errors.isEmpty()){
+                registro.guardar();
+                persona.getRegistros().add(registro);
+                VPrincipal.alumnosMatriculados.add(registro);
+                Utilidades.actualizarTabla(tablaMatriculas);
+                registro=new Registro();
+                persona=new Persona();
+                limpiarControles();
+                Utilidades.sendNotification("Éxito","Matricula registrada", TrayIcon.MessageType.INFO);
+            }else {
+                RegistroValidator.mostrarErrores(errors);
+            }
+        }else{
+            Utilidades.sendNotification("Error","El alumno ya se encuentra matriculado", TrayIcon.MessageType.ERROR);
+        }
 
     }
     private void verificarMatricula(){
         if(!persona.getRegistros().isEmpty()){
-            Registro registro=persona.getRegistros().get(persona.getRegistros().size());
+            Registro registro=persona.getRegistros().get(persona.getRegistros().size()-1);
             if(año.format(registro.getActualizacion().getTime()).equals(año.format(new Date()))){
                 matriculadoCheckBox.setSelected(true);
             }else{
@@ -179,21 +204,24 @@ public class VMatricula extends JFrame{
         }
     }
     private void iniciarComponentes(){
-        persona=new Persona();
         setTitle("Matrícula");
-        cargarTablaFamiliares();
-        cargarTablaCelulares();
-        definirColumnas();
+        panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         cargarMatriculas();
         cargarComboBox();
-        panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         cargarTarifaPorDefecto();
         cargarGradosPorNivel();
+        cargarTablasDelEstudiante();
+        deshabilitarBotones();
+    }
+    private void cargarTablasDelEstudiante(){
+        cargarTablaFamiliares();
+        cargarTablaCelulares();
+        verificarMatricula();
     }
     private void cargarTarifaPorDefecto(){
         if(!VPrincipal.tarifas.isEmpty()){
             cbbTarifas.setSelectedItem(Tarifas.tarifaActiva());
-            txtMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
+            lblMonto.setText(sol.format(((Tarifa) cbbTarifas.getSelectedItem()).getPrecio()));
         }
     }
     private void cargarComboBox(){
@@ -203,12 +231,16 @@ public class VMatricula extends JFrame{
         cbbGrados.setRenderer(new Grado.ListCellRenderer());
         cbbTarifas.setModel(new DefaultComboBoxModel( VPrincipal.tarifas));
         cbbTarifas.setRenderer(new Tarifa.ListCellRenderer());
+        cbbSecciones.setModel(new DefaultComboBoxModel( VPrincipal.secciones));
+        cbbSecciones.setRenderer(new Seccion.ListCellRenderer());
+        cbbSalones.setModel(new DefaultComboBoxModel( VPrincipal.salones));
+        cbbSalones.setRenderer(new Salon.ListCellRenderer());
     }
     private void cargarMatriculas(){
         matriculadosAbstractModel=new MatriculasAbstractModel(VPrincipal.alumnosMatriculados);
         tablaMatriculas.setModel(matriculadosAbstractModel);
-        Utilidades.headerNegrita(tablaMatriculas);
         Utilidades.cellsRendered(tablaMatriculas);
+        Utilidades.headerNegrita(tablaMatriculas);
     }
     private void cargarTablaFamiliares( ){
         familiaresAbstractModel=new FamiliaresAbstractModel(persona.getFamiliaresparaEstudiante());
@@ -234,7 +266,23 @@ public class VMatricula extends JFrame{
         dañadirCelular.setVisible(true);
         Utilidades.actualizarTabla(tablaCelulares);
     }
-    private void definirColumnas(){
-        tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
+    private void limpiarControles(){
+        txtDni.setText(null);
+        lblCodigo.setText("--");
+        lblNombres.setText("--");
+        cargarTablasDelEstudiante();
+        deshabilitarBotones();
+    }
+
+    private void deshabilitarBotones(){
+        btnRegistrarMatricula.setEnabled(false);
+        btnAñadirFamiliar.setEnabled(false);
+        btnAñadirCelular.setEnabled(false);
+    }
+
+    private void habilitarBotones(){
+        btnRegistrarMatricula.setEnabled(true);
+        btnAñadirFamiliar.setEnabled(true);
+        btnAñadirCelular.setEnabled(true);
     }
 }

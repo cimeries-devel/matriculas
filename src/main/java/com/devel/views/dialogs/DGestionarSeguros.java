@@ -1,6 +1,6 @@
 package com.devel.views.dialogs;
 
-import com.devel.models.Seguro;
+import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.JButtonEditorSeguros;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -9,25 +9,25 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.*;
-import java.util.Vector;
 
 public class DGestionarSeguros extends JDialog{
     private JTable tablaSeguros;
-    private JButton nuevoButton;
-    private JButton hechoButton;
+    private JButton btnAñadir;
+    private JButton btnHecho;
     private JPanel panelPrincipal;
     private SegurosAbstractModel segurosAbstractModel;
     public DGestionarSeguros() {
         iniciarComponentes();
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 cargarCrearSeguro();
             }
         });
-        hechoButton.addMouseListener(new MouseAdapter() {
+        btnHecho.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -48,6 +48,7 @@ public class DGestionarSeguros extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
     private void cargarCrearSeguro(){
         DAñadirSeguro dAñadirSeguro=new DAñadirSeguro();
@@ -66,5 +67,19 @@ public class DGestionarSeguros extends JDialog{
     }
     private void cerrar(){
         dispose();
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

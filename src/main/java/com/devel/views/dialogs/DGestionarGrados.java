@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Grado;
+import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.JButtonEditorGrados;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -9,25 +10,26 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
 
 public class DGestionarGrados extends JDialog{
     private JTable tablaGrados;
-    private JButton nuevoButton;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JPanel panelPrincipal;
     private Grado grado;
     private GradoAbstractModel gradoAbstractModel;
     public DGestionarGrados() {
         iniciarComponentes();
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
             }
         });
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -54,7 +56,7 @@ public class DGestionarGrados extends JDialog{
         setLocationRelativeTo(null);
         setModal(true);
         setResizable(false);
-
+        cargarConfiguracion();
     }
     private void cargarNuevoGrado(){
         DCrearGrado dCrearGrado=new DCrearGrado();
@@ -62,7 +64,7 @@ public class DGestionarGrados extends JDialog{
         Utilidades.actualizarTabla(tablaGrados);
     }
     private void cargarTabla(){
-        gradoAbstractModel=new GradoAbstractModel((Vector<Grado>) VPrincipal.grados);
+        gradoAbstractModel=new GradoAbstractModel(VPrincipal.grados);
         tablaGrados.setModel(gradoAbstractModel);
         tablaGrados.getColumnModel().getColumn(gradoAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorGrados(tablaGrados));
         TableCellRenderer renderer1 = tablaGrados.getDefaultRenderer(JButton.class);
@@ -74,5 +76,19 @@ public class DGestionarGrados extends JDialog{
     }
     private void cerrar(){
         dispose();
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

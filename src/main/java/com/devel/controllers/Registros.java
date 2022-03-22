@@ -20,6 +20,7 @@ public class Registros extends Hibernate {
         Registro registro = session.find(Registro.class, id, LockModeType.NONE);
         return registro;
     }
+
     public static Vector<Registro> getMatriculados(){
         Calendar primerDia=Calendar.getInstance();
         primerDia.set(Calendar.MONTH,primerDia.getActualMinimum(Calendar.MONTH));

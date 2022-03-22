@@ -1,6 +1,7 @@
 package com.devel.validators;
 
 import com.devel.hibernate.ProgramaValidator;
+import com.devel.models.Documento;
 import com.devel.models.Registro;
 import com.devel.models.Seccion;
 import com.devel.utilities.Utilidades;
@@ -15,8 +16,9 @@ public class RegistroValidator extends ProgramaValidator {
         Set<ConstraintViolation<Registro>> violations = PROGRAMA_VALIDATOR.validateProperty(registro, property);
         return violations.isEmpty() ? null : violations.iterator().next();
     }
-    public static Set<ConstraintViolation<Seccion>> loadViolations(Seccion seccion) {
-        Set<ConstraintViolation<Seccion>> violations = PROGRAMA_VALIDATOR.validate(seccion);
+
+    public static Set<ConstraintViolation<Registro>> loadViolations(Registro registro) {
+        Set<ConstraintViolation<Registro>> violations = PROGRAMA_VALIDATOR.validate(registro);
         return violations;
     }
 

@@ -3,6 +3,7 @@ package com.devel.utilities.modelosTablas;
 import com.devel.models.Seguro;
 import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonAction;
+import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -16,7 +17,6 @@ public class TarifasAbstractModel extends AbstractTableModel {
     public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
     private Vector<Tarifa> vector;
     private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");
-    private NumberFormat sol = NumberFormat.getCurrencyInstance();
 
     public TarifasAbstractModel(Vector<Tarifa> vector){
         this.vector=vector;
@@ -57,7 +57,7 @@ public class TarifasAbstractModel extends AbstractTableModel {
             case 1:
                 return tarifa.getDescripcion();
             case 2:
-                return sol.format(tarifa.getPrecio());
+                return Utilidades.sol.format(tarifa.getPrecio());
             case 3:
                 return tarifa.isDefecto()?new JButtonAction("x16/default.png"):new JButtonAction("x16/Nodefault.png");
             default:

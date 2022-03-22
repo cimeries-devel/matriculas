@@ -50,6 +50,7 @@ public class VPrincipal extends JFrame{
     public static Vector<Seccion> secciones= Secciones.todos();
     public static Vector<Seguro> segurosConTodos= Seguros.todosconTodos();
     public static Vector<Salon> salones=Salones.getTodos();
+
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;
         iniciarComponentes();

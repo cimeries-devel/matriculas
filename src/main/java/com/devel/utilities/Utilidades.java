@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.math.BigInteger;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.util.Calendar;
@@ -30,6 +31,7 @@ public class Utilidades {
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm");
+    public static  NumberFormat sol = NumberFormat.getCurrencyInstance();
     public static void tema(String tema){
         try {
             if(tema.equals("oscuro")){

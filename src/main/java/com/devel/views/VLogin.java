@@ -1,6 +1,7 @@
 package com.devel.views;
 
 import com.devel.Principal;
+import com.devel.utilities.Colors;
 import com.devel.utilities.PlaceHolder;
 import com.devel.utilities.Propiedades;
 
@@ -13,7 +14,7 @@ public class VLogin extends JFrame{
     private JPanel panelDatos;
     private JLabel logoLogin;
     private JPasswordField psfContraseña;
-    private JButton ingresarButton;
+    private JButton btnIngresar;
     private JTextField txtUsuario;
     private JCheckBox recordarUsuarioCheckBox;
     private JLabel label=new JLabel("");
@@ -53,11 +54,8 @@ public class VLogin extends JFrame{
                 }
             }
         });
-        ingresarButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                cargarVPrincipal();
-            }
+        btnIngresar.addActionListener(e -> {
+            cargarVPrincipal();
         });
     }
     public void cargarVPrincipal(){
@@ -94,7 +92,7 @@ public class VLogin extends JFrame{
         label.setOpaque(false);
         label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
         label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        ingresarButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         label.setFocusable(false);
         recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
@@ -104,11 +102,14 @@ public class VLogin extends JFrame{
                 txtUsuario.setForeground(new Color(0x000000));
                 psfContraseña.setForeground(new Color(0x000000));
                 recordarUsuarioCheckBox.setForeground(new Color(0x000000));
+                btnIngresar.setForeground(Color.white);
+                btnIngresar.setBackground(Colors.buttonDefect1);
                 break;
             case "oscuro":
                 txtUsuario.setForeground(new Color(0xBABABA));
                 psfContraseña.setForeground(new Color(0xBABABA));
                 recordarUsuarioCheckBox.setForeground(new Color(0xBABABA));
+                btnIngresar.setBackground(Colors.buttonDefect2);
                 break;
         }
     }

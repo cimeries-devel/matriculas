@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Tarifa;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.TarifaValidator;
 import com.devel.views.VPrincipal;
@@ -15,7 +16,7 @@ import java.util.Set;
 public class DAñadirTarifa extends JDialog {
     private JTextField txtDescripcion;
     private JTextField txtPrecio;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JPanel panelPrincipal;
     private Tarifa tarifa;
@@ -24,7 +25,7 @@ public class DAñadirTarifa extends JDialog {
         iniciarComponentes();
         tarifa = new Tarifa();
 
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -56,7 +57,7 @@ public class DAñadirTarifa extends JDialog {
         iniciarComponentes();
         this.tarifa=tarifa;
         paraActualizar();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -94,8 +95,7 @@ public class DAñadirTarifa extends JDialog {
         tarifa.setCreacion(new Date());
         tarifa.setDefecto(false);
 
-        TarifaValidator validator = new TarifaValidator();
-        Set<ConstraintViolation<Tarifa>> errors = validator.loadViolations(tarifa);
+        Set<ConstraintViolation<Tarifa>> errors = TarifaValidator.loadViolations(tarifa);
         if(errors.isEmpty()){
             tarifa.guardar();
             VPrincipal.tarifas.add(tarifa);
@@ -113,8 +113,7 @@ public class DAñadirTarifa extends JDialog {
         tarifa.setDescripcion(desripcion);
         tarifa.setPrecio(precio);
 
-        TarifaValidator validator = new TarifaValidator();
-        Set<ConstraintViolation<Tarifa>> errors = validator.loadViolations(tarifa);
+        Set<ConstraintViolation<Tarifa>> errors = TarifaValidator.loadViolations(tarifa);
         if(errors.isEmpty()){
             tarifa.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -130,11 +129,12 @@ public class DAñadirTarifa extends JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void paraActualizar(){
         setTitle("Editar Tarifa");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         cargarTarifa();
         guardarCopia();
@@ -167,5 +167,19 @@ public class DAñadirTarifa extends JDialog {
     private void limpiarControles(){
         txtDescripcion.setText(null);
         txtPrecio.setText(null);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

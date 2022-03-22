@@ -50,7 +50,7 @@ public class Seccion extends Hibernate {
 
     public static class ListCellRenderer extends DefaultListCellRenderer {
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            if (value instanceof Grado) {
+            if (value instanceof Seccion) {
                 value = ((Seccion) value).getSeccion();
             }
             super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

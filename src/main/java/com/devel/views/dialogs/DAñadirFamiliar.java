@@ -177,8 +177,7 @@ public class DAñadirFamiliar extends JDialog{
         familiar.setEmail(email);
         familiar.setGenero(genero);
 
-        PersonaValidator validator = new PersonaValidator();
-        Set<ConstraintViolation<Persona>> errors = validator.loadViolations(familiar);
+        Set<ConstraintViolation<Persona>> errors = PersonaValidator.loadViolations(familiar);
         if(errors.isEmpty()){
             System.out.println("está en celular");
             String numero=txtCelular.getText().trim();
@@ -187,8 +186,7 @@ public class DAñadirFamiliar extends JDialog{
             celular.setNumero(numero);
             celular.setDescipcion(descCelular);
 
-            CelularValidator validator2 = new CelularValidator();
-            Set<ConstraintViolation<Celular>> errors2 = validator2.loadViolations(celular);
+            Set<ConstraintViolation<Celular>> errors2 = CelularValidator.loadViolations(celular);
             if(errors2.isEmpty()){
                 System.out.println("está en documento");
                 String numeroDocumento=txtDni.getText().trim();
@@ -198,8 +196,7 @@ public class DAñadirFamiliar extends JDialog{
                 documento.setNumero(numeroDocumento);
                 documento.setPerson(familiar);
 
-                DocumentoValidator validator3 = new DocumentoValidator();
-                Set<ConstraintViolation<Documento>> errors3 = validator3.loadViolations(documento);
+                Set<ConstraintViolation<Documento>> errors3 = DocumentoValidator.loadViolations(documento);
                 if(errors3.isEmpty()){
                     System.out.println("está en relacion");
                     if(persona.getRelacionAFamiliar(familiar)==null){
@@ -207,7 +204,7 @@ public class DAñadirFamiliar extends JDialog{
                             Relacion relacion=new Relacion();
                             String tipoRelacion=txtRelacion.getText().trim();
                             boolean vivenJuntos=ckVivenJuntos.isSelected();
-                            boolean esApoderado=persona.getApoderado()==null? true:false;
+                            boolean esApoderado= persona.getApoderado() == null;
 
                             relacion.setTipoRelacion(tipoRelacion);
                             relacion.setVivenJuntos(vivenJuntos);
@@ -215,8 +212,7 @@ public class DAñadirFamiliar extends JDialog{
                             relacion.setPersona1(familiar);
                             relacion.setApoderado(esApoderado);
 
-                            RelacionValidator validator4 = new RelacionValidator();
-                            Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
+                            Set<ConstraintViolation<Relacion>> errors4 = RelacionValidator.loadViolations(relacion);
                             if(errors4.isEmpty()){
                                 if(persona.getId()!=null){
                                     celular.guardar();
@@ -258,8 +254,7 @@ public class DAñadirFamiliar extends JDialog{
         familiar.setDireccion(direccion);
         familiar.setEmail(email);
 
-        PersonaValidator validator = new PersonaValidator();
-        Set<ConstraintViolation<Persona>> errors = validator.loadViolations(familiar);
+        Set<ConstraintViolation<Persona>> errors = PersonaValidator.loadViolations(familiar);
         if(errors.isEmpty()){
             Celular celular=familiar.getCelulares().get(0);
             String numero=txtCelular.getText().trim();
@@ -268,8 +263,7 @@ public class DAñadirFamiliar extends JDialog{
             celular.setNumero(numero);
             celular.setDescipcion(descCelular);
 
-            CelularValidator validator2 = new CelularValidator();
-            Set<ConstraintViolation<Celular>> errors2 = validator2.loadViolations(celular);
+            Set<ConstraintViolation<Celular>> errors2 = CelularValidator.loadViolations(celular);
             if(errors2.isEmpty()){
                 Relacion relacion= familiar.getRelacion(persona);
                 String tipoRelacion=txtRelacion.getText().trim();
@@ -280,8 +274,7 @@ public class DAñadirFamiliar extends JDialog{
                 relacion.setVivenJuntos(vivenJuntos);
                 relacion.setApoderado(esApoderado);
 
-                RelacionValidator validator4 = new RelacionValidator();
-                Set<ConstraintViolation<Relacion>> errors4 = validator4.loadViolations(relacion);
+                Set<ConstraintViolation<Relacion>> errors4 = RelacionValidator.loadViolations(relacion);
                 if(errors4.isEmpty()){
                     if(persona.getId()!=null){
                         familiar.guardar();

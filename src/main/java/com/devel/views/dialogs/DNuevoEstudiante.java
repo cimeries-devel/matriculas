@@ -5,20 +5,17 @@ import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.*;
 import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.*;
-import com.devel.validators.CelularValidator;
 import com.devel.validators.DocumentoValidator;
 import com.devel.validators.PersonaValidator;
 import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
 import jakarta.validation.ConstraintViolation;
 
-import javax.print.Doc;
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Set;
 import java.util.Vector;
@@ -29,7 +26,7 @@ public class DNuevoEstudiante extends JDialog{
     private DatePicker pickerEdad;
     private JLabel labelEdad;
     private JPanel panelPrincipal;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private JTextField txtDni;
     private JTextField txtApellidos;
@@ -63,7 +60,7 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 actualizar();
@@ -115,7 +112,7 @@ public class DNuevoEstudiante extends JDialog{
                 labelEdad.setText(String.valueOf(Utilidades.calcularaños(Date.valueOf(pickerEdad.getDate()))));
             }
         });
-        btnRegistrar.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 registrar();
@@ -265,7 +262,7 @@ public class DNuevoEstudiante extends JDialog{
 
     private void paraActualizar(){
         setTitle("Editar Tipo de documento");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         guardarCopia();
         cargarEstudiante();
@@ -408,7 +405,6 @@ public class DNuevoEstudiante extends JDialog{
         tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        tablaFamiliares.removeColumn(tablaFamiliares.getColumn("Dirección"));
         Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilidades.headerNegrita(tablaFamiliares);
         Utilidades.cellsRendered(tablaFamiliares,relaciones,true);
@@ -421,12 +417,12 @@ public class DNuevoEstudiante extends JDialog{
         switch (VPrincipal.tema){
             case "oscuro":
                 btnHecho.setForeground(new Color(0xFFFFFF));
-                btnRegistrar.setBackground(Colors.buttonDefect2);
+                btnAñadir.setBackground(Colors.buttonDefect2);
                 break;
             default:
                 btnHecho.setForeground(new Color(0x000000));
-                btnRegistrar.setForeground(Color.white);
-                btnRegistrar.setBackground(Colors.buttonDefect1);
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
                 break;
         }
     }

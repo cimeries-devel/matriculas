@@ -1,8 +1,10 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Documento;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.DocumentoValidator;
+import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
@@ -12,21 +14,21 @@ import java.util.Set;
 
 public class DAñadirDocumento extends JDialog {
     private JPanel panelPrincipal;
-    private JButton btnGuardar;
-    private JButton btnCancelar;
+    private JButton btnAñadir;
+    private JButton btnHecho;
     private JTextField txtNumero;
     private Documento documento;
 
     public DAñadirDocumento(Documento documento) {
         this.documento=documento;
         iniciarComponentes();
-        btnGuardar.addActionListener(new ActionListener() {
+        btnAñadir.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 actualizar();
             }
         });
 
-        btnCancelar.addActionListener(new ActionListener() {
+        btnHecho.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
             }
@@ -46,6 +48,7 @@ public class DAñadirDocumento extends JDialog {
         setModal(true);
         txtNumero.setName(documento.getNumero());
         txtNumero.setText(documento.getNumero());
+        cargarConfiguracion();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -57,8 +60,7 @@ public class DAñadirDocumento extends JDialog {
     }
     private void actualizar(){
         documento.setNumero(txtNumero.getText().trim());
-        DocumentoValidator validator=new DocumentoValidator();
-        Set<ConstraintViolation<Documento>> errors = validator.loadViolations(documento);
+        Set<ConstraintViolation<Documento>> errors = DocumentoValidator.loadViolations(documento);
         if(errors.isEmpty()){
             Utilidades.sendNotification("Éxito","Documento registrado", TrayIcon.MessageType.INFO);
             cerrar();
@@ -74,4 +76,17 @@ public class DAñadirDocumento extends JDialog {
         dispose();
     }
 
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
+    }
 }

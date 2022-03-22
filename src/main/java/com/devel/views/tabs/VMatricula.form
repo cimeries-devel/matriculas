@@ -74,10 +74,7 @@
                       <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <model>
-                        <item value="Primaria"/>
-                        <item value="Secundaria"/>
-                      </model>
+                      <model/>
                     </properties>
                   </component>
                   <component id="1b9fc" class="javax.swing.JLabel">
@@ -94,30 +91,16 @@
                       <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="1" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <model>
-                        <item value="Primaria"/>
-                        <item value="Secundaria"/>
-                      </model>
+                      <model/>
                     </properties>
                   </component>
                   <component id="58e6d" class="javax.swing.JLabel">
                     <constraints>
-                      <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <font size="14"/>
                       <text value="Monto:"/>
-                    </properties>
-                  </component>
-                  <component id="55244" class="javax.swing.JTextField" binding="txtMonto">
-                    <constraints>
-                      <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="1" indent="0" use-parent-layout="false">
-                        <preferred-size width="80" height="-1"/>
-                      </grid>
-                    </constraints>
-                    <properties>
-                      <editable value="true"/>
-                      <enabled value="false"/>
                     </properties>
                   </component>
                   <component id="b599" class="javax.swing.JLabel">
@@ -129,60 +112,12 @@
                       <text value="Código:"/>
                     </properties>
                   </component>
-                  <component id="32dea" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14"/>
-                      <text value="Grado:"/>
-                    </properties>
-                  </component>
-                  <component id="e18b4" class="javax.swing.JComboBox" binding="cbbGrados">
-                    <constraints>
-                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <model>
-                        <item value="Primero"/>
-                        <item value="Segundo"/>
-                        <item value="Tercero"/>
-                        <item value="Cuarto"/>
-                        <item value="Quinto"/>
-                        <item value="Sexto"/>
-                      </model>
-                    </properties>
-                  </component>
-                  <component id="a7207" class="javax.swing.JLabel">
-                    <constraints>
-                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <font size="14"/>
-                      <text value="Sección:"/>
-                    </properties>
-                  </component>
-                  <component id="ce241" class="javax.swing.JComboBox" default-binding="true">
-                    <constraints>
-                      <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <model>
-                        <item value="A"/>
-                        <item value="B"/>
-                        <item value="C"/>
-                        <item value="D"/>
-                        <item value="E"/>
-                        <item value="F"/>
-                      </model>
-                    </properties>
-                  </component>
                   <component id="fbad4" class="javax.swing.JButton" binding="btnRegistrarMatricula">
                     <constraints>
                       <grid row="6" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <enabled value="false"/>
+                      <enabled value="true"/>
                       <text value="Registrar Matricula"/>
                     </properties>
                   </component>
@@ -204,7 +139,7 @@
                   </component>
                   <component id="4542e" class="javax.swing.JCheckBox" binding="matriculadoCheckBox">
                     <constraints>
-                      <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="1" column="2" row-span="2" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <enabled value="true"/>
@@ -231,6 +166,66 @@
                       <text value="--"/>
                     </properties>
                   </component>
+                  <component id="32dea" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Grado:"/>
+                    </properties>
+                  </component>
+                  <component id="e18b4" class="javax.swing.JComboBox" binding="cbbGrados">
+                    <constraints>
+                      <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <model/>
+                    </properties>
+                  </component>
+                  <component id="a7207" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Sección:"/>
+                    </properties>
+                  </component>
+                  <component id="ce241" class="javax.swing.JComboBox" binding="cbbSecciones">
+                    <constraints>
+                      <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <model/>
+                    </properties>
+                  </component>
+                  <component id="6cc61" class="javax.swing.JLabel">
+                    <constraints>
+                      <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="Salón:"/>
+                    </properties>
+                  </component>
+                  <component id="e7b5b" class="javax.swing.JComboBox" binding="cbbSalones">
+                    <constraints>
+                      <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <model/>
+                    </properties>
+                  </component>
+                  <component id="39ea9" class="javax.swing.JLabel" binding="lblMonto">
+                    <constraints>
+                      <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <font size="14"/>
+                      <text value="S/ 0.0"/>
+                    </properties>
+                  </component>
                 </children>
               </grid>
               <grid id="2259" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
@@ -246,7 +241,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <enabled value="false"/>
+                      <enabled value="true"/>
                       <text value="Añadir celular"/>
                     </properties>
                   </component>
@@ -284,7 +279,7 @@
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
-                      <enabled value="false"/>
+                      <enabled value="true"/>
                       <focusable value="true"/>
                       <text value="Nuevo familiar"/>
                     </properties>
@@ -323,10 +318,9 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="1f4b4" class="javax.swing.JTable" binding="tablaMatriculas">
+                  <component id="21ea5" class="javax.swing.JTable" binding="tablaMatriculas">
                     <constraints/>
                     <properties>
-                      <maximumSize width="-1" height="-1"/>
                       <rowHeight value="25"/>
                     </properties>
                   </component>

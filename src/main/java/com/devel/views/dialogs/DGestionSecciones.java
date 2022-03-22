@@ -1,5 +1,6 @@
 package com.devel.views.dialogs;
 
+import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.JButtonEditorSecciones;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
@@ -8,17 +9,18 @@ import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
+import java.awt.*;
 import java.awt.event.*;
 
 public class DGestionSecciones extends JDialog{
     private JTable tablaSecciones;
     private JButton btnHecho;
-    private JButton nuevoButton;
+    private JButton btnAñadir;
     private JPanel panelPrincipal;
     private SeccionAbstractModel seccionAbstractModel;
     public DGestionSecciones() {
         iniciarComponentes();
-        nuevoButton.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -46,6 +48,7 @@ public class DGestionSecciones extends JDialog{
         setResizable(false);
         setModal(true);
         cargarTabla();
+        cargarConfiguracion();
     }
 
     private void cargarNuevaSeccion(){
@@ -65,5 +68,19 @@ public class DGestionSecciones extends JDialog{
     }
     private void cerrar(){
         dispose();
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }

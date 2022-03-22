@@ -1,6 +1,7 @@
 package com.devel.views.dialogs;
 
 import com.devel.models.Nivel;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.NivelValidator;
 import com.devel.views.VPrincipal;
@@ -9,19 +10,15 @@ import com.github.lgooddatepicker.components.TimePickerSettings;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
-import javax.swing.text.DateFormatter;
 import java.awt.*;
 import java.awt.event.*;
-import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Set;
 
 public class DCrearNivel extends JDialog{
     private JTextField txtDescripcion;
-    private JButton btnRegistrar;
+    private JButton btnAñadir;
     private JButton btnHecho;
     private TimePicker horaInicio;
     private TimePicker horaFin;
@@ -31,9 +28,9 @@ public class DCrearNivel extends JDialog{
     private Date fin;
 
     public DCrearNivel(){
-        iniciarComponentes();
         nivel=new Nivel();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        iniciarComponentes();
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 registrar();
@@ -53,10 +50,10 @@ public class DCrearNivel extends JDialog{
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     }
     public DCrearNivel(Nivel nivel){
-        iniciarComponentes();
         this.nivel=nivel;
+        iniciarComponentes();
         paraActualizar();
-        btnRegistrar.addMouseListener(new MouseAdapter() {
+        btnAñadir.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 actualizar();
@@ -82,6 +79,7 @@ public class DCrearNivel extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void registrar(){
@@ -94,8 +92,7 @@ public class DCrearNivel extends JDialog{
         nivel.setHoraInicio(inicio);
         nivel.setHoraFin(fin);
 
-        NivelValidator validator = new NivelValidator();
-        Set<ConstraintViolation<Nivel>> errors = validator.loadViolations(nivel);
+        Set<ConstraintViolation<Nivel>> errors = NivelValidator.loadViolations(nivel);
         if(errors.isEmpty()){
             nivel.guardar();
             VPrincipal.niveles.add(nivel);
@@ -116,8 +113,7 @@ public class DCrearNivel extends JDialog{
         nivel.setHoraInicio(inicio);
         nivel.setHoraFin(fin);
 
-        NivelValidator validator = new NivelValidator();
-        Set<ConstraintViolation<Nivel>> errors = validator.loadViolations(nivel);
+        Set<ConstraintViolation<Nivel>> errors = NivelValidator.loadViolations(nivel);
         if(errors.isEmpty()){
             nivel.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -129,7 +125,7 @@ public class DCrearNivel extends JDialog{
 
     private void paraActualizar(){
         setTitle("Editar Nivel");
-        btnRegistrar.setText("Guardar");
+        btnAñadir.setText("Guardar");
         btnHecho.setText("Cancelar");
         cargarNivel();
         guardarCopia();
@@ -161,12 +157,27 @@ public class DCrearNivel extends JDialog{
     private void cerrar(){
         dispose();
     }
+
     private void limpiarControles(){
         txtDescripcion.setText(null);
         horaInicio.getComponentTimeTextField().setText(null);
         horaInicio.setTime(null);
         horaFin.getComponentTimeTextField().setText(null);
         horaFin.setTime(null);
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

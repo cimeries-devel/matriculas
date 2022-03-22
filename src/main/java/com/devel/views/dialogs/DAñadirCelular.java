@@ -2,8 +2,10 @@ package com.devel.views.dialogs;
 
 import com.devel.models.Celular;
 import com.devel.models.Persona;
+import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.CelularValidator;
+import com.devel.views.VPrincipal;
 import jakarta.validation.ConstraintViolation;
 
 import javax.swing.*;
@@ -75,8 +77,7 @@ public class DAñadirCelular extends JDialog{
         String numero= txtNumero.getText().trim();
         celular.setDescipcion(desripcion);
         celular.setNumero(numero);
-        CelularValidator validator = new CelularValidator();
-        Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
+        Set<ConstraintViolation<Celular>> errors = CelularValidator.loadViolations(celular);
         if(errors.isEmpty()){
             if(persona.getId()!=null){
                 celular.guardar();
@@ -97,8 +98,7 @@ public class DAñadirCelular extends JDialog{
         String numero= txtNumero.getText().trim();
         celular.setDescipcion(desripcion);
         celular.setNumero(numero);
-        CelularValidator validator = new CelularValidator();
-        Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
+        Set<ConstraintViolation<Celular>> errors = CelularValidator.loadViolations(celular);
         if(errors.isEmpty()){
             celular.guardar();
             Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
@@ -115,6 +115,7 @@ public class DAñadirCelular extends JDialog{
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
+        cargarConfiguracion();
     }
 
     private void limpiarControles(){
@@ -150,5 +151,19 @@ public class DAñadirCelular extends JDialog{
     }
     private void cerrar(){
         dispose();
+    }
+
+    private void cargarConfiguracion(){
+        switch (VPrincipal.tema){
+            case "oscuro":
+                btnHecho.setForeground(new Color(0xFFFFFF));
+                btnAñadir.setBackground(Colors.buttonDefect2);
+                break;
+            default:
+                btnHecho.setForeground(new Color(0x000000));
+                btnAñadir.setForeground(Color.white);
+                btnAñadir.setBackground(Colors.buttonDefect1);
+                break;
+        }
     }
 }
