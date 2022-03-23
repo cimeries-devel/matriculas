@@ -251,7 +251,7 @@ public class VMatricula extends JFrame{
         tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(persona.getFamiliaresparaEstudiante(),tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.cellsRendered(tablaFamiliares,persona.getFamiliaresparaEstudiante(),true);
+        Utilidades.cellsRendered(null,tablaFamiliares,persona.getFamiliaresparaEstudiante(),true);
         Utilidades.headerNegrita(tablaFamiliares);
     }
     private void cargarTablaCelulares(){

@@ -17,10 +17,8 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 public class Utilidades {
     private static TrayIcon mainTrayIcon;
@@ -177,26 +175,31 @@ public class Utilidades {
         }
         return vector;
     }
-
     public static void cellsRendered(JTable table){
         TablesCellRendered tablesCellRendered=new TablesCellRendered();
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }
     }
-    public static void cellsRendered(JTable table, List<Relacion> vector,boolean a){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered(vector,a);
+    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros);
         for (int i=0;i<table.getColumnCount();i++){
             table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
         }
+    }
+    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table, List<Relacion> vector, boolean a){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros,vector,a);
+        for (int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
+        }
+    }
+    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table, Vector<Tarifa> vector){
+        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros,vector);
+        for (int i=0;i<table.getColumnCount();i++){
+            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
+        }
+    }
 
-    }
-    public static void cellsRendered(JTable table, Vector<Tarifa> vector){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered(vector);
-        for (int i=0;i<table.getColumnCount();i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
-        }
-    }
     public static Integer calcularaños(Date fecha){
         Calendar hoy=Calendar.getInstance();
         Calendar nacimiento=Calendar.getInstance();

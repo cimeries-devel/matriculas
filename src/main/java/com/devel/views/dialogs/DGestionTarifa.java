@@ -63,7 +63,7 @@ public class DGestionTarifa extends JDialog{
         tablaTarifas.getColumnModel().getColumn(tarifasAbstractModel.getColumnCount()-2).setCellEditor(new JButtonEditroTarifas(tablaTarifas,"defecto"));
         TableCellRenderer renderer1 = tablaTarifas.getDefaultRenderer(JButton.class);
         tablaTarifas.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.cellsRendered(tablaTarifas,VPrincipal.tarifas);
+        Utilidades.cellsRendered(null,tablaTarifas,VPrincipal.tarifas);
         Utilidades.headerNegrita(tablaTarifas);
     }
 

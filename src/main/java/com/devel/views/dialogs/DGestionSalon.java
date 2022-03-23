@@ -55,7 +55,7 @@ public class DGestionSalon extends JDialog{
         tablaSalones.getColumnModel().getColumn(salonesAbstractModel.getColumnCount()-1).setCellEditor(new JButtonEditorSalones(tablaSalones));
         TableCellRenderer renderer1 = tablaSalones.getDefaultRenderer(JButton.class);
         tablaSalones.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.cellsRendered(tablaSalones,VPrincipal.tarifas);
+        Utilidades.cellsRendered(tablaSalones);
         Utilidades.headerNegrita(tablaSalones);
     }
     private void cerrar(){

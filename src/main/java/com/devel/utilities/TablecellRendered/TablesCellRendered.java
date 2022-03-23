@@ -3,25 +3,43 @@ package com.devel.utilities.TablecellRendered;
 import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonAction;
+import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
+import com.formdev.flatlaf.ui.FlatTableCellBorder;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class TablesCellRendered extends DefaultTableCellRenderer {
     private Vector<Tarifa> tarifas;
     private List<Relacion> familiares;
     private JTable table;
-    public TablesCellRendered(Vector<Tarifa> tarifas){
+    private Map<Integer, String> listaFiltros;
+
+    public TablesCellRendered(Map<Integer, String> listaFiltros,Vector<Tarifa> tarifas){
+        this.listaFiltros=listaFiltros;
         this.tarifas=tarifas;
+    }
+    public TablesCellRendered(Map<Integer, String> listaFiltros,List<Relacion> familiares, boolean a){
+        this.listaFiltros=listaFiltros;
+        this.familiares=familiares;
     }
     public TablesCellRendered(List<Relacion> familiares, boolean a){
         this.familiares=familiares;
     }
+    public TablesCellRendered(Map<Integer, String> listaFiltros){
+        this.listaFiltros=listaFiltros;
+    }
     public TablesCellRendered(){
-
     }
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -104,7 +122,7 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                     break;
             }
         }
-        return this;
+        return buscarTexto(value,column);
     }
 
     private Component seleccionada(boolean isSelected, String icono){
@@ -141,6 +159,39 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 }
 
         }
-
     }
+
+    public Component buscarTexto(Object value,int column) {
+        if(listaFiltros!=null){
+            JTextField componente=new JTextField();
+            componente.setBorder(this.getBorder());
+            componente.setBackground(this.getBackground());
+            componente.setForeground(this.getForeground());
+            componente.setText(String.valueOf(value));
+            Highlighter hilit = new DefaultHighlighter();
+            Highlighter.HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(0xEE1633));
+            componente.setHighlighter(hilit);
+            if(!listaFiltros.isEmpty()){
+                if(listaFiltros.get(column)!=null){
+                    String s = listaFiltros.get(column);
+                    if (s.length() > 0) {
+                        String contenido = componente.getText();
+                        int index = contenido.indexOf(s, 0);
+                        if (index >= 0) {
+                            try {
+                                int end = index + s.length();
+                                hilit.addHighlight(index, end, painter);
+                                componente.setCaretPosition(end);
+                            } catch (BadLocationException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
+            }
+            return componente;
+        }
+        return this;
+    }
+
 }

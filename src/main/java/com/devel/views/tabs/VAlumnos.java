@@ -15,10 +15,7 @@ import javax.swing.table.TableRowSorter;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
 public class VAlumnos extends JFrame{
     private TabPanel panelPrincipal;
@@ -36,6 +33,9 @@ public class VAlumnos extends JFrame{
     private TableRowSorter<AlumnosAbstractModel> modeloOrdenado;
     private List<RowFilter<AlumnosAbstractModel, String>> filtros = new ArrayList<>();
     private RowFilter filtroand;
+
+    private Map<Integer, String> listaFiltros = new HashMap<Integer, String>();
+
     public VAlumnos() {
         iniciarComponentes();
         txtCodigo.addKeyListener(new KeyAdapter() {
@@ -109,7 +109,7 @@ public class VAlumnos extends JFrame{
         tablaAlumnos.setRowSorter(modeloOrdenado);
         TableCellRenderer renderer1=tablaAlumnos.getDefaultRenderer(JButton.class);
         tablaAlumnos.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
-        Utilidades.cellsRendered(tablaAlumnos);
+        Utilidades.cellsRendered(listaFiltros,tablaAlumnos);
         Utilidades.headerNegrita(tablaAlumnos);
     }
     private void cargarGradosPorNivel(){
@@ -134,34 +134,54 @@ public class VAlumnos extends JFrame{
 
     public void actualizar() {
         filtros.clear();
-        if (!txtCodigo.getText().trim().isBlank()) {
+        if (txtCodigo.getText().trim().length()>0) {
             String busqueda = txtCodigo.getText().trim().toUpperCase();
             filtros.add(RowFilter.regexFilter(busqueda,0));
+            listaFiltros.put(0,busqueda);
+        }else{
+            listaFiltros.remove(0);
         }
-        if (!txtNombres.getText().trim().isBlank()) {
+        if (txtNombres.getText().trim().length()>0) {
             String busqueda = txtNombres.getText().trim().toUpperCase();
             filtros.add(RowFilter.regexFilter(busqueda,1));
-            System.out.println(busqueda);
+            listaFiltros.put(1,busqueda);
+        }else{
+            listaFiltros.remove(1);
         }
         if(checkSoloMatriculados.isSelected()){
             String año=Utilidades.año.format(new Date());
             filtros.add(RowFilter.regexFilter(año,7));
+            listaFiltros.put(7,año);
+        }else{
+            listaFiltros.remove(7);
         }
         if(((Seguro)cbbSeguros.getSelectedItem()).getId()!=null){
             Seguro seguro= (Seguro) cbbSeguros.getSelectedItem();
             filtros.add(RowFilter.regexFilter(seguro.getCodigo(),3));
+            listaFiltros.put(3,seguro.getCodigo());
+        }else{
+            listaFiltros.remove(3);
         }
         if(((Nivel)cbbNiveles.getSelectedItem()).getId()!=null){
             Nivel nivel= (Nivel) cbbNiveles.getSelectedItem();
             filtros.add(RowFilter.regexFilter(nivel.getDescripcion(),4));
+            listaFiltros.put(4,nivel.getDescripcion());
+        }else{
+            listaFiltros.remove(4);
         }
         if(((Grado)cbbGrados.getSelectedItem()).getId()!=null){
             Grado grado= (Grado) cbbGrados.getSelectedItem();
             filtros.add(RowFilter.regexFilter(grado.getGrado(),5));
+            listaFiltros.put(5,grado.getGrado());
+        }else{
+            listaFiltros.remove(5);
         }
         if(((Seccion)cbbSecciones.getSelectedItem()).getId()!=null){
             Seccion seccion=(Seccion) cbbSecciones.getSelectedItem();
             filtros.add(RowFilter.regexFilter(seccion.getSeccion(),6));
+            listaFiltros.put(6,seccion.getSeccion());
+        }else{
+            listaFiltros.remove(6);
         }
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);

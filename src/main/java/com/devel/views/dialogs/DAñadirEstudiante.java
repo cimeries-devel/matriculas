@@ -338,7 +338,7 @@ public class DAñadirEstudiante extends JDialog{
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilidades.headerNegrita(tablaFamiliares);
-        Utilidades.cellsRendered(tablaFamiliares,relaciones,true);
+        Utilidades.cellsRendered(null,tablaFamiliares,relaciones,true);
     }
 
     private void cerrar(){
