@@ -134,20 +134,16 @@ public class VAlumnos extends JFrame{
 
     public void actualizar() {
         filtros.clear();
-        if (txtCodigo.getText().trim().length()>0) {
-            String busqueda = txtCodigo.getText().trim().toUpperCase();
-            filtros.add(RowFilter.regexFilter(busqueda,0));
-            listaFiltros.put(0,busqueda);
-        }else{
-            listaFiltros.remove(0);
-        }
-        if (txtNombres.getText().trim().length()>0) {
-            String busqueda = txtNombres.getText().trim().toUpperCase();
-            filtros.add(RowFilter.regexFilter(busqueda,1));
-            listaFiltros.put(1,busqueda);
-        }else{
-            listaFiltros.remove(1);
-        }
+        String busqueda;
+
+        busqueda = txtCodigo.getText().trim().toUpperCase();
+        filtros.add(RowFilter.regexFilter(busqueda,0));
+        listaFiltros.put(0,busqueda);
+
+        busqueda = txtNombres.getText().trim().toUpperCase();
+        filtros.add(RowFilter.regexFilter(busqueda,1));
+        listaFiltros.put(1,busqueda);
+
         if(checkSoloMatriculados.isSelected()){
             String año=Utilidades.año.format(new Date());
             filtros.add(RowFilter.regexFilter(año,7));
@@ -183,6 +179,7 @@ public class VAlumnos extends JFrame{
         }else{
             listaFiltros.remove(6);
         }
+
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);
     }
