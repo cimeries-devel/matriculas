@@ -1,6 +1,5 @@
 package com.devel.utilities.TablecellRendered;
 
-import com.devel.models.Persona;
 import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
 import com.devel.utilities.JButoonEditors.JButtonAction;
@@ -91,6 +90,9 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 case "Monto":
                 case "Número":
                 case "Edad":
+                case "Nivel":
+                case "Grado":
+                case "Seguro":
                 case "Sección":
                 case "Viven juntos":
                     table.getColumn(table.getColumnName(column)).setMaxWidth(90);

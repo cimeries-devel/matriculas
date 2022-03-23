@@ -24,4 +24,14 @@ public class Niveles extends Hibernate {
         todos = new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }
+
+    public static Vector<Nivel> getTodosConTodos(){
+        criteria = builder.createQuery(Nivel.class);
+        criteria.select(criteria.from(Nivel.class));
+        todos = new Vector<>(session.createQuery(criteria).getResultList());
+        Nivel nivel=new Nivel();
+        nivel.setDescripcion("Todos");
+        todos.add(0,nivel);
+        return todos;
+    }
 }

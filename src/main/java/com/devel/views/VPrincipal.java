@@ -52,8 +52,12 @@ public class VPrincipal extends JFrame{
     public static Vector<Tarifa> tarifas= Tarifas.getTodas();
     public static Vector<Seguro> seguros= Seguros.todos();
     public static Vector<Seccion> secciones= Secciones.todos();
-    public static Vector<Seguro> segurosConTodos= Seguros.todosconTodos();
     public static Vector<Salon> salones=Salones.getTodos();
+    public static Vector<Grado> gradosConTodos= Grados.getTodosConTodos();
+    public static Vector<Nivel> nivelesConTodos= Niveles.getTodosConTodos();
+    public static Vector<Seccion> seccionesConTodos= Secciones.todosConTodos();
+    public static Vector<Seguro> segurosConTodos= Seguros.todosconTodos();
+
 
     public VPrincipal(Propiedades propiedades){
         this.propiedades=propiedades;

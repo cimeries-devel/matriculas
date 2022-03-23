@@ -90,6 +90,13 @@ public class Nivel extends Hibernate {
     public List<Grado> getGrados() {
         return grados;
     }
+    public List<Grado> getGradosConTodos(){
+        List<Grado> gradosConTodos=new ArrayList<>(grados);
+        Grado grado=new Grado();
+        grado.setGrado("Todos");
+        gradosConTodos.add(0,grado);
+        return gradosConTodos;
+    }
 
     public void setGrados(List<Grado> grados) {
         this.grados = grados;

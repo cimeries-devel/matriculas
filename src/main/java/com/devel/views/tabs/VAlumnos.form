@@ -32,7 +32,7 @@
                   <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
               </hspacer>
-              <grid id="ee380" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+              <grid id="ee380" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -46,7 +46,11 @@
                         <preferred-size width="150" height="-1"/>
                       </grid>
                     </constraints>
-                    <properties/>
+                    <properties>
+                      <selectionEnd value="0"/>
+                      <selectionStart value="0"/>
+                      <text value=""/>
+                    </properties>
                   </component>
                   <component id="4a1ee" class="javax.swing.JLabel">
                     <constraints>
@@ -57,17 +61,9 @@
                       <text value="Código:"/>
                     </properties>
                   </component>
-                  <component id="9681" class="javax.swing.JButton" binding="btnBuscarPorCodigo">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Buscar"/>
-                    </properties>
-                  </component>
                 </children>
               </grid>
-              <grid id="16ea9" binding="txtNombres" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
+              <grid id="16ea9" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="5" vgap="5">
                 <margin top="0" left="0" bottom="0" right="0"/>
                 <constraints>
                   <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -75,7 +71,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="b9d52" class="javax.swing.JTextField" default-binding="true">
+                  <component id="b9d52" class="javax.swing.JTextField" binding="txtNombres">
                     <constraints>
                       <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="250" height="-1"/>
@@ -92,14 +88,6 @@
                       <text value="Nombres y apellidos:"/>
                     </properties>
                   </component>
-                  <component id="dc084" class="javax.swing.JButton" binding="btnBuscarPorNombres">
-                    <constraints>
-                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties>
-                      <text value="Buscar"/>
-                    </properties>
-                  </component>
                 </children>
               </grid>
               <hspacer id="dd32f">
@@ -109,7 +97,7 @@
               </hspacer>
             </children>
           </grid>
-          <grid id="11cd9" layout-manager="GridLayoutManager" row-count="8" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="2" vgap="5">
+          <grid id="11cd9" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="2" vgap="5">
             <margin top="5" left="5" bottom="5" right="5"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
@@ -117,7 +105,7 @@
             <properties/>
             <border type="none" title="Filtros"/>
             <children>
-              <component id="35b81" class="javax.swing.JCheckBox" binding="soloMatriculadosCheckBox" default-binding="true">
+              <component id="35b81" class="javax.swing.JCheckBox" binding="checkSoloMatriculados">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -130,48 +118,12 @@
               </component>
               <vspacer id="1bda0">
                 <constraints>
-                  <grid row="7" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
                 </constraints>
               </vspacer>
-              <component id="b2814" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                  <text value="Seguros:"/>
-                </properties>
-              </component>
-              <component id="c3d46" class="javax.swing.JComboBox" binding="cbbSeguros">
-                <constraints>
-                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties/>
-              </component>
-              <component id="c6faf" class="javax.swing.JLabel">
-                <constraints>
-                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <font size="14"/>
-                  <text value="Teléfono:"/>
-                </properties>
-              </component>
-              <component id="dfa4c" class="javax.swing.JComboBox" default-binding="true">
-                <constraints>
-                  <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                </constraints>
-                <properties>
-                  <model>
-                    <item value="Ambos"/>
-                    <item value="No tiene"/>
-                    <item value="Si tiene"/>
-                  </model>
-                </properties>
-              </component>
               <component id="1400d" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font size="14"/>
@@ -180,13 +132,13 @@
               </component>
               <component id="2c64b" class="javax.swing.JComboBox" binding="cbbNiveles">
                 <constraints>
-                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="eb084" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font size="14"/>
@@ -195,13 +147,13 @@
               </component>
               <component id="4025d" class="javax.swing.JComboBox" binding="cbbGrados">
                 <constraints>
-                  <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
               <component id="158da" class="javax.swing.JLabel">
                 <constraints>
-                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties>
                   <font size="14"/>
@@ -210,7 +162,7 @@
               </component>
               <component id="6b993" class="javax.swing.JComboBox" binding="cbbSecciones">
                 <constraints>
-                  <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                  <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
                 <properties/>
               </component>
@@ -221,6 +173,21 @@
                 <properties>
                   <text value="Limpiar filtros"/>
                 </properties>
+              </component>
+              <component id="b2814" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <font size="14"/>
+                  <text value="Seguro:"/>
+                </properties>
+              </component>
+              <component id="c3d46" class="javax.swing.JComboBox" binding="cbbSeguros">
+                <constraints>
+                  <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
               </component>
             </children>
           </grid>
@@ -243,6 +210,8 @@
                     <constraints/>
                     <properties>
                       <rowHeight value="25"/>
+                      <rowSelectionAllowed value="true"/>
+                      <showVerticalLines value="true"/>
                     </properties>
                   </component>
                 </children>

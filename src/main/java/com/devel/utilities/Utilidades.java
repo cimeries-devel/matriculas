@@ -31,6 +31,7 @@ public class Utilidades {
     private static boolean primera=true;
     public static DateFormat formatoParaAños=new SimpleDateFormat("yyyy-MM-dd");
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm");
+    public static DateFormat año=new SimpleDateFormat("yyyy");
     public static  NumberFormat sol = NumberFormat.getCurrencyInstance();
     public static void tema(String tema){
         try {

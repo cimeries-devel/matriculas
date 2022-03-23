@@ -48,7 +48,7 @@ public class Seguro extends Hibernate {
     }
 
     public void setCodigo(String codigo) {
-        this.codigo = codigo;
+        this.codigo = codigo.toUpperCase();
     }
 
     public static class ListCellRenderer extends DefaultListCellRenderer {

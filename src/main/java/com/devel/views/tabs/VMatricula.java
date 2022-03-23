@@ -155,28 +155,31 @@ public class VMatricula extends JFrame{
 
     private void registrarMatricula() {
         if(!matriculadoCheckBox.isSelected()){
-            registro=new Registro();
-            Tarifa tarifa=(Tarifa) cbbTarifas.getSelectedItem();
-            Salon salon=(Salon) cbbSalones.getSelectedItem();
-
-            registro.setCreacion(new Date());
-            registro.setActualizacion(new Date());
-            registro.setEstudiante(persona);
-            registro.setSalon(salon);
-            registro.setTarifa(tarifa);
-
-            Set<ConstraintViolation<Registro>> errors = RegistroValidator.loadViolations(registro);
-            if(errors.isEmpty()){
-                registro.guardar();
-                persona.getRegistros().add(registro);
-                VPrincipal.alumnosMatriculados.add(registro);
-                Utilidades.actualizarTabla(tablaMatriculas);
+            int sioNo=JOptionPane.showOptionDialog(null, "¿Está seguro?","Confirmar matrícula",JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,  null,new Object[] { "Si", "No"},"Si");
+            if(sioNo==0){
                 registro=new Registro();
-                persona=new Persona();
-                limpiarControles();
-                Utilidades.sendNotification("Éxito","Matricula registrada", TrayIcon.MessageType.INFO);
-            }else {
-                RegistroValidator.mostrarErrores(errors);
+                Tarifa tarifa=(Tarifa) cbbTarifas.getSelectedItem();
+                Salon salon=(Salon) cbbSalones.getSelectedItem();
+
+                registro.setCreacion(new Date());
+                registro.setActualizacion(new Date());
+                registro.setEstudiante(persona);
+                registro.setSalon(salon);
+                registro.setTarifa(tarifa);
+
+                Set<ConstraintViolation<Registro>> errors = RegistroValidator.loadViolations(registro);
+                if(errors.isEmpty()){
+                    registro.guardar();
+                    persona.getRegistros().add(registro);
+                    VPrincipal.alumnosMatriculados.add(registro);
+                    Utilidades.actualizarTabla(tablaMatriculas);
+                    registro=new Registro();
+                    persona=new Persona();
+                    limpiarControles();
+                    Utilidades.sendNotification("Éxito","Matricula registrada", TrayIcon.MessageType.INFO);
+                }else {
+                    RegistroValidator.mostrarErrores(errors);
+                }
             }
         }else{
             Utilidades.sendNotification("Error","El alumno ya se encuentra matriculado", TrayIcon.MessageType.ERROR);

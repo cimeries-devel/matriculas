@@ -22,7 +22,15 @@ public class Secciones extends Hibernate {
         criteria = builder.createQuery(Seccion.class);
         criteria.select(criteria.from(Seccion.class));
         todos= new Vector<>(session.createQuery(criteria).getResultList());
-        System.out.println(todos.size());
+        return todos;
+    }
+    public static Vector<Seccion> todosConTodos(){
+        criteria = builder.createQuery(Seccion.class);
+        criteria.select(criteria.from(Seccion.class));
+        todos= new Vector<>(session.createQuery(criteria).getResultList());
+        Seccion seccion=new Seccion();
+        seccion.setSeccion("Todos");
+        todos.add(0,seccion);
         return todos;
     }
 }

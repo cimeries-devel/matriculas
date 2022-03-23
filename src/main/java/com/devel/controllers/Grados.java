@@ -24,4 +24,13 @@ public class Grados extends Hibernate {
         todos = new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
     }
+    public static Vector<Grado> getTodosConTodos(){
+        criteria = builder.createQuery(Grado.class);
+        criteria.select(criteria.from(Grado.class));
+        todos = new Vector<>(session.createQuery(criteria).getResultList());
+        Grado grado=new Grado();
+        grado.setGrado("Todos");
+        todos.add(0,grado);
+        return todos;
+    }
 }

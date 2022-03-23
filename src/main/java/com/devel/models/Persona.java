@@ -277,6 +277,16 @@ public class Persona extends Hibernate {
         }
         return false;
     }
+    public String getSegurosString(){
+        String seguros="";
+        for(Seguro seguro:getSeguros()){
+            if(!seguros.isEmpty()){
+                seguros+=" - ";
+            }
+            seguros+=seguro.getCodigo();
+        }
+        return seguros;
+    }
     @Override
     public void guardar() {
         super.guardar();

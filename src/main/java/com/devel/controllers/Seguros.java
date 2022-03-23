@@ -32,7 +32,7 @@ public class Seguros extends Hibernate {
         verificarSeguros();
         System.out.println(todos.size());
         Seguro seguro=new Seguro();
-        seguro.setDescripcion("Todos");
+        seguro.setCodigo("Todos");
         todos.add(0,seguro);
         return todos;
     }
@@ -47,8 +47,13 @@ public class Seguros extends Hibernate {
             essalud.setCodigo("EsSalud");
             essalud.setDescripcion("Seguro Social de Salud del Perú");
             essalud.guardar();
+            Seguro independiente=new Seguro();
+            independiente.setCodigo("Independiente");
+            independiente.setDescripcion("Independiente");
+            independiente.guardar();
             todos.add(sis);
             todos.add(essalud);
+            todos.add(independiente);
         }
     }
 }
