@@ -18,6 +18,7 @@ public class Exportar {
     private static List<Object[]> datos;
     private static JFileChooser chooser;
     private static WritableSheet hoja;
+
     public static void exportar(String[] nombreColumnas, List<Object[]> datos){
         Exportar.nombreColumnas=nombreColumnas;
         Exportar.datos=datos;
