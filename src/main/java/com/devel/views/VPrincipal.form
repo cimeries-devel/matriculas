@@ -226,14 +226,19 @@
                       <verticalTextPosition value="3"/>
                     </properties>
                   </component>
+                  <vspacer id="f5c05">
+                    <constraints>
+                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                  </vspacer>
                   <component id="9c2b9" class="javax.swing.JButton" binding="setingsButton" default-binding="true">
                     <constraints>
-                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x16/ajustes.png"/>
-                      <iconTextGap value="4"/>
+                      <iconTextGap value="1"/>
                       <pressedIcon value="com/devel/Icons/x16/ajustesSeleccionado.png"/>
                       <text value="Setings"/>
                       <verticalTextPosition value="3"/>
@@ -241,23 +246,18 @@
                   </component>
                   <component id="93546" class="javax.swing.JButton" binding="button1">
                     <constraints>
-                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties>
                       <horizontalTextPosition value="0"/>
                       <icon value="com/devel/Icons/x16/ajustes.png"/>
-                      <iconTextGap value="4"/>
+                      <iconTextGap value="1"/>
                       <pressedIcon value="com/devel/Icons/x16/ajustesSeleccionado.png"/>
                       <text value="Salir"/>
                       <verticalAlignment value="0"/>
                       <verticalTextPosition value="3"/>
                     </properties>
                   </component>
-                  <vspacer id="f5c05">
-                    <constraints>
-                      <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                  </vspacer>
                 </children>
               </grid>
               <grid id="fd6d" binding="panelMenus" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

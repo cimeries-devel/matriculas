@@ -37,13 +37,12 @@ public class DAñadirDocumento extends JDialog {
     private void iniciarComponentes(){
         setTitle("Editar Documento");
         setContentPane(panelPrincipal);
-        pack();
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
         txtNumero.setName(documento.getNumero());
         txtNumero.setText(documento.getNumero());
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
@@ -52,6 +51,7 @@ public class DAñadirDocumento extends JDialog {
                 onCancel();
             }
         });
+        pack();
     }
     private void actualizar(){
         documento.setNumero(txtNumero.getText().trim());
@@ -71,17 +71,4 @@ public class DAñadirDocumento extends JDialog {
         dispose();
     }
 
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
-    }
 }

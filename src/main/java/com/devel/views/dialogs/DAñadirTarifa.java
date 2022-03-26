@@ -113,7 +113,7 @@ public class DAñadirTarifa extends JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         setModal(true);
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void paraActualizar(){
@@ -153,17 +153,4 @@ public class DAñadirTarifa extends JDialog {
         txtPrecio.setText(null);
     }
 
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
-    }
 }

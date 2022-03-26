@@ -4,10 +4,13 @@ import com.devel.Principal;
 import com.devel.utilities.Colors;
 import com.devel.utilities.PlaceHolder;
 import com.devel.utilities.Propiedades;
+import com.intellij.uiDesigner.lw.LwHSpacer;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+
+import static javax.swing.SwingConstants.HORIZONTAL;
 
 public class VLogin extends JFrame{
     private JPanel panelLogin;
@@ -64,6 +67,7 @@ public class VLogin extends JFrame{
         dispose();
     }
     private void iniciarComponentes()  {
+        getRootPane().setDefaultButton(btnIngresar);
         setDefaultCloseOperation(3);
         setContentPane(panelLogin);
         setTitle("Login");
@@ -102,14 +106,11 @@ public class VLogin extends JFrame{
                 txtUsuario.setForeground(new Color(0x000000));
                 psfContraseña.setForeground(new Color(0x000000));
                 recordarUsuarioCheckBox.setForeground(new Color(0x000000));
-                btnIngresar.setForeground(Color.white);
-                btnIngresar.setBackground(Colors.buttonDefect1);
                 break;
             case "oscuro":
                 txtUsuario.setForeground(new Color(0xBABABA));
                 psfContraseña.setForeground(new Color(0xBABABA));
                 recordarUsuarioCheckBox.setForeground(new Color(0xBABABA));
-                btnIngresar.setBackground(Colors.buttonDefect2);
                 break;
         }
     }

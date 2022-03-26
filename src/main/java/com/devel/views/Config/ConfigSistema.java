@@ -74,24 +74,21 @@ public class ConfigSistema extends JDialog {
         setLocationRelativeTo(null);
         cargarCursores();
         cargarConfiguracion();
+        getRootPane().setDefaultButton(btnGuardar);
     }
     private void cargarCursores(){
         labelLogo.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnRetroceder.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btnAvanzar.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
+
     private void cargarConfiguracion(){
         switch (propiedades.getTema()){
             case "oscuro":
                 temaOscuro.setSelected(true);
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnGuardar.setBackground(Colors.buttonDefect2);
                 break;
             default:
                 temaClaro.setSelected(true);
-                btnHecho.setForeground(new Color(0x000000));
-                btnGuardar.setForeground(new Color(0xFFFFFF));
-                btnGuardar.setBackground(Colors.buttonDefect1);
                 break;
         }
     }

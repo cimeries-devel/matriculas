@@ -40,7 +40,7 @@ public class DGestionSecciones extends JDialog{
         setResizable(false);
         setModal(true);
         cargarTabla();
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void cargarNuevaSeccion(){
@@ -62,17 +62,4 @@ public class DGestionSecciones extends JDialog{
         dispose();
     }
 
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
-    }
 }

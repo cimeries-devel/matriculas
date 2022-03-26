@@ -67,7 +67,7 @@ public class DAñadirSalon extends JDialog{
         setResizable(false);
         setModal(true);
         cargarComboBox();
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void registrar(){
@@ -166,19 +166,5 @@ public class DAñadirSalon extends JDialog{
         cbbNiveles.setSelectedItem(0);
         cbbGrado.setSelectedItem(0);
         cbbSeccion.setSelectedItem(0);
-    }
-
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
     }
 }

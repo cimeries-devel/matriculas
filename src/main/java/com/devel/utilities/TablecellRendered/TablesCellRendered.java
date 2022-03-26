@@ -108,21 +108,26 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 case "Monto":
                 case "Número":
                 case "Edad":
-                case "Nivel":
-                case "Grado":
                 case "Seguro":
-                case "Sección":
                 case "Viven juntos":
                     table.getColumn(table.getColumnName(column)).setMaxWidth(90);
                     table.getColumn(table.getColumnName(column)).setMinWidth(90);
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
+                case "Nivel":
+                case "Grado":
+                case "Sección":
+                    if(table.getModel() instanceof AlumnosAbstractModel){
+                        table.getColumn(table.getColumnName(column)).setMaxWidth(90);
+                        table.getColumn(table.getColumnName(column)).setMinWidth(90);
+                        setHorizontalAlignment(SwingConstants.CENTER);
+                    }
                 default:
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
             }
+            return buscarTexto(value,column);
         }
-        return buscarTexto(value,column);
     }
 
     private Component seleccionada(boolean isSelected, String icono){
@@ -169,7 +174,7 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
             componente.setForeground(this.getForeground());
             componente.setText(String.valueOf(value));
             Highlighter hilit = new DefaultHighlighter();
-            Highlighter.HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(new Color(0xEE1633));
+            Highlighter.HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(componente.getSelectionColor());
             componente.setHighlighter(hilit);
             if(!listaFiltros.isEmpty()){
                 if(listaFiltros.get(column)!=null){
@@ -189,9 +194,48 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                     }
                 }
             }
+            verificarString(componente,column);
             return componente;
         }
         return this;
+    }
+
+    private void verificarString(JTextField jTextField,int column){
+        switch (table.getColumnName(column)){
+            case "Descripción":
+            case "Nombre":
+            case "Documento":
+                jTextField.setHorizontalAlignment(SwingConstants.LEFT);
+                break;
+            case "Tipo":
+                jTextField.setHorizontalAlignment(SwingConstants.LEFT);
+                break;
+            case "Fecha creación":
+            case "Fecha Matrícula":
+            case "Última matrícula":
+            case "Relación":
+                jTextField.setHorizontalAlignment(SwingConstants.CENTER);
+                break;
+            case "Código":
+            case "Tarifa":
+            case "Monto":
+            case "Número":
+            case "Edad":
+            case "Seguro":
+            case "Viven juntos":
+                jTextField.setHorizontalAlignment(SwingConstants.CENTER);
+                break;
+            case "Nivel":
+            case "Grado":
+            case "Sección":
+                if(table.getModel() instanceof AlumnosAbstractModel){
+                    jTextField.setHorizontalAlignment(SwingConstants.CENTER);
+                }
+                break;
+            default:
+                jTextField.setHorizontalAlignment(SwingConstants.CENTER);
+                break;
+        }
     }
 
 }

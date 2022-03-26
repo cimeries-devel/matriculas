@@ -108,7 +108,7 @@ public class DAñadirFamiliar extends JDialog{
         setModal(true);
         cargarComboBox();
         setLocationRelativeTo(null);
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void paraActualizar(){
@@ -379,19 +379,5 @@ public class DAñadirFamiliar extends JDialog{
         ckVivenJuntos.setSelected(false);
         txtEmail.setText(null);
         datePicker1.getComponentDateTextField().setText(null);
-    }
-
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
     }
 }

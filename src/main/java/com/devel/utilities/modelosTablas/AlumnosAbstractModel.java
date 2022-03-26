@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class AlumnosAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Código","Estudiante","Edad","Seguro","Nivel","Grado","Sección","Apoderado","Última matrícula","Más"};
+    private String[] columnNames = {"Código","Estudiante","Edad","Seguro","Apoderado","Nivel","Grado","Sección","Última matrícula","Más"};
     public Class[] m_colTypes = {String.class,String.class,Integer.class,String.class,String.class,String.class,String.class,String.class,String.class,JButton.class};
     private Vector<Persona> vector;
     public AlumnosAbstractModel(Vector<Persona> vector){
@@ -57,13 +57,13 @@ public class AlumnosAbstractModel extends AbstractTableModel {
             case 3:
                 return persona.getSeguros().isEmpty()?"Independiente":persona.getSegurosString();
             case 4:
-                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getNivel().getDescripcion();
-            case 5:
-                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getGrado().getGrado();
-            case 6:
-                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getSeccion().getSeccion();
-            case 7:
                 return persona.getApoderado().getNombres()+" "+persona.getApoderado().getApellidos();
+            case 5:
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getNivel().getDescripcion();
+            case 6:
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getGrado().getGrado();
+            case 7:
+                return persona.getRegistros().isEmpty()?"Sin registros":persona.ultimaMatricula().getSalon().getSeccion().getSeccion();
             case 8:
                 return persona.getRegistros().isEmpty()?"Sin registros":Utilidades.año.format(persona.ultimaMatricula().getCreacion());
             default:

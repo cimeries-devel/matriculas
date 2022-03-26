@@ -3,18 +3,22 @@ package com.devel.views.tabs;
 import com.devel.Principal;
 import com.devel.custom.TabPanel;
 import com.devel.models.*;
+import com.devel.utilities.Exportar;
 import com.devel.utilities.JButoonEditors.JButtonActionAlumnos;
 import com.devel.utilities.JButoonEditors.JTableButtonRenderer;
 import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
 import com.devel.views.VPrincipal;
+import com.devel.views.dialogs.Exportar.ExportarAlumnos;
+import org.hibernate.tool.schema.spi.Exporter;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 public class VAlumnos extends JFrame{
@@ -29,6 +33,7 @@ public class VAlumnos extends JFrame{
     private JComboBox cbbGrados;
     private JComboBox cbbSecciones;
     private JTextField txtNombres;
+    private JButton exportarButton;
     private AlumnosAbstractModel matriculasAbstractModel;
     private TableRowSorter<AlumnosAbstractModel> modeloOrdenado;
     private List<RowFilter<AlumnosAbstractModel, String>> filtros = new ArrayList<>();
@@ -48,12 +53,6 @@ public class VAlumnos extends JFrame{
             @Override
             public void keyReleased(KeyEvent e) {
 
-                actualizar();
-            }
-        });
-        checkSoloMatriculados.addPropertyChangeListener(new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
                 actualizar();
             }
         });
@@ -89,8 +88,28 @@ public class VAlumnos extends JFrame{
                 actualizar();
             }
         });
+        btnExportar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exportarRelacionAlumnos();
+            }
+        });
+        checkSoloMatriculados.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizar();
+            }
+        });
+        exportarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                exportar();
+            }
+        });
     }
-
+    public void exportar(){
+        Exportar.pedirNombre();
+    }
     public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
@@ -121,6 +140,10 @@ public class VAlumnos extends JFrame{
             cbbGrados.setRenderer(new Grado.ListCellRenderer());
         }
     }
+    private void exportarRelacionAlumnos(){
+        ExportarAlumnos exportarAlumnos=new ExportarAlumnos();
+        exportarAlumnos.setVisible(true);
+    }
     private void cargarComboBox(){
         cbbNiveles.setModel(new DefaultComboBoxModel(VPrincipal.nivelesConTodos));
         cbbNiveles.setRenderer(new Nivel.ListCellRenderer());
@@ -146,38 +169,23 @@ public class VAlumnos extends JFrame{
 
         if(checkSoloMatriculados.isSelected()){
             String año=Utilidades.año.format(new Date());
-            filtros.add(RowFilter.regexFilter(año,7));
-            listaFiltros.put(7,año);
-        }else{
-            listaFiltros.remove(7);
+            filtros.add(RowFilter.regexFilter(año,8));
         }
         if(((Seguro)cbbSeguros.getSelectedItem()).getId()!=null){
             Seguro seguro= (Seguro) cbbSeguros.getSelectedItem();
             filtros.add(RowFilter.regexFilter(seguro.getCodigo(),3));
-            listaFiltros.put(3,seguro.getCodigo());
-        }else{
-            listaFiltros.remove(3);
         }
         if(((Nivel)cbbNiveles.getSelectedItem()).getId()!=null){
             Nivel nivel= (Nivel) cbbNiveles.getSelectedItem();
             filtros.add(RowFilter.regexFilter(nivel.getDescripcion(),4));
-            listaFiltros.put(4,nivel.getDescripcion());
-        }else{
-            listaFiltros.remove(4);
         }
         if(((Grado)cbbGrados.getSelectedItem()).getId()!=null){
             Grado grado= (Grado) cbbGrados.getSelectedItem();
             filtros.add(RowFilter.regexFilter(grado.getGrado(),5));
-            listaFiltros.put(5,grado.getGrado());
-        }else{
-            listaFiltros.remove(5);
         }
         if(((Seccion)cbbSecciones.getSelectedItem()).getId()!=null){
             Seccion seccion=(Seccion) cbbSecciones.getSelectedItem();
             filtros.add(RowFilter.regexFilter(seccion.getSeccion(),6));
-            listaFiltros.put(6,seccion.getSeccion());
-        }else{
-            listaFiltros.remove(6);
         }
 
         filtroand = RowFilter.andFilter(filtros);

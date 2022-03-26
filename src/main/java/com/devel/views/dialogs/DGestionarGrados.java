@@ -43,7 +43,7 @@ public class DGestionarGrados extends JDialog{
         setLocationRelativeTo(null);
         setModal(true);
         setResizable(false);
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
     private void cargarNuevoGrado(){
         DCrearGrado dCrearGrado=new DCrearGrado();
@@ -65,17 +65,4 @@ public class DGestionarGrados extends JDialog{
         dispose();
     }
 
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
-    }
 }

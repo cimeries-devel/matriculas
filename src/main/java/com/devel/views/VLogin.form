@@ -31,8 +31,6 @@
               </grid>
             </constraints>
             <properties>
-              <font name="Roboto Light" size="16" style="0"/>
-              <opaque value="false"/>
               <text value="Ingresar"/>
             </properties>
           </component>

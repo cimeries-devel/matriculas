@@ -35,7 +35,7 @@
         <properties>
           <focusPainted value="false"/>
           <font size="14"/>
-          <text value="Padres"/>
+          <text value="Familiares"/>
         </properties>
       </component>
       <component id="a23cf" class="javax.swing.JButton" binding="matriculasButton">

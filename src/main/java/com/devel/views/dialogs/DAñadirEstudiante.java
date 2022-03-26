@@ -1,5 +1,6 @@
 package com.devel.views.dialogs;
 import com.devel.controllers.Documentos;
+import com.devel.controllers.Personas;
 import com.devel.models.*;
 import com.devel.utilities.Colors;
 import com.devel.utilities.JButoonEditors.*;
@@ -10,6 +11,7 @@ import com.devel.validators.PersonaValidator;
 import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
 import jakarta.validation.ConstraintViolation;
+import jdk.jshell.execution.Util;
 
 import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
@@ -111,31 +113,35 @@ public class DAñadirEstudiante extends JDialog{
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(persona);
         if(errors.isEmpty()){
             if(persona.getCodigo().length()>=4){
-                if(persona.getDocumentos().isEmpty()){
-                    Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
-                } else if(persona.getApoderado()==null){
-                    Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                if(!Personas.codigoRegistrado(persona.getCodigo())){
+                    if(persona.getDocumentos().isEmpty()){
+                        Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
+                    } else if(persona.getApoderado()==null){
+                        Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                    }else{
+                        for(Celular celular:persona.getCelulares()){
+                            celular.guardar();
+                        }
+                        persona.guardar();
+                        for (Relacion relacion:persona.getFamiliaresparaEstudiante()){
+                            relacion.getPersona1().getCelulares().get(0).guardar();
+                            relacion.getPersona1().guardar();
+                            relacion.getPersona1().getDocumentos().get(0).guardar();
+                            relacion.guardar();
+                        }
+                        for (Documento documento:persona.getDocumentos()){
+                            documento.guardar();
+                        }
+                        persona=new Persona();
+                        cargarTablas();
+                        Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
+                        limpiarControles();
+                    }
                 }else{
-                    for(Celular celular:persona.getCelulares()){
-                        celular.guardar();
-                    }
-                    persona.guardar();
-                    for (Relacion relacion:persona.getFamiliaresparaEstudiante()){
-                        relacion.getPersona1().getCelulares().get(0).guardar();
-                        relacion.getPersona1().guardar();
-                        relacion.getPersona1().getDocumentos().get(0).guardar();
-                        relacion.guardar();
-                    }
-                    for (Documento documento:persona.getDocumentos()){
-                        documento.guardar();
-                    }
-                    persona=new Persona();
-                    cargarTablas();
-                    Utilidades.sendNotification("Éxito","Alumno registrado", TrayIcon.MessageType.INFO);
-                    limpiarControles();
+                    Utilidades.sendNotification("Error","Código ya registrado", TrayIcon.MessageType.ERROR);
                 }
             }else{
-                Utilidades.sendNotification("Error","verifique el campo Código", TrayIcon.MessageType.WARNING);
+                Utilidades.sendNotification("Error","Verifique el campo Código", TrayIcon.MessageType.WARNING);
             }
         }else {
             PersonaValidator.mostrarErrores(errors);
@@ -163,17 +169,29 @@ public class DAñadirEstudiante extends JDialog{
         Set<ConstraintViolation<Persona>> errors = validator.loadViolations(persona);
         if(errors.isEmpty()){
             if(persona.getCodigo().length()>=4){
-                if(persona.getDocumentos().isEmpty()){
-                    Utilidades.sendNotification("Error","Debe registrar al menos un documento de identificación", TrayIcon.MessageType.WARNING);
-                } else if(persona.getApoderado()==null){
-                    Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                if(persona.getCodigo().equals(txtCodigo.getName())){
+                    if(persona.getApoderado()==null){
+                        Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                    }else{
+                        persona.guardar();
+                        cerrar();
+                        Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                    }
                 }else{
-                    persona.guardar();
-                    cerrar();
-                    Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                    if(!Personas.codigoRegistrado(persona.getCodigo())){
+                        if(persona.getApoderado()==null){
+                            Utilidades.sendNotification("Error","Debe registrar un apoderado", TrayIcon.MessageType.WARNING);
+                        }else{
+                            persona.guardar();
+                            cerrar();
+                            Utilidades.sendNotification("Éxito","Cambios guardados", TrayIcon.MessageType.INFO);
+                        }
+                    }else{
+                        Utilidades.sendNotification("Error","Código ya registrado", TrayIcon.MessageType.WARNING);
+                    }
                 }
             }else{
-                Utilidades.sendNotification("Error","verifique el campo Código", TrayIcon.MessageType.WARNING);
+                Utilidades.sendNotification("Error","Verifique el campo Código", TrayIcon.MessageType.WARNING);
             }
         }else {
             PersonaValidator.mostrarErrores(errors);
@@ -189,7 +207,7 @@ public class DAñadirEstudiante extends JDialog{
         setResizable(false);
         setModal(true);
         cargarTablas();
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void paraActualizar(){
@@ -329,33 +347,19 @@ public class DAñadirEstudiante extends JDialog{
     }
 
     private void cargarFamiliares(){
-        Vector<Relacion> relaciones=new Vector<>(persona.getFamiliaresparaEstudiante());
-        familiaresAbstractModel=new FamiliaresAbstractModel(relaciones);
+        familiaresAbstractModel=new FamiliaresAbstractModel(persona.getFamiliaresparaEstudiante());
         tablaFamiliares.setModel(familiaresAbstractModel);
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"editar"));
-        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(relaciones,tablaFamiliares,"apoderado"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 1).setCellEditor(new JButtonEditorFamiliares(persona.getFamiliaresparaEstudiante(),tablaFamiliares,"editar"));
+        tablaFamiliares.getColumnModel().getColumn(familiaresAbstractModel.getColumnCount() - 2).setCellEditor(new JButtonEditorFamiliares(persona.getFamiliaresparaEstudiante(),tablaFamiliares,"apoderado"));
         TableCellRenderer renderer1=tablaFamiliares.getDefaultRenderer(JButton.class);
         tablaFamiliares.setDefaultRenderer(JButton.class, new JTableButtonRenderer(renderer1));
         Utilidades.definirTamaño(tablaFamiliares.getColumn("Apoderado"),70);
         Utilidades.headerNegrita(tablaFamiliares);
-        Utilidades.cellsRendered(null,tablaFamiliares,relaciones,true);
+        Utilidades.cellsRendered(null,tablaFamiliares,persona.getFamiliaresparaEstudiante(),true);
     }
 
     private void cerrar(){
         dispose();
-    }
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here

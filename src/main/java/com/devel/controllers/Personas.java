@@ -1,6 +1,7 @@
 package com.devel.controllers;
 
 import com.devel.hibernate.Hibernate;
+import com.devel.models.Documento;
 import com.devel.models.Nivel;
 import com.devel.models.Persona;
 import com.devel.models.Relacion;
@@ -20,12 +21,11 @@ public class Personas extends Hibernate {
         return persona;
     }
 
-    public static Vector<Persona> alumnosPorCodigo(String codigo){
+    public static Persona alumnoPorCodigo(String codigo){
         criteria= builder.createQuery(Persona.class);
         root=criteria.from(Persona.class);
         criteria.select(root).where(builder.equal(root.get("codigo"),codigo));
-        todos=new Vector<>(session.createQuery(criteria).getResultList());
-        return todos;
+        return session.createQuery(criteria).uniqueResult();
     }
 
     public static Vector<Persona> alumnos(){
@@ -34,5 +34,13 @@ public class Personas extends Hibernate {
         criteria.select(root).where(builder.isNotNull(root.get("codigo")));
         todos=new Vector<>(session.createQuery(criteria).getResultList());
         return todos;
+    }
+
+    public static boolean codigoRegistrado(String codigo){
+        criteria= builder.createQuery(Persona.class);
+        root=criteria.from(Persona.class);
+        criteria.select(root).where(builder.equal(root.get("codigo"),codigo));
+        Persona persona=session.createQuery(criteria).uniqueResult();
+        return persona != null;
     }
 }

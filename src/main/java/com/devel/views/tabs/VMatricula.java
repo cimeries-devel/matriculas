@@ -132,16 +132,15 @@ public class VMatricula extends JFrame{
             if(dni!=null){
                 if(dni.getPerson().getCodigo()!=null){
                     persona=dni.getPerson();
-                    lblNombres.setText(persona.getNombres()+" "+persona.getApellidos());
-                    lblCodigo.setText(persona.getCodigo());
+                    cargarEstudiante();
                     cargarTablasDelEstudiante();
-                    habilitarBotones();
+                    botones(true);
                 }else{
                     persona=new Persona();
                     lblNombres.setText("--");
                     lblCodigo.setText("--");
                     cargarTablasDelEstudiante();
-                    deshabilitarBotones();
+                    botones(false);
                     Utilidades.sendNotification("Error","No es estudiante", TrayIcon.MessageType.ERROR);
                 }
             }else{
@@ -213,12 +212,22 @@ public class VMatricula extends JFrame{
         cargarTarifaPorDefecto();
         cargarGradosPorNivel();
         cargarTablasDelEstudiante();
-        deshabilitarBotones();
+        botones(false);
     }
     private void cargarTablasDelEstudiante(){
         cargarTablaFamiliares();
         cargarTablaCelulares();
         verificarMatricula();
+    }
+    private void cargarEstudiante(){
+        lblNombres.setText(persona.getNombres()+" "+persona.getApellidos());
+        lblCodigo.setText(persona.getCodigo());
+        if(!persona.getRegistros().isEmpty()){
+            cbbTarifas.setSelectedItem(persona.getRegistros().get(persona.getRegistros().size()-1).getTarifa());
+            cbbNiveles.setSelectedItem(persona.getRegistros().get(persona.getRegistros().size()-1).getSalon().getNivel());
+            cbbGrados.setSelectedItem(persona.getRegistros().get(persona.getRegistros().size()-1).getSalon().getGrado());
+            cbbSecciones.setSelectedItem(persona.getRegistros().get(persona.getRegistros().size()-1).getSalon().getSeccion());
+        }
     }
     private void cargarTarifaPorDefecto(){
         if(!VPrincipal.tarifas.isEmpty()){
@@ -273,18 +282,13 @@ public class VMatricula extends JFrame{
         lblCodigo.setText("--");
         lblNombres.setText("--");
         cargarTablasDelEstudiante();
-        deshabilitarBotones();
+        botones(false);
     }
 
-    private void deshabilitarBotones(){
-        btnRegistrarMatricula.setEnabled(false);
-        btnAñadirFamiliar.setEnabled(false);
-        btnAñadirCelular.setEnabled(false);
+    private void botones(boolean estado){
+        btnRegistrarMatricula.setEnabled(estado);
+        btnAñadirFamiliar.setEnabled(estado);
+        btnAñadirCelular.setEnabled(estado);
     }
 
-    private void habilitarBotones(){
-        btnRegistrarMatricula.setEnabled(true);
-        btnAñadirFamiliar.setEnabled(true);
-        btnAñadirCelular.setEnabled(true);
-    }
 }

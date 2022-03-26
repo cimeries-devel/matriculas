@@ -47,7 +47,7 @@ public class DGestionTarifa extends JDialog{
         setResizable(false);
         setModal(true);
         setLocationRelativeTo(null);
-        cargarConfiguracion();
+        getRootPane().setDefaultButton(btnAñadir);
     }
 
     private void cargarNuevaTarifa(){
@@ -71,17 +71,4 @@ public class DGestionTarifa extends JDialog{
         dispose();
     }
 
-    private void cargarConfiguracion(){
-        switch (VPrincipal.tema){
-            case "oscuro":
-                btnHecho.setForeground(new Color(0xFFFFFF));
-                btnAñadir.setBackground(Colors.buttonDefect2);
-                break;
-            default:
-                btnHecho.setForeground(new Color(0x000000));
-                btnAñadir.setForeground(Color.white);
-                btnAñadir.setBackground(Colors.buttonDefect1);
-                break;
-        }
-    }
 }
