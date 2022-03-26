@@ -14,7 +14,7 @@ public class Exportar {
     private static File file;
     private static String[] nombreColumnas;
     private static WritableWorkbook Excel;
-    private static DataOutputStream ruta;
+    private static DataOutputStream outputStream;
     private static List<Object[]> datos;
     private static JFileChooser chooser;
     private static WritableSheet hoja;
@@ -24,33 +24,14 @@ public class Exportar {
         Exportar.datos=datos;
         if(pedirNombre()){
             hoja = Excel.createSheet(chooser.getSelectedFile().getName(), 0);
-
-        }
-    }
-
-//    public static boolean export() {
-//        try {
-//            ruta = new DataOutputStream(new FileOutputStream(file));
-//            Excel = Workbook.createWorkbook(ruta);
-//
-//            for (int index = 0; index < tabla.size(); index++) {
-//                JTable table = (JTable) tabla.get(index);
-//
 //                for (int i = 0; i < table.getColumnCount(); i++) {
 //                    for (int j = 0; j < table.getRowCount(); j++) {
 //                        Object object = table.getValueAt(j, i);
 //                        s.addCell(new Label(i, j, String.valueOf(object)));
 //                    }
 //                }
-//            }
-//        } catch (IOException | WriteException e) {
-//            e.printStackTrace();
-//        }
-//        escribirExcel();
-//        cerrarExccel();
-//        return true;
-//    }
-
+        }
+    }
     public static boolean  pedirNombre(){
         chooser = new JFileChooser();
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos excel", "xml","xls","xlsm","xla","xlr","xlw","xlt","xlsx","xlsb","xltx","xltm");
@@ -109,6 +90,12 @@ public class Exportar {
     }
 
     private static void instanciarFile(String nombreArchivo){
-        file=new File(nombreArchivo);
+        try {
+            file=new File(nombreArchivo);
+            outputStream = new DataOutputStream(new FileOutputStream(file));
+            Excel = Workbook.createWorkbook(outputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
