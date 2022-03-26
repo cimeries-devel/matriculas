@@ -20,17 +20,23 @@ public class Exportar {
     private static WritableSheet hoja;
 
     public static void exportar(String[] nombreColumnas, List<Object[]> datos){
-        Exportar.nombreColumnas=nombreColumnas;
-        Exportar.datos=datos;
-        if(pedirNombre()){
-            hoja = Excel.createSheet(chooser.getSelectedFile().getName(), 0);
-//                for (int i = 0; i < table.getColumnCount(); i++) {
-//                    for (int j = 0; j < table.getRowCount(); j++) {
-//                        Object object = table.getValueAt(j, i);
-//                        s.addCell(new Label(i, j, String.valueOf(object)));
-//                    }
-//                }
+        try {
+            Exportar.nombreColumnas=nombreColumnas;
+            Exportar.datos=datos;
+            if(pedirNombre()){
+                hoja = Excel.createSheet(chooser.getSelectedFile().getName(), 0);
+                for (int i = 0; i < datos.size(); i++) {
+                    Object[] object=datos.get(i);
+                    for (int j = 0; j < object.length; j++) {
+                        hoja.addCell(new Label(i, j, String.valueOf(object)));
+                    }
+                }
+            }
+        }catch (WriteException e){
+            e.printStackTrace();
         }
+        escribirExcel();
+        cerrarExccel();
     }
     public static boolean  pedirNombre(){
         chooser = new JFileChooser();
