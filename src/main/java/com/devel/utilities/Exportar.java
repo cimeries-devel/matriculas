@@ -35,15 +35,16 @@ public class Exportar {
             try {
                 WritableCellFormat cellFormat=new WritableCellFormat();
                 WritableFont font=new WritableFont(WritableFont.ARIAL);
+                font.setBoldStyle(WritableFont.BOLD);
+
                 CellView cellView=new CellView();
                 cellView.setAutosize(true);
 
-                font.setBoldStyle(WritableFont.BOLD);
                 cellFormat.setAlignment(Alignment.getAlignment(2));
-                cellFormat.setFont(new WritableFont(font));
+                cellFormat.setFont(font);
+
                 if(pedirNombre()){
                     hoja = Excel.createSheet(titulo, 0);
-                    hoja.setColumnView(1,cellView);
                     for(int i=0;i< nombreColumnas.size();i++){
                         Label cabecera=new Label(i+3,3,nombreColumnas.get(i));
                         cabecera.setCellFormat(cellFormat);
@@ -51,8 +52,12 @@ public class Exportar {
                     }
                     for (int i = 0; i <datos.size(); i++) {
                         Object[] object=datos.get(i);
+                        Label numero=new Label(2,i+4,String.valueOf(i+1));
+                        hoja.addCell(numero);
+                        hoja.setColumnView(2,cellView);
                         for (int j = 0; j < object.length; j++) {
-                            hoja.addCell(new Label(j+3, i+4, String.valueOf(object[j])));
+                            Label contenido=new Label(j+3, i+4, String.valueOf(object[j]));
+                            hoja.addCell(contenido);
                             hoja.setColumnView(j+3,cellView);
                         }
                     }
@@ -83,12 +88,14 @@ public class Exportar {
     private static void cerrarExccel() {
         try {
             Excel.close();
+            outputStream.close();
         } catch (WriteException | IOException ex) {
             ex.printStackTrace();
         }
     }
     private static void escribirExcel(){
         try {
+
             Excel.write();
         } catch (IOException e) {
             e.printStackTrace();
