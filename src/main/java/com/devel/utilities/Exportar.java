@@ -48,7 +48,6 @@ public class Exportar {
                         Label cabecera=new Label(i+3,3,nombreColumnas.get(i));
                         cabecera.setCellFormat(cellFormat);
                         hoja.addCell(cabecera);
-                        hoja.setColumnView(i+3,cellView);
                     }
                     for (int i = 0; i <datos.size(); i++) {
                         Object[] object=datos.get(i);
