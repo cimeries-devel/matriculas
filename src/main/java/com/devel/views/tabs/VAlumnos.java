@@ -100,16 +100,8 @@ public class VAlumnos extends JFrame{
                 actualizar();
             }
         });
-        exportarButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                exportar();
-            }
-        });
     }
-    public void exportar(){
-        Exportar.pedirNombre();
-    }
+
     public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
@@ -141,7 +133,7 @@ public class VAlumnos extends JFrame{
         }
     }
     private void exportarRelacionAlumnos(){
-        ExportarAlumnos exportarAlumnos=new ExportarAlumnos();
+        ExportarAlumnos exportarAlumnos=new ExportarAlumnos(tablaAlumnos);
         exportarAlumnos.setVisible(true);
     }
     private void cargarComboBox(){

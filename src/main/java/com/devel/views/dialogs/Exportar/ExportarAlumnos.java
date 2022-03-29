@@ -1,9 +1,17 @@
 package com.devel.views.dialogs.Exportar;
 
+import com.devel.models.Persona;
+import com.devel.utilities.Exportar;
+import com.devel.utilities.Utilidades;
+import jdk.jshell.execution.Util;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ExportarAlumnos extends JDialog {
     private JPanel panelPrincipal;
@@ -19,8 +27,10 @@ public class ExportarAlumnos extends JDialog {
     private JCheckBox ckbxGrado;
     private JCheckBox ckbxSeccion;
     private JCheckBox ckbxUltimaMatricula;
+    private JTable tablaAlumnos;
 
-    public ExportarAlumnos() {
+    public ExportarAlumnos(JTable tablaAlumnos) {
+        this.tablaAlumnos=tablaAlumnos;
         iniciarComponentes();
         btnExportar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -56,13 +66,61 @@ public class ExportarAlumnos extends JDialog {
     }
 
     private void exportar() {
-        dispose();
+        List<String> columnas=getColumnasSeleccionadas();
+        if(!columnas.isEmpty()){
+            List<Object[]> datos=getDatos(columnas);
+            Exportar.exportar("Relación alumnos",columnas,datos);
+        }else{
+            Utilidades.sendNotification("Error","Seleccione las columnas", TrayIcon.MessageType.ERROR);
+        }
     }
 
     private void cerrar() {
         dispose();
     }
+    private List<String> getColumnasSeleccionadas(){
+        List<String> columnas=new ArrayList<>();
 
+        if(ckbxCodigo.isSelected()){
+            columnas.add("Código");
+        }
+        if(ckbxEstudiante.isSelected()){
+            columnas.add("Estudiante");
+        }
+        if(ckbxEdad.isSelected()){
+            columnas.add("Edad");
+        }
+        if(ckbxSeguro.isSelected()){
+            columnas.add("Seguro");
+        }
+        if(ckbxApoderado.isSelected()){
+            columnas.add("Apoderado");
+        }
+        if(ckbxNivel.isSelected()){
+            columnas.add("Nivel");
+        }
+        if(ckbxGrado.isSelected()){
+            columnas.add("Grado");
+        }
+        if(ckbxSeccion.isSelected()){
+            columnas.add("Sección");
+        }
+        if(ckbxUltimaMatricula.isSelected()){
+            columnas.add("Última matrícula");
+        }
+        return columnas;
+    }
+    private List<Object[]> getDatos(List<String> columnas){
+        List<Object[]> datos=new ArrayList<>();
+        for(int i=0;i<tablaAlumnos.getRowCount();i++){
+            Object[] alumno=new Object[columnas.size()];
+            for(int j=0;j<columnas.size();j++){
+                alumno[j]=tablaAlumnos.getValueAt(tablaAlumnos.convertRowIndexToModel(i),tablaAlumnos.getColumn(columnas.get(j)).getModelIndex());
+            }
+            datos.add(alumno);
+        }
+        return datos;
+    }
     private void todosLosCampos(){
         boolean estado=ckbxTodos.isSelected();
         ckbxCodigo.setSelected(estado);
