@@ -1,71 +1,54 @@
 package com.devel.utilities;
-import java.awt.*;
-import java.io.*;
-import java.util.List;
+
+import jxl.CellView;
+import jxl.format.Alignment;
+import jxl.write.*;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.util.CellRangeAddressBase;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-import jxl.Cell;
-import jxl.CellView;
-import jxl.Workbook;
-import jxl.format.Alignment;
-import jxl.format.CellFormat;
-import jxl.write.*;
-import jxl.write.Label;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 public class Exportar {
     private static File file;
-    private static List<String> nombreColumnas;
-    private static WritableWorkbook Excel;
-    private static DataOutputStream outputStream;
-    private static List<Object[]> datos;
+    private static HSSFWorkbook Excel;
+    private static FileOutputStream outputStream;
     private static JFileChooser chooser;
-    private static WritableSheet hoja;
-    private static String titulo;
+    private static HSSFSheet hoja;
+    private static HSSFCellStyle styleCabecera;
 
     public static void exportar(String titulo,List<String> nombreColumnas, List<Object[]> datos){
         if(!datos.isEmpty()){
-            Exportar.nombreColumnas=nombreColumnas;
-            Exportar.titulo=titulo;
-            Exportar.datos=datos;
-            try {
-                WritableCellFormat cellFormat=new WritableCellFormat();
-                WritableFont font=new WritableFont(WritableFont.ARIAL);
-                font.setBoldStyle(WritableFont.BOLD);
-
-                CellView cellView=new CellView();
-                cellView.setAutosize(true);
-
-                cellFormat.setAlignment(Alignment.getAlignment(2));
-                cellFormat.setFont(font);
-
-                if(pedirNombre()){
-                    hoja = Excel.createSheet(titulo, 0);
-                    for(int i=0;i< nombreColumnas.size();i++){
-                        Label cabecera=new Label(i+3,3,nombreColumnas.get(i));
-                        cabecera.setCellFormat(cellFormat);
-                        hoja.addCell(cabecera);
+            if(pedirNombre()){
+                hoja=Excel.createSheet(titulo);
+                instaciarEstilo();
+                for (int i = 0; i <datos.size(); i++) {
+                    Object[] object=datos.get(i);
+                    hoja.autoSizeColumn(2);
+                    HSSFRow dato = hoja.createRow(i+4);
+                    dato.createCell(2).setCellValue(String.valueOf(i+1));
+                    dato.getCell(2).setCellStyle(styleCabecera);
+                    for (int j = 0; j < object.length; j++) {
+                        dato.createCell(j+3).setCellValue(String.valueOf(object[j]));
                     }
-                    for (int i = 0; i <datos.size(); i++) {
-                        Object[] object=datos.get(i);
-                        Label numero=new Label(2,i+4,String.valueOf(i+1));
-                        hoja.addCell(numero);
-                        hoja.setColumnView(2,cellView);
-                        for (int j = 0; j < object.length; j++) {
-                            Label contenido=new Label(j+3, i+4, String.valueOf(object[j]));
-                            hoja.addCell(contenido);
-                            hoja.setColumnView(j+3,cellView);
-                        }
-                    }
-                    escribirExcel();
-                    cerrarExccel();
                 }
-            }catch (WriteException e){
-                e.printStackTrace();
+                HSSFRow cabacera = hoja.createRow(3);
+                for(int i=0;i< nombreColumnas.size();i++){
+                    cabacera.createCell(i+3).setCellValue(nombreColumnas.get(i));
+                    cabacera.getCell(i+3).setCellStyle(styleCabecera);
+                    hoja.autoSizeColumn(i+3);
+                }
+                escribirExcel();
+                cerrarExccel();
             }
         }else{
             Utilidades.sendNotification("Error","No hay datos", TrayIcon.MessageType.ERROR);
@@ -84,19 +67,31 @@ public class Exportar {
         }
         return false;
     }
-
+    private static void instaciarEstilo(){
+        if(styleCabecera==null){
+            styleCabecera=Excel.createCellStyle();
+            styleCabecera.setAlignment(HorizontalAlignment.CENTER);
+            HSSFFont font= Excel.createFont();
+            font.setFontName(HSSFFont.FONT_ARIAL);
+            font.setBold(true);
+            styleCabecera.setFont(font);
+            styleCabecera.setBorderBottom(BorderStyle.MEDIUM    );
+            styleCabecera.setBorderLeft(BorderStyle.MEDIUM);
+            styleCabecera.setBorderRight(BorderStyle.MEDIUM);
+            styleCabecera.setBorderTop(BorderStyle.MEDIUM);
+        }
+    }
     private static void cerrarExccel() {
         try {
             Excel.close();
             outputStream.close();
-        } catch (WriteException | IOException ex) {
+        } catch ( IOException ex) {
             ex.printStackTrace();
         }
     }
     private static void escribirExcel(){
         try {
-
-            Excel.write();
+            Excel.write(outputStream);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,8 +100,8 @@ public class Exportar {
     private static void instanciarFile(String nombreArchivo){
         try {
             file=new File(nombreArchivo);
-            outputStream = new DataOutputStream(new FileOutputStream(file));
-            Excel = Workbook.createWorkbook(outputStream);
+            outputStream = new FileOutputStream(file);
+            Excel =new HSSFWorkbook();
         } catch (IOException e) {
             e.printStackTrace();
         }

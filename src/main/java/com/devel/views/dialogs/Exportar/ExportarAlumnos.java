@@ -1,15 +1,12 @@
 package com.devel.views.dialogs.Exportar;
 
-import com.devel.models.Persona;
 import com.devel.utilities.Exportar;
 import com.devel.utilities.Utilidades;
-import jdk.jshell.execution.Util;
+import com.devel.views.VTabla;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +24,7 @@ public class ExportarAlumnos extends JDialog {
     private JCheckBox ckbxGrado;
     private JCheckBox ckbxSeccion;
     private JCheckBox ckbxUltimaMatricula;
+    private JButton btnVistaPrevia;
     private JTable tablaAlumnos;
 
     public ExportarAlumnos(JTable tablaAlumnos) {
@@ -61,6 +59,20 @@ public class ExportarAlumnos extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 todosLosCampos();
+            }
+        });
+
+        btnVistaPrevia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<String> columnas=getColumnasSeleccionadas();
+                if(!columnas.isEmpty()){
+                    List<Object[]> datos=getDatos(columnas);
+                    VTabla vTabla=new VTabla(columnas,datos);
+                    vTabla.setVisible(true);
+                }else{
+                    Utilidades.sendNotification("Error","Seleccione las columnas", TrayIcon.MessageType.ERROR);
+                }
             }
         });
     }
@@ -141,6 +153,6 @@ public class ExportarAlumnos extends JDialog {
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
-
+        todosLosCampos();
     }
 }
