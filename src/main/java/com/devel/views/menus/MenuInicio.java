@@ -16,7 +16,6 @@ import java.awt.event.MouseEvent;
 
 public class MenuInicio {
     private JButton inicioButton;
-    private JButton alumnosButton;
     private JPanel panelPrincipal;
     private JButton matriculaButton;
     private DnDTabbedPane tabContenido;
@@ -29,24 +28,13 @@ public class MenuInicio {
         this.tabContenido=tabContenido;
         inicioButton.addActionListener(e -> {
             cargarBienvenida();
-            alumnosButton.setBackground(new JButton().getBackground());
             matriculaButton.setBackground(new JButton().getBackground());
             Utilidades.buttonSelectedOrEntered(inicioButton);
-        });
-        alumnosButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cargarAlumnos();
-                inicioButton.setBackground(new JButton().getBackground());
-                matriculaButton.setBackground(new JButton().getBackground());
-                Utilidades.buttonSelectedOrEntered(alumnosButton);
-            }
         });
         matriculaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cargarMatricula();
-                alumnosButton.setBackground(new JButton().getBackground());
                 inicioButton.setBackground(new JButton().getBackground());
                 Utilidades.buttonSelectedOrEntered(matriculaButton);
             }
@@ -67,18 +55,6 @@ public class MenuInicio {
         }
         tabContenido.setSelectedComponent(welcome.getPanelPrincipal());
         inicioButton.requestFocus();
-    }
-    public void cargarAlumnos() {
-        if (alumnos == null) {
-            alumnos = new VAlumnos();
-        }
-        if (tabContenido.indexOfComponent(alumnos.getPanelPrincipal()) == -1) {
-            alumnos = new VAlumnos();
-            alumnos.getPanelPrincipal().setOption(alumnosButton);
-            tabContenido.addTab(alumnos.getTitle(), alumnos.getPanelPrincipal().getIcon(),alumnos.getPanelPrincipal());
-
-        }
-        tabContenido.setSelectedComponent(alumnos.getPanelPrincipal());
     }
     public void cargarMatricula() {
         if (matricula == null) {

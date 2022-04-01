@@ -75,7 +75,7 @@ public class Exportar {
             font.setFontName(HSSFFont.FONT_ARIAL);
             font.setBold(true);
             styleCabecera.setFont(font);
-            styleCabecera.setBorderBottom(BorderStyle.MEDIUM    );
+            styleCabecera.setBorderBottom(BorderStyle.MEDIUM);
             styleCabecera.setBorderLeft(BorderStyle.MEDIUM);
             styleCabecera.setBorderRight(BorderStyle.MEDIUM);
             styleCabecera.setBorderTop(BorderStyle.MEDIUM);

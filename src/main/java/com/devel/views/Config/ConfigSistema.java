@@ -1,12 +1,13 @@
 package com.devel.views.Config;
 
-import com.devel.utilities.Colors;
 import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilidades;
 import com.devel.views.VPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,7 +15,7 @@ public class ConfigSistema extends JDialog {
     private JButton btnRetroceder;
     private JButton btnAvanzar;
     private JPanel panelContenido;
-    private JTabbedPane TabConfiguraciones;
+    private JTabbedPane tabConfiguraciones;
     private JLabel labelLogo;
     private JTextField textField1;
     private JButton editarButton;
@@ -36,6 +37,7 @@ public class ConfigSistema extends JDialog {
     private JRadioButton ImpresionNoPreguntarRadioButton;
     private Propiedades propiedades;
     private VPrincipal vPrincipal;
+
     public ConfigSistema(VPrincipal vPrincipal,Propiedades propiedades){
         this.vPrincipal=vPrincipal;
         this.propiedades=propiedades;
@@ -54,6 +56,29 @@ public class ConfigSistema extends JDialog {
                 guardarCambios();
             }
         });
+        btnAvanzar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambio(true);
+            }
+        });
+        btnRetroceder.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambio(false);
+            }
+        });
+    }
+    private void cambio(boolean avanzar){
+        if(avanzar){
+            if(tabConfiguraciones.getSelectedIndex()!=tabConfiguraciones.getTabCount()-1){
+                tabConfiguraciones.setSelectedIndex(tabConfiguraciones.getSelectedIndex()+1);
+            }
+        }else{
+            if(tabConfiguraciones.getSelectedIndex()!=0){
+                tabConfiguraciones.setSelectedIndex(tabConfiguraciones.getSelectedIndex()-1);
+            }
+        }
     }
     private void guardarCambios(){
         if(temaOscuro.isSelected()){
