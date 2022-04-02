@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity(name = "tbl_relacion")
 public class Relacion extends Hibernate {
@@ -22,10 +20,9 @@ public class Relacion extends Hibernate {
     @NotNull
     private Persona persona;
 
-    @Column
-    @NotEmpty(message = "Relación")
-    @Size(min = 3,max = 32,message = "Relación")
-    private String tipoRelacion;
+    @ManyToOne
+    @NotNull(message = "Relación")
+    private TipoRelacion tipoRelacion;
 
     @Column
     @NotNull
@@ -52,12 +49,12 @@ public class Relacion extends Hibernate {
         this.persona = persona;
     }
 
-    public String getTipoRelacion() {
+    public TipoRelacion getTipoRelacion() {
         return tipoRelacion;
     }
 
-    public void setTipoRelacion(String tipoRelacion) {
-        this.tipoRelacion = tipoRelacion.toUpperCase();
+    public void setTipoRelacion(TipoRelacion tipoRelacion) {
+        this.tipoRelacion = tipoRelacion;
     }
 
     public boolean isApoderado() {

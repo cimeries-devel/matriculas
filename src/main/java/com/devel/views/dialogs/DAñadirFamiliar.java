@@ -1,28 +1,20 @@
 package com.devel.views.dialogs;
 
 import com.devel.controllers.Documentos;
+import com.devel.controllers.TiposRelaciones;
 import com.devel.models.*;
-import com.devel.utilities.Colors;
 import com.devel.utilities.Utilidades;
 import com.devel.validators.*;
 import com.devel.views.VPrincipal;
 import com.github.lgooddatepicker.components.DatePicker;
-import com.github.lgooddatepicker.optionalusertools.DateChangeListener;
-import com.github.lgooddatepicker.zinternaltools.DateChangeEvent;
 import jakarta.validation.ConstraintViolation;
 
-import javax.print.Doc;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Set;
 import java.util.Vector;
-
-import static com.github.lgooddatepicker.components.DatePickerSettings.DateArea.*;
 
 public class DAñadirFamiliar extends JDialog{
     private DatePicker datePicker1;
@@ -42,6 +34,8 @@ public class DAñadirFamiliar extends JDialog{
     private JTextField txtRelacion;
     private JTextField txtDni;
     private JComboBox cbbGenero;
+    private JComboBox cbbTipoRelación;
+    private JButton nuevoButton;
     private Persona persona;
     private Persona familiar;
     private boolean vivenJuntos;
@@ -190,9 +184,9 @@ public class DAñadirFamiliar extends JDialog{
                     if(persona.getRelacionAFamiliar(familiar)==null){
                         if(!persona.existeDocumento(documento.getNumero())){
                             Relacion relacion=new Relacion();
-                            String tipoRelacion=txtRelacion.getText().trim();
                             boolean vivenJuntos=ckVivenJuntos.isSelected();
                             boolean esApoderado= persona.getApoderado() == null;
+                            TipoRelacion tipoRelacion=(TipoRelacion) cbbTipoRelación.getSelectedItem();
 
                             relacion.setTipoRelacion(tipoRelacion);
                             relacion.setVivenJuntos(vivenJuntos);
@@ -254,9 +248,9 @@ public class DAñadirFamiliar extends JDialog{
             Set<ConstraintViolation<Celular>> errors2 = CelularValidator.loadViolations(celular);
             if(errors2.isEmpty()){
                 Relacion relacion= familiar.getRelacion(persona);
-                String tipoRelacion=txtRelacion.getText().trim();
                 boolean vivenJuntos=ckVivenJuntos.isSelected();
                 boolean esApoderado=relacion.isApoderado();
+                TipoRelacion tipoRelacion=(TipoRelacion) cbbTipoRelación.getSelectedItem();
 
                 relacion.setTipoRelacion(tipoRelacion);
                 relacion.setVivenJuntos(vivenJuntos);
@@ -317,8 +311,11 @@ public class DAñadirFamiliar extends JDialog{
     }
 
     private void cargarComboBox(){
-        cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(new Vector<>(VPrincipal.tipoDocumentos)));
+        cbbTipoDocumento.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoDocumentos));
         cbbTipoDocumento.setRenderer(new TipoDocumento.ListCellRenderer());
+
+        cbbTipoRelación.setModel(new DefaultComboBoxModel<>(VPrincipal.tipoRelaciones));
+        cbbTipoRelación.setRenderer(new TipoRelacion.ListCellRenderer());
     }
     private void createUIComponents() {
         // TODO: place custom component creation code here
@@ -332,7 +329,7 @@ public class DAñadirFamiliar extends JDialog{
     private void guardarCopia(){
         txtEmail.setName(familiar.getEmail());
         txtDireccion.setName(familiar.getDireccion());
-        txtRelacion.setName(familiar.getTipoRelacion(persona));
+        txtRelacion.setName(String.valueOf(familiar.getTipoRelacion(persona).getId()));
         txtDescripcionCelular.setName(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setName(familiar.getCelulares().get(0).getNumero());
         vivenJuntos=familiar.getRelacion(persona).isVivenJuntos();
@@ -344,7 +341,7 @@ public class DAñadirFamiliar extends JDialog{
         txtApellidos.setText(familiar.getApellidos());
         txtEmail.setText(familiar.getEmail());
         txtDireccion.setText(familiar.getDireccion());
-        txtRelacion.setText(familiar.getRelacion(persona).getTipoRelacion());
+        cbbTipoRelación.setSelectedItem(familiar.getRelacion(persona).getTipoRelacion());
         txtDescripcionCelular.setText(familiar.getCelulares().get(0).getDescipcion());
         txtCelular.setText(familiar.getCelulares().get(0).getNumero());
         cbbGenero.setSelectedIndex(familiar.isGenero()?0:1);
@@ -355,7 +352,7 @@ public class DAñadirFamiliar extends JDialog{
     private void onCancel(){
         familiar.setEmail(txtEmail.getName());
         familiar.setDireccion(txtDireccion.getName());
-        familiar.setTipoRelacionRelacion(persona,txtRelacion.getName());
+        familiar.setTipoRelacionRelacion(persona, TiposRelaciones.get(Integer.valueOf(txtRelacion.getName())));
         familiar.getCelulares().get(0).setDescipcion(txtDescripcionCelular.getName());
         familiar.getCelulares().get(0).setNumero(txtCelular.getName());
         familiar.getRelacion(persona).setVivenJuntos(vivenJuntos);
@@ -369,10 +366,8 @@ public class DAñadirFamiliar extends JDialog{
     private void limpiarControles(){
         txtCelular.setText(null);
         txtDni.setText(null);
-        txtRelacion.setText(null);
         txtApellidos.setText(null);
         txtNombres.setText(null);
-        txtRelacion.setText(null);
         lblEdad.setText(null);
         txtDireccion.setText(null);
         txtDescripcionCelular.setText(null);

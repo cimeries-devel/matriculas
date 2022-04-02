@@ -1,20 +1,19 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Persona;
-import com.devel.models.Relacion;
+import com.devel.models.TipoDocumento;
+import com.devel.models.TipoRelacion;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.List;
 import java.util.Vector;
 
-public class FamiliaresAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Apoderado",""};
-    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
-    private List<Relacion> vector;
+public class TipoRelacionAbstractModel extends AbstractTableModel {
+    private String[] columnNames = {"Id","Tipo",""};
+    public Class[] m_colTypes = {String.class,String.class, JButton.class};
+    private Vector<TipoRelacion> vector;
 
-    public FamiliaresAbstractModel(List<Relacion> vector){
+    public TipoRelacionAbstractModel(Vector<TipoRelacion> vector){
         this.vector=vector;
     }
     @Override
@@ -46,26 +45,17 @@ public class FamiliaresAbstractModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Relacion relacion=vector.get(rowIndex);
+        TipoRelacion tipoRelacion=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return relacion.getPersona1().getNombres()+" "+relacion.getPersona1().getApellidos();
+                return tipoRelacion.getId();
             case 1:
-                return relacion.getTipoRelacion().getTipo();
-            case 2:
-                return relacion.isVivenJuntos()?"si":"no";
-            case 3:
-                if(relacion.isApoderado()){
-                    return new JButtonAction("x16/default.png");
-                }else {
-                    return new JButtonAction("x16/Nodefault.png");
-                }
+                return tipoRelacion.getTipo();
             default:
                 return new JButtonAction("x16/editar.png");
         }
     }
-    public Relacion traer(int row){
+    public TipoRelacion traer(int row){
         return vector.get(row);
     }
 }
-

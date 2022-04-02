@@ -63,7 +63,7 @@ public class MatriculasAbstractModel extends AbstractTableModel {
             case 5:
                 return registro.getEstudiante().getApoderado().getNombres()+" "+registro.getEstudiante().getApoderado().getApellidos();
             case 6:
-                return registro.getEstudiante().getRelacionAFamiliar(registro.getEstudiante().getApoderado()).getTipoRelacion();
+                return registro.getEstudiante().getRelacionAFamiliar(registro.getEstudiante().getApoderado()).getTipoRelacion().getTipo();
             case 7:
                 return registro.getSalon().getNivel().getDescripcion();
             case 8:

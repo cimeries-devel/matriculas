@@ -245,7 +245,7 @@ public class Persona extends Hibernate {
         }
         return null;
     }
-    public String getTipoRelacion(Persona persona){
+    public TipoRelacion getTipoRelacion(Persona persona){
         for(Relacion relacion:getRelaciones()){
             if(relacion.getPersona()==persona){
                 return relacion.getTipoRelacion();
@@ -254,14 +254,21 @@ public class Persona extends Hibernate {
         return null;
     }
 
-    public void setTipoRelacionRelacion(Persona persona,String tiporelacion){
+    public void setTipoRelacionRelacion(Persona persona,TipoRelacion tiporelacion){
         for(Relacion relacion:getRelaciones()){
             if(relacion.getPersona1()==persona){
-                relacion.setTipoRelacion(tiporelacion.toUpperCase());
+                relacion.setTipoRelacion(tiporelacion);
             }
         }
     }
-
+    public String isApoderado(){
+        for(Relacion relacion: getRelaciones()){
+            if(relacion.isApoderado()){
+                return "Si";
+            }
+        }
+        return "No";
+    }
     public List<Relacion> getFamiliaresparaEstudiante() {
         return familiaresparaEstudiante;
     }

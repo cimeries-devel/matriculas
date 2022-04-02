@@ -33,9 +33,6 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
         this.listaFiltros=listaFiltros;
         this.familiares=familiares;
     }
-    public TablesCellRendered(List<Relacion> familiares, boolean a){
-        this.familiares=familiares;
-    }
     public TablesCellRendered(Map<Integer, String> listaFiltros){
         this.listaFiltros=listaFiltros;
     }
@@ -88,10 +85,11 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                 case "Descripción":
                 case "Nombre":
                 case "Documento":
+                case "Nombres y apellidos":
                     setHorizontalAlignment(SwingConstants.LEFT);
                     break;
                 case "Tipo":
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(130);
+                    table.getColumn(table.getColumnName(column)).setPreferredWidth(130);
                     table.getColumn(table.getColumnName(column)).setMinWidth(130);
                     setHorizontalAlignment(SwingConstants.LEFT);
                     break;
@@ -122,6 +120,7 @@ public class TablesCellRendered extends DefaultTableCellRenderer {
                         table.getColumn(table.getColumnName(column)).setMinWidth(90);
                         setHorizontalAlignment(SwingConstants.CENTER);
                     }
+                    break;
                 default:
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;

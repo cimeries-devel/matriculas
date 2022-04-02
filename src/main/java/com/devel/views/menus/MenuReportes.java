@@ -4,48 +4,49 @@ import com.devel.custom.DnDTabbedPane;
 import com.devel.utilities.Propiedades;
 import com.devel.utilities.Utilidades;
 import com.devel.views.tabs.VAlumnos;
+import com.devel.views.tabs.VFamiliares;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class MenuReportes {
-    private JButton alumnosButton;
+    private JButton btnAlumnos;
     private JPanel panelPrincipal;
-    private JButton padresButton;
-    private JButton matriculasButton;
+    private JButton btnFamiliares;
+    private JButton btnMatriculas;
     private DnDTabbedPane tabContenido;
     private Propiedades propiedades;
     private VAlumnos alumnos;
+    private VFamiliares vFamiliares;
 
     public MenuReportes(DnDTabbedPane tabContenido){
         this.propiedades=propiedades;
         this.tabContenido=tabContenido;
-        alumnosButton.addActionListener(new ActionListener() {
+        btnAlumnos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                padresButton.setBackground(new JButton().getBackground());
-                matriculasButton.setBackground(new JButton().getBackground());
-                Utilidades.buttonSelectedOrEntered(alumnosButton);
+                btnFamiliares.setBackground(new JButton().getBackground());
+                btnMatriculas.setBackground(new JButton().getBackground());
+                Utilidades.buttonSelectedOrEntered(btnAlumnos);
                 cargarAlumnos();
             }
         });
-        padresButton.addActionListener(new ActionListener() {
+        btnFamiliares.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                alumnosButton.setBackground(new JButton().getBackground());
-                matriculasButton.setBackground(new JButton().getBackground());
-                Utilidades.buttonSelectedOrEntered(padresButton);
+                btnAlumnos.setBackground(new JButton().getBackground());
+                btnMatriculas.setBackground(new JButton().getBackground());
+                Utilidades.buttonSelectedOrEntered(btnFamiliares);
+                cargarFamiliares();
             }
         });
-        matriculasButton.addActionListener(new ActionListener() {
+        btnMatriculas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                alumnosButton.setBackground(new JButton().getBackground());
-                padresButton.setBackground(new JButton().getBackground());
-                Utilidades.buttonSelectedOrEntered(matriculasButton);
+                btnAlumnos.setBackground(new JButton().getBackground());
+                btnFamiliares.setBackground(new JButton().getBackground());
+                Utilidades.buttonSelectedOrEntered(btnMatriculas);
             }
         });
     }
@@ -60,10 +61,23 @@ public class MenuReportes {
         }
         if (tabContenido.indexOfComponent(alumnos.getPanelPrincipal()) == -1) {
             alumnos = new VAlumnos();
-            alumnos.getPanelPrincipal().setOption(alumnosButton);
+            alumnos.getPanelPrincipal().setOption(btnAlumnos);
             tabContenido.addTab(alumnos.getTitle(), alumnos.getPanelPrincipal().getIcon(),alumnos.getPanelPrincipal());
 
         }
         tabContenido.setSelectedComponent(alumnos.getPanelPrincipal());
+    }
+
+    public void cargarFamiliares() {
+        if (vFamiliares == null) {
+            vFamiliares = new VFamiliares();
+        }
+        if (tabContenido.indexOfComponent(vFamiliares.getPanelPrincipal()) == -1) {
+            vFamiliares = new VFamiliares();
+            vFamiliares.getPanelPrincipal().setOption(btnAlumnos);
+            tabContenido.addTab(vFamiliares.getTitle(), vFamiliares.getPanelPrincipal().getIcon(),vFamiliares.getPanelPrincipal());
+
+        }
+        tabContenido.setSelectedComponent(vFamiliares.getPanelPrincipal());
     }
 }

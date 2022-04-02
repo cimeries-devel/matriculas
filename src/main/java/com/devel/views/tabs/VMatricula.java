@@ -169,6 +169,9 @@ public class VMatricula extends JFrame{
                 Set<ConstraintViolation<Registro>> errors = RegistroValidator.loadViolations(registro);
                 if(errors.isEmpty()){
                     registro.guardar();
+                    if(persona.getRegistros().isEmpty()){
+                        VPrincipal.alumnos.add(persona);
+                    }
                     persona.getRegistros().add(registro);
                     VPrincipal.alumnosMatriculados.add(registro);
                     Utilidades.actualizarTabla(tablaMatriculas);

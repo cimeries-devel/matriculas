@@ -1,20 +1,21 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Persona;
-import com.devel.models.Relacion;
+import com.devel.models.Seguro;
 import com.devel.utilities.JButoonEditors.JButtonAction;
+import jdk.jfr.Percentage;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.List;
 import java.util.Vector;
 
-public class FamiliaresAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Nombres y apellidos","Relación","Viven juntos","Apoderado",""};
-    public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
-    private List<Relacion> vector;
+public class TodosLosFamiliaresAbstractModel extends AbstractTableModel {
 
-    public FamiliaresAbstractModel(List<Relacion> vector){
+    private String[] columnNames = {"Documento","Nombres y apellidos","Celular","Dirección","Alumnos","Apoderado",""};
+    public Class[] m_colTypes = {String.class,String.class, String.class,String.class,Integer.class,String.class,JButton.class};
+    private Vector<Persona> vector;
+
+    public TodosLosFamiliaresAbstractModel(Vector<Persona> vector){
         this.vector=vector;
     }
     @Override
@@ -46,26 +47,25 @@ public class FamiliaresAbstractModel extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Relacion relacion=vector.get(rowIndex);
+        Persona persona=vector.get(rowIndex);
         switch (columnIndex){
             case 0:
-                return relacion.getPersona1().getNombres()+" "+relacion.getPersona1().getApellidos();
+                return persona.getDocumentos().get(0).getNumero();
             case 1:
-                return relacion.getTipoRelacion().getTipo();
+                return persona.getNombres()+" "+persona.getApellidos();
             case 2:
-                return relacion.isVivenJuntos()?"si":"no";
+                return persona.getCelulares().get(0).getNumero();
             case 3:
-                if(relacion.isApoderado()){
-                    return new JButtonAction("x16/default.png");
-                }else {
-                    return new JButtonAction("x16/Nodefault.png");
-                }
+                return persona.getDireccion();
+            case 4:
+                return persona.getRelaciones().size();
+            case 5:
+                return persona.isApoderado();
             default:
                 return new JButtonAction("x16/editar.png");
         }
     }
-    public Relacion traer(int row){
+    public Persona traer(int row){
         return vector.get(row);
     }
 }
-

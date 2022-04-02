@@ -45,8 +45,11 @@ public class VPrincipal extends JFrame{
     private MenuReportes menuReportes;
     private MenuGestiones menuGestiones;
     public static Vector<TipoDocumento> tipoDocumentos= TipoDocumentos.getTodos();
+    public static Vector<TipoRelacion> tipoRelaciones=TiposRelaciones.getTodos();
+    public static Vector<TipoRelacion> tipoRelacionesConTodos=TiposRelaciones.getTodosConTodos();
     public static Vector<Registro> alumnosMatriculados=Registros.getMatriculados();
     public static Vector<Persona> alumnos=Personas.alumnos();
+    public static Vector<Persona> familiares=Personas.familares();
     public static Vector<Nivel> niveles= Niveles.getTodos();
     public static Vector<Grado> grados= Grados.getTodos();
     public static Vector<Tarifa> tarifas= Tarifas.getTodas();

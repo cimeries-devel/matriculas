@@ -10,10 +10,7 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExportarAlumnos extends JDialog {
-    private JPanel panelPrincipal;
-    private JButton btnExportar;
-    private JButton btnHecho;
+public class ExportarFamiliares extends JDialog{
     private JCheckBox ckbxTodos;
     private JCheckBox ckbxCodigo;
     private JCheckBox ckbxEstudiante;
@@ -24,11 +21,14 @@ public class ExportarAlumnos extends JDialog {
     private JCheckBox ckbxGrado;
     private JCheckBox ckbxSeccion;
     private JCheckBox ckbxUltimaMatricula;
+    private JButton btnExportar;
+    private JButton btnHecho;
     private JButton btnVistaPrevia;
-    private JTable tablaAlumnos;
+    private JPanel panelPrincipal;
+    private JTable tablaFamiliares;
 
-    public ExportarAlumnos(JTable tablaAlumnos) {
-        this.tablaAlumnos=tablaAlumnos;
+    public ExportarFamiliares(JTable tablaFamiliares) {
+        this.tablaFamiliares=tablaFamiliares;
         iniciarComponentes();
         btnExportar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -81,7 +81,7 @@ public class ExportarAlumnos extends JDialog {
         List<String> columnas=getColumnasSeleccionadas();
         if(!columnas.isEmpty()){
             List<Object[]> datos=getDatos(columnas);
-            Exportar.exportar("Relación alumnos",columnas,datos);
+            Exportar.exportar("Relación Familiares",columnas,datos);
             Utilidades.sendNotification("Exito","Datos exportados", TrayIcon.MessageType.INFO);
         }else{
             Utilidades.sendNotification("Error","Seleccione las columnas", TrayIcon.MessageType.ERROR);
@@ -125,12 +125,12 @@ public class ExportarAlumnos extends JDialog {
     }
     private List<Object[]> getDatos(List<String> columnas){
         List<Object[]> datos=new ArrayList<>();
-        for(int i=0;i<tablaAlumnos.getRowCount();i++){
-            Object[] alumno=new Object[columnas.size()];
+        for(int i=0;i<tablaFamiliares.getRowCount();i++){
+            Object[] familiar=new Object[columnas.size()];
             for(int j=0;j<columnas.size();j++){
-                alumno[j]=tablaAlumnos.getValueAt(tablaAlumnos.convertRowIndexToModel(i),tablaAlumnos.getColumn(columnas.get(j)).getModelIndex());
+                familiar[j]=tablaFamiliares.getValueAt(tablaFamiliares.convertRowIndexToModel(i),tablaFamiliares.getColumn(columnas.get(j)).getModelIndex());
             }
-            datos.add(alumno);
+            datos.add(familiar);
         }
         return datos;
     }

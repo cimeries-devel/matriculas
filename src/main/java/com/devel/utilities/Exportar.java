@@ -49,6 +49,7 @@ public class Exportar {
                 }
                 escribirExcel();
                 cerrarExccel();
+                abrirExcel();
             }
         }else{
             Utilidades.sendNotification("Error","No hay datos", TrayIcon.MessageType.ERROR);
@@ -103,6 +104,13 @@ public class Exportar {
             outputStream = new FileOutputStream(file);
             Excel =new HSSFWorkbook();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private static void abrirExcel(){
+        try{
+            Runtime.getRuntime().exec("cmd /c start "+file.getAbsolutePath());
+        }catch(IOException  e){
             e.printStackTrace();
         }
     }

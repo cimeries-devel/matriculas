@@ -19,6 +19,7 @@ public class MenuGestiones {
     private JButton btnTiposdeDocumentos;
     private JButton usuariosButton;
     private JButton btnSalones;
+    private JButton btnTipodeRelaciones;
     private DnDTabbedPane tabContenido;
 
     public MenuGestiones(DnDTabbedPane tabContenido){
@@ -43,6 +44,9 @@ public class MenuGestiones {
         });
         btnSalones.addActionListener(e -> {
             cargarGestionSalones();
+        });
+        btnTipodeRelaciones.addActionListener(e -> {
+            cargarGestionTipoRelaciones();
         });
     }
     public JPanel traerInicioOpciones() {
@@ -76,6 +80,10 @@ public class MenuGestiones {
     private void cargarGestionSalones(){
         DGestionSalon dGestionSalon=new DGestionSalon();
         dGestionSalon.setVisible(true);
+    }
+    private void cargarGestionTipoRelaciones(){
+        DGestionTipoRelacion dGestionTipoRelacion=new DGestionTipoRelacion();
+        dGestionTipoRelacion.setVisible(true);
     }
 
 }

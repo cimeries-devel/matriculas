@@ -36,6 +36,13 @@ public class Personas extends Hibernate {
         return todos;
     }
 
+    public static Vector<Persona> familares(){
+        criteria= builder.createQuery(Persona.class);
+        root=criteria.from(Persona.class);
+        criteria.select(root).where(builder.isNull(root.get("codigo")));
+        todos=new Vector<>(session.createQuery(criteria).getResultList());
+        return todos;
+    }
     public static boolean codigoRegistrado(String codigo){
         criteria= builder.createQuery(Persona.class);
         root=criteria.from(Persona.class);
