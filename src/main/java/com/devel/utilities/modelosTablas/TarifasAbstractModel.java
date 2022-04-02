@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class TarifasAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Fecha creación","Descripción","Tarifa","Activa",""};
+    private String[] columnNames = {"Fecha creación","Descripción","Tarifa","Defecto",""};
     public Class[] m_colTypes = {String.class,String.class,String.class, JButton.class, JButton.class};
     private Vector<Tarifa> vector;
     private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");

@@ -9,7 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
 public class TipoRelacionAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Id","Tipo",""};
+    private String[] columnNames = {"ID","Tipo",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
     private Vector<TipoRelacion> vector;
 

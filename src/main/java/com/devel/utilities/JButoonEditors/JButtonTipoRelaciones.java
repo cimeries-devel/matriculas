@@ -1,11 +1,8 @@
 package com.devel.utilities.JButoonEditors;
 
-import com.devel.models.Seccion;
 import com.devel.models.TipoRelacion;
 import com.devel.utilities.Utilidades;
-import com.devel.utilities.modelosTablas.SeccionAbstractModel;
 import com.devel.utilities.modelosTablas.TipoRelacionAbstractModel;
-import com.devel.views.dialogs.DAñadirSecciones;
 import com.devel.views.dialogs.DAñadirTipoRelacion;
 
 import javax.swing.*;

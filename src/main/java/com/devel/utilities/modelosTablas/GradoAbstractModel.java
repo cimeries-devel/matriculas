@@ -12,6 +12,7 @@ public class GradoAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Id","Nivel","Grado",""};
     public Class[] m_colTypes = {Integer.class,String.class,String.class, JButton.class};
     private Vector<Grado> vector;
+
     public GradoAbstractModel(Vector<Grado> vector){
         this.vector=vector;
     }

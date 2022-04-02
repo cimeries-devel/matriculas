@@ -1,12 +1,9 @@
 package com.devel.utilities.JButoonEditors;
 
 import com.devel.models.Salon;
-import com.devel.models.Seccion;
 import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.SalonesAbstractModel;
-import com.devel.utilities.modelosTablas.SeccionAbstractModel;
 import com.devel.views.dialogs.DAñadirSalon;
-import com.devel.views.dialogs.DAñadirSecciones;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;

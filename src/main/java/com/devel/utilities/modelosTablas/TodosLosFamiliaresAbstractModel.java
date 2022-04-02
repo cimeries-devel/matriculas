@@ -11,7 +11,7 @@ import java.util.Vector;
 
 public class TodosLosFamiliaresAbstractModel extends AbstractTableModel {
 
-    private String[] columnNames = {"Documento","Nombres y apellidos","Celular","Dirección","Alumnos","Apoderado",""};
+    private String[] columnNames = {"Documento","Nombres y apellidos","Celular","Dirección","Alumnos","Apoderado","Más"};
     public Class[] m_colTypes = {String.class,String.class, String.class,String.class,Integer.class,String.class,JButton.class};
     private Vector<Persona> vector;
 
@@ -62,7 +62,7 @@ public class TodosLosFamiliaresAbstractModel extends AbstractTableModel {
             case 5:
                 return persona.isApoderado();
             default:
-                return new JButtonAction("x16/editar.png");
+                return new JButtonAction("x16/mostrarContraseña.png");
         }
     }
     public Persona traer(int row){

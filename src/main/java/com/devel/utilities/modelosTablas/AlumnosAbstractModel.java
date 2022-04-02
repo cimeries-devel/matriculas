@@ -1,20 +1,18 @@
 package com.devel.utilities.modelosTablas;
 
 import com.devel.models.Persona;
-import com.devel.models.Registro;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 import com.devel.utilities.Utilidades;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class AlumnosAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Código","Estudiante","Edad","Seguro","Apoderado","Nivel","Grado","Sección","Última matrícula","Más"};
     public Class[] m_colTypes = {String.class,String.class,Integer.class,String.class,String.class,String.class,String.class,String.class,String.class,JButton.class};
     private Vector<Persona> vector;
+
     public AlumnosAbstractModel(Vector<Persona> vector){
         this.vector=vector;
     }

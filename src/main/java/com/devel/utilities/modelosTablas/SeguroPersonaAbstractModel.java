@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Vector;
 
 public class SeguroPersonaAbstractModel  extends AbstractTableModel {
-    private String[] columnNames = {"Nombre","Código","Quitar"};
+    private String[] columnNames = {"Nombre","Código",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
 
     private List<Seguro> vector;

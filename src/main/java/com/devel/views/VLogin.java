@@ -4,15 +4,21 @@ import com.devel.Principal;
 import com.devel.utilities.Colors;
 import com.devel.utilities.PlaceHolder;
 import com.devel.utilities.Propiedades;
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import com.intellij.uiDesigner.lw.LwHSpacer;
 
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Locale;
 
 import static javax.swing.SwingConstants.HORIZONTAL;
 
-public class VLogin extends JFrame{
+public class VLogin extends JFrame {
     private JPanel panelLogin;
     private JPanel panelDatos;
     private JLabel logoLogin;
@@ -20,17 +26,18 @@ public class VLogin extends JFrame{
     private JButton btnIngresar;
     private JTextField txtUsuario;
     private JCheckBox recordarUsuarioCheckBox;
-    private JLabel label=new JLabel("");
-    public static PlaceHolder placeholder;
+    private JLabel label = new JLabel("");
+    private PlaceHolder placeholder;
     public Propiedades propiedades;
-    public VLogin(Propiedades propiedades){
-        this.propiedades=propiedades;
+
+    public VLogin(Propiedades propiedades) {
+        this.propiedades = propiedades;
         iniciarComponentes();
         label.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (psfContraseña.getEchoChar()=='•') {
+                if (psfContraseña.getEchoChar() == '•') {
                     psfContraseña.setEchoChar((char) 0);
                     label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/mostrarContraseña.png")));
                 } else {
@@ -50,9 +57,9 @@ public class VLogin extends JFrame{
         psfContraseña.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                if(psfContraseña.getText().length()>0){
+                if (psfContraseña.getText().length() > 0) {
                     label.setVisible(true);
-                }else{
+                } else {
                     label.setVisible(false);
                 }
             }
@@ -61,47 +68,52 @@ public class VLogin extends JFrame{
             cargarVPrincipal();
         });
     }
-    public void cargarVPrincipal(){
-        VPrincipal vPrincipal=new VPrincipal(propiedades);
+
+    public void cargarVPrincipal() {
+        VPrincipal vPrincipal = new VPrincipal(propiedades);
         vPrincipal.setVisible(true);
         dispose();
     }
-    private void iniciarComponentes()  {
+
+    private void iniciarComponentes() {
         getRootPane().setDefaultButton(btnIngresar);
         setDefaultCloseOperation(3);
         setContentPane(panelLogin);
         setTitle("Login");
-        placeholder= new PlaceHolder("Usuario", txtUsuario);
-        placeholder= new PlaceHolder("Contraseña", psfContraseña);
+        placeholder = new PlaceHolder("Usuario", txtUsuario);
+        placeholder = new PlaceHolder("Contraseña", psfContraseña);
         pack();
         setLocationRelativeTo(null);
         cargarMostrarContraseña();
         cargarCursores();
         cargarConfiguracion();
     }
+
     private void cargarMostrarContraseña() {
-        JPanel panel=new JPanel();
-        JLabel label1=new JLabel("                                              ");
+        JPanel panel = new JPanel();
+        JLabel label1 = new JLabel("                                              ");
         label1.setOpaque(false);
         panel.setOpaque(false);
         panel.add(label1);
         panel.add(label);
-        label.setSize(new Dimension(20,30));
-        label.setMaximumSize(new Dimension(20,30));
+        label.setSize(new Dimension(20, 30));
+        label.setMaximumSize(new Dimension(20, 30));
         psfContraseña.add(panel);
         label.setVisible(false);
     }
-    private void cargarCursores(){
+
+    private void cargarCursores() {
         psfContraseña.setEchoChar('•');
+        btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
         label.setOpaque(false);
         label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
         label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         label.setFocusable(false);
-        recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
     }
-    private void cargarConfiguracion(){
-        switch (propiedades.getTema()){
+
+    private void cargarConfiguracion() {
+        switch (propiedades.getTema()) {
             case "claro":
                 txtUsuario.setForeground(new Color(0x000000));
                 psfContraseña.setForeground(new Color(0x000000));
@@ -116,4 +128,105 @@ public class VLogin extends JFrame{
     }
 
 
+    {
+// GUI initializer generated by IntelliJ IDEA GUI Designer
+// >>> IMPORTANT!! <<<
+// DO NOT EDIT OR ADD ANY CODE HERE!
+        $$$setupUI$$$();
+    }
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+    private void $$$setupUI$$$() {
+        panelLogin = new JPanel();
+        panelLogin.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
+        panelLogin.setMaximumSize(new Dimension(280, 400));
+        panelLogin.setMinimumSize(new Dimension(280, 400));
+        panelLogin.setOpaque(true);
+        panelLogin.setPreferredSize(new Dimension(280, 400));
+        panelDatos = new JPanel();
+        panelDatos.setLayout(new GridLayoutManager(4, 1, new Insets(2, 2, 2, 2), 5, 5));
+        panelDatos.setBackground(new Color(-12828863));
+        panelDatos.setOpaque(false);
+        panelLogin.add(panelDatos, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        btnIngresar = new JButton();
+        btnIngresar.setText("Ingresar");
+        panelDatos.add(btnIngresar, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 32), null, 0, false));
+        recordarUsuarioCheckBox = new JCheckBox();
+        recordarUsuarioCheckBox.setFocusCycleRoot(false);
+        recordarUsuarioCheckBox.setFocusPainted(false);
+        recordarUsuarioCheckBox.setFocusTraversalPolicyProvider(false);
+        Font recordarUsuarioCheckBoxFont = this.$$$getFont$$$(null, -1, -1, recordarUsuarioCheckBox.getFont());
+        if (recordarUsuarioCheckBoxFont != null) recordarUsuarioCheckBox.setFont(recordarUsuarioCheckBoxFont);
+        recordarUsuarioCheckBox.setForeground(new Color(-16777216));
+        recordarUsuarioCheckBox.setHideActionText(false);
+        recordarUsuarioCheckBox.setHorizontalAlignment(2);
+        recordarUsuarioCheckBox.setHorizontalTextPosition(4);
+        recordarUsuarioCheckBox.setIcon(new ImageIcon(getClass().getResource("/com/devel/Icons/x32/switch.png")));
+        recordarUsuarioCheckBox.setIconTextGap(5);
+        recordarUsuarioCheckBox.setInheritsPopupMenu(false);
+        recordarUsuarioCheckBox.setMargin(new Insets(2, 2, 2, 2));
+        recordarUsuarioCheckBox.setOpaque(false);
+        recordarUsuarioCheckBox.setSelectedIcon(new ImageIcon(getClass().getResource("/com/devel/Icons/x32/switchoff.png")));
+        recordarUsuarioCheckBox.setText("Recordar usuario");
+        recordarUsuarioCheckBox.setVerticalAlignment(0);
+        panelDatos.add(recordarUsuarioCheckBox, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        psfContraseña = new JPasswordField();
+        Font psfContraseñaFont = this.$$$getFont$$$(null, -1, 17, psfContraseña.getFont());
+        if (psfContraseñaFont != null) psfContraseña.setFont(psfContraseñaFont);
+        psfContraseña.setMargin(new Insets(2, 5, 2, 5));
+        psfContraseña.setOpaque(false);
+        psfContraseña.setText("");
+        panelDatos.add(psfContraseña, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(180, -1), null, 0, false));
+        txtUsuario = new JTextField();
+        Font txtUsuarioFont = this.$$$getFont$$$(null, -1, 17, txtUsuario.getFont());
+        if (txtUsuarioFont != null) txtUsuario.setFont(txtUsuarioFont);
+        txtUsuario.setMargin(new Insets(2, 6, 2, 6));
+        panelDatos.add(txtUsuario, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        panelLogin.add(spacer1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        logoLogin = new JLabel();
+        Font logoLoginFont = this.$$$getFont$$$("Roboto Light", Font.PLAIN, 16, logoLogin.getFont());
+        if (logoLoginFont != null) logoLogin.setFont(logoLoginFont);
+        logoLogin.setHorizontalAlignment(0);
+        logoLogin.setIcon(new ImageIcon(getClass().getResource("/com/devel/Images/lojoJmoreno (1).png")));
+        logoLogin.setText("");
+        logoLogin.setVerticalAlignment(0);
+        logoLogin.setVerticalTextPosition(0);
+        panelLogin.add(logoLogin, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, new Dimension(255, 220), new Dimension(255, 220), new Dimension(255, 220), 0, false));
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    private Font $$$getFont$$$(String fontName, int style, int size, Font currentFont) {
+        if (currentFont == null) return null;
+        String resultName;
+        if (fontName == null) {
+            resultName = currentFont.getName();
+        } else {
+            Font testFont = new Font(fontName, Font.PLAIN, 10);
+            if (testFont.canDisplay('a') && testFont.canDisplay('1')) {
+                resultName = fontName;
+            } else {
+                resultName = currentFont.getName();
+            }
+        }
+        Font font = new Font(resultName, style >= 0 ? style : currentFont.getStyle(), size >= 0 ? size : currentFont.getSize());
+        boolean isMac = System.getProperty("os.name", "").toLowerCase(Locale.ENGLISH).startsWith("mac");
+        Font fontWithFallback = isMac ? new Font(font.getFamily(), font.getStyle(), font.getSize()) : new StyleContext().getFont(font.getFamily(), font.getStyle(), font.getSize());
+        return fontWithFallback instanceof FontUIResource ? fontWithFallback : new FontUIResource(fontWithFallback);
+    }
+
+    /**
+     * @noinspection ALL
+     */
+    public JComponent $$$getRootComponent$$$() {
+        return panelLogin;
+    }
 }

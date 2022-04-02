@@ -3,7 +3,7 @@ package com.devel.utilities;
 import com.devel.Principal;
 import com.devel.models.Relacion;
 import com.devel.models.Tarifa;
-import com.devel.utilities.TablecellRendered.TablesCellRendered;
+import com.devel.utilities.JButoonEditors.JButtonAction;
 import com.devel.views.VPrincipal;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatIntelliJLaf;
@@ -31,6 +31,7 @@ public class Utilidades {
     public static DateFormat formatoHora=new SimpleDateFormat("HH:mm");
     public static DateFormat año=new SimpleDateFormat("yyyy");
     public static  NumberFormat sol = NumberFormat.getCurrencyInstance();
+
     public static void tema(String tema){
         try {
             if(tema.equals("oscuro")){
@@ -174,30 +175,6 @@ public class Utilidades {
             vector.set((vector.size()-i-1), ventaAUX);
         }
         return vector;
-    }
-    public static void cellsRendered(JTable table){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered();
-        for (int i=0;i<table.getColumnCount();i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
-        }
-    }
-    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros);
-        for (int i=0;i<table.getColumnCount();i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
-        }
-    }
-    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table, List<Relacion> vector, boolean a){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros,vector,a);
-        for (int i=0;i<table.getColumnCount();i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
-        }
-    }
-    public static void cellsRendered(Map<Integer, String> listaFiltros,JTable table, Vector<Tarifa> vector){
-        TablesCellRendered tablesCellRendered=new TablesCellRendered(listaFiltros,vector);
-        for (int i=0;i<table.getColumnCount();i++){
-            table.getColumnModel().getColumn(i).setCellRenderer(tablesCellRendered);
-        }
     }
 
     public static Integer calcularaños(Date fecha){

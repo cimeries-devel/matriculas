@@ -2,6 +2,8 @@ package com.devel.custom;
 
 import com.devel.Principal;
 import com.devel.utilities.Utilidades;
+import com.devel.views.menus.MenuInicio;
+import com.devel.views.tabs.VWelcome;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -29,6 +31,7 @@ public class DnDTabbedPane extends JTabbedPane {
     private Double maxY=0.0;
     private Double minX=0.0;
     private Double minY=0.0;
+    private MenuInicio menuInicio;
 
     @Override
     public void addTab(String title, Icon icon,Component component) {
@@ -49,7 +52,6 @@ public class DnDTabbedPane extends JTabbedPane {
                 }
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
-//                    tabPanel.getOption().requestFocus();
                     Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }
@@ -59,17 +61,18 @@ public class DnDTabbedPane extends JTabbedPane {
         JMenuItem cerrarPestaña = new JMenuItem("Cerrar Pestaña");
         JMenuItem cerrarOtras = new JMenuItem("Cerrar Otras Pestañas");
         JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");
-        cerrarPestaña.addMouseListener(new MouseAdapter() {
+
+        cerrarPestaña.addActionListener(new ActionListener() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if(getSelectedIndex()!=-1){
                     removeTabAt(getSelectedIndex());
                 }
             }
         });
-        cerrarOtras.addMouseListener(new MouseAdapter() {
+        cerrarOtras.addActionListener(new ActionListener() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 if(getSelectedIndex()!=-1){
                     TabPanel tab= (TabPanel) getComponentAt(getSelectedIndex());
                     String titulo= getTitleAt(getSelectedIndex());
@@ -79,11 +82,11 @@ public class DnDTabbedPane extends JTabbedPane {
                 }
             }
         });
-
-        cerrarTodas.addMouseListener(new MouseAdapter() {
+        cerrarTodas.addActionListener(new ActionListener() {
             @Override
-            public void mousePressed(MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 removeAll();
+                cargarBienvenida();
             }
         });
         pop_up.add(cerrarPestaña);
@@ -199,7 +202,14 @@ public class DnDTabbedPane extends JTabbedPane {
             }
         };
     }
-
+    public void cargarBienvenida(){
+        if(menuInicio!=null){
+            menuInicio.cargarBienvenida();
+        }
+    }
+    public void setInicio(MenuInicio menuInicio){
+        this.menuInicio=menuInicio;
+    }
     public TabAcceptor getAcceptor() {
         return m_acceptor;
     }
@@ -624,12 +634,8 @@ class Cross extends JPanel {
     private JLabel L;
     private JLabel B;
     private int size = 22;
-    private JTabbedPane jTabbedPane;
-    private String title;
 
     public Cross(final JTabbedPane jTabbedPane, String title,Icon icon) {
-        this.jTabbedPane = jTabbedPane;
-        this.title = title;
         setOpaque(false);
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -654,7 +660,12 @@ class Cross extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                ((TabPanel) jTabbedPane.getComponentAt(jTabbedPane.indexOfTab(title))).getOption().setBackground(new JButton().getBackground());
                 jTabbedPane.removeTabAt(jTabbedPane.indexOfTab(title));
+                if(jTabbedPane.getTabCount()==0){
+                    DnDTabbedPane tabbedPane= (DnDTabbedPane) jTabbedPane;
+                    tabbedPane.cargarBienvenida();
+                }
             }
 
             @Override

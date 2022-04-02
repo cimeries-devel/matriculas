@@ -1,22 +1,18 @@
 package com.devel.utilities.modelosTablas;
 
-import com.devel.models.Nivel;
 import com.devel.models.Seccion;
 import com.devel.utilities.JButoonEditors.JButtonAction;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Vector;
 
-public class SeccionAbstractModel extends AbstractTableModel {
+public class SeccionesAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Id","Sección",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
     private List<Seccion> vector;
 
-    public SeccionAbstractModel(List<Seccion> vector){
+    public SeccionesAbstractModel(List<Seccion> vector){
         this.vector=vector;
     }
     @Override

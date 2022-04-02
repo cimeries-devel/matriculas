@@ -13,6 +13,7 @@ public class CelularesAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Descripción","Número",""};
     public Class[] m_colTypes = {String.class,String.class, JButton.class};
     private List<Celular> vector;
+
     public CelularesAbstractModel(List<Celular> vector){
         this.vector=vector;
     }

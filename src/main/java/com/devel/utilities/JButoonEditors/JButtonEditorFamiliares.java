@@ -50,11 +50,15 @@ public class JButtonEditorFamiliares extends AbstractCellEditor implements Table
                 for (Relacion relacion1:relaciones){
                     if(relacion1.isApoderado()){
                         relacion1.setApoderado(false);
-                        relacion1.guardar();
+                        if(relacion1.getId()!=null){
+                            relacion1.guardar();
+                        }
                     }
                 }
                 relacion.setApoderado(true);
-                relacion.guardar();
+                if(relacion.getId()!=null){
+                    relacion.guardar();
+                }
                 break;
         }
         Utilidades.actualizarTabla(table);

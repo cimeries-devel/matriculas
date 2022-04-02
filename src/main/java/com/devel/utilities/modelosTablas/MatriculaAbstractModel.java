@@ -7,16 +7,15 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.Vector;
 
-public class MatriculasAbstractModel extends AbstractTableModel {
+public class MatriculaAbstractModel extends AbstractTableModel {
     private String[] columnNames = {"Fecha Matrícula","Tipo","Monto","Código","Alumno","Apoderado","Relación apoderado","Nivel","Grado","Sección"};
     public Class[] m_colTypes = {String.class,String.class,String.class,String.class, String.class,String.class,String.class,String.class,String.class,String.class};
     private Vector<Registro> vector;
     private DateFormat formatoFecha=new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-    public MatriculasAbstractModel(Vector<Registro> vector){
+    public MatriculaAbstractModel(Vector<Registro> vector){
         this.vector=vector;
     }
     @Override
