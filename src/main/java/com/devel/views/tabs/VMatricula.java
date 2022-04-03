@@ -232,6 +232,7 @@ public class VMatricula extends JFrame {
         cargarGradosPorNivel();
         cargarTablasDelEstudiante();
         botones(false);
+        panelPrincipal.setTable(tablaMatriculas);
     }
 
     private void cargarTablasDelEstudiante() {

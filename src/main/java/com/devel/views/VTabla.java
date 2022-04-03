@@ -27,8 +27,10 @@ public class VTabla extends JDialog {
     private List<String> columnas;
     private List<Object[]> datos;
     private DefaultTableModel modelo;
+    private String tipo;
 
-    public VTabla(List<String> columnas, List<Object[]> datos) {
+    public VTabla(List<String> columnas, List<Object[]> datos, String tipo) {
+        this.tipo = tipo;
         this.columnas = columnas;
         this.datos = datos;
         iniciarComponentes();
@@ -58,6 +60,18 @@ public class VTabla extends JDialog {
             modelo.addRow(object);
         }
         Utilidades.headerNegrita(tablaDatos);
+        definirCellRendered();
+    }
+
+    private void definirCellRendered() {
+        switch (tipo) {
+            case "Familiares":
+                TodosLosFamiliaresCellRendered.setCellRenderer(null, tablaDatos);
+                break;
+            case "Alumnos":
+                AlumnosCellRendered.setCellRenderer(null, tablaDatos);
+                break;
+        }
     }
 
     private void cerrar() {

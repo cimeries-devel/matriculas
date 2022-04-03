@@ -10,6 +10,7 @@ import com.devel.utilities.Utilidades;
 import com.devel.utilities.modelosTablas.TodosLosFamiliaresAbstractModel;
 import com.devel.views.VPrincipal;
 import com.devel.views.dialogs.Exportar.ExportarAlumnos;
+import com.devel.views.dialogs.Exportar.ExportarFamiliares;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -91,6 +92,7 @@ public class VFamiliares extends JFrame {
         panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         cargarFamiliares(VPrincipal.familiares);
         cargarComboBox();
+        panelPrincipal.setTable(tablaFamiliares);
     }
 
     private void cargarFamiliares(Vector<Persona> familiares) {
@@ -106,8 +108,8 @@ public class VFamiliares extends JFrame {
     }
 
     private void exportarRelacionAlumnos() {
-        ExportarAlumnos exportarAlumnos = new ExportarAlumnos(tablaFamiliares);
-        exportarAlumnos.setVisible(true);
+        ExportarFamiliares exportarFamiliares = new ExportarFamiliares(tablaFamiliares);
+        exportarFamiliares.setVisible(true);
     }
 
     private void cargarComboBox() {
@@ -128,8 +130,7 @@ public class VFamiliares extends JFrame {
         listaFiltros.put(1, busqueda);
 
         if (checkSoloApoderados.isSelected()) {
-            String año = Utilidades.año.format(new Date());
-            filtros.add(RowFilter.regexFilter(año, 8));
+            filtros.add(RowFilter.regexFilter("Si", 5));
         }
         filtroand = RowFilter.andFilter(filtros);
         modeloOrdenado.setRowFilter(filtroand);
@@ -139,6 +140,7 @@ public class VFamiliares extends JFrame {
         checkSoloApoderados.setSelected(false);
         txtDni.setText(null);
         txtNombresYApellidos.setText(null);
+        cbbTipoFamiliares.setSelectedIndex(0);
     }
 
     {

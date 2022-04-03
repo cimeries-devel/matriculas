@@ -65,7 +65,7 @@ public class ExportarAlumnos extends JDialog {
         ckbxTodos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                todosLosCampos();
+                todosLosCampos(ckbxTodos.isSelected());
             }
         });
 
@@ -75,7 +75,7 @@ public class ExportarAlumnos extends JDialog {
                 List<String> columnas = getColumnasSeleccionadas();
                 if (!columnas.isEmpty()) {
                     List<Object[]> datos = getDatos(columnas);
-                    VTabla vTabla = new VTabla(columnas, datos);
+                    VTabla vTabla = new VTabla(columnas, datos, "Alumnos");
                     vTabla.setVisible(true);
                 } else {
                     Utilidades.sendNotification("Error", "Seleccione las columnas", TrayIcon.MessageType.ERROR);
@@ -144,8 +144,8 @@ public class ExportarAlumnos extends JDialog {
         return datos;
     }
 
-    private void todosLosCampos() {
-        boolean estado = ckbxTodos.isSelected();
+    private void todosLosCampos(boolean estado) {
+        ckbxTodos.setSelected(estado);
         ckbxCodigo.setSelected(estado);
         ckbxEstudiante.setSelected(estado);
         ckbxEdad.setSelected(estado);
@@ -165,7 +165,7 @@ public class ExportarAlumnos extends JDialog {
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
-        todosLosCampos();
+        todosLosCampos(true);
     }
 
     {
@@ -311,4 +311,5 @@ public class ExportarAlumnos extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return panelPrincipal;
     }
+
 }

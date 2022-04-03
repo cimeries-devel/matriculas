@@ -41,6 +41,7 @@ public class VMatriculas extends JFrame {
     private void iniciarComponentes() {
         setTitle("Matrículas");
         panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
+        panelPrincipal.setTable(tablaMatriculas);
     }
 
     public TabPanel getPanelPrincipal() {

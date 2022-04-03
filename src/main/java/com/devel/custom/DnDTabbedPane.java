@@ -53,6 +53,9 @@ public class DnDTabbedPane extends JTabbedPane {
                 if(getSelectedIndex()!=-1){
                     TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
                     Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
+                    if(tabPanel.getTable()!=null){
+                        Utilidades.actualizarTabla(tabPanel.getTable());
+                    }
                 }
             }
         });

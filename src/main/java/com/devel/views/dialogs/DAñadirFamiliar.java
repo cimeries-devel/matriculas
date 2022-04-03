@@ -150,15 +150,17 @@ public class DAñadirFamiliar extends JDialog {
     private void registrar() {
         Documento documento;
         Celular celular;
-        if (familiar.getId() == null) {
+        Documento doc = Documentos.getByDni(txtDni.getText().trim());
+        if (doc != null) {
+            familiar = doc.getPerson();
+            documento = familiar.getDocumentos().get(0);
+            celular = familiar.getCelulares().get(0);
+        } else {
             familiar = new Persona();
             documento = new Documento();
             celular = new Celular();
             familiar.getCelulares().add(celular);
             familiar.getDocumentos().add(documento);
-        } else {
-            documento = familiar.getDocumentos().get(0);
-            celular = familiar.getCelulares().get(0);
         }
         String nombres = txtNombres.getText().trim();
         String apellidos = txtApellidos.getText().trim();
@@ -221,6 +223,7 @@ public class DAñadirFamiliar extends JDialog {
                                     documento.guardar();
                                     relacion.guardar();
                                     persona.guardar();
+                                    VPrincipal.familiares.add(familiar);
                                 }
                                 persona.getFamiliaresparaEstudiante().add(relacion);
                                 familiar.getRelaciones().add(relacion);

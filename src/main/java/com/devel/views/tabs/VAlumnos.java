@@ -115,6 +115,7 @@ public class VAlumnos extends JFrame {
         panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         cargarAlumnos(VPrincipal.alumnos);
         cargarComboBox();
+        panelPrincipal.setTable(tablaAlumnos);
     }
 
     private void cargarAlumnos(Vector<Persona> alumnos) {
@@ -177,15 +178,15 @@ public class VAlumnos extends JFrame {
         }
         if (((Nivel) cbbNiveles.getSelectedItem()).getId() != null) {
             Nivel nivel = (Nivel) cbbNiveles.getSelectedItem();
-            filtros.add(RowFilter.regexFilter(nivel.getDescripcion(), 4));
+            filtros.add(RowFilter.regexFilter(nivel.getDescripcion(), 5));
         }
         if (((Grado) cbbGrados.getSelectedItem()).getId() != null) {
             Grado grado = (Grado) cbbGrados.getSelectedItem();
-            filtros.add(RowFilter.regexFilter(grado.getGrado(), 5));
+            filtros.add(RowFilter.regexFilter(grado.getGrado(), 6));
         }
         if (((Seccion) cbbSecciones.getSelectedItem()).getId() != null) {
             Seccion seccion = (Seccion) cbbSecciones.getSelectedItem();
-            filtros.add(RowFilter.regexFilter(seccion.getSeccion(), 6));
+            filtros.add(RowFilter.regexFilter(seccion.getSeccion(), 7));
         }
 
         filtroand = RowFilter.andFilter(filtros);

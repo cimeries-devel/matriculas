@@ -19,15 +19,12 @@ import java.util.Locale;
 
 public class ExportarFamiliares extends JDialog {
     private JCheckBox ckbxTodos;
-    private JCheckBox ckbxCodigo;
-    private JCheckBox ckbxEstudiante;
-    private JCheckBox ckbxEdad;
-    private JCheckBox ckbxSeguro;
+    private JCheckBox ckbxDocumento;
+    private JCheckBox ckbxNombresyApellidos;
+    private JCheckBox ckbxCelular;
+    private JCheckBox ckbxDireccion;
     private JCheckBox ckbxApoderado;
-    private JCheckBox ckbxNivel;
-    private JCheckBox ckbxGrado;
-    private JCheckBox ckbxSeccion;
-    private JCheckBox ckbxUltimaMatricula;
+    private JCheckBox ckbxAlumnos;
     private JButton btnExportar;
     private JButton btnHecho;
     private JButton btnVistaPrevia;
@@ -65,7 +62,7 @@ public class ExportarFamiliares extends JDialog {
         ckbxTodos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                todosLosCampos();
+                todosLosCampos(ckbxTodos.isSelected());
             }
         });
 
@@ -75,7 +72,7 @@ public class ExportarFamiliares extends JDialog {
                 List<String> columnas = getColumnasSeleccionadas();
                 if (!columnas.isEmpty()) {
                     List<Object[]> datos = getDatos(columnas);
-                    VTabla vTabla = new VTabla(columnas, datos);
+                    VTabla vTabla = new VTabla(columnas, datos, "Familiares");
                     vTabla.setVisible(true);
                 } else {
                     Utilidades.sendNotification("Error", "Seleccione las columnas", TrayIcon.MessageType.ERROR);
@@ -102,32 +99,23 @@ public class ExportarFamiliares extends JDialog {
     private List<String> getColumnasSeleccionadas() {
         List<String> columnas = new ArrayList<>();
 
-        if (ckbxCodigo.isSelected()) {
-            columnas.add("Código");
+        if (ckbxDocumento.isSelected()) {
+            columnas.add("Documento");
         }
-        if (ckbxEstudiante.isSelected()) {
-            columnas.add("Estudiante");
+        if (ckbxNombresyApellidos.isSelected()) {
+            columnas.add("Nombres y apellidos");
         }
-        if (ckbxEdad.isSelected()) {
-            columnas.add("Edad");
+        if (ckbxCelular.isSelected()) {
+            columnas.add("Celular");
         }
-        if (ckbxSeguro.isSelected()) {
-            columnas.add("Seguro");
+        if (ckbxDireccion.isSelected()) {
+            columnas.add("Dirección");
         }
         if (ckbxApoderado.isSelected()) {
             columnas.add("Apoderado");
         }
-        if (ckbxNivel.isSelected()) {
-            columnas.add("Nivel");
-        }
-        if (ckbxGrado.isSelected()) {
-            columnas.add("Grado");
-        }
-        if (ckbxSeccion.isSelected()) {
-            columnas.add("Sección");
-        }
-        if (ckbxUltimaMatricula.isSelected()) {
-            columnas.add("Última matrícula");
+        if (ckbxAlumnos.isSelected()) {
+            columnas.add("Alumnos");
         }
         return columnas;
     }
@@ -144,17 +132,14 @@ public class ExportarFamiliares extends JDialog {
         return datos;
     }
 
-    private void todosLosCampos() {
-        boolean estado = ckbxTodos.isSelected();
-        ckbxCodigo.setSelected(estado);
-        ckbxEstudiante.setSelected(estado);
-        ckbxEdad.setSelected(estado);
-        ckbxSeguro.setSelected(estado);
+    private void todosLosCampos(boolean estado) {
+        ckbxTodos.setSelected(estado);
+        ckbxDocumento.setSelected(estado);
+        ckbxNombresyApellidos.setSelected(estado);
+        ckbxCelular.setSelected(estado);
+        ckbxDireccion.setSelected(estado);
         ckbxApoderado.setSelected(estado);
-        ckbxNivel.setSelected(estado);
-        ckbxGrado.setSelected(estado);
-        ckbxSeccion.setSelected(estado);
-        ckbxUltimaMatricula.setSelected(estado);
+        ckbxAlumnos.setSelected(estado);
     }
 
     private void iniciarComponentes() {
@@ -165,7 +150,7 @@ public class ExportarFamiliares extends JDialog {
         pack();
         setResizable(false);
         setLocationRelativeTo(null);
-        todosLosCampos();
+        todosLosCampos(true);
     }
 
     {
@@ -206,72 +191,52 @@ public class ExportarFamiliares extends JDialog {
         panel3.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 20, -1));
         panel1.add(panel3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JPanel panel4 = new JPanel();
-        panel4.setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), 5, -1));
+        panel4.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), 5, -1));
         panel3.add(panel4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
-        label2.setText("Código");
+        label2.setText("Documento");
         panel4.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxCodigo = new JCheckBox();
-        ckbxCodigo.setText("");
-        panel4.add(ckbxCodigo, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ckbxDocumento = new JCheckBox();
+        ckbxDocumento.setText("");
+        panel4.add(ckbxDocumento, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label3 = new JLabel();
-        label3.setText("Estudiante");
+        label3.setText("Nombres y apellidos");
         panel4.add(label3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxEstudiante = new JCheckBox();
-        ckbxEstudiante.setText("");
-        panel4.add(ckbxEstudiante, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxEdad = new JCheckBox();
-        ckbxEdad.setText("");
-        panel4.add(ckbxEdad, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ckbxNombresyApellidos = new JCheckBox();
+        ckbxNombresyApellidos.setText("");
+        panel4.add(ckbxNombresyApellidos, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label4 = new JLabel();
-        label4.setText("Seguro");
-        panel4.add(label4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label4.setText("Dirección");
+        panel4.add(label4, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ckbxDireccion = new JCheckBox();
+        ckbxDireccion.setText("");
+        panel4.add(ckbxDireccion, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel5 = new JPanel();
+        panel5.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), 5, -1));
+        panel3.add(panel5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label5 = new JLabel();
-        label5.setText("Edad");
-        panel4.add(label5, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxSeguro = new JCheckBox();
-        ckbxSeguro.setText("");
-        panel4.add(ckbxSeguro, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label5.setText("Apoderado");
+        panel5.add(label5, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label6 = new JLabel();
-        label6.setText("Apoderado");
-        panel4.add(label6, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label6.setText("Alumnos");
+        panel5.add(label6, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label7 = new JLabel();
+        label7.setText("Celular");
+        panel5.add(label7, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ckbxCelular = new JCheckBox();
+        ckbxCelular.setText("");
+        panel5.add(ckbxCelular, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        ckbxAlumnos = new JCheckBox();
+        ckbxAlumnos.setText("");
+        panel5.add(ckbxAlumnos, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         ckbxApoderado = new JCheckBox();
         ckbxApoderado.setText("");
-        panel4.add(ckbxApoderado, new GridConstraints(4, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JPanel panel5 = new JPanel();
-        panel5.setLayout(new GridLayoutManager(5, 2, new Insets(0, 0, 0, 0), 5, -1));
-        panel3.add(panel5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        ckbxNivel = new JCheckBox();
-        ckbxNivel.setText("");
-        panel5.add(ckbxNivel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label7 = new JLabel();
-        label7.setText("Nivel");
-        panel5.add(label7, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label8 = new JLabel();
-        label8.setText("Grado");
-        panel5.add(label8, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxGrado = new JCheckBox();
-        ckbxGrado.setText("");
-        panel5.add(ckbxGrado, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label9 = new JLabel();
-        label9.setText("Sección");
-        panel5.add(label9, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxSeccion = new JCheckBox();
-        ckbxSeccion.setText("");
-        panel5.add(ckbxSeccion, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label10 = new JLabel();
-        label10.setText("Ultima matrícula");
-        panel5.add(label10, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        ckbxUltimaMatricula = new JCheckBox();
-        ckbxUltimaMatricula.setText("");
-        panel5.add(ckbxUltimaMatricula, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer3 = new Spacer();
-        panel5.add(spacer3, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel5.add(ckbxApoderado, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel6 = new JPanel();
         panel6.setLayout(new GridLayoutManager(1, 4, new Insets(0, 0, 0, 0), -1, -1));
         panelPrincipal.add(panel6, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, 1, null, null, null, 0, false));
-        final Spacer spacer4 = new Spacer();
-        panel6.add(spacer4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final Spacer spacer3 = new Spacer();
+        panel6.add(spacer3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         btnExportar = new JButton();
         btnExportar.setText("Exportar");
         panel6.add(btnExportar, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -311,4 +276,14 @@ public class ExportarFamiliares extends JDialog {
     public JComponent $$$getRootComponent$$$() {
         return panelPrincipal;
     }
+
+
+    /**
+     * Method generated by IntelliJ IDEA GUI Designer
+     * >>> IMPORTANT!! <<<
+     * DO NOT edit this method OR call it in your code!
+     *
+     * @noinspection ALL
+     */
+
 }

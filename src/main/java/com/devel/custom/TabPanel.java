@@ -6,6 +6,7 @@ public class TabPanel extends JPanel {
     private String title;
     private Icon icon;
     private JButton option;
+    private JTable table;
 
     public String getTitle() {
         return title;
@@ -29,5 +30,13 @@ public class TabPanel extends JPanel {
 
     public void setOption(JButton option) {
         this.option = option;
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public void setTable(JTable table) {
+        this.table = table;
     }
 }
