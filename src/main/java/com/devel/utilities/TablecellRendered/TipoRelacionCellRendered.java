@@ -21,17 +21,12 @@ public class TipoRelacionCellRendered extends DefaultTableCellRenderer {
         if(table.getColumnClass(column).equals(JButton.class)){
             table.getColumn(table.getColumnName(column)).setMaxWidth(30);
             table.getColumn(table.getColumnName(column)).setMinWidth(30);
-            return seleccionada(isSelected,"cancelar",table);
+            return seleccionada(isSelected,"editar",table);
         }else{
             switch (table.getColumnName(column)){
                 case "ID":
                     table.getColumn(table.getColumnName(column)).setMaxWidth(50);
                     table.getColumn(table.getColumnName(column)).setMinWidth(50);
-                    setHorizontalAlignment(SwingConstants.CENTER);
-                    break;
-                case "Tipo":
-                    table.getColumn(table.getColumnName(column)).setMaxWidth(90);
-                    table.getColumn(table.getColumnName(column)).setMinWidth(90);
                     setHorizontalAlignment(SwingConstants.CENTER);
                     break;
                 default:

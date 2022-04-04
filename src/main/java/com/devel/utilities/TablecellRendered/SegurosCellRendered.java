@@ -21,7 +21,7 @@ public class SegurosCellRendered extends DefaultTableCellRenderer {
         if(table.getColumnClass(column).equals(JButton.class)){
             table.getColumn(table.getColumnName(column)).setMaxWidth(30);
             table.getColumn(table.getColumnName(column)).setMinWidth(30);
-            return seleccionada(isSelected,"cancelar",table);
+            return seleccionada(isSelected,"editar",table);
         }else{
             switch (table.getColumnName(column)){
                 case "Código":
