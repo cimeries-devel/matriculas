@@ -46,15 +46,24 @@ public class VLogin extends JFrame {
                 }
             }
         });
+        btnIngresar.addActionListener(e -> {
+            cargarVPrincipal();
+        });
         psfContraseña.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    iniciarSesion();
+                }
+            }
+
             @Override
             public void keyTyped(KeyEvent e) {
                 if (psfContraseña.getText().length() > 14) {
                     e.consume();
                 }
             }
-        });
-        psfContraseña.addKeyListener(new KeyAdapter() {
+
             @Override
             public void keyReleased(KeyEvent e) {
                 if (psfContraseña.getText().length() > 0) {
@@ -64,15 +73,17 @@ public class VLogin extends JFrame {
                 }
             }
         });
-        btnIngresar.addActionListener(e -> {
-            cargarVPrincipal();
-        });
+
     }
 
     public void cargarVPrincipal() {
         VPrincipal vPrincipal = new VPrincipal(propiedades);
         vPrincipal.setVisible(true);
         dispose();
+    }
+
+    private void iniciarSesion() {
+        cargarVPrincipal();
     }
 
     private void iniciarComponentes() {
@@ -83,10 +94,10 @@ public class VLogin extends JFrame {
         placeholder = new PlaceHolder("Usuario", txtUsuario);
         placeholder = new PlaceHolder("Contraseña", psfContraseña);
         pack();
+        setResizable(false);
         setLocationRelativeTo(null);
         cargarMostrarContraseña();
         cargarCursores();
-        cargarConfiguracion();
     }
 
     private void cargarMostrarContraseña() {
@@ -112,20 +123,6 @@ public class VLogin extends JFrame {
         label.setFocusable(false);
     }
 
-    private void cargarConfiguracion() {
-        switch (propiedades.getTema()) {
-            case "claro":
-                txtUsuario.setForeground(new Color(0x000000));
-                psfContraseña.setForeground(new Color(0x000000));
-                recordarUsuarioCheckBox.setForeground(new Color(0x000000));
-                break;
-            case "oscuro":
-                txtUsuario.setForeground(new Color(0xBABABA));
-                psfContraseña.setForeground(new Color(0xBABABA));
-                recordarUsuarioCheckBox.setForeground(new Color(0xBABABA));
-                break;
-        }
-    }
 
 
     {
@@ -145,10 +142,9 @@ public class VLogin extends JFrame {
     private void $$$setupUI$$$() {
         panelLogin = new JPanel();
         panelLogin.setLayout(new GridLayoutManager(3, 1, new Insets(0, 0, 0, 0), -1, -1));
-        panelLogin.setMaximumSize(new Dimension(280, 400));
-        panelLogin.setMinimumSize(new Dimension(280, 400));
-        panelLogin.setOpaque(true);
-        panelLogin.setPreferredSize(new Dimension(280, 400));
+        panelLogin.setMaximumSize(new Dimension(280, 410));
+        panelLogin.setMinimumSize(new Dimension(280, 410));
+        panelLogin.setPreferredSize(new Dimension(280, 410));
         panelDatos = new JPanel();
         panelDatos.setLayout(new GridLayoutManager(4, 1, new Insets(2, 2, 2, 2), 5, 5));
         panelDatos.setBackground(new Color(-12828863));
@@ -161,10 +157,6 @@ public class VLogin extends JFrame {
         recordarUsuarioCheckBox.setFocusCycleRoot(false);
         recordarUsuarioCheckBox.setFocusPainted(false);
         recordarUsuarioCheckBox.setFocusTraversalPolicyProvider(false);
-        Font recordarUsuarioCheckBoxFont = this.$$$getFont$$$(null, -1, -1, recordarUsuarioCheckBox.getFont());
-        if (recordarUsuarioCheckBoxFont != null) recordarUsuarioCheckBox.setFont(recordarUsuarioCheckBoxFont);
-        recordarUsuarioCheckBox.setForeground(new Color(-16777216));
-        recordarUsuarioCheckBox.setHideActionText(false);
         recordarUsuarioCheckBox.setHorizontalAlignment(2);
         recordarUsuarioCheckBox.setHorizontalTextPosition(4);
         recordarUsuarioCheckBox.setIcon(new ImageIcon(getClass().getResource("/com/devel/Icons/x32/switch.png")));
@@ -191,8 +183,6 @@ public class VLogin extends JFrame {
         final Spacer spacer1 = new Spacer();
         panelLogin.add(spacer1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         logoLogin = new JLabel();
-        Font logoLoginFont = this.$$$getFont$$$("Roboto Light", Font.PLAIN, 16, logoLogin.getFont());
-        if (logoLoginFont != null) logoLogin.setFont(logoLoginFont);
         logoLogin.setHorizontalAlignment(0);
         logoLogin.setIcon(new ImageIcon(getClass().getResource("/com/devel/Images/lojoJmoreno (1).png")));
         logoLogin.setText("");
@@ -229,4 +219,5 @@ public class VLogin extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return panelLogin;
     }
+
 }

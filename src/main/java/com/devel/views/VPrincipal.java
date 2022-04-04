@@ -152,7 +152,7 @@ public class VPrincipal extends JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 super.windowClosing(e);
-                cargarLogin();
+                salir();
             }
         });
     }
@@ -243,6 +243,13 @@ public class VPrincipal extends JFrame {
             Utilidades.tema(propiedades.getTema());
             VLogin vLogin = new VLogin(propiedades);
             vLogin.setVisible(true);
+        }
+    }
+
+    private void salir() {
+        int sioNo = JOptionPane.showOptionDialog(null, "¿Está seguro?", "Salir", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, "Si");
+        if (sioNo == 0) {
+            dispose();
         }
     }
 
@@ -428,4 +435,5 @@ public class VPrincipal extends JFrame {
     public JComponent $$$getRootComponent$$$() {
         return contentPane;
     }
+
 }
