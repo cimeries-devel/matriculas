@@ -15,6 +15,7 @@ import java.awt.dnd.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 public class DnDTabbedPane extends JTabbedPane {
     private DnDTabbedPane jtabedpane=this;
@@ -32,13 +33,13 @@ public class DnDTabbedPane extends JTabbedPane {
     private Double minX=0.0;
     private Double minY=0.0;
     private MenuInicio menuInicio;
+    public ArrayList<JButton> botones=new ArrayList<>();
 
     @Override
     public void addTab(String title, Icon icon,Component component) {
         super.addTab(title, icon,component);
         setTabComponentAt(indexOfTab(title), new Cross(this, title,icon));
     }
-
 
     public DnDTabbedPane() {
         super();

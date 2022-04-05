@@ -69,18 +69,16 @@ public class Exportar {
         return false;
     }
     private static void instaciarEstilo(){
-        if(styleCabecera==null){
-            styleCabecera=Excel.createCellStyle();
-            styleCabecera.setAlignment(HorizontalAlignment.CENTER);
-            HSSFFont font= Excel.createFont();
-            font.setFontName(HSSFFont.FONT_ARIAL);
-            font.setBold(true);
-            styleCabecera.setFont(font);
-            styleCabecera.setBorderBottom(BorderStyle.MEDIUM);
-            styleCabecera.setBorderLeft(BorderStyle.MEDIUM);
-            styleCabecera.setBorderRight(BorderStyle.MEDIUM);
-            styleCabecera.setBorderTop(BorderStyle.MEDIUM);
-        }
+        styleCabecera=Excel.createCellStyle();
+        styleCabecera.setAlignment(HorizontalAlignment.CENTER);
+        HSSFFont font= Excel.createFont();
+        font.setFontName(HSSFFont.FONT_ARIAL);
+        font.setBold(true);
+        styleCabecera.setFont(font);
+        styleCabecera.setBorderBottom(BorderStyle.MEDIUM);
+        styleCabecera.setBorderLeft(BorderStyle.MEDIUM);
+        styleCabecera.setBorderRight(BorderStyle.MEDIUM);
+        styleCabecera.setBorderTop(BorderStyle.MEDIUM);
     }
     private static void cerrarExccel() {
         try {

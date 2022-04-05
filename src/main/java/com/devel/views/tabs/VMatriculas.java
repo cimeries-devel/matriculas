@@ -139,7 +139,7 @@ public class VMatriculas extends JFrame {
         checkSoloApoderados = new JCheckBox();
         Font checkSoloApoderadosFont = this.$$$getFont$$$(null, -1, 14, checkSoloApoderados.getFont());
         if (checkSoloApoderadosFont != null) checkSoloApoderados.setFont(checkSoloApoderadosFont);
-        checkSoloApoderados.setHorizontalAlignment(0);
+        checkSoloApoderados.setHorizontalAlignment(4);
         checkSoloApoderados.setHorizontalTextPosition(2);
         checkSoloApoderados.setText("Solo actuales");
         panel8.add(checkSoloApoderados, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -158,7 +158,7 @@ public class VMatriculas extends JFrame {
         final JCheckBox checkBox1 = new JCheckBox();
         Font checkBox1Font = this.$$$getFont$$$(null, -1, 14, checkBox1.getFont());
         if (checkBox1Font != null) checkBox1.setFont(checkBox1Font);
-        checkBox1.setHorizontalAlignment(0);
+        checkBox1.setHorizontalAlignment(2);
         checkBox1.setHorizontalTextPosition(2);
         checkBox1.setText("Por estudiante");
         panel8.add(checkBox1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

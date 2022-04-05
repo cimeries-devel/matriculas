@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 public class Hibernate {
     protected static Session session;
     protected static CriteriaBuilder builder;
+
     private static void buildSessionFactory() {
         StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();
         SessionFactory sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
