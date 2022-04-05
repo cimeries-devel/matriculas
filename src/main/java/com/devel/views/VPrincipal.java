@@ -131,6 +131,7 @@ public class VPrincipal extends JFrame {
     private void iniciarComponentes() {
         setContentPane(contentPane);
         setTitle("Gestión matrículas");
+        setIconImage((new ImageIcon(Principal.class.getResource("Images/documento.png"))).getImage());
         tema = propiedades.getTema();
         menuInicio = new MenuInicio(tabContenido);
         menuReportes = new MenuReportes(tabContenido);
