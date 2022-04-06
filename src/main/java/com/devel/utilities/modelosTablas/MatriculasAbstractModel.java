@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 public class MatriculasAbstractModel extends AbstractTableModel {
-    private String[] columnNames = {"Año", "Tipo", "Monto", "Código de Alumno", "Apoderado", "Relación apoderado", "Nivel", "Grado", "Sección"};
-    public Class[] m_colTypes = {String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+    private String[] columnNames = {"Año", "Tipo", "Monto", "Código de alumno", "Dni","Género", "Apoderado","Relación apoderado", "Nivel", "Grado", "Sección"};
+    public Class[] m_colTypes = {String.class, String.class, String.class, String.class,String.class, String.class,String.class, String.class, String.class, String.class, String.class};
     private Vector<Registro> vector;
     private DateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
@@ -56,7 +56,7 @@ public class MatriculasAbstractModel extends AbstractTableModel {
         Registro registro = vector.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return formatoFecha.format(registro.getActualizacion());
+                return Utilidades.año.format(registro.getCreacion());
             case 1:
                 return registro.getTarifa().getDescripcion();
             case 2:
@@ -64,12 +64,16 @@ public class MatriculasAbstractModel extends AbstractTableModel {
             case 3:
                 return registro.getEstudiante().getCodigo();
             case 4:
-                return registro.getEstudiante().getApoderado().getNombres() + " " + registro.getEstudiante().getApoderado().getApellidos();
+                return registro.getEstudiante().getDocumentos().get(0).getNumero();
             case 5:
-                return registro.getEstudiante().getRelacionAFamiliar(registro.getEstudiante().getApoderado()).getTipoRelacion().getTipo();
+                return registro.getEstudiante().isGenero()?"Masculino":"Femenino";
             case 6:
-                return registro.getSalon().getNivel().getDescripcion();
+                return registro.getEstudiante().getApoderado().getNombres() + " " + registro.getEstudiante().getApoderado().getApellidos();
             case 7:
+                return registro.getEstudiante().getRelacionAFamiliar(registro.getEstudiante().getApoderado()).getTipoRelacion().getTipo();
+            case 8:
+                return registro.getSalon().getNivel().getDescripcion();
+            case 9:
                 return registro.getSalon().getGrado().getGrado();
             default:
                 return registro.getSalon().getSeccion().getSeccion();

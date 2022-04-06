@@ -72,16 +72,20 @@ public class ExportarAlumnos extends JDialog {
         btnVistaPrevia.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                List<String> columnas = getColumnasSeleccionadas();
-                if (!columnas.isEmpty()) {
-                    List<Object[]> datos = getDatos(columnas);
-                    VTabla vTabla = new VTabla(columnas, datos, "Alumnos");
-                    vTabla.setVisible(true);
-                } else {
-                    Utilidades.sendNotification("Error", "Seleccione las columnas", TrayIcon.MessageType.ERROR);
-                }
+                cargarVistaPrevia();
             }
         });
+    }
+
+    private void cargarVistaPrevia() {
+        List<String> columnas = getColumnasSeleccionadas();
+        if (!columnas.isEmpty()) {
+            List<Object[]> datos = getDatos(columnas);
+            VTabla vTabla = new VTabla(columnas, datos, "Alumnos");
+            vTabla.setVisible(true);
+        } else {
+            Utilidades.sendNotification("Error", "Seleccione las columnas", TrayIcon.MessageType.ERROR);
+        }
     }
 
     private void exportar() {

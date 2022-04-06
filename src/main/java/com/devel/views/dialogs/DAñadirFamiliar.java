@@ -398,12 +398,12 @@ public class DAñadirFamiliar extends JDialog {
         txtDni.setText(null);
         txtApellidos.setText(null);
         txtNombres.setText(null);
-        lblEdad.setText(null);
+        lblEdad.setText("0");
         txtDireccion.setText(null);
         txtDescripcionCelular.setText(null);
         ckVivenJuntos.setSelected(false);
         txtEmail.setText(null);
-        datePicker1.getComponentDateTextField().setText(null);
+        datePicker1.setDate(null);
     }
 
     /**

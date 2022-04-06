@@ -33,7 +33,6 @@ public class DnDTabbedPane extends JTabbedPane {
     private Double minX=0.0;
     private Double minY=0.0;
     private MenuInicio menuInicio;
-    public ArrayList<JButton> botones=new ArrayList<>();
 
     @Override
     public void addTab(String title, Icon icon,Component component) {
@@ -70,7 +69,13 @@ public class DnDTabbedPane extends JTabbedPane {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if(getSelectedIndex()!=-1){
+                    ((TabPanel) getComponentAt(getSelectedIndex())).getOption().setBackground(new JButton().getBackground());
                     removeTabAt(getSelectedIndex());
+                    if(getTabCount()==0){
+                        cargarBienvenida();
+                    }
+                    TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
+                    Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }
         });
@@ -80,15 +85,29 @@ public class DnDTabbedPane extends JTabbedPane {
                 if(getSelectedIndex()!=-1){
                     TabPanel tab= (TabPanel) getComponentAt(getSelectedIndex());
                     String titulo= getTitleAt(getSelectedIndex());
+                    for (Component component : getComponents()) {
+                        if(indexOfComponent(component)!=-1){
+                            ((TabPanel) component).getOption().setBackground(new JButton().getBackground());
+                        }
+                    }
                     removeAll();
                     add(tab,titulo);
                     setTabComponentAt(indexOfTab(titulo), new Cross(jtabedpane,titulo,tab.getIcon()));
+                    TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
+                    Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
                 }
             }
         });
         cerrarTodas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (Component component : getComponents()) {
+                    if(indexOfComponent(component)!=-1){
+                        ((TabPanel) component).getOption().setBackground(new JButton().getBackground());
+                        TabPanel tabPanel=(TabPanel) getComponentAt(getSelectedIndex());
+                        Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
+                    }
+                }
                 removeAll();
                 cargarBienvenida();
             }

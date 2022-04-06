@@ -2,12 +2,10 @@ package com.devel.views;
 
 import com.devel.utilities.TablecellRendered.AlumnosCellRendered;
 import com.devel.utilities.TablecellRendered.MatriculaCellRendered;
+import com.devel.utilities.TablecellRendered.MatriculasCellRendered;
 import com.devel.utilities.TablecellRendered.TodosLosFamiliaresCellRendered;
 import com.devel.utilities.Utilidades;
-import com.devel.utilities.modelosTablas.AlumnosAbstractModel;
-import com.devel.utilities.modelosTablas.FamiliaresAbstractModel;
-import com.devel.utilities.modelosTablas.MatriculaAbstractModel;
-import com.devel.utilities.modelosTablas.TodosLosFamiliaresAbstractModel;
+import com.devel.utilities.modelosTablas.*;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -70,6 +68,9 @@ public class VTabla extends JDialog {
                 break;
             case "Alumnos":
                 AlumnosCellRendered.setCellRenderer(null, tablaDatos);
+                break;
+            case "Matriculas":
+                MatriculasCellRendered.setCellRenderer(null, tablaDatos);
                 break;
         }
     }

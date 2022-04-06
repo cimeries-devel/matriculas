@@ -13,7 +13,6 @@ public class AlumnosCellRendered extends DefaultTableCellRenderer {
 
     public AlumnosCellRendered(Map<Integer, String> listaFiltros) {
         this.listaFiltros=listaFiltros;
-
     }
 
     public static void setCellRenderer(Map<Integer, String> listaFiltros, JTable table){

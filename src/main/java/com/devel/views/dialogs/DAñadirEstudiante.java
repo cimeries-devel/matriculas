@@ -275,7 +275,8 @@ public class DAñadirEstudiante extends JDialog {
         txtCodigo.setText(null);
         txtNombres.setText(null);
         txtApellidos.setText(null);
-        labelEdad.setText(null);
+        pickerEdad.setDate(null);
+        labelEdad.setText("0");
         txtEmail.setText(null);
     }
 

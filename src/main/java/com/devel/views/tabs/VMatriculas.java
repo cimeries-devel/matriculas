@@ -2,7 +2,13 @@ package com.devel.views.tabs;
 
 import com.devel.Principal;
 import com.devel.custom.TabPanel;
+import com.devel.utilities.TablecellRendered.MatriculasCellRendered;
+import com.devel.utilities.Utilidades;
+import com.devel.utilities.modelosTablas.MatriculasAbstractModel;
+import com.devel.utilities.modelosTablas.TodosLosFamiliaresAbstractModel;
 import com.devel.views.VPrincipal;
+import com.devel.views.dialogs.Exportar.ExportarAlumnos;
+import com.devel.views.dialogs.Exportar.ExportarMatriculas;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -10,43 +16,128 @@ import com.intellij.uiDesigner.core.Spacer;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.plaf.FontUIResource;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Locale;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.*;
+import java.util.List;
 
 public class VMatriculas extends JFrame {
     private TabPanel panelPrincipal;
     private JTextField txtDni;
-    private JTextField txtNombresYApellidos;
     private JButton btnExportar;
     private JTable tablaMatriculas;
-    private JCheckBox checkSoloApoderados;
+    private JCheckBox checkSoloActuales;
     private JButton limpiarFiltrosButton;
     private JComboBox cbbSexo;
     private JTextField txtCodigo;
-
+    private MatriculasAbstractModel matriculasAbstractModel;
+    private Map<Integer, String> listaFiltros = new HashMap<Integer, String>();
+    private TableRowSorter<MatriculasAbstractModel> modeloOrdenado;
+    private List<RowFilter<TodosLosFamiliaresAbstractModel, String>> filtros = new ArrayList<>();
+    private RowFilter filtroand;
 
     public VMatriculas() {
         iniciarComponentes();
+        txtCodigo.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                actualizar();
+            }
+        });
+        txtDni.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                actualizar();
+            }
+        });
         btnExportar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                exportarMatriculas();
             }
         });
+        checkSoloActuales.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizar();
+            }
+        });
+        cbbSexo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizar();
+            }
+        });
+        limpiarFiltrosButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                limpiarFiltros();
+            }
+        });
+    }
+
+    private void cargarMatriculas() {
+        matriculasAbstractModel = new MatriculasAbstractModel(VPrincipal.alumnosMatriculados);
+        tablaMatriculas.setModel(matriculasAbstractModel);
+        modeloOrdenado = new TableRowSorter<>(matriculasAbstractModel);
+        tablaMatriculas.setRowSorter(modeloOrdenado);
+        Utilidades.headerNegrita(tablaMatriculas);
+        MatriculasCellRendered.setCellRenderer(listaFiltros, tablaMatriculas);
     }
 
     private void iniciarComponentes() {
         setTitle("Matrículas");
         panelPrincipal.setIcon(new ImageIcon(Principal.class.getResource("Icons/x24/inicio.png")));
         panelPrincipal.setTable(tablaMatriculas);
+        cargarMatriculas();
+    }
+
+    private void limpiarFiltros() {
+        cbbSexo.setSelectedIndex(0);
+        checkSoloActuales.setSelected(false);
+        txtDni.setText(null);
+        txtCodigo.setText(null);
+        actualizar();
+    }
+
+    public void actualizar() {
+        filtros.clear();
+        String busqueda;
+        if (checkSoloActuales.isSelected()) {
+            String año = Utilidades.año.format(new Date());
+            filtros.add(RowFilter.regexFilter(año, 0));
+        }
+
+        busqueda = txtCodigo.getText().trim().toUpperCase();
+        filtros.add(RowFilter.regexFilter(busqueda, 3));
+        listaFiltros.put(3, busqueda);
+
+        busqueda = txtDni.getText().trim().toUpperCase();
+        filtros.add(RowFilter.regexFilter(busqueda, 4));
+        listaFiltros.put(4, busqueda);
+
+        if (cbbSexo.getSelectedIndex() != 0) {
+            String sexo = cbbSexo.getSelectedItem().toString();
+            filtros.add(RowFilter.regexFilter(sexo, 5));
+        }
+        filtroand = RowFilter.andFilter(filtros);
+        modeloOrdenado.setRowFilter(filtroand);
+    }
+
+    private void exportarMatriculas() {
+        ExportarMatriculas exportarMatriculas = new ExportarMatriculas(tablaMatriculas);
+        exportarMatriculas.setVisible(true);
     }
 
     public TabPanel getPanelPrincipal() {
         return panelPrincipal;
     }
+
 
     {
 // GUI initializer generated by IntelliJ IDEA GUI Designer
@@ -69,11 +160,11 @@ public class VMatriculas extends JFrame {
         panelPrincipal.setLayout(new GridLayoutManager(2, 3, new Insets(0, 0, 0, 0), -1, -1));
         panel1.add(panelPrincipal, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JPanel panel2 = new JPanel();
-        panel2.setLayout(new GridLayoutManager(1, 5, new Insets(5, 5, 5, 5), 25, -1));
+        panel2.setLayout(new GridLayoutManager(1, 4, new Insets(5, 5, 5, 5), 25, -1));
         panelPrincipal.add(panel2, new GridConstraints(0, 0, 1, 3, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         panel2.setBorder(BorderFactory.createTitledBorder(null, "Busqueda", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final Spacer spacer1 = new Spacer();
-        panel2.add(spacer1, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        panel2.add(spacer1, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
         final JPanel panel3 = new JPanel();
         panel3.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 5, 5));
         panel2.add(panel3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -87,81 +178,77 @@ public class VMatriculas extends JFrame {
         if (label1Font != null) label1.setFont(label1Font);
         label1.setText("DNI");
         panel3.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JPanel panel4 = new JPanel();
-        panel4.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 5, 5));
-        panel2.add(panel4, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        txtNombresYApellidos = new JTextField();
-        panel4.add(txtNombresYApellidos, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(250, -1), null, 0, false));
-        final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, -1, 14, label2.getFont());
-        if (label2Font != null) label2.setFont(label2Font);
-        label2.setText("Nombres y apellidos:");
-        panel4.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final Spacer spacer2 = new Spacer();
         panel2.add(spacer2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final JPanel panel5 = new JPanel();
-        panel5.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 5, 5));
-        panel2.add(panel5, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 5, 5));
+        panel2.add(panel4, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         txtCodigo = new JTextField();
         txtCodigo.setSelectionEnd(0);
         txtCodigo.setSelectionStart(0);
         txtCodigo.setText("");
-        panel5.add(txtCodigo, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, -1, 14, label3.getFont());
-        if (label3Font != null) label3.setFont(label3Font);
-        label3.setText("Código:");
-        panel5.add(label3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JPanel panel6 = new JPanel();
-        panel6.setLayout(new GridLayoutManager(2, 1, new Insets(5, 5, 5, 5), -1, -1));
-        panelPrincipal.add(panel6, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        panel6.setBorder(BorderFactory.createTitledBorder(null, "Acciones", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        panel4.add(txtCodigo, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        final JLabel label2 = new JLabel();
+        Font label2Font = this.$$$getFont$$$(null, -1, 14, label2.getFont());
+        if (label2Font != null) label2.setFont(label2Font);
+        label2.setText("Código:");
+        panel4.add(label2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel5 = new JPanel();
+        panel5.setLayout(new GridLayoutManager(2, 1, new Insets(5, 5, 5, 5), -1, -1));
+        panelPrincipal.add(panel5, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel5.setBorder(BorderFactory.createTitledBorder(null, "Acciones", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final Spacer spacer3 = new Spacer();
-        panel6.add(spacer3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel5.add(spacer3, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         btnExportar = new JButton();
         btnExportar.setText("Exportar");
-        panel6.add(btnExportar, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JPanel panel7 = new JPanel();
-        panel7.setLayout(new GridLayoutManager(1, 1, new Insets(5, 5, 5, 5), -1, 5));
-        panelPrincipal.add(panel7, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        panel7.setBorder(BorderFactory.createTitledBorder(null, "Matrículas", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
+        panel5.add(btnExportar, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel6 = new JPanel();
+        panel6.setLayout(new GridLayoutManager(1, 1, new Insets(5, 5, 5, 5), -1, 5));
+        panelPrincipal.add(panel6, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel6.setBorder(BorderFactory.createTitledBorder(null, "Matrículas", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final JScrollPane scrollPane1 = new JScrollPane();
-        panel7.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel6.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         tablaMatriculas = new JTable();
         tablaMatriculas.setRowHeight(25);
         tablaMatriculas.setRowSelectionAllowed(true);
         tablaMatriculas.setShowVerticalLines(true);
         scrollPane1.setViewportView(tablaMatriculas);
-        final JPanel panel8 = new JPanel();
-        panel8.setLayout(new GridLayoutManager(5, 2, new Insets(5, 5, 5, 5), 2, 5));
-        panelPrincipal.add(panel8, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        panel8.setBorder(BorderFactory.createTitledBorder(null, "Filtros", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
-        checkSoloApoderados = new JCheckBox();
-        Font checkSoloApoderadosFont = this.$$$getFont$$$(null, -1, 14, checkSoloApoderados.getFont());
-        if (checkSoloApoderadosFont != null) checkSoloApoderados.setFont(checkSoloApoderadosFont);
-        checkSoloApoderados.setHorizontalAlignment(4);
-        checkSoloApoderados.setHorizontalTextPosition(2);
-        checkSoloApoderados.setText("Solo actuales");
-        panel8.add(checkSoloApoderados, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel7 = new JPanel();
+        panel7.setLayout(new GridLayoutManager(4, 2, new Insets(5, 5, 5, 5), 2, 5));
+        panelPrincipal.add(panel7, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        panel7.setBorder(BorderFactory.createTitledBorder(null, "Filtros", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, null));
         final Spacer spacer4 = new Spacer();
-        panel8.add(spacer4, new GridConstraints(4, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        panel7.add(spacer4, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         limpiarFiltrosButton = new JButton();
         limpiarFiltrosButton.setText("Limpiar filtros");
-        panel8.add(limpiarFiltrosButton, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel7.add(limpiarFiltrosButton, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JLabel label3 = new JLabel();
+        Font label3Font = this.$$$getFont$$$(null, -1, 14, label3.getFont());
+        if (label3Font != null) label3.setFont(label3Font);
+        label3.setText("Sexo:");
+        panel7.add(label3, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        cbbSexo = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("Todos");
+        defaultComboBoxModel1.addElement("Masculino");
+        defaultComboBoxModel1.addElement("Femenino");
+        cbbSexo.setModel(defaultComboBoxModel1);
+        panel7.add(cbbSexo, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel8 = new JPanel();
+        panel8.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel7.add(panel8, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         final JLabel label4 = new JLabel();
         Font label4Font = this.$$$getFont$$$(null, -1, 14, label4.getFont());
         if (label4Font != null) label4.setFont(label4Font);
-        label4.setText("Sexo:");
-        panel8.add(label4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        cbbSexo = new JComboBox();
-        panel8.add(cbbSexo, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JCheckBox checkBox1 = new JCheckBox();
-        Font checkBox1Font = this.$$$getFont$$$(null, -1, 14, checkBox1.getFont());
-        if (checkBox1Font != null) checkBox1.setFont(checkBox1Font);
-        checkBox1.setHorizontalAlignment(2);
-        checkBox1.setHorizontalTextPosition(2);
-        checkBox1.setText("Por estudiante");
-        panel8.add(checkBox1, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        label4.setText("Solo actuales");
+        panel8.add(label4, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        checkSoloActuales = new JCheckBox();
+        Font checkSoloActualesFont = this.$$$getFont$$$(null, -1, 14, checkSoloActuales.getFont());
+        if (checkSoloActualesFont != null) checkSoloActuales.setFont(checkSoloActualesFont);
+        checkSoloActuales.setHorizontalAlignment(2);
+        checkSoloActuales.setHorizontalTextPosition(2);
+        checkSoloActuales.setText("");
+        panel8.add(checkSoloActuales, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**

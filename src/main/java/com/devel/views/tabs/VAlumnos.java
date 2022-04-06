@@ -56,7 +56,6 @@ public class VAlumnos extends JFrame {
         txtNombres.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-
                 actualizar();
             }
         });
@@ -89,7 +88,6 @@ public class VAlumnos extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 limpiarFiltros();
-                actualizar();
             }
         });
         btnExportar.addActionListener(new ActionListener() {
@@ -201,6 +199,7 @@ public class VAlumnos extends JFrame {
         cbbNiveles.setSelectedIndex(0);
         cbbGrados.setSelectedIndex(0);
         cbbSecciones.setSelectedIndex(0);
+        actualizar();
     }
 
     {

@@ -21,8 +21,8 @@ public class Registros extends Hibernate {
         return registro;
     }
 
-    public static Vector<Registro> getMatriculados(){
-        Calendar primerDia=Calendar.getInstance();
+    public static Vector<Registro> getMatriculasPorAño(Calendar año){
+        Calendar primerDia=año;
         primerDia.set(Calendar.MONTH,primerDia.getActualMinimum(Calendar.MONTH));
         primerDia.set(Calendar.DATE,primerDia.getActualMinimum(Calendar.DATE));
         primerDia.add(primerDia.DATE,-1);

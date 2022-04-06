@@ -151,8 +151,9 @@ public class Utilidades {
         column.setMaxWidth(Width);
     }
     public static void actualizarTabla(JTable tabla){
-        tabla.setVisible(false);
-        tabla.setVisible(true);
+        tabla.updateUI();
+        Utilidades.headerNegrita(tabla);
+//        tabla.setVisible(true);
         tabla.getParent().requestFocus();
     }
     public static void headerNegrita(JTable table){

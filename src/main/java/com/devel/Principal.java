@@ -16,23 +16,5 @@ public class Principal
         Utilidades.tema(propiedades.getTema());
         VLogin vLogin=new VLogin(propiedades);
         vLogin.setVisible(true);
-
-
-//        Celular celular = new Celular();
-//        CelularValidator validator = new CelularValidator();
-//
-//        ConstraintViolation<Celular> error = validator.isValidNumber(celular);
-//        if (error == null) {
-//            celular.guardar();
-//        } else {
-//            System.out.println(error.getPropertyPath());
-//        }
-
-//        Set<ConstraintViolation<Celular>> errors = validator.loadViolations(celular);
-//        if(errors.isEmpty()){
-//            celular.guardar();
-//        }else {
-//            errors.forEach(e -> System.out.println(e.getMessage()));
-//        }
     }
 }

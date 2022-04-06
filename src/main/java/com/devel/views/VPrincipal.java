@@ -23,6 +23,7 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.Vector;
 
@@ -54,7 +55,7 @@ public class VPrincipal extends JFrame {
     public static Vector<TipoDocumento> tipoDocumentos = TipoDocumentos.getTodos();
     public static Vector<TipoRelacion> tipoRelaciones = TiposRelaciones.getTodos();
     public static Vector<TipoRelacion> tipoRelacionesConTodos = TiposRelaciones.getTodosConTodos();
-    public static Vector<Registro> alumnosMatriculados = Registros.getMatriculados();
+    public static Vector<Registro> alumnosMatriculados = Registros.getMatriculasPorAño(Calendar.getInstance());
     public static Vector<Persona> alumnos = Personas.alumnos();
     public static Vector<Persona> familiares = Personas.familares();
     public static Vector<Nivel> niveles = Niveles.getTodos();
@@ -167,7 +168,6 @@ public class VPrincipal extends JFrame {
         jButton.setAlignmentX(1.0f);
         jButton.setAlignmentY(0.0f);
         jButton.setFocusPainted(false);
-
         jButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
@@ -187,7 +187,13 @@ public class VPrincipal extends JFrame {
         JMenuItem cerrarTodas = new JMenuItem("Cerrar Todas Las Pestañas");
         cerrarPestaña.addActionListener(e -> {
             if (tabContenido.getSelectedIndex() != -1) {
+                ((TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex())).getOption().setBackground(new JButton().getBackground());
                 tabContenido.removeTabAt(tabContenido.getSelectedIndex());
+                if (tabContenido.getTabCount() == 0) {
+                    menuInicio.cargarBienvenida();
+                }
+                TabPanel tabPanel = (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
+                Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
             }
         });
         cerrarOtras.addActionListener(e -> {
@@ -196,11 +202,20 @@ public class VPrincipal extends JFrame {
                 String titulo = tabContenido.getTitleAt(tabContenido.getSelectedIndex());
                 tabContenido.removeAll();
                 tabContenido.addTab(titulo, tab.getIcon(), tab);
+                TabPanel tabPanel = (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
+                Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
             }
         });
         cerrarTodas.addActionListener(e -> {
+            for (Component component : tabContenido.getComponents()) {
+                if (tabContenido.indexOfComponent(component) != -1) {
+                    ((TabPanel) component).getOption().setBackground(new JButton().getBackground());
+                }
+            }
             tabContenido.removeAll();
             menuInicio.cargarBienvenida();
+            TabPanel tabPanel = (TabPanel) tabContenido.getComponentAt(tabContenido.getSelectedIndex());
+            Utilidades.buttonSelectedOrEntered(tabPanel.getOption());
         });
         pop_up.add(cerrarPestaña);
         pop_up.addSeparator();
