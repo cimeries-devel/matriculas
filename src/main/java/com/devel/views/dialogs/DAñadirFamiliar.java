@@ -152,9 +152,14 @@ public class DAñadirFamiliar extends JDialog {
         Celular celular;
         Documento doc = Documentos.getByDni(txtDni.getText().trim());
         if (doc != null) {
-            familiar = doc.getPerson();
-            documento = familiar.getDocumentos().get(0);
-            celular = familiar.getCelulares().get(0);
+            if (doc.getPerson().getCodigo() != null) {
+                familiar = doc.getPerson();
+                celular = familiar.getCelulares().get(0);
+                documento = familiar.getDocumentos().get(0);
+            } else {
+                Utilidades.sendNotification("Error", "No puede registrar a un estudiante como familiar", TrayIcon.MessageType.ERROR);
+                return;
+            }
         } else {
             familiar = new Persona();
             documento = new Documento();
