@@ -147,12 +147,14 @@ public class VPrincipal extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                salir();
+                if (salir()) {
+                    setDefaultCloseOperation(EXIT_ON_CLOSE);
+                    super.windowClosing(e);
+                }
             }
         });
     }
@@ -260,11 +262,9 @@ public class VPrincipal extends JFrame {
         }
     }
 
-    private void salir() {
+    private boolean salir() {
         int sioNo = JOptionPane.showOptionDialog(null, "¿Está seguro?", "Salir", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, "Si");
-        if (sioNo == 0) {
-           dispose();
-        }
+        return sioNo == 0;
     }
 
     {
