@@ -26,23 +26,23 @@ public class VLogin extends JFrame {
     private JButton btnIngresar;
     private JTextField txtUsuario;
     private JCheckBox recordarUsuarioCheckBox;
-    private JLabel label = new JLabel("");
+    private JLabel mostrar = new JLabel("");
     private PlaceHolder placeholder;
     public Propiedades propiedades;
 
     public VLogin(Propiedades propiedades) {
         this.propiedades = propiedades;
         iniciarComponentes();
-        label.addMouseListener(new MouseAdapter() {
+        mostrar.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (psfContraseña.getEchoChar() == '•') {
                     psfContraseña.setEchoChar((char) 0);
-                    label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/mostrarContraseña.png")));
+                    mostrar.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/mostrarContraseña.png")));
                 } else {
                     psfContraseña.setEchoChar('•');
-                    label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
+                    mostrar.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
                 }
             }
         });
@@ -67,9 +67,9 @@ public class VLogin extends JFrame {
             @Override
             public void keyReleased(KeyEvent e) {
                 if (psfContraseña.getText().length() > 0) {
-                    label.setVisible(true);
+                    mostrar.setVisible(true);
                 } else {
-                    label.setVisible(false);
+                    mostrar.setVisible(false);
                 }
             }
         });
@@ -103,25 +103,21 @@ public class VLogin extends JFrame {
 
     private void cargarMostrarContraseña() {
         JPanel panel = new JPanel();
-        JLabel label1 = new JLabel("                                              ");
-        label1.setOpaque(false);
         panel.setOpaque(false);
-        panel.add(label1);
-        panel.add(label);
-        label.setSize(new Dimension(20, 30));
-        label.setMaximumSize(new Dimension(20, 30));
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panel.add(mostrar);
         psfContraseña.add(panel);
-        label.setVisible(false);
+        mostrar.setVisible(false);
     }
 
     private void cargarCursores() {
         psfContraseña.setEchoChar('•');
         btnIngresar.setCursor(new Cursor(Cursor.HAND_CURSOR));
         recordarUsuarioCheckBox.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        label.setOpaque(false);
-        label.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
-        label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        label.setFocusable(false);
+        mostrar.setOpaque(false);
+        mostrar.setIcon(new ImageIcon(Principal.class.getResource("Icons/x16/ocultarContraseña.png")));
+        mostrar.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        mostrar.setFocusable(false);
     }
 
 

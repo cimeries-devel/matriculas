@@ -137,7 +137,6 @@ public class VPrincipal extends JFrame {
         menuInicio = new MenuInicio(tabContenido);
         menuReportes = new MenuReportes(tabContenido);
         menuGestiones = new MenuGestiones(tabContenido);
-        setDefaultCloseOperation(3);
         splitPane.setRightComponent(null);
         splitPane.setRightComponent(menuInicio.traerInicioOpciones());
         menuInicio.cargarBienvenida();
@@ -149,7 +148,6 @@ public class VPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -265,7 +263,7 @@ public class VPrincipal extends JFrame {
     private void salir() {
         int sioNo = JOptionPane.showOptionDialog(null, "¿Está seguro?", "Salir", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Si", "No"}, "Si");
         if (sioNo == 0) {
-            dispose();
+           dispose();
         }
     }
 
